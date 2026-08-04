@@ -1,0 +1,7 @@
+- [ ] Add `provider` dependency to `pubspec.yaml`
+- [ ] Update `main.dart` with `MultiProvider` and refactored `LockedScreen`
+- [ ] Refactor `SecurityScreen` to use `SecurityProvider`
+- [ ] Refactor `PinSetupScreen` to use `SecurityProvider`
+- [ ] Refactor `BiometricSetupScreen` to use `SecurityProvider`
+- [ ] Refactor `ProfileScreen` to use `SecurityProvider`
+- [ ] Verify functionality and remove legacy `SecurityService`
