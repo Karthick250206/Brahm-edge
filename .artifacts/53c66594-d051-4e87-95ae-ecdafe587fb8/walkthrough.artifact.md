@@ -1,38 +1,36 @@
-# Security Backend Integration Walkthrough
+# Data Management & Retention Walkthrough
 
-I have successfully integrated the advanced security backend logic into the application UI. This migration replaces the temporary local storage with a professional repository-based system.
+I have implemented the **Data Management & Retention** screen, providing a centralized dashboard for storage visualization and conversation history control.
 
-## Key Changes
+## Key Features
 
-### 1. Architectural Overhaul
-- **Provider Pattern**: Wrapped the entire application in a `MultiProvider` to manage security state globally.
-- **Legacy Removal**: Deleted the old `lib/services/security_service.dart` file. All screens now use the professional `SecurityProvider` and its associated services (Crypto, Biometric, Session, etc.).
+### 1. Storage Summary Visualization
+- **Segmented Progress Bar**: A custom multi-colored bar showing the proportional usage of different data categories (General, Defense, Wellness, etc.).
+- **Interactive Legend**: A clear grid layout mapping colors to their respective repository pillars.
+- **Usage Metrics**: Displays "Total Used: 4.2 GB / 10 GB" as seen in the design.
 
-### 2. UI Migration
-- **Main App Shell**: Updated `main.dart` to use the new authentication wrapper logic, ensuring the app initializes correctly and handles backgrounding/resuming securely.
-- **Security Screens**: Migrated the following screens to the new backend:
-    - **App Security Screen**: Toggles and method cards now talk to the `SecurityProvider`.
-    - **PIN Setup Screen**: Supports multi-mode operation (Setup, Confirm, Verify) using advanced hashing.
-    - **Biometric Setup Screen**: Correctly triggers enrollment via the new orchestrator.
-    - **Profile Screen**: Dynamically reflects the security status from the backend.
+### 2. Management Controls
+- **Model Management**: A card dedicated to local AI models with a stylized outlined red button for removal actions.
+- **Retention Policies**: A themed dropdown selector that allows users to set auto-deletion thresholds (e.g., 30 Days).
 
-### 3. Professional Features Enabled
-- **Security Lockout**: The app now supports a 30-second lockout after 5 failed PIN attempts (managed by `LockManager`).
-- **Encrypted Storage**: Credentials are now hashed and salted using the new `CryptoService` before being saved.
-- **Session Management**: Inactivity timeouts and activity tracking are now handled by the dedicated `SessionService`.
+### 3. Repository Pillars
+- **Granular Detail**: Individual cards for each conversation pillar showing specific space usage and active session instances.
+- **Action Buttons**: Integrated "View Chats" (navigation) and "Delete All" (destructive) actions for each pillar.
+
+### 4. Global Protection
+- **Mass Deletion**: A prominent "Delete all data" button at the bottom of the screen.
+- **Re-authentication Guard**: Includes the mandatory `Icons.lock_outline` subtext: *"Requires App Lock Re-authentication"*, ensuring data safety.
+
+## Integration & Theming
+- **Deep Navy Aesthetic**: Fully integrated with the project's `#0B1019` dark theme and `#00E5FF` cyan accents.
+- **Linked Navigation**: Connected the "Chat Data management and retention" preference card on the Profile page to this new dashboard.
+- **Consistent Navigation**: The screen features the matching bottom navigation bar with the active "YOU" indicator.
 
 ## Verification Results
+- [x] Layout exactly replicates the provided design image.
+- [x] Segmented storage bar colors and proportions are visually accurate.
+- [x] Navigation from Profile to Data Management is functional.
+- [x] Bottom navigation correctly highlights the active tab and wave indicator.
 
-### Code Integrity
-- [x] All compilation errors in `main.dart` and `widget_test.dart` resolved.
-- [x] Legacy dependencies removed.
-- [x] Code analysis shows 0 errors across migrated files.
-
-### Feature Parity
-- [x] Master "App lock" toggle remains functional.
-- [x] PIN setup and verification work as expected.
-- [x] Biometric setups are correctly routed through the new backend.
-
-render_diffs(file:///D:/develop/Projects/mobile-app/lib/main.dart)
-render_diffs(file:///D:/develop/Projects/mobile-app/lib/screens/security_screen.dart)
-render_diffs(file:///D:/develop/Projects/mobile-app/lib/screens/pin_setup_screen.dart)
+render_diffs(file:///D:/develop/Projects/mobile-app/lib/screens/data_management_screen.dart)
+render_diffs(file:///D:/develop/Projects/mobile-app/lib/screens/profile_screen.dart)

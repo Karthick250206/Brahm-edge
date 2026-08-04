@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../security/providers/security_provider.dart';
 import 'security_screen.dart';
 import 'language_selection_screen.dart';
+import 'data_management_screen.dart';
 import '../services/language_service.dart';
 import '../services/localization_service.dart';
 
@@ -195,7 +196,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     accentColor: accentColor,
                     cardColor: cardColor,
                     onTap: () {
-                      // Placeholder for navigation
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const DataManagementScreen()),
+                      );
                     },
                   ),
                   const SizedBox(height: 12),

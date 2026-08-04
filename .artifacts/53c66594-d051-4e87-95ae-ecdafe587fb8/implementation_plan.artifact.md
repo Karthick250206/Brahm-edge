@@ -1,58 +1,45 @@
-# Implementation Plan - Backend Security Integration
+# Implementation Plan - Data Management & Retention Screen
 
-I will integrate the new comprehensive security backend located in `lib/security/` with your existing UI. This will replace the temporary local storage logic with a robust, repository-based system that includes crypto services, session management, and lockout protection.
+I will create a new screen "Data Management & Retention" that exactly replicates the provided design. This screen will allow users to view storage usage, manage downloaded models, set auto-deletion policies, and manage repository pillars.
 
 ## User Review Required
 
 > [!IMPORTANT]
-> This integration will use the `provider` package for state management. I will add it to your `pubspec.yaml` and wrap your app in a `MultiProvider`.
+> The screen features a complex segmented progress bar for storage and multiple interactive cards for model and pillar management. I will implement these as visual replicas with placeholder logic for this iteration.
 
-> [!WARNING]
-> Existing PINs or biometric preferences set with the old `SecurityService` will be reset, as the new backend uses a different storage and encryption format. Users will need to set up their PIN again.
+> [!NOTE]
+> The "Delete all data" button at the bottom includes a subtext "Requires App Lock Re-authentication". I will integrate this with the existing `SecurityProvider` to trigger an authentication check before proceeding with a simulated deletion.
 
 ## Proposed Changes
 
-### Configuration & Dependencies
+### [Screens]
 
-#### [MODIFY] [pubspec.yaml](file:///D:/develop/Projects/mobile-app/pubspec.yaml)
-- Add `provider: ^6.1.1` to dependencies.
+#### [NEW] [data_management_screen.dart](file:///D:/develop/Projects/mobile-app/lib/screens/data_management_screen.dart)
+- **Theme**: Deep navy (`#0B1019`) background with dark grey cards (`#161B22`) and cyan accents (`#00E5FF`).
+- **Storage Summary**:
+    - "Total Used" header.
+    - A custom linear segmented bar with different colors for each category.
+    - A grid/legend section showing colored dots and category labels.
+- **Model Management**:
+    - A dedicated card for deleting models with an outlined red button "SELECT MODELS TO DELETE".
+- **Retention Settings**:
+    - A card for auto-deletion with a themed dropdown/selector (defaulting to "30 Days").
+- **Repository Pillars**:
+    - A list of pillar cards (e.g., "Pillar 1: General Assistant") showing space usage and active instances.
+    - Each card will have "View Chats" and "Delete All" actions.
+- **Global Delete Action**:
+    - A large outlined red button "Delete all data" with a warning icon.
+    - Integration with `SecurityProvider` for the authentication subtext.
+- **Navigation**: Matching bottom navigation bar with the "You" tab active and the wave indicator.
 
-### Application Entry Point
-
-#### [MODIFY] [main.dart](file:///D:/develop/Projects/mobile-app/lib/main.dart)
-- Import `securityProviders` and `provider`.
-- Wrap `MaterialApp` in a `MultiProvider`.
-- Refactor `MyApp` and `LockedScreen` to use `SecurityProvider` via `context.watch()` or `context.read()`.
-- Remove manual instantiation of the old `SecurityService`.
-
-### UI Integration
-
-#### [MODIFY] [security_screen.dart](file:///D:/develop/Projects/mobile-app/lib/screens/security_screen.dart)
-- Use `SecurityProvider` for toggling the global app lock and checking current enrollment status.
-- Delegate setup actions (PIN/Biometric) to the new provider methods.
-
-#### [MODIFY] [pin_setup_screen.dart](file:///D:/develop/Projects/mobile-app/lib/screens/pin_setup_screen.dart)
-- Update the `_onSubmit` logic to use `securityProvider.setSecurityType(SecurityType.pin, value: pin)`.
-- Support the `verify` mode using `securityProvider.verifyPin(pin)`.
-
-#### [MODIFY] [biometric_setup_screen.dart](file:///D:/develop/Projects/mobile-app/lib/screens/biometric_setup_screen.dart)
-- Update the "Authenticate" button to use `securityProvider.authenticate(type: SecurityType.biometric)`.
-- On success, call `securityProvider.setSecurityType(SecurityType.biometric)`.
-
-### Cleanup
-
-#### [DELETE] [security_service.dart](file:///D:/develop/Projects/mobile-app/lib/services/security_service.dart)
-- Remove the legacy service once all references are migrated.
+#### [MODIFY] [profile_screen.dart](file:///D:/develop/Projects/mobile-app/lib/screens/profile_screen.dart)
+- Link the "Chat Data management and retention" card to navigate to the new `DataManagementScreen`.
 
 ## Verification Plan
 
-### Automated Verification
-- Run `flutter pub get` to ensure the new dependency is resolved.
-- Check for any compilation errors in the refactored screens.
-
 ### Manual Verification
-1. **PIN Setup**: Verify that you can set a new 4-digit PIN and that it persists.
-2. **App Locking**: Close and reopen the app; verify the PIN pad appears and correctly validates the code.
-3. **Lockout Logic**: Enter the wrong PIN 5 times and verify that the app locks you out for 30 seconds (as defined in `LockManager`).
-4. **Biometric Toggle**: Enable biometrics and verify that the system prompt appears on resume.
-5. **Universal Toggle**: Verify that turning OFF the "App lock" master switch disables all security regardless of configured PIN/Biometrics.
+- Verify the layout matches the provided image exactly.
+- Test navigation from `ProfileScreen` to `DataManagementScreen`.
+- Verify the segmented progress bar colors and alignment.
+- Ensure all cards and buttons are styled correctly (red outlines/text where appropriate).
+- Check that the "You" tab is correctly highlighted in the bottom navigation.
