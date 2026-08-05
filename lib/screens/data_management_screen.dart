@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../security/providers/security_provider.dart';
+import 'model_deletion_screen.dart';
+import 'pillar_chats_screen.dart';
 
 class DataManagementScreen extends StatefulWidget {
   const DataManagementScreen({super.key});
@@ -127,7 +129,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                           color: const Color(0xFF1C2431),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(Icons.crop_square_rounded, color: accentColor, size: 24),
+                        child: const Icon(Icons.psychology_rounded, color: accentColor, size: 24),
                       ),
                       const SizedBox(width: 16),
                       const Expanded(
@@ -152,7 +154,12 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ModelDeletionScreen()),
+                        );
+                      },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: errorRed.withValues(alpha: 0.2)),
                         padding: const EdgeInsets.symmetric(vertical: 18),
@@ -229,9 +236,11 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             const SizedBox(height: 20),
             // Pillar Cards
             _buildPillarCard(
+              context: context,
               title: "Pillar 1: General Assistant\n(Gemini Flash)",
               space: "450",
               instances: 12,
+              retention: "30",
               cardColor: cardColor,
               accentColor: accentColor,
               textSecondary: textSecondary,
@@ -239,9 +248,11 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             ),
             const SizedBox(height: 16),
             _buildPillarCard(
+              context: context,
               title: "Pillar 2: Code Expert Agent",
               space: "650",
               instances: 8,
+              retention: "7",
               cardColor: cardColor,
               accentColor: accentColor,
               textSecondary: textSecondary,
@@ -357,9 +368,13 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(color: item.color, shape: BoxShape.circle),
             ),
             const SizedBox(width: 12),
-            Text(
-              item.label, 
-              style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+            Expanded(
+              child: Text(
+                item.label, 
+                style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
             ),
           ],
         ),
@@ -368,9 +383,11 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
   }
 
   Widget _buildPillarCard({
+    required BuildContext context,
     required String title,
     required String space,
     required int instances,
+    required String retention,
     required Color cardColor,
     required Color accentColor,
     required Color textSecondary,
@@ -435,7 +452,18 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PillarChatsScreen(
+                        pillarName: title.split('\n')[0].replaceFirst('Pillar 1: ', '').replaceFirst('Pillar 2: ', ''),
+                        storage: space,
+                        retention: retention,
+                      ),
+                    ),
+                  );
+                },
                 child: const Row(
                   children: [
                     Text("View Chats", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
