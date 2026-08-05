@@ -129,7 +129,7 @@ class _AuthGateState extends State<AuthGate> {
             ElevatedButton(
               onPressed: _checkAuth,
               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-              child: const Text("Authenticate", style: TextStyle(color: Colors.white)),
+              child: const Text("Authentication", style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
@@ -137,3 +137,5 @@ class _AuthGateState extends State<AuthGate> {
     );
   }
 }
+
+
