@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
-import '../security/providers/security_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'model_deletion_screen.dart';
 import 'pillar_chats_screen.dart';
 
@@ -43,12 +42,12 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        title: const Text(
+        title: Text(
           "Data Management &\nRetention",
-          style: TextStyle(
+          style: GoogleFonts.sora(
             color: accentColor,
             fontSize: 24,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w800,
             height: 1.1,
           ),
         ),
@@ -71,13 +70,23 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Total Used: 4.2 GB / 10 GB",
-                    style: TextStyle(
-                      color: Colors.white, 
-                      fontSize: 20, 
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: -0.5,
+                  RichText(
+                    text: TextSpan(
+                      style: GoogleFonts.inter(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -0.5,
+                      ),
+                      children: [
+                        const TextSpan(text: "Total Used: "),
+                        TextSpan(
+                          text: "4.2 GB / 10 GB",
+                          style: GoogleFonts.ibmPlexMono(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -129,21 +138,21 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                           color: const Color(0xFF1C2431),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(Icons.psychology_rounded, color: accentColor, size: 24),
+                        child: const Icon(Icons.crop_square_rounded, color: accentColor, size: 24),
                       ),
                       const SizedBox(width: 16),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Delete all downloaded models",
-                              style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.inter(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
                               "Completely remove all local model weights and fine-tuned parameters from this device.",
-                              style: TextStyle(color: textSecondary, fontSize: 15, height: 1.5),
+                              style: GoogleFonts.inter(color: textSecondary, fontSize: 15, height: 1.5),
                             ),
                           ],
                         ),
@@ -165,15 +174,15 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 18),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "SELECT MODELS TO DELETE",
-                            style: TextStyle(color: errorRed, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                            style: GoogleFonts.ibmPlexMono(color: errorRed, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1.5),
                           ),
-                          SizedBox(width: 10),
-                          Icon(Icons.arrow_forward_ios, color: errorRed, size: 16),
+                          const SizedBox(width: 10),
+                          const Icon(Icons.arrow_forward_ios, color: errorRed, size: 16),
                         ],
                       ),
                     ),
@@ -194,14 +203,14 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Auto-delete chats older than:",
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.inter(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    "This setting applies across all unlinked conversation pillars.",
-                    style: TextStyle(color: textSecondary, fontSize: 15),
+                  Text(
+                    "This setting applies across all unlinked conversation modes.",
+                    style: GoogleFonts.inter(color: textSecondary, fontSize: 15),
                   ),
                   const SizedBox(height: 20),
                   Container(
@@ -220,7 +229,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         items: ["7 Days", "30 Days", "90 Days", "Never"].map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
+                            child: Text(value, style: GoogleFonts.inter(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
                           );
                         }).toList(),
                         onChanged: (val) => setState(() => _retentionPeriod = val!),
@@ -232,12 +241,12 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             ),
 
             const SizedBox(height: 40),
-            _buildSectionTitle("REPOSITORY PILLARS", accentColor),
+            _buildSectionTitle("MODES", accentColor),
             const SizedBox(height: 20),
             // Pillar Cards
             _buildPillarCard(
               context: context,
-              title: "Pillar 1: General Assistant\n(Gemini Flash)",
+              title: "General Assistant\n(Gemini Flash)",
               space: "450",
               instances: 12,
               retention: "30",
@@ -249,7 +258,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             const SizedBox(height: 16),
             _buildPillarCard(
               context: context,
-              title: "Pillar 2: Code Expert Agent",
+              title: "Code Expert Agent",
               space: "650",
               instances: 8,
               retention: "7",
@@ -272,14 +281,14 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.warning_amber_rounded, color: errorRed, size: 26),
-                        SizedBox(width: 14),
+                        const Icon(Icons.warning_amber_rounded, color: errorRed, size: 26),
+                        const SizedBox(width: 14),
                         Text(
                           "Delete all data",
-                          style: TextStyle(color: errorRed, fontSize: 20, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: errorRed, fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -291,8 +300,8 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       const Icon(Icons.lock_outline, color: textSecondary, size: 16),
                       const SizedBox(width: 10),
                       Text(
-                        "Requires App Lock Re-authentication",
-                        style: TextStyle(color: textSecondary.withValues(alpha: 0.7), fontSize: 13, fontWeight: FontWeight.w500),
+                        "Requires app lock re-authentication",
+                        style: GoogleFonts.ibmPlexMono(color: textSecondary.withValues(alpha: 0.7), fontSize: 13, fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -318,10 +327,10 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
         const SizedBox(width: 14),
         Text(
           title,
-          style: TextStyle(
-            color: color, 
-            fontSize: 11, 
-            fontWeight: FontWeight.w900, 
+          style: GoogleFonts.ibmPlexMono(
+            color: color,
+            fontSize: 11,
+            fontWeight: FontWeight.w900,
             letterSpacing: 2.0,
           ),
         ),
@@ -368,13 +377,9 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(color: item.color, shape: BoxShape.circle),
             ),
             const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                item.label, 
-                style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
+            Text(
+              item.label,
+              style: GoogleFonts.inter(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
             ),
           ],
         ),
@@ -419,8 +424,8 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title, 
-                      style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, height: 1.2),
+                      title,
+                      style: GoogleFonts.inter(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, height: 1.2),
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -428,16 +433,16 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Space: $space", style: TextStyle(color: textSecondary, fontSize: 13)),
-                            const Text("MB", style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900)),
+                            Text("Space:", style: GoogleFonts.ibmPlexMono(color: textSecondary, fontSize: 11)),
+                            Text("$space MB", style: GoogleFonts.ibmPlexMono(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700)),
                           ],
                         ),
                         const SizedBox(width: 32),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Active Instances:", style: TextStyle(color: textSecondary, fontSize: 13)),
-                            Text("$instances", style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900)),
+                            Text("Active Instances:", style: GoogleFonts.ibmPlexMono(color: textSecondary, fontSize: 11)),
+                            Text("$instances", style: GoogleFonts.ibmPlexMono(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700)),
                           ],
                         ),
                       ],
@@ -457,18 +462,18 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => PillarChatsScreen(
-                        pillarName: title.split('\n')[0].replaceFirst('Pillar 1: ', '').replaceFirst('Pillar 2: ', ''),
+                        pillarName: title.split('\n')[0].replaceFirst('General Assistant', 'General Assistant').replaceFirst('Code Expert Agent', 'Code Expert Agent'),
                         storage: space,
                         retention: retention,
                       ),
                     ),
                   );
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Text("View Chats", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
-                    SizedBox(width: 6),
-                    Icon(Icons.chevron_right, color: Colors.white, size: 20),
+                    Text("View Chats", style: GoogleFonts.inter(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+                    const SizedBox(width: 6),
+                    const Icon(Icons.chevron_right, color: Colors.white, size: 20),
                   ],
                 ),
               ),
@@ -480,7 +485,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
-                child: Text("Delete All", style: TextStyle(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold)),
+                child: Text("Delete all", style: GoogleFonts.inter(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold)),
               ),
             ],
           ),

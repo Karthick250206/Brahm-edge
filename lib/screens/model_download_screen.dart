@@ -13,8 +13,6 @@ class ModelDownloadScreen extends StatefulWidget {
 }
 
 class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
-  bool _wifiOnly = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,72 +153,6 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                 ),
               ),
 
-              const SizedBox(height: 24),
-
-              // Settings Card
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: Colors.grey.shade200),
-                ),
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Wi-Fi only",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            "protect your mobile data",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Switch(
-                      value: _wifiOnly,
-                      onChanged: (val) => setState(() => _wifiOnly = val),
-                      activeTrackColor: const Color(0xFFD35400),
-                      activeThumbColor: Colors.white,
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 32),
-              const Text(
-                "MORE LANGUAGES?",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 10,
-                  letterSpacing: 1.2,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Language Pack Chips
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  _buildLangChip("हिन्दी ✓", "included", true),
-                  _buildLangChip("+ தமிழ்", "120 MB", false),
-                  _buildLangChip("+ বাংলা", "120 MB", false),
-                ],
-              ),
-
               const Spacer(),
 
               // Final CTA Button
@@ -284,38 +216,6 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
       child: Text(
         label,
         style: const TextStyle(color: Colors.black87, fontSize: 11),
-      ),
-    );
-  }
-
-  Widget _buildLangChip(String label, String sub, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFF1E1E1E) : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black87,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(width: 4),
-          Text(
-            sub,
-            style: TextStyle(
-              color: isSelected ? Colors.grey : Colors.grey.shade500,
-              fontSize: 10,
-            ),
-          ),
-        ],
       ),
     );
   }

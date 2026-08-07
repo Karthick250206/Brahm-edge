@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'screens/welcome_screen.dart';
 import 'screens/intro_screen.dart';
 import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
@@ -66,13 +68,12 @@ class _LifecycleManagerState extends State<LifecycleManager> with WidgetsBinding
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     final securityProvider = context.read<SecurityProvider>();
     
-    if (state == AppLifecycleState.paused) {
-      await securityProvider.updateActivity();
-    } else if (state == AppLifecycleState.resumed) {
+    if (state == AppLifecycleState.resumed) {
       if (securityProvider.isAuthenticating) return;
       
+      // Trigger a check which will cause AuthenticationWrapper to rebuild if needed
       if (await securityProvider.shouldLock()) {
-        // The provider's state will trigger a rebuild in AuthenticationWrapper
+        securityProvider.notifyListeners(); 
       }
     }
   }
@@ -89,286 +90,408 @@ class AuthenticationWrapper extends StatelessWidget {
     final securityProvider = context.watch<SecurityProvider>();
 
     if (!securityProvider.isInitialized) {
-      return const Scaffold(backgroundColor: Color(0xFF0B1019));
+      return const Scaffold(backgroundColor: Color(0xFFF7FAFF));
     }
 
     return FutureBuilder<List<bool>>(
       future: Future.wait([
+        securityProvider.isFirstLaunch(),
         securityProvider.shouldLock(),
         securityProvider.isOnboarded(),
       ]),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const Scaffold(backgroundColor: Color(0xFF0B1019));
+          return const Scaffold(backgroundColor: Color(0xFFF7FAFF));
         }
 
-        final bool shouldLock = snapshot.data![0];
-        final bool onboarded = snapshot.data![1];
+        final bool isFirstLaunch = snapshot.data![0];
+        final bool shouldLock = snapshot.data![1];
+        final bool onboarded = snapshot.data![2];
         
+        if (isFirstLaunch) {
+          return const WelcomeScreen();
+        }
+
         final bool isLocked = securityProvider.isAppLockEnabled && shouldLock;
 
         if (isLocked) {
-          return LockedScreen(onUnlocked: () {
-            // Success in PIN/Biometric already calls updateActivity()
-            // which will make shouldLock() false. notifyListeners() in provider
-            // will trigger this builder again.
-          });
+          return const LockedScreen();
         }
 
-        return onboarded ? const MainWrapper() : const IntroScreen();
+        return onboarded ? const MainWrapper() : const WelcomeScreen();
       },
     );
   }
 }
 
 class LockedScreen extends StatefulWidget {
-  final VoidCallback onUnlocked;
-  const LockedScreen({super.key, required this.onUnlocked});
+  const LockedScreen({super.key});
 
   @override
   State<LockedScreen> createState() => _LockedScreenState();
 }
 
 class _LockedScreenState extends State<LockedScreen> {
-  String _enteredPin = "";
+  bool _showPasswordView = false;
+  bool _obscurePassword = true;
+  final TextEditingController _passwordController = TextEditingController();
   String _errorMessage = "";
 
-  void _onKeyPress(String value) {
-    if (_enteredPin.length < 4) {
-      setState(() {
-        _enteredPin += value;
-        _errorMessage = "";
-      });
-    }
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
   }
 
-  void _onDelete() {
-    if (_enteredPin.isNotEmpty) {
-      setState(() {
-        _enteredPin = _enteredPin.substring(0, _enteredPin.length - 1);
-      });
-    }
-  }
-
-  Future<void> _verifyPin() async {
+  Future<void> _handleResumeSession() async {
     final securityProvider = context.read<SecurityProvider>();
-    final result = await securityProvider.verifyPin(_enteredPin);
+    final result = await securityProvider.authenticate();
     
     if (result.success) {
-      widget.onUnlocked();
+      // AuthenticationWrapper will rebuild automatically via provider notifyListeners
+    } else if (result.errorMessage != null && !result.errorMessage!.contains('cancel')) {
+      setState(() {
+        _showPasswordView = true;
+        _errorMessage = result.errorMessage!;
+      });
+    }
+  }
+
+  Future<void> _unlockWithPassword() async {
+    if (_passwordController.text.isEmpty) return;
+
+    final securityProvider = context.read<SecurityProvider>();
+    // Note: This validates against existing PIN or Password
+    final result = await securityProvider.verifyPin(_passwordController.text);
+    
+    if (result.success) {
+      // Success, AuthenticationWrapper will rebuild
     } else {
       setState(() {
-        _enteredPin = "";
-        _errorMessage = result.errorMessage ?? "Incorrect PIN";
+        _errorMessage = result.errorMessage ?? "Incorrect password";
+        _passwordController.clear();
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final securityProvider = context.watch<SecurityProvider>();
-    final type = securityProvider.selectedType;
-
-    if (type != SecurityType.pin && type != SecurityType.password) {
-      // Biometric or other non-input view
-      const bgColor = Color(0xFF0B1019);
-      const accentColor = Color(0xFF00E5FF);
-
-      return Scaffold(
-        backgroundColor: bgColor,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.shield_outlined, size: 64, color: accentColor),
-              const SizedBox(height: 24),
-              const Text(
-                "Vault Security",
-                style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "App is locked",
-                style: TextStyle(color: Color(0xFF8B949E), fontSize: 16),
-              ),
-              const SizedBox(height: 48),
-              if (securityProvider.isAuthenticating)
-                const CircularProgressIndicator(color: accentColor)
-              else
-                ElevatedButton(
-                  onPressed: () => securityProvider.authenticate().then((result) {
-                    if (result.success) widget.onUnlocked();
-                  }),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4DB6AC),
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  child: const Text(
-                    "Unlock with Biometrics", 
-                    style: TextStyle(color: Color(0xFF0B1019), fontWeight: FontWeight.bold)
-                  ),
-                ),
-              const SizedBox(height: 24),
-              TextButton(
-                onPressed: () {
-                  // Fallback logic if any
-                },
-                child: const Text(
-                  "Try another way",
-                  style: TextStyle(color: accentColor, fontWeight: FontWeight.w500),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+    if (_showPasswordView) {
+      return _buildPasswordView();
     }
+    return _buildProtectedView();
+  }
 
-    // PIN Unlock UI
-    const bgColor = Color(0xFF0B1019);
-    const accentColor = Color(0xFF00E5FF);
+  Widget _buildProtectedView() {
+    const tealColor = Color(0xFF00444F);
+    const lightBgColor = Color(0xFFF7FAFF);
 
     return Scaffold(
-      backgroundColor: bgColor,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 100),
-                    const Icon(Icons.shield_outlined, color: accentColor, size: 48),
-                    const SizedBox(height: 24),
-                    const Text(
-                      "Enter PIN",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      "Please enter your 4-digit code to unlock",
-                      style: TextStyle(
-                        color: Color(0xFF8B949E),
-                        fontSize: 16,
-                      ),
-                    ),
-                    if (_errorMessage.isNotEmpty) ...[
-                      const SizedBox(height: 16),
-                      Text(
-                        _errorMessage,
-                        style: const TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                    const SizedBox(height: 44),
-                    // PIN Dots
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(4, (index) {
-                        bool filled = index < _enteredPin.length;
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 12),
-                          width: 16,
-                          height: 16,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: filled ? accentColor : Colors.transparent,
-                            border: Border.all(
-                              color: filled ? accentColor : Colors.white.withValues(alpha: 0.2),
-                              width: 2,
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                    const Spacer(),
-                    _buildNumericPad(),
-                    const SizedBox(height: 40),
-                  ],
+      backgroundColor: lightBgColor,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF64748B).withValues(alpha: 0.12),
+                  blurRadius: 40,
+                  offset: const Offset(0, 15),
                 ),
-              ),
+              ],
             ),
-          ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "BRAHM EDGE",
+                  style: GoogleFonts.ibmPlexMono(
+                    color: tealColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Container(width: 48, height: 3, color: tealColor),
+                const SizedBox(height: 40),
+                
+                // Shield Icon in Square
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.shield, color: tealColor, size: 40),
+                ),
+                const SizedBox(height: 32),
+                
+                // Session Protected Badge
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "SESSION PROTECTED",
+                    style: GoogleFonts.ibmPlexMono(
+                      color: const Color(0xFF475569),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                
+                Text(
+                  "Workspace Locked",
+                  style: GoogleFonts.sora(
+                    color: const Color(0xFF1E293B),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  "Your session was paused for security. Tap below to securely restore your workspace and pick up where you left off.",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    color: const Color(0xFF64748B),
+                    fontSize: 14,
+                    height: 1.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 48),
+                
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton(
+                    onPressed: _handleResumeSession,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: tealColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      elevation: 0,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.fingerprint, size: 24),
+                        const SizedBox(width: 12),
+                        Text(
+                          "Resume Session",
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (_errorMessage.isNotEmpty) ...[
+                  const SizedBox(height: 16),
+                  Text(
+                    _errorMessage,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.redAccent, fontSize: 12),
+                  ),
+                ],
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () => setState(() => _showPasswordView = true),
+                  child: Text(
+                    "Use Password instead",
+                    style: GoogleFonts.inter(
+                      color: tealColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildNumericPad() {
-    return Column(
-      children: [
-        _buildRow(["1", "2", "3"]),
-        const SizedBox(height: 12),
-        _buildRow(["4", "5", "6"]),
-        const SizedBox(height: 12),
-        _buildRow(["7", "8", "9"]),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(child: _buildKey("delete", isAction: true)),
-            const SizedBox(width: 12),
-            Expanded(child: _buildKey("0")),
-            const SizedBox(width: 12),
-            Expanded(child: _buildKey("submit", isAction: true)),
-          ],
-        ),
-      ],
-    );
-  }
+  Widget _buildPasswordView() {
+    const tealColor = Color(0xFF00444F);
+    const lightBgColor = Color(0xFFF7FAFF);
 
-  Widget _buildRow(List<String> keys) {
-    return Row(
-      children: keys.map((key) => Expanded(
+    return Scaffold(
+      backgroundColor: lightBgColor,
+      body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: _buildKey(key),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: const Color(0xFFE2E8F0), width: 0.8),
+                ),
+                child: Text(
+                  "BRAHM EDGE",
+                  style: GoogleFonts.ibmPlexMono(
+                    color: const Color(0xFF475569),
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32),
+              
+              // Auth Required Badge
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.lock_outline, size: 14, color: tealColor),
+                    const SizedBox(width: 8),
+                    Text(
+                      "AUTHENTICATION REQUIRED",
+                      style: GoogleFonts.ibmPlexMono(
+                        color: tealColor,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(height: 100),
+              
+              Text(
+                "Enter Password",
+                style: GoogleFonts.sora(
+                  color: const Color(0xFF1E293B),
+                  fontSize: 32,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                "The application was toggled off. Please enter your password to unlock your workspace.",
+                style: GoogleFonts.inter(
+                  color: const Color(0xFF64748B),
+                  fontSize: 16,
+                  height: 1.5,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              
+              const SizedBox(height: 48),
+              Text(
+                "PASSWORD",
+                style: GoogleFonts.ibmPlexMono(
+                  color: const Color(0xFF1E293B),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: _passwordController,
+                obscureText: _obscurePassword,
+                style: GoogleFonts.ibmPlexMono(fontSize: 18, letterSpacing: 2),
+                decoration: InputDecoration(
+                  hintText: "••••••••••••",
+                  hintStyle: TextStyle(color: Colors.grey.shade400),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: tealColor),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  const Icon(Icons.info_outline, size: 14, color: Color(0xFF64748B)),
+                  const SizedBox(width: 8),
+                  Text(
+                    "Must be at least 8 characters",
+                    style: GoogleFonts.inter(
+                      color: const Color(0xFF64748B),
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              
+              if (_errorMessage.isNotEmpty) ...[
+                const SizedBox(height: 16),
+                Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.redAccent, fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+              ],
+              
+              const Spacer(),
+              
+              SizedBox(
+                width: double.infinity,
+                height: 64,
+                child: ElevatedButton(
+                  onPressed: _unlockWithPassword,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: tealColor,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Unlock Application",
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      const Icon(Icons.arrow_forward_rounded, size: 22),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
-      )).toList(),
-    );
-  }
-
-  Widget _buildKey(String key, {bool isAction = false}) {
-    const keyColor = Color(0xFF161B22);
-    const actionColor = Color(0xFF4DB6AC);
-
-    Widget content;
-    if (key == "delete") {
-      content = const Icon(Icons.backspace_outlined, color: Color(0xFF0B1019));
-    } else if (key == "submit") {
-      content = const Icon(Icons.check, color: Color(0xFF0B1019));
-    } else {
-      content = Text(
-        key,
-        style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
-      );
-    }
-
-    return GestureDetector(
-      onTap: () {
-        if (key == "delete") {
-          _onDelete();
-        } else if (key == "submit") {
-          _verifyPin();
-        } else {
-          _onKeyPress(key);
-        }
-      },
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: isAction ? actionColor : keyColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Center(child: content),
       ),
     );
   }

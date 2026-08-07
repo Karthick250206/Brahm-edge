@@ -148,4 +148,8 @@ class SecurityService {
   Future<void> setOnboarded(bool value) => _repository.setOnboarded(value);
 
   Future<bool> isOnboarded() => _repository.isOnboarded();
+
+  Future<void> setFirstLaunch(bool value) => _repository.setFirstLaunch(value);
+
+  Future<bool> isFirstLaunch() => _repository.isFirstLaunch();
 }

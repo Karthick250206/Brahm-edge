@@ -1,10 +1,3 @@
-- [x] Create Data Management & Retention Screen
-    - [x] Set up screen scaffold and custom app bar
-    - [x] Implement Storage Summary with segmented progress bar and legend
-    - [x] Implement Model Management card
-    - [x] Implement Auto-delete settings card with dropdown
-    - [x] Implement Repository Pillars list with action buttons
-    - [x] Implement global "Delete all data" button and authentication subtext
-    - [x] Add matching bottom navigation bar
-- [x] Link Profile Screen to Data Management Screen
-- [x] Verify UI and navigation
+- [x] Update `lib/main.dart` routing logic
+- [x] Update `lib/screens/new_language_selection_screen.dart` navigation
+- [x] Verify onboarding flow sequence

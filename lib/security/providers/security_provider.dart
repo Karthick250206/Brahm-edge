@@ -87,4 +87,11 @@ class SecurityProvider with ChangeNotifier {
   Future<void> setOnboarded(bool value) => _securityService.setOnboarded(value);
 
   Future<bool> isOnboarded() => _securityService.isOnboarded();
+
+  Future<void> setFirstLaunch(bool value) async {
+    await _securityService.setFirstLaunch(value);
+    notifyListeners();
+  }
+
+  Future<bool> isFirstLaunch() => _securityService.isFirstLaunch();
 }

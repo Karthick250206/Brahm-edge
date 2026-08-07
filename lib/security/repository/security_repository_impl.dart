@@ -33,4 +33,10 @@ class SecurityRepositoryImpl implements SecurityRepository {
 
   @override
   Future<bool> isOnboarded() => _storage.isOnboarded();
+
+  @override
+  Future<void> setFirstLaunch(bool isFirst) => _storage.setFirstLaunch(isFirst);
+
+  @override
+  Future<bool> isFirstLaunch() => _storage.isFirstLaunch();
 }

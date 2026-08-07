@@ -10,4 +10,6 @@ abstract class SecurityRepository {
   Future<void> clearAll();
   Future<void> setOnboarded(bool onboarded);
   Future<bool> isOnboarded();
+  Future<void> setFirstLaunch(bool isFirst);
+  Future<bool> isFirstLaunch();
 }

@@ -16,6 +16,7 @@ class SecureStorageService {
   static const String _keyAppLockEnabled = 'app_lock_enabled';
   static const String _keyLastLockoutTime = 'last_lockout_time';
   static const String _keyOnboarded = 'app_onboarded';
+  static const String _keyFirstLaunch = 'is_first_launch';
 
   Future<void> setAppLockEnabled(bool enabled) async {
     await _storage.write(key: _keyAppLockEnabled, value: enabled.toString());
@@ -113,5 +114,15 @@ class SecureStorageService {
   Future<bool> isOnboarded() async {
     final String? value = await _storage.read(key: _keyOnboarded);
     return value == 'true';
+  }
+
+  Future<void> setFirstLaunch(bool isFirst) async {
+    await _storage.write(key: _keyFirstLaunch, value: isFirst.toString());
+  }
+
+  Future<bool> isFirstLaunch() async {
+    final String? value = await _storage.read(key: _keyFirstLaunch);
+    // Defaults to true if no value exists (first time)
+    return value == null || value == 'true';
   }
 }
