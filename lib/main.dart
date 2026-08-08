@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'theme/design_system.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/intro_screen.dart';
 import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
+import 'services/llm_inference_service.dart';
 import 'security/providers/security_setup.dart';
 import 'security/providers/security_provider.dart';
 import 'security/models/security_type.dart';
@@ -15,6 +17,10 @@ void main() async {
   // Initialize Language Service
   final languageService = LanguageService();
   await languageService.init();
+
+  // Initialize LLM Inference Service
+  final inferenceService = LlmInferenceService();
+  await inferenceService.init();
   
   runApp(
     MultiProvider(
@@ -32,10 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BrahmAI',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: SystematicIntegrity.themeData,
       home: const LifecycleManager(
         child: AuthenticationWrapper(),
       ),
@@ -199,7 +202,7 @@ class _LockedScreenState extends State<LockedScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF64748B).withValues(alpha: 0.12),
+                  color: const Color(0xFF64748B).withOpacity(0.12),
                   blurRadius: 40,
                   offset: const Offset(0, 15),
                 ),
@@ -226,7 +229,7 @@ class _LockedScreenState extends State<LockedScreen> {
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
+                    color: const Color(0xFFE2E8F0).withOpacity(0.5),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.shield, color: tealColor, size: 40),
@@ -237,7 +240,7 @@ class _LockedScreenState extends State<LockedScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
+                    color: const Color(0xFFE2E8F0).withOpacity(0.5),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -362,7 +365,7 @@ class _LockedScreenState extends State<LockedScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
+                  color: const Color(0xFFE2E8F0).withOpacity(0.5),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Row(

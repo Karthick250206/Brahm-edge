@@ -71,7 +71,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         decoration: BoxDecoration(
                           color: cardColor,
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                          border: Border.all(color: Colors.white.withOpacity(0.05)),
                         ),
                         child: Row(
                           children: [
@@ -164,9 +164,9 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: cardColor.withValues(alpha: 0.3),
+                            color: cardColor.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: const Color(0xFF00E5FF).withValues(alpha: 0.1)),
+                            border: Border.all(color: const Color(0xFF00E5FF).withOpacity(0.1)),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,7 +177,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                     padding: const EdgeInsets.all(4),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      border: Border.all(color: accentColor.withValues(alpha: 0.5)),
+                                      border: Border.all(color: accentColor.withOpacity(0.5)),
                                     ),
                                     child: Icon(Icons.info_outline, color: accentColor, size: 16),
                                   ),
@@ -270,7 +270,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
         Expanded(
           child: Container(
             height: 1,
-            color: Colors.white.withValues(alpha: 0.1),
+            color: Colors.white.withOpacity(0.1),
           ),
         ),
       ],
@@ -298,7 +298,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.05),
+                color: Colors.white.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: accentColor, size: 24),

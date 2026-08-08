@@ -69,7 +69,7 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 10),
             child: Row(
               children: [
-                Container(width: 30, height: 1.5, color: accentColor.withValues(alpha: 0.3)),
+                Container(width: 30, height: 1.5, color: accentColor.withOpacity(0.3)),
                 const SizedBox(width: 10),
                 const Text(
                   "INSTALLED MODELS",
@@ -95,7 +95,7 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
                         color: cardColor,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: model['selected'] ? accentColor.withValues(alpha: 0.3) : Colors.white.withValues(alpha: 0.05),
+                          color: model['selected'] ? accentColor.withOpacity(0.3) : Colors.white.withOpacity(0.05),
                         ),
                       ),
                       child: Row(
@@ -143,7 +143,7 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
             decoration: BoxDecoration(
               color: bgColor,
-              border: Border(top: BorderSide(color: Colors.white.withValues(alpha: 0.05))),
+              border: Border(top: BorderSide(color: Colors.white.withOpacity(0.05))),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -168,7 +168,7 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
                       backgroundColor: errorRed,
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                      disabledBackgroundColor: errorRed.withValues(alpha: 0.3),
+                      disabledBackgroundColor: errorRed.withOpacity(0.3),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -207,7 +207,7 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
     return Container(
       decoration: BoxDecoration(
         color: bgColor,
-        border: Border(top: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 0.5)),
+        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1), width: 0.5)),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),

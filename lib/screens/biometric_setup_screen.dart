@@ -55,7 +55,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                           width: 32,
                           height: 2,
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.1),
+                            color: Colors.white.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(1),
                           ),
                         ),
@@ -121,7 +121,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: Colors.black.withValues(alpha: 0.8),
+            color: Colors.black.withOpacity(0.8),
             child: Center(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 32),
@@ -129,7 +129,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFF1C2431),
                   borderRadius: BorderRadius.circular(28),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                  border: Border.all(color: Colors.white.withOpacity(0.1)),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -138,9 +138,9 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.05),
+                        color: Colors.white.withOpacity(0.05),
                         borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: accentColor.withValues(alpha: 0.2)),
+                        border: Border.all(color: accentColor.withOpacity(0.2)),
                       ),
                       child: const Icon(Icons.shield_outlined, color: accentColor, size: 48),
                     ),
@@ -172,7 +172,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                             onPressed: () => Navigator.pop(context),
                             style: OutlinedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(vertical: 18),
-                              side: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
+                              side: BorderSide(color: Colors.white.withOpacity(0.2)),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                             ),
                             child: const Text(
@@ -252,7 +252,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.05),
+              color: Colors.white.withOpacity(0.05),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: accentColor, size: 24),

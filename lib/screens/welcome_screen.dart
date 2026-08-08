@@ -27,17 +27,17 @@ class WelcomeScreen extends StatelessWidget {
           Positioned(
             top: MediaQuery.of(context).size.height * 0.2,
             left: MediaQuery.of(context).size.width * 0.28,
-            child: _buildSoftDot(12, const Color(0xFF94A3B8).withValues(alpha: 0.3)),
+            child: _buildSoftDot(12, const Color(0xFF94A3B8).withOpacity(0.3)),
           ),
           Positioned(
             top: MediaQuery.of(context).size.height * 0.4,
             right: MediaQuery.of(context).size.width * 0.25,
-            child: _buildSoftDot(8, const Color(0xFF94A3B8).withValues(alpha: 0.15)),
+            child: _buildSoftDot(8, const Color(0xFF94A3B8).withOpacity(0.15)),
           ),
           Positioned(
             bottom: MediaQuery.of(context).size.height * 0.3,
             left: MediaQuery.of(context).size.width * 0.38,
-            child: _buildSoftDot(10, const Color(0xFF94A3B8).withValues(alpha: 0.15)),
+            child: _buildSoftDot(10, const Color(0xFF94A3B8).withOpacity(0.15)),
           ),
 
           SafeArea(
@@ -80,7 +80,7 @@ class WelcomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(22),
                     boxShadow: [
                       BoxShadow(
-                        color: tealColor.withValues(alpha: 0.25),
+                        color: tealColor.withOpacity(0.25),
                         blurRadius: 25,
                         offset: const Offset(0, 12),
                       ),
@@ -122,7 +122,7 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF64748B).withValues(alpha: 0.08),
+                          color: const Color(0xFF64748B).withOpacity(0.08),
                           blurRadius: 40,
                           offset: const Offset(0, 15),
                         ),
@@ -202,7 +202,7 @@ class WelcomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         elevation: 6,
-                        shadowColor: tealColor.withValues(alpha: 0.35),
+                        shadowColor: tealColor.withOpacity(0.35),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -265,7 +265,7 @@ class GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF64748B).withValues(alpha: 0.04)
+      ..color = const Color(0xFF64748B).withOpacity(0.04)
       ..strokeWidth = 0.8;
 
     const step = 45.0;

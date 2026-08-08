@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/design_system.dart';
 import 'home_screen.dart';
 import 'chat_screen.dart';
 import 'library_screen.dart';
@@ -46,22 +47,20 @@ class _MainWrapperState extends State<MainWrapper> {
           body: _pages[_index],
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: _index == 3 ? const Color(0xFF0B1019) : const Color(0xFFF5F5F0),
+              color: SystematicIntegrity.level0,
               border: Border(
                 top: BorderSide(
-                  color: _index == 3 
-                    ? Colors.white.withValues(alpha: 0.1) 
-                    : Colors.grey.shade300, 
+                  color: SystematicIntegrity.outlineVariant, 
                   width: 0.5
                 )
               ),
             ),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: _index == 3 ? const Color(0xFF0B1019) : const Color(0xFFF5F5F0),
+              backgroundColor: SystematicIntegrity.level0,
               currentIndex: _index,
-              selectedItemColor: _index == 3 ? const Color(0xFF00E5FF) : Colors.orange.shade800,
-              unselectedItemColor: _index == 3 ? const Color(0xFF8B949E) : Colors.grey,
+              selectedItemColor: SystematicIntegrity.primary,
+              unselectedItemColor: SystematicIntegrity.neutral,
               selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               unselectedLabelStyle: const TextStyle(fontSize: 12),
               // Update state to render the chosen tab view on tap

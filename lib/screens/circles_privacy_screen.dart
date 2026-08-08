@@ -162,7 +162,7 @@ class CirclesPrivacyScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E1E),
         borderRadius: BorderRadius.circular(12),
-        border: isHighlighted ? Border.all(color: Colors.orange.shade800.withValues(alpha: 0.5)) : null,
+        border: isHighlighted ? Border.all(color: Colors.orange.shade800.withOpacity(0.5)) : null,
       ),
       child: Row(
         children: [

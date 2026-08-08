@@ -280,7 +280,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               decoration: BoxDecoration(
                                 color: bgColor,
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                                border: Border.all(color: Colors.white.withOpacity(0.1)),
                               ),
                               child: const Center(
                                 child: Icon(Icons.wb_sunny_outlined, color: Colors.white, size: 24),

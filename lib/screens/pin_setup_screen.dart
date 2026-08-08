@@ -191,7 +191,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                             shape: BoxShape.circle,
                             color: filled ? accentColor : Colors.transparent,
                             border: Border.all(
-                              color: filled ? accentColor : Colors.white.withValues(alpha: 0.2),
+                              color: filled ? accentColor : Colors.white.withOpacity(0.2),
                               width: 2,
                             ),
                           ),
@@ -291,7 +291,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 0.5)),
+        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1), width: 0.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

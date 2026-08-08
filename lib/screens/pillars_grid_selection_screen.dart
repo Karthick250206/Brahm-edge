@@ -98,7 +98,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           decoration: BoxDecoration(
-                            color: isSelected ? Colors.white : cardBgColor.withValues(alpha: 0.6),
+                            color: isSelected ? Colors.white : cardBgColor.withOpacity(0.6),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: isSelected ? tealColor : Colors.transparent,
@@ -106,7 +106,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                             ),
                             boxShadow: isSelected ? [
                               BoxShadow(
-                                color: tealColor.withValues(alpha: 0.1),
+                                color: tealColor.withOpacity(0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               )
@@ -118,7 +118,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                               Container(
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
-                                  color: isSelected ? tealColor.withValues(alpha: 0.1) : Colors.white,
+                                  color: isSelected ? tealColor.withOpacity(0.1) : Colors.white,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Icon(

@@ -111,7 +111,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           decoration: BoxDecoration(
-                            color: isSelected ? Colors.white : cardBgColor.withValues(alpha: 0.6),
+                            color: isSelected ? Colors.white : cardBgColor.withOpacity(0.6),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: isSelected ? tealColor : Colors.transparent,
@@ -119,7 +119,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                             ),
                             boxShadow: isSelected ? [
                               BoxShadow(
-                                color: tealColor.withValues(alpha: 0.1),
+                                color: tealColor.withOpacity(0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               )

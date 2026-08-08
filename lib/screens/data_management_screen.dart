@@ -65,7 +65,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                border: Border.all(color: Colors.white.withOpacity(0.05)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +124,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                border: Border.all(color: Colors.white.withOpacity(0.05)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,7 +170,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         );
                       },
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: errorRed.withValues(alpha: 0.2)),
+                        side: BorderSide(color: errorRed.withOpacity(0.2)),
                         padding: const EdgeInsets.symmetric(vertical: 18),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       ),
@@ -198,7 +198,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                border: Border.all(color: Colors.white.withOpacity(0.05)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,7 +218,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                     decoration: BoxDecoration(
                       color: const Color(0xFF0B1019),
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                      border: Border.all(color: Colors.white.withOpacity(0.1)),
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
@@ -301,7 +301,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       const SizedBox(width: 10),
                       Text(
                         "Requires app lock re-authentication",
-                        style: GoogleFonts.ibmPlexMono(color: textSecondary.withValues(alpha: 0.7), fontSize: 13, fontWeight: FontWeight.w500),
+                        style: GoogleFonts.ibmPlexMono(color: textSecondary.withOpacity(0.7), fontSize: 13, fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -322,7 +322,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
         Container(
           width: 32,
           height: 1.5,
-          color: color.withValues(alpha: 0.3),
+          color: color.withOpacity(0.3),
         ),
         const SizedBox(width: 14),
         Text(
@@ -403,7 +403,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
       ),
       child: Column(
         children: [
@@ -481,7 +481,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               OutlinedButton(
                 onPressed: () {},
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: errorRed.withValues(alpha: 0.2)),
+                  side: BorderSide(color: errorRed.withOpacity(0.2)),
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
@@ -498,7 +498,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
     return Container(
       decoration: BoxDecoration(
         color: bgColor,
-        border: Border(top: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 0.5)),
+        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1), width: 0.5)),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),

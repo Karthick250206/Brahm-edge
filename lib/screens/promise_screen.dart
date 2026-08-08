@@ -72,7 +72,7 @@ class PromiseScreen extends StatelessWidget {
                 title: "WHAT I AM",
                 titleColor: const Color(0xFF00796B),
                 bgColor: const Color(0xFFE8F3EF),
-                borderColor: const Color(0xFF00796B).withValues(alpha: 0.3),
+                borderColor: const Color(0xFF00796B).withOpacity(0.3),
                 items: [
                   "your private thinking partner",
                   "fluent in your script & voice",
@@ -87,7 +87,7 @@ class PromiseScreen extends StatelessWidget {
                 title: "WHAT I AM NOT",
                 titleColor: const Color(0xFFA93226),
                 bgColor: const Color(0xFFFCE9E0),
-                borderColor: const Color(0xFFA93226).withValues(alpha: 0.3),
+                borderColor: const Color(0xFFA93226).withOpacity(0.3),
                 items: [
                   "an oracle of all facts",
                   "a doctor, lawyer or therapist",
