@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'theme/design_system.dart';
 import 'screens/welcome_screen.dart';
-import 'screens/intro_screen.dart';
 import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
 import 'services/llm_inference_service.dart';
+import 'providers/theme_provider.dart';
 import 'security/providers/security_setup.dart';
 import 'security/providers/security_provider.dart';
 import 'security/models/security_type.dart';
@@ -35,10 +35,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeProvider>();
+    
     return MaterialApp(
       title: 'BrahmAI',
       debugShowCheckedModeBanner: false,
-      theme: SystematicIntegrity.themeData,
+      theme: SystematicIntegrity.lightTheme,
+      darkTheme: SystematicIntegrity.darkTheme,
+      themeMode: themeProvider.themeMode,
       home: const LifecycleManager(
         child: AuthenticationWrapper(),
       ),
