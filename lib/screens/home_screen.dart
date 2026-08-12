@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'chat_screen.dart';
 import '../services/language_service.dart';
 import '../services/localization_service.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Access the LanguageService to listen for locale/language changes across the dashboard
     final languageService = LanguageService();
+    final theme = Theme.of(context);
 
     return ListenableBuilder(
       listenable: languageService,
@@ -22,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         String t(String key) => LocalizationService.translate(lang, key);
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F5F0),
+          backgroundColor: theme.scaffoldBackgroundColor,
           body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -37,26 +39,25 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text(
                         t('hello'),
-                        style: const TextStyle(
-                          color: Colors.black,
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onSurface,
                           fontSize: 32,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Serif',
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                       Container(
                         width: 36,
                         height: 36,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: theme.colorScheme.surface,
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.grey.shade300),
+                          border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2)),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             "R",
-                            style: TextStyle(
-                              color: Colors.black,
+                            style: GoogleFonts.notoSans(
+                              color: theme.colorScheme.onSurface,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -66,8 +67,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Text(
                     t('mind_today'),
-                    style: const TextStyle(
-                      color: Colors.grey,
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurfaceVariant,
                       fontSize: 16,
                     ),
                   ),
@@ -77,32 +78,33 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.orange.shade100),
+                      border: Border.all(color: theme.colorScheme.primary.withValues(alpha: 0.2)),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.lock_outline, size: 16, color: Colors.orange.shade800),
+                        Icon(Icons.lock_outline, size: 16, color: theme.colorScheme.primary),
                         const SizedBox(width: 8),
                         Text(
                           t('on_device_only'),
-                          style: TextStyle(
-                            color: Colors.orange.shade800,
+                          style: GoogleFonts.notoSans(
+                            color: theme.colorScheme.primary,
                             fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         const Spacer(),
                         Text(
                           t('offline'),
-                          style: TextStyle(
-                            color: Colors.orange.shade800,
+                          style: GoogleFonts.notoSans(
+                            color: theme.colorScheme.primary,
                             fontSize: 12,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(width: 4),
-                        Icon(Icons.check, size: 14, color: Colors.orange.shade800),
+                        Icon(Icons.check, size: 14, color: theme.colorScheme.primary),
                       ],
                     ),
                   ),
@@ -110,12 +112,12 @@ class HomeScreen extends StatelessWidget {
 
                   // Section Title: Action triggers
                   Text(
-                    t('start_something'),
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
+                    t('start_something').toUpperCase(),
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontSize: 11,
                       letterSpacing: 1.2,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -131,18 +133,19 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1E1E1E),
+                        color: theme.colorScheme.surfaceContainerHighest,
                         borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
                       ),
                       child: Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFE67E22),
+                              color: theme.colorScheme.primary,
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(Icons.chat_bubble_outline, color: Colors.white),
+                            child: Icon(Icons.chat_bubble_outline, color: theme.colorScheme.onPrimary),
                           ),
                           const SizedBox(width: 16),
                           Expanded(
@@ -151,8 +154,8 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   t('ask_anything'),
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurface,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -160,15 +163,15 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 Text(
                                   t('ask_anything_sub'),
-                                  style: const TextStyle(
-                                    color: Colors.grey,
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurfaceVariant,
                                     fontSize: 12,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 16),
+                          Icon(Icons.arrow_forward_ios, color: theme.colorScheme.onSurfaceVariant, size: 16),
                         ],
                       ),
                     ),
@@ -178,9 +181,9 @@ class HomeScreen extends StatelessWidget {
                   // Grid Row 1: Voice Mode and Image Query Shortcuts
                   Row(
                     children: [
-                      Expanded(child: _buildSmallCard(Icons.mic_none, t('voice_mode'), t('voice_mode_sub'))),
+                      Expanded(child: _buildSmallCard(context, Icons.mic_none, t('voice_mode'), t('voice_mode_sub'))),
                       const SizedBox(width: 16),
-                      Expanded(child: _buildSmallCard(Icons.image_outlined, t('ask_image'), t('ask_image_sub'))),
+                      Expanded(child: _buildSmallCard(context, Icons.image_outlined, t('ask_image'), t('ask_image_sub'))),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -188,40 +191,42 @@ class HomeScreen extends StatelessWidget {
                   // Grid Row 2: Panchang and Ephemeral Session Utilities
                   Row(
                     children: [
-                      Expanded(child: _buildSmallCard(Icons.settings_suggest_outlined, t('panchang'), t('panchang_sub'))),
+                      Expanded(child: _buildSmallCard(context, Icons.settings_suggest_outlined, t('panchang'), t('panchang_sub'))),
                       const SizedBox(width: 16),
-                      Expanded(child: _buildSmallCard(Icons.history_toggle_off, t('ephemeral'), t('ephemeral_sub'))),
+                      Expanded(child: _buildSmallCard(context, Icons.history_toggle_off, t('ephemeral'), t('ephemeral_sub'))),
                     ],
                   ),
                   const SizedBox(height: 24),
 
                   // Section Title: Recent chat history list
                   Text(
-                    t('recent'),
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
+                    t('recent').toUpperCase(),
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontSize: 11,
                       letterSpacing: 1.2,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                   const SizedBox(height: 12),
 
                   // Recent History Item 1
                   _buildRecentItem(
+                    context,
                     Icons.star_outline,
                     const Color(0xFF00796B),
-                    const Color(0xFFE8F3EF),
+                    theme.colorScheme.secondary.withValues(alpha: 0.3),
                     "Mom's prescription",
                     "12 messages · 4m ago",
                   ),
-                  const Divider(height: 1, color: Color(0xFFE0E0DB)),
+                  Divider(height: 1, color: theme.colorScheme.outline.withValues(alpha: 0.1)),
 
                   // Recent History Item 2
                   _buildRecentItem(
+                    context,
                     Icons.language,
                     const Color(0xFFD35400),
-                    const Color(0xFFFCE9E0),
+                    theme.colorScheme.secondary.withValues(alpha: 0.3),
                     "A career decision",
                     "28 messages · yesterday",
                   ),
@@ -236,7 +241,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Helper widget to build a styled list row item for recent chat sessions
-  Widget _buildRecentItem(IconData icon, Color iconColor, Color bgColor, String title, String subtitle) {
+  Widget _buildRecentItem(BuildContext context, IconData icon, Color iconColor, Color bgColor, String title, String subtitle) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Row(
@@ -257,8 +263,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style: GoogleFonts.notoSans(
+                    color: theme.colorScheme.onSurface,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -266,8 +272,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    color: Colors.grey,
+                  style: GoogleFonts.notoSans(
+                    color: theme.colorScheme.onSurfaceVariant,
                     fontSize: 13,
                   ),
                 ),
@@ -280,22 +286,24 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Helper widget to build individual secondary shortcut dashboard cards
-  Widget _buildSmallCard(IconData icon, String title, String subtitle) {
+  Widget _buildSmallCard(BuildContext context, IconData icon, String title, String subtitle) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFEBEBE0),
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: Colors.orange.shade800),
+          Icon(icon, color: theme.colorScheme.primary),
           const SizedBox(height: 12),
           Text(
             title,
-            style: const TextStyle(
-              color: Colors.black,
+            style: GoogleFonts.notoSans(
+              color: theme.colorScheme.onSurface,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -303,9 +311,10 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: TextStyle(
-              color: Colors.grey.shade600,
+            style: GoogleFonts.notoSans(
+              color: theme.colorScheme.onSurfaceVariant,
               fontSize: 11,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

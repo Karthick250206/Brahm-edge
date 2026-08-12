@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pillar_selection_screen.dart';
+import 'pillars_grid_selection_screen.dart';
 import '../services/language_service.dart';
 
 /// [LanguageSelectionScreen] provides an interactive multi-language choice interface
@@ -210,7 +210,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       // Replace onboarding screen stack to advance forward without looping back
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => const PillarSelectionScreen(),
+                          builder: (context) => const PillarsGridSelectionScreen(),
                         ),
                       );
                     }

@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../services/llm_inference_service.dart';
 import '../services/database_service.dart';
-import '../theme/design_system.dart';
 
 class ChatMessage {
   final String text;
@@ -56,12 +56,12 @@ class _ChatScreenState extends State<ChatScreen> {
       "icon": Icons.work_outline,
     },
     {
-      "title": "Culture & Family",
+      "title": "Culture and Family",
       "subtitle": "Relationships",
       "icon": Icons.groups_outlined,
     },
     {
-      "title": "Daily Journal",
+      "title": "Defence",
       "subtitle": "Record Thoughts",
       "icon": Icons.edit_note_outlined,
     },
@@ -181,7 +181,9 @@ class _ChatScreenState extends State<ChatScreen> {
   void _generateAiResponse(String prompt) {
     if (!_inferenceService.isModelLoaded) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Model is not loaded. Please go to Settings.")),
+        SnackBar(
+          content: Text("Model is not loaded. Please go to Settings.", style: GoogleFonts.notoSans()),
+        ),
       );
       return;
     }
@@ -212,10 +214,9 @@ class _ChatScreenState extends State<ChatScreen> {
           setState(() {
             _messages[_messages.length - 1] = ChatMessage(text: "Error: $error", isUser: false);
           });
-          // Ensure we don't leave the UI in a hung state
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("A hardware error occurred. Brahmai is switching to Safe Mode."),
+              content: Text("A hardware error occurred. BrahmAI is switching to Safe Mode.", style: GoogleFonts.notoSans()),
               backgroundColor: Colors.blue.shade800,
             ),
           );
@@ -236,19 +237,17 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _showPillarSelector() {
+    final theme = Theme.of(context);
     showModalBottomSheet(
       context: context,
-      backgroundColor: SystematicIntegrity.level2,
+      backgroundColor: theme.colorScheme.surface,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(SystematicIntegrity.radiusXl)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (context) {
         return Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: SystematicIntegrity.marginMobile, 
-            vertical: SystematicIntegrity.spacingLg
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,16 +257,21 @@ class _ChatScreenState extends State<ChatScreen> {
                   Container(
                     width: 24,
                     height: 1,
-                    color: SystematicIntegrity.primary,
+                    color: theme.colorScheme.primary,
                   ),
                   const SizedBox(width: 12),
                   Text(
                     "BRAHM-EDGE PILLAR",
-                    style: SystematicIntegrity.labelSm().copyWith(color: SystematicIntegrity.primary),
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.primary,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.2,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: SystematicIntegrity.spacingLg),
+              const SizedBox(height: 24),
               ..._pillars.map((pillar) {
                 bool isSelected = pillar['title'] == _selectedPillar;
                 return GestureDetector(
@@ -279,22 +283,21 @@ class _ChatScreenState extends State<ChatScreen> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: SystematicIntegrity.spacingMd),
-                    padding: const EdgeInsets.all(SystematicIntegrity.spacingMd),
-                    decoration: SystematicIntegrity.cardDecoration(elevated: isSelected),
+                    margin: const EdgeInsets.only(bottom: 12),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: isSelected ? theme.colorScheme.primary.withValues(alpha: 0.1) : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isSelected ? theme.colorScheme.primary : theme.colorScheme.outline.withValues(alpha: 0.1),
+                      ),
+                    ),
                     child: Row(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(SystematicIntegrity.spacingSm),
-                          decoration: BoxDecoration(
-                            color: SystematicIntegrity.level0,
-                            borderRadius: BorderRadius.circular(SystematicIntegrity.radiusSm),
-                          ),
-                          child: Icon(
-                            pillar['icon'],
-                            color: isSelected ? SystematicIntegrity.primary : SystematicIntegrity.neutral,
-                            size: 24,
-                          ),
+                        Icon(
+                          pillar['icon'],
+                          color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
+                          size: 24,
                         ),
                         const SizedBox(width: 16),
                         Column(
@@ -302,13 +305,18 @@ class _ChatScreenState extends State<ChatScreen> {
                           children: [
                             Text(
                               pillar['title'],
-                              style: isSelected 
-                                ? SystematicIntegrity.headlineSm().copyWith(color: SystematicIntegrity.primary)
-                                : SystematicIntegrity.headlineSm(),
+                              style: GoogleFonts.notoSans(
+                                color: theme.colorScheme.onSurface,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               pillar['subtitle'],
-                              style: SystematicIntegrity.labelSm(),
+                              style: GoogleFonts.notoSans(
+                                color: theme.colorScheme.onSurfaceVariant,
+                                fontSize: 12,
+                              ),
                             ),
                           ],
                         ),
@@ -325,8 +333,9 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildSidebar() {
+    final theme = Theme.of(context);
     return Drawer(
-      backgroundColor: SystematicIntegrity.level1,
+      backgroundColor: theme.colorScheme.surface,
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -340,10 +349,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: SystematicIntegrity.level2),
+                      border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2)),
                     ),
-                    child: const Center(
-                      child: Icon(Icons.psychology_outlined, color: Colors.white, size: 24),
+                    child: Center(
+                      child: Icon(Icons.psychology_outlined, color: theme.colorScheme.onSurface, size: 24),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -352,11 +361,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: [
                       Text(
                         "Brahm-edge",
-                        style: SystematicIntegrity.headlineMd().copyWith(color: SystematicIntegrity.primary),
+                        style: GoogleFonts.notoSans(color: theme.colorScheme.primary, fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         _selectedPillar,
-                        style: SystematicIntegrity.bodySm(),
+                        style: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 12),
                       ),
                     ],
                   ),
@@ -379,11 +388,16 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(width: 24, height: 1, color: SystematicIntegrity.primary),
+                  Container(width: 24, height: 1, color: theme.colorScheme.primary),
                   const SizedBox(height: 8),
                   Text(
                     "RECENT ANALYSIS",
-                    style: SystematicIntegrity.labelSm().copyWith(color: SystematicIntegrity.primary),
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.primary,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.2,
+                    ),
                   ),
                 ],
               ),
@@ -395,7 +409,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                     child: Text(
                       "No recent data",
-                      style: SystematicIntegrity.bodySm(),
+                      style: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 13),
                     ),
                   )
                 : ListView.builder(
@@ -413,11 +427,12 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildSidebarItem(IconData icon, String title, VoidCallback onTap) {
+    final theme = Theme.of(context);
     return ListTile(
-      leading: Icon(icon, color: SystematicIntegrity.onSurface, size: 22),
+      leading: Icon(icon, color: theme.colorScheme.onSurface, size: 22),
       title: Text(
         title,
-        style: SystematicIntegrity.bodyMd(),
+        style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 14, fontWeight: FontWeight.w500),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
       onTap: onTap,
@@ -425,11 +440,12 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildRecentItem(Map<String, dynamic> session) {
+    final theme = Theme.of(context);
     return ListTile(
-      leading: const Icon(Icons.history, color: SystematicIntegrity.neutral, size: 18),
+      leading: Icon(Icons.history, color: theme.colorScheme.onSurfaceVariant, size: 18),
       title: Text(
         _formatHistoryTitle(session['text']),
-        style: SystematicIntegrity.bodySm(),
+        style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 24),
       dense: true,
@@ -439,19 +455,17 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: SystematicIntegrity.level0,
+      backgroundColor: theme.scaffoldBackgroundColor,
       drawer: _buildSidebar(),
       body: SafeArea(
         child: Column(
           children: [
             // Custom Top App Bar
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: SystematicIntegrity.marginMobile, 
-                vertical: SystematicIntegrity.spacingSm
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
                 children: [
                   _IconButton(
@@ -467,7 +481,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     onTap: _showPillarSelector,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      decoration: SystematicIntegrity.cardDecoration(),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
+                      ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -481,10 +499,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                 children: [
                                   Text(
                                     "Brahm-edge",
-                                    style: SystematicIntegrity.labelSm().copyWith(
+                                    style: GoogleFonts.notoSans(
                                       fontSize: 14,
-                                      color: SystematicIntegrity.primary,
-                                      letterSpacing: 0,
+                                      color: theme.colorScheme.primary,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -503,18 +520,19 @@ class _ChatScreenState extends State<ChatScreen> {
                                     ),
                                   ],
                                   const SizedBox(width: 4),
-                                  const Icon(
+                                  Icon(
                                     Icons.keyboard_arrow_down, 
-                                    color: SystematicIntegrity.neutral, 
+                                    color: theme.colorScheme.onSurfaceVariant, 
                                     size: 16
                                   ),
                                 ],
                               ),
                               Text(
                                 _selectedPillar.toUpperCase(),
-                                style: SystematicIntegrity.labelSm().copyWith(
-                                  fontSize: 7,
-                                  color: SystematicIntegrity.neutral,
+                                style: GoogleFonts.notoSans(
+                                  fontSize: 8,
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                  fontWeight: FontWeight.w800,
                                   letterSpacing: 1.0,
                                 ),
                                 textAlign: TextAlign.center,
@@ -555,17 +573,14 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: Center(
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: SystematicIntegrity.maxReadingWidth),
+                  constraints: const BoxConstraints(maxWidth: 1280),
                   child: Stack(
                     children: [
                       _messages.isEmpty 
                         ? _buildEmptyState()
                         : ListView.builder(
                             controller: _scrollController,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: SystematicIntegrity.marginMobile, 
-                              vertical: SystematicIntegrity.spacingLg
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                             itemCount: _messages.length,
                             itemBuilder: (context, index) {
                               return _buildChatBubble(_messages[index]);
@@ -587,25 +602,25 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
-                                  color: SystematicIntegrity.primary,
-                                  borderRadius: BorderRadius.circular(SystematicIntegrity.radiusFull),
+                                  color: theme.colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(99),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
+                                      color: Colors.black.withValues(alpha: 0.2),
                                       blurRadius: 8,
                                       offset: const Offset(0, 4),
                                     ),
                                   ],
                                 ),
-                                child: const Row(
+                                child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.arrow_downward, color: Colors.white, size: 16),
-                                    SizedBox(width: 8),
+                                    Icon(Icons.arrow_downward, color: theme.colorScheme.onPrimary, size: 16),
+                                    const SizedBox(width: 8),
                                     Text(
                                       "Scroll to Bottom",
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                      style: GoogleFonts.notoSans(
+                                        color: theme.colorScheme.onPrimary,
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -622,7 +637,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
 
-            // Floating Chat Composer
+            // Chat Composer
             _buildComposer(),
           ],
         ),
@@ -631,15 +646,17 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildEmptyState() {
+    final theme = Theme.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             "Brahm-edge",
-            style: SystematicIntegrity.headlineLg().copyWith(
-              color: _isIncognito ? Colors.white : SystematicIntegrity.primary,
+            style: GoogleFonts.notoSans(
+              color: _isIncognito ? theme.colorScheme.onSurface : theme.colorScheme.primary,
               fontSize: 40,
+              fontWeight: FontWeight.w800,
             ),
           ),
           const SizedBox(height: 12),
@@ -647,18 +664,18 @@ class _ChatScreenState extends State<ChatScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: SystematicIntegrity.secondary.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(SystematicIntegrity.radiusLg),
-                border: Border.all(color: SystematicIntegrity.secondary.withOpacity(0.3)),
+                color: theme.colorScheme.secondary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: theme.colorScheme.secondary.withValues(alpha: 0.3)),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(PhosphorIcons.shieldCheck, color: SystematicIntegrity.primary, size: 16),
+                  Icon(PhosphorIcons.shieldCheck, color: theme.colorScheme.primary, size: 16),
                   const SizedBox(width: 8),
                   Text(
                     "INCOGNITO ACTIVE",
-                    style: SystematicIntegrity.labelSm().copyWith(color: SystematicIntegrity.primary),
+                    style: GoogleFonts.notoSans(color: theme.colorScheme.primary, fontSize: 10, fontWeight: FontWeight.w800),
                   ),
                 ],
               ),
@@ -666,7 +683,7 @@ class _ChatScreenState extends State<ChatScreen> {
           else
             Text(
               "EDITORIAL INTELLIGENCE",
-              style: SystematicIntegrity.labelSm(),
+              style: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1.2),
             ),
         ],
       ),
@@ -674,17 +691,18 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildChatBubble(ChatMessage message) {
+    final theme = Theme.of(context);
     return Align(
       alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        margin: const EdgeInsets.only(bottom: SystematicIntegrity.spacingMd),
-        padding: const EdgeInsets.all(SystematicIntegrity.spacingMd),
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.all(16),
         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.85),
         decoration: BoxDecoration(
-          color: message.isUser ? SystematicIntegrity.level2 : SystematicIntegrity.level1,
-          borderRadius: BorderRadius.circular(SystematicIntegrity.radiusLg),
+          color: message.isUser ? theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5) : theme.colorScheme.surfaceContainerLow,
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: SystematicIntegrity.outlineVariant,
+            color: theme.colorScheme.outline.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -696,11 +714,11 @@ class _ChatScreenState extends State<ChatScreen> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Row(
                   children: [
-                    Container(width: 24, height: 1, color: SystematicIntegrity.primary),
+                    Container(width: 24, height: 1, color: theme.colorScheme.primary),
                     const SizedBox(width: 8),
                     Text(
                       "ANALYSIS",
-                      style: SystematicIntegrity.labelSm().copyWith(color: SystematicIntegrity.primary),
+                      style: GoogleFonts.notoSans(color: theme.colorScheme.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1.2),
                     ),
                   ],
                 ),
@@ -709,7 +727,12 @@ class _ChatScreenState extends State<ChatScreen> {
               message.text.isEmpty && !message.isUser 
                 ? (_inferenceService.isOptimizing ? "Optimizing engine for your device..." : "Generating...")
                 : message.text,
-              style: message.isUser ? SystematicIntegrity.bodyMd() : SystematicIntegrity.bodyLg(),
+              style: GoogleFonts.notoSans(
+                color: theme.colorScheme.onSurface,
+                fontSize: 16,
+                fontWeight: message.isUser ? FontWeight.w500 : FontWeight.w400,
+                height: 1.5,
+              ),
             ),
           ],
         ),
@@ -718,21 +741,22 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildComposer() {
+    final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.all(SystematicIntegrity.marginMobile),
+      padding: const EdgeInsets.all(16),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(SystematicIntegrity.radiusLg),
+        borderRadius: BorderRadius.circular(16),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: SystematicIntegrity.level1.withOpacity(0.95),
-              borderRadius: BorderRadius.circular(SystematicIntegrity.radiusLg),
-              border: Border.all(color: SystematicIntegrity.outlineVariant),
+              color: theme.colorScheme.surface.withValues(alpha: 0.9),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.4),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 24,
                   offset: const Offset(0, 8),
                 ),
@@ -751,10 +775,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     maxLines: 5,
                     minLines: 1,
                     keyboardType: TextInputType.multiline,
-                    style: SystematicIntegrity.bodyMd(),
+                    style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 16),
                     decoration: InputDecoration(
                       hintText: "Ask BrahmAI anything...",
-                      hintStyle: SystematicIntegrity.bodyMd().copyWith(color: SystematicIntegrity.neutral),
+                      hintStyle: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 14),
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     ),
@@ -811,6 +835,7 @@ class _IconButtonState extends State<_IconButton> with SingleTickerProviderState
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTapDown: (_) => _controller.forward(),
       onTapUp: (_) => _controller.reverse(),
@@ -822,15 +847,15 @@ class _IconButtonState extends State<_IconButton> with SingleTickerProviderState
           width: widget.containerSize,
           height: widget.containerSize,
           decoration: BoxDecoration(
-            color: widget.isActive ? SystematicIntegrity.secondary.withOpacity(0.2) : Colors.transparent,
-            borderRadius: BorderRadius.circular(SystematicIntegrity.radiusSm),
+            color: widget.isActive ? theme.colorScheme.secondary.withValues(alpha: 0.2) : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: widget.isActive ? SystematicIntegrity.secondary : SystematicIntegrity.outlineVariant,
+              color: widget.isActive ? theme.colorScheme.secondary : theme.colorScheme.outline.withValues(alpha: 0.1),
             ),
           ),
           child: Icon(
             widget.icon, 
-            color: widget.isActive ? SystematicIntegrity.primary : SystematicIntegrity.onSurface, 
+            color: widget.isActive ? theme.colorScheme.primary : theme.colorScheme.onSurface, 
             size: 20
           ),
         ),
@@ -873,6 +898,7 @@ class _SendButtonState extends State<_SendButton> with SingleTickerProviderState
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     bool enabled = widget.hasText || widget.isGenerating;
     return GestureDetector(
       onTapDown: (_) => enabled ? _controller.forward() : null,
@@ -885,12 +911,12 @@ class _SendButtonState extends State<_SendButton> with SingleTickerProviderState
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: enabled ? SystematicIntegrity.primary : SystematicIntegrity.level2,
-            borderRadius: BorderRadius.circular(SystematicIntegrity.radiusSm),
+            color: enabled ? theme.colorScheme.primary : theme.colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
             widget.isGenerating ? PhosphorIcons.square : PhosphorIcons.arrowUp,
-            color: enabled ? Colors.white : SystematicIntegrity.neutral,
+            color: enabled ? theme.colorScheme.onPrimary : theme.colorScheme.onSurfaceVariant,
             size: 18,
           ),
         ),

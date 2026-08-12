@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/design_system.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
 import 'chat_screen.dart';
 import 'library_screen.dart';
@@ -35,6 +35,7 @@ class _MainWrapperState extends State<MainWrapper> {
   Widget build(BuildContext context) {
     // Access the LanguageService to listen for locale/language changes across the shell
     final languageService = LanguageService();
+    final theme = Theme.of(context);
 
     return ListenableBuilder(
       listenable: languageService,
@@ -47,22 +48,22 @@ class _MainWrapperState extends State<MainWrapper> {
           body: _pages[_index],
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: SystematicIntegrity.level0,
+              color: theme.colorScheme.surface,
               border: Border(
                 top: BorderSide(
-                  color: SystematicIntegrity.outlineVariant, 
+                  color: theme.colorScheme.outline.withValues(alpha: 0.1), 
                   width: 0.5
                 )
               ),
             ),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: SystematicIntegrity.level0,
+              backgroundColor: theme.colorScheme.surface,
               currentIndex: _index,
-              selectedItemColor: SystematicIntegrity.primary,
-              unselectedItemColor: SystematicIntegrity.neutral,
-              selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-              unselectedLabelStyle: const TextStyle(fontSize: 12),
+              selectedItemColor: theme.colorScheme.primary,
+              unselectedItemColor: theme.colorScheme.onSurfaceVariant,
+              selectedLabelStyle: GoogleFonts.notoSans(fontSize: 12, fontWeight: FontWeight.bold),
+              unselectedLabelStyle: GoogleFonts.notoSans(fontSize: 12),
               // Update state to render the chosen tab view on tap
               onTap: (i) => setState(() => _index = i),
               items: [

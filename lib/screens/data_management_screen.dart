@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'model_deletion_screen.dart';
 import 'pillar_chats_screen.dart';
+import '../services/storage_management_service.dart';
 
 class DataManagementScreen extends StatefulWidget {
   const DataManagementScreen({super.key});
@@ -15,18 +16,32 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
   String _retentionPeriod = "30 Days";
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<StorageManagementService>().refresh();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const bgColor = Color(0xFF0B1019);
-    const cardColor = Color(0xFF161B22);
-    const accentColor = Color(0xFF4FD1C5); // More precise Teal from image
-    const textSecondary = Color(0xFF94A3B8); // Lighter blue-grey
-    const errorRed = Color(0xFFF87171); // Soft error red for actions
+    final theme = Theme.of(context);
+    final storageService = context.watch<StorageManagementService>();
+    final storage = storageService.currentStorage;
+    
+    final bgColor = theme.colorScheme.surface;
+    final cardColor = theme.colorScheme.surfaceContainerHighest;
+    final accentColor = theme.colorScheme.primary;
+    final textSecondary = theme.colorScheme.onSurfaceVariant;
+    final errorRed = theme.colorScheme.error;
+
+    const double totalCapacityGB = 10.0;
+    final double usedGB = storage.totalGB;
+    final double freeGB = totalCapacityGB - usedGB;
 
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: bgColor,
-        elevation: 0,
         toolbarHeight: 80,
         leading: Padding(
           padding: const EdgeInsets.only(left: 12.0),
@@ -34,23 +49,29 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             icon: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFF1C2431),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.05),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, color: accentColor, size: 20),
+              child: Icon(Icons.arrow_back, color: accentColor, size: 20),
             ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
         title: Text(
           "Data Management &\nRetention",
-          style: GoogleFonts.sora(
+          style: GoogleFonts.notoSans(
             color: accentColor,
             fontSize: 24,
             fontWeight: FontWeight.w800,
             height: 1.1,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh, color: accentColor),
+            onPressed: () => storageService.refresh(),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
@@ -65,15 +86,15 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white.withOpacity(0.05)),
+                border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.05)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RichText(
                     text: TextSpan(
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
+                      style: GoogleFonts.notoSans(
+                        color: theme.colorScheme.onSurface,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.5,
@@ -81,8 +102,8 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       children: [
                         const TextSpan(text: "Total Used: "),
                         TextSpan(
-                          text: "4.2 GB / 10 GB",
-                          style: GoogleFonts.ibmPlexMono(
+                          text: "${usedGB.toStringAsFixed(2)} GB / ${totalCapacityGB.toInt()} GB",
+                          style: GoogleFonts.notoSans(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -90,27 +111,37 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Segmented Bar
+                  // Dynamic Segmented Bar
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: SizedBox(
                       height: 14,
                       child: Row(
                         children: [
-                          _buildBarSegment(flex: 25, color: const Color(0xFFF87171)), // Red
-                          _buildBarSegment(flex: 15, color: const Color(0xFFFB923C)), // Orange
-                          _buildBarSegment(flex: 10, color: const Color(0xFFFACC15)), // Yellow
-                          _buildBarSegment(flex: 12, color: const Color(0xFF4ADE80)), // Green
-                          _buildBarSegment(flex: 8, color: const Color(0xFF22D3EE)), // Blue
-                          _buildBarSegment(flex: 10, color: const Color(0xFF94A3B8)), // Grey
-                          _buildBarSegment(flex: 20, color: const Color(0xFF334155)), // Dark Grey
+                          // Model Segment
+                          if (storage.modelBytes > 0)
+                            _buildBarSegment(
+                              flex: (storage.modelBytes * 100 ~/ (totalCapacityGB * 1024 * 1024 * 1024)).clamp(1, 100), 
+                              color: theme.colorScheme.primary,
+                            ),
+                          // Pillar Segments
+                          ...storage.pillarInfo.where((p) => p.bytes > 1024).map((p) => _buildBarSegment(
+                            flex: (p.bytes * 100 ~/ (totalCapacityGB * 1024 * 1024 * 1024)).clamp(1, 100),
+                            color: _getPillarColor(p.name),
+                          )),
+                          // Free Space Segment
+                          if (freeGB > 0)
+                            _buildBarSegment(
+                              flex: (freeGB * 100 ~/ totalCapacityGB).clamp(1, 100), 
+                              color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+                            ),
                         ],
                       ),
                     ),
                   ),
                   const SizedBox(height: 28),
                   // Legend Grid
-                  _buildLegendGrid(),
+                  _buildLegendGrid(storage),
                 ],
               ),
             ),
@@ -124,7 +155,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white.withOpacity(0.05)),
+                border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.05)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,10 +166,10 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1C2431),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.05),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(Icons.crop_square_rounded, color: accentColor, size: 24),
+                        child: Icon(Icons.crop_square_rounded, color: accentColor, size: 24),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -147,12 +178,12 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                           children: [
                             Text(
                               "Delete all downloaded models",
-                              style: GoogleFonts.inter(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 10),
                             Text(
                               "Completely remove all local model weights and fine-tuned parameters from this device.",
-                              style: GoogleFonts.inter(color: textSecondary, fontSize: 15, height: 1.5),
+                              style: GoogleFonts.notoSans(color: textSecondary, fontSize: 15, height: 1.5),
                             ),
                           ],
                         ),
@@ -170,7 +201,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         );
                       },
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: errorRed.withOpacity(0.2)),
+                        side: BorderSide(color: errorRed.withValues(alpha: 0.2)),
                         padding: const EdgeInsets.symmetric(vertical: 18),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       ),
@@ -179,10 +210,10 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         children: [
                           Text(
                             "SELECT MODELS TO DELETE",
-                            style: GoogleFonts.ibmPlexMono(color: errorRed, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                            style: GoogleFonts.notoSans(color: errorRed, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1.5),
                           ),
                           const SizedBox(width: 10),
-                          const Icon(Icons.arrow_forward_ios, color: errorRed, size: 16),
+                          Icon(Icons.arrow_forward_ios, color: errorRed, size: 16),
                         ],
                       ),
                     ),
@@ -198,38 +229,38 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white.withOpacity(0.05)),
+                border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.05)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Auto-delete chats older than:",
-                    style: GoogleFonts.inter(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     "This setting applies across all unlinked conversation modes.",
-                    style: GoogleFonts.inter(color: textSecondary, fontSize: 15),
+                    style: GoogleFonts.notoSans(color: textSecondary, fontSize: 15),
                   ),
                   const SizedBox(height: 20),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0B1019),
+                      color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.white.withOpacity(0.1)),
+                      border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.1)),
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         value: _retentionPeriod,
-                        dropdownColor: const Color(0xFF161B22),
+                        dropdownColor: theme.colorScheme.surfaceContainerHighest,
                         isExpanded: true,
-                        icon: const Icon(Icons.keyboard_arrow_down, color: textSecondary),
+                        icon: Icon(Icons.keyboard_arrow_down, color: textSecondary),
                         items: ["7 Days", "30 Days", "90 Days", "Never"].map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value, style: GoogleFonts.inter(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
+                            child: Text(value, style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 16, fontWeight: FontWeight.w500)),
                           );
                         }).toList(),
                         onChanged: (val) => setState(() => _retentionPeriod = val!),
@@ -243,30 +274,32 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             const SizedBox(height: 40),
             _buildSectionTitle("MODES", accentColor),
             const SizedBox(height: 20),
-            // Pillar Cards
-            _buildPillarCard(
-              context: context,
-              title: "General Assistant\n(Gemini Flash)",
-              space: "450",
-              instances: 12,
-              retention: "30",
-              cardColor: cardColor,
-              accentColor: accentColor,
-              textSecondary: textSecondary,
-              errorRed: errorRed,
-            ),
-            const SizedBox(height: 16),
-            _buildPillarCard(
-              context: context,
-              title: "Code Expert Agent",
-              space: "650",
-              instances: 8,
-              retention: "7",
-              cardColor: cardColor,
-              accentColor: accentColor,
-              textSecondary: textSecondary,
-              errorRed: errorRed,
-            ),
+            // Dynamic Pillar Cards
+            ...storage.pillarInfo.where((p) => p.bytes > 0).map((p) => Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: _buildPillarCard(
+                context: context,
+                title: p.name,
+                space: (p.bytes / (1024 * 1024)).toStringAsFixed(1),
+                instances: 0, // In future, fetch actual session count
+                retention: "30",
+                cardColor: cardColor,
+                accentColor: accentColor,
+                textSecondary: textSecondary,
+                errorRed: errorRed,
+              ),
+            )),
+            
+            if (storage.pillarInfo.every((p) => p.bytes == 0))
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Center(
+                  child: Text(
+                    "No active chat data",
+                    style: GoogleFonts.notoSans(color: textSecondary),
+                  ),
+                ),
+              ),
 
             const SizedBox(height: 60),
             // Global Delete Action
@@ -276,7 +309,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                   OutlinedButton(
                     onPressed: () {},
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1C1318),
+                      backgroundColor: theme.colorScheme.error.withValues(alpha: 0.1),
                       side: const BorderSide(color: Colors.transparent),
                       padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -284,11 +317,11 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.warning_amber_rounded, color: errorRed, size: 26),
+                        Icon(Icons.warning_amber_rounded, color: errorRed, size: 26),
                         const SizedBox(width: 14),
                         Text(
                           "Delete all data",
-                          style: GoogleFonts.inter(color: errorRed, fontSize: 20, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.notoSans(color: errorRed, fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -297,11 +330,11 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.lock_outline, color: textSecondary, size: 16),
+                      Icon(Icons.lock_outline, color: textSecondary, size: 16),
                       const SizedBox(width: 10),
                       Text(
                         "Requires app lock re-authentication",
-                        style: GoogleFonts.ibmPlexMono(color: textSecondary.withOpacity(0.7), fontSize: 13, fontWeight: FontWeight.w500),
+                        style: GoogleFonts.notoSans(color: textSecondary.withValues(alpha: 0.7), fontSize: 13, fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -312,7 +345,6 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(bgColor, accentColor, textSecondary),
     );
   }
 
@@ -322,12 +354,12 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
         Container(
           width: 32,
           height: 1.5,
-          color: color.withOpacity(0.3),
+          color: color.withValues(alpha: 0.3),
         ),
         const SizedBox(width: 14),
         Text(
           title,
-          style: GoogleFonts.ibmPlexMono(
+          style: GoogleFonts.notoSans(
             color: color,
             fontSize: 11,
             fontWeight: FontWeight.w900,
@@ -345,28 +377,58 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
     );
   }
 
-  Widget _buildLegendGrid() {
+  Widget _buildLegendGrid(StorageInfo info) {
     return Column(
       children: [
         _buildLegendRow([
-          _LegendItem("General", const Color(0xFFF87171)),
-          _LegendItem("Defense", const Color(0xFFFB923C)),
+          _LegendItem("Model Weights", Theme.of(context).colorScheme.primary, bytes: info.modelBytes),
+          _LegendItem("Free Space", Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1), bytes: (10.0 * 1024 * 1024 * 1024).toInt() - info.totalBytes),
         ]),
         const SizedBox(height: 16),
-        _buildLegendRow([
-          _LegendItem("Personal Wellness", const Color(0xFFFACC15)),
-          _LegendItem("Workplace Wellness", const Color(0xFF4ADE80)),
-        ]),
-        const SizedBox(height: 16),
-        _buildLegendRow([
-          _LegendItem("Culture & Society", const Color(0xFF22D3EE)),
-          _LegendItem("Daily Journal", const Color(0xFF94A3B8)),
-        ]),
+        ..._chunkPillars(info.pillarInfo, 2).map((chunk) => Column(
+          children: [
+            _buildLegendRow(chunk.map((p) => _LegendItem(p.name, _getPillarColor(p.name), bytes: p.bytes)).toList()),
+            const SizedBox(height: 16),
+          ],
+        )),
       ],
     );
   }
 
+  List<List<T>> _chunkPillars<T>(List<T> list, int size) {
+    List<List<T>> chunks = [];
+    for (var i = 0; i < list.length; i += size) {
+      chunks.add(list.sublist(i, i + size > list.length ? list.length : i + size));
+    }
+    return chunks;
+  }
+
+  Color _getPillarColor(String name) {
+    switch (name) {
+      case "General": return const Color(0xFFF87171);
+      case "Operational": return const Color(0xFFFB923C);
+      case "Personal Counsel": return const Color(0xFFFACC15);
+      case "Workplace": return const Color(0xFF4ADE80);
+      case "Culture & Family": return const Color(0xFF22D3EE);
+      case "Daily Journal": return const Color(0xFF94A3B8);
+      default: return const Color(0xFF64748B);
+    }
+  }
+
+  IconData _getPillarIcon(String name) {
+    switch (name) {
+      case "General": return Icons.chat_bubble_outline;
+      case "Operational": return Icons.auto_awesome_outlined;
+      case "Personal Counsel": return Icons.face_retouching_natural_outlined;
+      case "Workplace": return Icons.work_outline;
+      case "Culture & Family": return Icons.groups_outlined;
+      case "Daily Journal": return Icons.edit_note_outlined;
+      default: return Icons.psychology_outlined;
+    }
+  }
+
   Widget _buildLegendRow(List<_LegendItem> items) {
+    final theme = Theme.of(context);
     return Row(
       children: items.map((item) => Expanded(
         child: Row(
@@ -377,9 +439,21 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               decoration: BoxDecoration(color: item.color, shape: BoxShape.circle),
             ),
             const SizedBox(width: 12),
-            Text(
-              item.label,
-              style: GoogleFonts.inter(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.label,
+                    style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w500),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    "${(item.bytes / (1024 * 1024)).toStringAsFixed(1)} MB",
+                    style: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 10),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -398,12 +472,13 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
     required Color textSecondary,
     required Color errorRed,
   }) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withOpacity(0.05)),
+        border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.05)),
       ),
       child: Column(
         children: [
@@ -414,9 +489,10 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                 width: 52,
                 height: 52,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1C2431),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(14),
                 ),
+                child: Icon(_getPillarIcon(title), color: theme.colorScheme.primary, size: 28),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -425,7 +501,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                   children: [
                     Text(
                       title,
-                      style: GoogleFonts.inter(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, height: 1.2),
+                      style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold, height: 1.2),
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -433,16 +509,16 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Space:", style: GoogleFonts.ibmPlexMono(color: textSecondary, fontSize: 11)),
-                            Text("$space MB", style: GoogleFonts.ibmPlexMono(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700)),
+                            Text("Space:", style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
+                            Text("$space MB", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
                           ],
                         ),
                         const SizedBox(width: 32),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Active Instances:", style: GoogleFonts.ibmPlexMono(color: textSecondary, fontSize: 11)),
-                            Text("$instances", style: GoogleFonts.ibmPlexMono(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700)),
+                            Text("Active Instances:", style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
+                            Text("$instances", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
                           ],
                         ),
                       ],
@@ -471,9 +547,9 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                 },
                 child: Row(
                   children: [
-                    Text("View Chats", style: GoogleFonts.inter(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+                    Text("View Chats", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 15, fontWeight: FontWeight.w600)),
                     const SizedBox(width: 6),
-                    const Icon(Icons.chevron_right, color: Colors.white, size: 20),
+                    Icon(Icons.chevron_right, color: theme.colorScheme.onSurface, size: 20),
                   ],
                 ),
               ),
@@ -481,11 +557,11 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
               OutlinedButton(
                 onPressed: () {},
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: errorRed.withOpacity(0.2)),
+                  side: BorderSide(color: errorRed.withValues(alpha: 0.2)),
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
-                child: Text("Delete all", style: GoogleFonts.inter(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold)),
+                child: Text("Delete all", style: GoogleFonts.notoSans(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold)),
               ),
             ],
           ),
@@ -493,52 +569,11 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
       ),
     );
   }
-
-  Widget _buildBottomNav(Color bgColor, Color accentColor, Color textSecondary) {
-    return Container(
-      decoration: BoxDecoration(
-        color: bgColor,
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1), width: 0.5)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(Icons.home_outlined, "HOME", false, textSecondary),
-            _buildNavItem(Icons.chat_bubble_outline, "CHAT", false, textSecondary),
-            _buildNavItem(Icons.grid_view, "LIBRARY", false, textSecondary),
-            _buildNavItem(Icons.person, "YOU", true, accentColor),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, bool active, Color color) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: color, size: 24),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
-        if (active)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: SvgPicture.asset(
-              'assets/icons/wave_sine.svg',
-              width: 16,
-              height: 4,
-              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
-          ),
-      ],
-    );
-  }
 }
 
 class _LegendItem {
   final String label;
   final Color color;
-  _LegendItem(this.label, this.color);
+  final int bytes;
+  _LegendItem(this.label, this.color, {required this.bytes});
 }

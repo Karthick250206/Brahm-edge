@@ -1,3 +1,11 @@
-- [x] Update `lib/main.dart` routing logic
-- [x] Update `lib/screens/new_language_selection_screen.dart` navigation
-- [x] Verify onboarding flow sequence
+- [ ] Implement `StorageManagementService`
+    - [ ] Add file size calculation for models directory
+    - [ ] Add file size calculation for database directory
+    - [ ] Create a consolidated model for storage info
+- [ ] Refactor `DataManagementScreen`
+    - [ ] Connect to `StorageManagementService`
+    - [ ] Replace static text with dynamic values
+    - [ ] Implement dynamic segmented bar calculation
+- [ ] Verify functionality
+    - [ ] Check values update correctly
+    - [ ] Ensure theme compatibility

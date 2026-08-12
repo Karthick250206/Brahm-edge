@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'main_wrapper.dart';
 import '../security/providers/security_provider.dart';
 import '../services/model_download_service.dart';
@@ -17,9 +18,22 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
   final String _modelUrl = "https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/main/gemma-4-E2B-it.litertlm?download=true";
   final String _modelFileName = "gemma-4-E2B-it.litertlm";
 
+  void _onSetupComplete() async {
+    final provider = context.read<SecurityProvider>();
+    final navigator = Navigator.of(context);
+    await provider.setOnboarded(true);
+    if (mounted) {
+      navigator.pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const MainWrapper()),
+        (route) => false,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final downloadService = ModelDownloadService();
+    final theme = Theme.of(context);
 
     return ListenableBuilder(
       listenable: downloadService,
@@ -32,7 +46,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
         final isError = status == DownloadStatus.error;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F5F0),
+          backgroundColor: theme.scaffoldBackgroundColor,
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -42,29 +56,28 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                   const SizedBox(height: 40),
                   // Main Headline
                   RichText(
-                    text: const TextSpan(
-                      style: TextStyle(
-                        color: Colors.black,
+                    text: TextSpan(
+                      style: GoogleFonts.notoSans(
+                        color: theme.colorScheme.onSurface,
                         fontSize: 32,
                         fontWeight: FontWeight.w400,
-                        fontFamily: 'Serif',
                       ),
                       children: [
-                        TextSpan(text: "Bringing\nBrahmAI "),
+                        const TextSpan(text: "Bringing\nBrahmAI "),
                         TextSpan(
                           text: "home.",
-                          style: TextStyle(
-                            color: Color(0xFFD35400),
+                          style: GoogleFonts.notoSans(
+                            color: theme.colorScheme.primary,
                           ),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     "One-time. After this, we never touch your data again.",
-                    style: TextStyle(
-                      color: Colors.grey,
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurfaceVariant,
                       fontSize: 14,
                     ),
                   ),
@@ -74,9 +87,9 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE8F3EF),
+                      color: theme.colorScheme.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: const Color(0xFF00796B).withOpacity(0.3)),
+                      border: Border.all(color: theme.colorScheme.primary.withValues(alpha: 0.3)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,21 +97,21 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Column(
+                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "BrahmAI · base",
-                                  style: TextStyle(
-                                    color: Colors.black,
+                                  "BrahmAI · 2B",
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurface,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
                                   "2.0 B params · Q4_K_M · v0.9",
-                                  style: TextStyle(
-                                    color: Colors.grey,
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurfaceVariant,
                                     fontSize: 12,
                                   ),
                                 ),
@@ -109,16 +122,16 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: const Color(0xFF00796B)),
+                                  border: Border.all(color: theme.colorScheme.primary),
                                 ),
-                                child: const Row(
+                                child: Row(
                                   children: [
-                                    Icon(Icons.check, size: 12, color: Color(0xFF00796B)),
-                                    SizedBox(width: 4),
+                                    Icon(Icons.check, size: 12, color: theme.colorScheme.primary),
+                                    const SizedBox(width: 4),
                                     Text(
                                       "Ready",
-                                      style: TextStyle(
-                                        color: Color(0xFF00796B),
+                                      style: GoogleFonts.notoSans(
+                                        color: theme.colorScheme.primary,
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -135,8 +148,8 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                           borderRadius: BorderRadius.circular(4),
                           child: LinearProgressIndicator(
                             value: isComplete ? 1.0 : (isDownloading ? progress : 0.0),
-                            backgroundColor: Colors.white,
-                            color: const Color(0xFF00796B),
+                            backgroundColor: theme.colorScheme.surface,
+                            color: theme.colorScheme.primary,
                             minHeight: 6,
                           ),
                         ),
@@ -148,13 +161,13 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                               isDownloading 
                                   ? "${(progress * 1300).toInt()} MB / 1300 MB" 
                                   : isComplete ? "1300 MB / 1300 MB" : "0 MB / 1300 MB",
-                              style: const TextStyle(color: Colors.grey, fontSize: 12),
+                              style: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 12),
                             ),
                             if (!isComplete)
                               Text(
                                 isValidating ? "Validating..." : "${(progress * 100).toInt()}%",
-                                style: const TextStyle(
-                                  color: Color(0xFF00796B),
+                                style: GoogleFonts.notoSans(
+                                  color: theme.colorScheme.primary,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -165,11 +178,11 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                         // Stats Badges
                         Row(
                           children: [
-                            _buildStatBadge("~18 tok/s"),
+                            _buildStatBadge(context, "~18 tok/s"),
                             const SizedBox(width: 8),
-                            _buildStatBadge("~140 ms TTFT"),
+                            _buildStatBadge(context, "~140 ms TTFT"),
                             const SizedBox(width: 8),
-                            _buildStatBadge("14 languages"),
+                            _buildStatBadge(context, "14 languages"),
                           ],
                         ),
                       ],
@@ -180,11 +193,11 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                     const SizedBox(height: 16),
                     Text(
                       "Error: ${downloadService.error ?? 'Unknown error'}",
-                      style: const TextStyle(color: Colors.red, fontSize: 14),
+                      style: GoogleFonts.notoSans(color: theme.colorScheme.error, fontSize: 14),
                     ),
                     TextButton(
                       onPressed: () => downloadService.downloadModel(_modelUrl, _modelFileName),
-                      child: const Text("Retry Download"),
+                      child: Text("Retry Download", style: GoogleFonts.notoSans(color: theme.colorScheme.primary)),
                     ),
                   ],
 
@@ -196,22 +209,14 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                     height: 56,
                     child: ElevatedButton(
                       onPressed: isComplete 
-                        ? () async {
-                            await context.read<SecurityProvider>().setOnboarded(true);
-                            if (!context.mounted) return;
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => const MainWrapper()),
-                              (route) => false,
-                            );
-                          }
+                        ? _onSetupComplete
                         : (isDownloading || isValidating) 
                           ? null 
                           : () => downloadService.downloadModel(_modelUrl, _modelFileName),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFD35400),
-                        disabledBackgroundColor: const Color(0xFFD35400).withOpacity(0.5),
-                        foregroundColor: Colors.white,
+                        backgroundColor: theme.colorScheme.primary,
+                        disabledBackgroundColor: theme.colorScheme.primary.withValues(alpha: 0.5),
+                        foregroundColor: theme.colorScheme.onPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -222,7 +227,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                         children: [
                           Text(
                             isComplete ? "Open BrahmAI" : "Download Model",
-                            style: const TextStyle(
+                            style: GoogleFonts.notoSans(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -233,6 +238,33 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                       ),
                     ),
                   ),
+
+                  if (!isComplete) ...[
+                    const SizedBox(height: 12),
+                    Center(
+                      child: TextButton(
+                        onPressed: _onSetupComplete,
+                        child: Text(
+                          "Set up later",
+                          style: GoogleFonts.notoSans(
+                            color: theme.colorScheme.primary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "Continue without downloading a model. You can add one when you are ready",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.notoSans(
+                        color: theme.colorScheme.primary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 40),
                 ],
               ),
@@ -243,17 +275,18 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
     );
   }
 
-  Widget _buildStatBadge(String label) {
+  Widget _buildStatBadge(BuildContext context, String label) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.5),
+        color: theme.colorScheme.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
       ),
       child: Text(
         label,
-        style: const TextStyle(color: Colors.black87, fontSize: 11),
+        style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 11),
       ),
     );
   }

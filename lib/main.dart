@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'theme/design_system.dart';
 import 'screens/welcome_screen.dart';
+import 'screens/intro_screen.dart';
 import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
 import 'services/llm_inference_service.dart';
 import 'security/providers/security_setup.dart';
 import 'security/providers/security_provider.dart';
+import 'security/models/security_type.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,7 +76,7 @@ class _LifecycleManagerState extends State<LifecycleManager> with WidgetsBinding
       
       // Trigger a check which will cause AuthenticationWrapper to rebuild if needed
       if (await securityProvider.shouldLock()) {
-        securityProvider.refresh(); 
+        securityProvider.notifyListeners(); 
       }
     }
   }
