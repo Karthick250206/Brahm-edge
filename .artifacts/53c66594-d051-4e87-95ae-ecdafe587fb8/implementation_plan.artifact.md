@@ -1,35 +1,37 @@
-# Implementation Plan - Bypassing Legacy Intro Screens
+# Implementation Plan - Dynamic Storage Monitoring
 
-I will update the onboarding flow to bypass the dark-themed intro screens while preserving their codebases for future use. The flow will now transition directly from the new grid selection screens to the final onboarding steps.
+I will implement a dynamic storage tracking system that scans the device for actual model weights and chat database sizes, replacing the static data on the Data Management screen.
 
 ## User Review Required
 
-> [!NOTE]
-> The screens being removed from the active flow are `IntroScreen` and `PrivacyInfoScreen` (and their subsequent dark-themed informational pages). The files will remain in the project directory but will no longer be visible to the user during the regular app experience.
+> [!IMPORTANT]
+> The storage limit is currently set to **10 GB** in the UI. I will maintain this cap for the percentage calculations. If the real data exceeds 10 GB, the bar will represent the relative distribution within that limit.
 
 ## Proposed Changes
 
-### Application Flow & Routing
+### [Services]
 
-#### [MODIFY] [main.dart](file:///D:/develop/Projects/mobile-app/lib/main.dart)
-- Update `AuthenticationWrapper` to use `WelcomeScreen` as the primary entry point for non-onboarded users, replacing the reference to `IntroScreen`.
-- This ensures that if a user closes the app mid-onboarding, they return to the start of the new sequence.
+#### [NEW] [storage_management_service.dart](file:///D:/develop/Projects/mobile-app/lib/services/storage_management_service.dart)
+- Create a service to calculate file sizes on disk.
+- **`getModelStorageSize()`**: Sums the size of all files in the `models/` directory.
+- **`getPillarStorageSize(String pillar)`**: Gets the size of the specific SQLite database for a pillar.
+- **`getTotalUsedStorage()`**: Sums models + all pillar databases.
+- Provide a `Stream` or `notifyListeners()` to update the UI when storage changes.
 
-#### [MODIFY] [new_language_selection_screen.dart](file:///D:/develop/Projects/mobile-app/lib/screens/new_language_selection_screen.dart)
-- Update the "Continue" button navigation.
-- **Old**: Navigated to `PromiseScreen`.
-- **New**: Will navigate directly to `ModelDownloadScreen`.
+### [Screens]
 
-### Code Preservation
-- No files will be deleted. `intro_screen.dart`, `privacy_info_screen.dart`, `circles_privacy_screen.dart`, `offline_info_screen.dart`, and `promise_screen.dart` will be kept in `lib/screens/` for potential future repurposing.
+#### [MODIFY] [data_management_screen.dart](file:///D:/develop/Projects/mobile-app/lib/screens/data_management_screen.dart)
+- Integrate `StorageManagementService`.
+- Replace static "4.2 GB" with the real total used value.
+- Refactor the **Segmented Bar**:
+    - Calculate the width of each segment (Model, General, Defense, etc.) as a percentage of the 10GB limit.
+    - Add a "Model Weights" segment to the bar.
+- Update the **Legend Grid** to show real sizes (e.g., "General - 45MB") if desired, or keep labels and just link them to the bar.
 
 ## Verification Plan
 
 ### Manual Verification
-- **Onboarding Journey**: Start a fresh install and verify the new sequence:
-    1. `WelcomeScreen` (Begin Onboarding)
-    2. `PillarsGridSelectionScreen` (Continue)
-    3. `NewLanguageSelectionScreen` (Continue)
-    4. `PromiseScreen` (Finalizing setup)
-- **Persistence Check**: Close and reopen the app at each step to ensure it doesn't revert to the old dark intro screens.
-- **Reference Preservation**: Verify that the files `intro_screen.dart` and `privacy_info_screen.dart` still exist and contain their original code.
+- **Model Check**: Download a model (e.g., Gemma) and verify the "Model Weights" segment and "Total Used" count increases on the Data Management screen.
+- **Chat Check**: Send several long messages in a specific pillar (e.g., "General"), and verify that its segment in the storage bar grows.
+- **Empty State**: Verify that on a fresh install, the used storage is near zero.
+- **Theme Check**: Ensure the new dynamic labels and bar colors look correct in both Light and Dark modes.

@@ -94,4 +94,9 @@ class SecurityProvider with ChangeNotifier {
   }
 
   Future<bool> isFirstLaunch() => _securityService.isFirstLaunch();
+
+  /// Forces a rebuild of listening widgets.
+  void refresh() {
+    notifyListeners();
+  }
 }

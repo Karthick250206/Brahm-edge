@@ -38,23 +38,24 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
 
   @override
   Widget build(BuildContext context) {
-    const tealColor = Color(0xFF00444F);
-    const lightBgColor = Color(0xFFF7FAFF);
-    const cardBgColor = Color(0xFFEBF2F7);
+    final theme = Theme.of(context);
+    final tealColor = theme.colorScheme.primary;
+    final bgColor = theme.colorScheme.surface;
+    final cardBgColor = theme.colorScheme.surfaceContainerHighest;
 
     return Scaffold(
-      backgroundColor: lightBgColor,
+      backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colorScheme.surface,
         elevation: 0.5,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
+          icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           "Language Selection",
-          style: GoogleFonts.inter(
-            color: const Color(0xFF1E293B),
+          style: GoogleFonts.notoSans(
+            color: theme.colorScheme.onSurface,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -70,8 +71,8 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                 children: [
                   Text(
                     "Choose your language",
-                    style: GoogleFonts.sora(
-                      color: const Color(0xFF1E293B),
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurface,
                       fontSize: 32,
                       fontWeight: FontWeight.w800,
                     ),
@@ -79,8 +80,8 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                   const SizedBox(height: 12),
                   Text(
                     "Select the language for your interface.",
-                    style: GoogleFonts.inter(
-                      color: const Color(0xFF64748B),
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurfaceVariant,
                       fontSize: 16,
                       height: 1.4,
                       fontWeight: FontWeight.w500,
@@ -100,7 +101,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                     itemCount: _languages.length,
                     itemBuilder: (context, index) {
                       final lang = _languages[index];
-                      final isSelected = _selectedLanguage == lang["english"] || _selectedLanguage == lang["native"];
+                      final isSelected = _selectedLanguage == lang["native"];
                       
                       return GestureDetector(
                         onTap: () {
@@ -111,7 +112,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           decoration: BoxDecoration(
-                            color: isSelected ? Colors.white : cardBgColor.withOpacity(0.6),
+                            color: isSelected ? theme.colorScheme.surface : cardBgColor.withValues(alpha: 0.6),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: isSelected ? tealColor : Colors.transparent,
@@ -119,7 +120,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                             ),
                             boxShadow: isSelected ? [
                               BoxShadow(
-                                color: tealColor.withOpacity(0.1),
+                                color: tealColor.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               )
@@ -130,8 +131,8 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                             children: [
                               Text(
                                 lang["native"]!,
-                                style: GoogleFonts.inter(
-                                  color: const Color(0xFF1E293B),
+                                style: GoogleFonts.notoSans(
+                                  color: theme.colorScheme.onSurface,
                                   fontSize: 22,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -139,8 +140,8 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                               const SizedBox(height: 8),
                               Text(
                                 lang["english"]!,
-                                style: GoogleFonts.inter(
-                                  color: const Color(0xFF64748B),
+                                style: GoogleFonts.notoSans(
+                                  color: theme.colorScheme.onSurfaceVariant,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -160,8 +161,8 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
           Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
             decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(top: BorderSide(color: Colors.grey.shade200)),
+              color: theme.colorScheme.surface,
+              border: Border(top: BorderSide(color: theme.colorScheme.outline.withValues(alpha: 0.1))),
             ),
             child: Row(
               children: [
@@ -171,13 +172,13 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                     child: TextButton(
                       onPressed: () => Navigator.pop(context),
                       style: TextButton.styleFrom(
-                        backgroundColor: const Color(0xFFE2E8F0),
+                        backgroundColor: theme.colorScheme.onSurface.withValues(alpha: 0.05),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                       ),
                       child: Text(
                         "Back",
-                        style: GoogleFonts.inter(
-                          color: const Color(0xFF475569),
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onSurfaceVariant,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -205,8 +206,8 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                       ),
                       child: Text(
                         "Continue",
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onPrimary,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),

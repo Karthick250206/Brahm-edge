@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:crypto/crypto.dart';
 import 'package:path_provider/path_provider.dart';
+import 'storage_management_service.dart';
 
 enum DownloadStatus { idle, downloading, validating, complete, error }
 
@@ -129,6 +130,7 @@ class ModelDownloadService extends ChangeNotifier {
       
       if (isValid) {
         _status = DownloadStatus.complete;
+        StorageManagementService().refresh(); // Update storage metrics
       } else {
         _status = DownloadStatus.error;
         _error = "Checksum verification failed. The file may be corrupt.";

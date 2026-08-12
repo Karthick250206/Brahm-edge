@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'storage_management_service.dart';
 
 class DatabaseService {
   static final DatabaseService _instance = DatabaseService._internal();
@@ -68,6 +69,7 @@ class DatabaseService {
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    StorageManagementService().refresh(); // Update storage metrics
   }
 
   Future<List<Map<String, dynamic>>> getMessages(String pillar, {String? sessionId}) async {

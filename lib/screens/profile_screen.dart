@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../security/providers/security_provider.dart';
+import '../providers/theme_provider.dart';
 import 'security_screen.dart';
 import 'language_selection_screen.dart';
 import 'data_management_screen.dart';
@@ -23,11 +25,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final languageService = LanguageService();
     final securityProvider = context.watch<SecurityProvider>();
+    final themeProvider = context.watch<ThemeProvider>();
+    final theme = Theme.of(context);
     
-    const bgColor = Color(0xFF0B1019);
-    const cardColor = Color(0xFF161B22);
-    const accentColor = Color(0xFF00E5FF);
-    const textSecondary = Color(0xFF8B949E);
+    final bgColor = theme.colorScheme.surface;
+    final cardColor = theme.colorScheme.surfaceContainerHighest;
+    final accentColor = theme.colorScheme.primary;
+    final textSecondary = theme.colorScheme.onSurfaceVariant;
 
     final bool appSecurityEnabled = securityProvider.isAppLockEnabled;
 
@@ -47,10 +51,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   const SizedBox(height: 20),
                   // Header
-                  const Text(
+                  Text(
                     "Profile settings",
-                    style: TextStyle(
-                      color: Colors.white,
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurface,
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                     ),
@@ -59,10 +63,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Static Header Row
                   Row(
                     children: [
-                      const Text(
+                      Text(
                         "ACCESS",
-                        style: TextStyle(
-                          color: Colors.white,
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onSurface,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1.2,
@@ -73,13 +77,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         'assets/icons/wave_sine.svg',
                         width: 16,
                         height: 4,
-                        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(theme.colorScheme.onSurface, BlendMode.srcIn),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
+                      Text(
                         "PRIVACY",
-                        style: TextStyle(
-                          color: Colors.white,
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onSurface,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1.2,
@@ -90,13 +94,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         'assets/icons/wave_sine.svg',
                         width: 16,
                         height: 4,
-                        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(theme.colorScheme.onSurface, BlendMode.srcIn),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
+                      Text(
                         "SYSTEM",
-                        style: TextStyle(
-                          color: Colors.white,
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onSurface,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1.2,
@@ -122,10 +126,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Color(0xFF4DB6AC),
                             shape: BoxShape.circle,
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               "R",
-                              style: TextStyle(color: bgColor, fontSize: 28, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.notoSans(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -137,19 +141,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children: [
                                 Text(
                                   t('you'),
-                                  style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                  style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(width: 8),
-                                const Text(
+                                Text(
                                   "• हिन्दी",
-                                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                  style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 4),
                             Text(
                               appSecurityEnabled ? "Security active" : "Security inactive",
-                              style: TextStyle(color: textSecondary, fontSize: 14),
+                              style: GoogleFonts.notoSans(color: textSecondary, fontSize: 14),
                             ),
                           ],
                         ),
@@ -159,9 +163,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 40),
 
                   // Section Label
-                  const Text(
+                  Text(
                     "Preferences and security",
-                    style: TextStyle(
+                    style: GoogleFonts.notoSans(
                       color: accentColor,
                       fontSize: 12,
                       letterSpacing: 1.2,
@@ -185,6 +189,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       );
                     },
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Dark Mode Toggle Item
+                  _buildPreferenceCard(
+                    icon: themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                    title: "Dark Mode",
+                    subtitle: "Switch between light and dark workspace themes",
+                    accentColor: accentColor,
+                    cardColor: cardColor,
+                    trailing: Switch(
+                      value: themeProvider.isDarkMode,
+                      onChanged: (val) => themeProvider.toggleTheme(val),
+                    ),
                   ),
                   const SizedBox(height: 12),
 
@@ -251,9 +269,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   const SizedBox(height: 48),
                   // System Info Section Label
-                  const Text(
+                  Text(
                     "SYSTEM INFO",
-                    style: TextStyle(
+                    style: GoogleFonts.notoSans(
                       color: accentColor,
                       fontSize: 12,
                       letterSpacing: 1.2,
@@ -280,23 +298,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               decoration: BoxDecoration(
                                 color: bgColor,
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                                border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.1)),
                               ),
-                              child: const Center(
-                                child: Icon(Icons.wb_sunny_outlined, color: Colors.white, size: 24),
+                              child: Center(
+                                child: Icon(Icons.wb_sunny_outlined, color: theme.colorScheme.onSurface, size: 24),
                               ),
                             ),
                             const SizedBox(width: 16),
-                            const Column(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "Brahm-edge",
-                                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   "V0.1 • SOVEREIGN • ON-DEVICE",
-                                  style: TextStyle(color: accentColor, fontSize: 10, fontWeight: FontWeight.bold),
+                                  style: GoogleFonts.notoSans(color: accentColor, fontSize: 10, fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -305,13 +323,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(height: 24),
                         Container(
                           padding: const EdgeInsets.only(left: 16),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             border: Border(left: BorderSide(color: accentColor, width: 2)),
                           ),
-                          child: const Text(
+                          child: Text(
                             "\"Built in India. For the World.\"",
-                            style: TextStyle(
-                              color: Colors.white,
+                            style: GoogleFonts.notoSans(
+                              color: theme.colorScheme.onSurface,
                               fontStyle: FontStyle.italic,
                               fontSize: 16,
                             ),
@@ -327,13 +345,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFF161B22)),
+                        side: BorderSide(color: cardColor),
                         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       ),
-                      child: const Text(
+                      child: Text(
                         "RESET PROTOTYPE",
-                        style: TextStyle(color: Color(0xFFF44336), fontSize: 14, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.notoSans(color: const Color(0xFFF44336), fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -344,33 +362,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildSubNavItem(String label, bool active, Color color) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            color: color,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
-        ),
-        if (active)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: SvgPicture.asset(
-              'assets/icons/wave_sine.svg',
-              width: 24,
-              height: 8,
-              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
-          ),
-      ],
     );
   }
 
@@ -396,7 +387,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF0B1019),
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(icon, color: accentColor, size: 20),
@@ -408,12 +399,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.notoSans(color: Theme.of(context).colorScheme.onSurface, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     subtitle,
-                    style: const TextStyle(color: Color(0xFF8B949E), fontSize: 12),
+                    style: GoogleFonts.notoSans(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 12),
                   ),
                 ],
               ),
@@ -421,7 +412,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (trailing != null)
               trailing
             else
-              const Icon(Icons.arrow_forward_ios, color: Color(0xFF8B949E), size: 14),
+              Icon(Icons.arrow_forward_ios, color: Theme.of(context).colorScheme.onSurfaceVariant, size: 14),
           ],
         ),
       ),
