@@ -707,7 +707,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             Text(
               message.text.isEmpty && !message.isUser 
-                ? (_inferenceService.isOptimizing ? "Optimizing engine for your device..." : "Generating...") 
+                ? (_inferenceService.isOptimizing ? "Optimizing engine for your device..." : "Generating...")
                 : message.text,
               style: message.isUser ? SystematicIntegrity.bodyMd() : SystematicIntegrity.bodyLg(),
             ),

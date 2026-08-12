@@ -284,7 +284,6 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
   }
 
   Widget _buildBottomNav() {
-    const bgColor = Color(0xFF0B1019);
     const accentColor = Color(0xFF00E5FF);
     const textSecondary = Color(0xFF8B949E);
 

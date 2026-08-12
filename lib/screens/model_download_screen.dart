@@ -198,13 +198,12 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                       onPressed: isComplete 
                         ? () async {
                             await context.read<SecurityProvider>().setOnboarded(true);
-                            if (mounted) {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const MainWrapper()),
-                                (route) => false,
-                              );
-                            }
+                            if (!context.mounted) return;
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => const MainWrapper()),
+                              (route) => false,
+                            );
                           }
                         : (isDownloading || isValidating) 
                           ? null 

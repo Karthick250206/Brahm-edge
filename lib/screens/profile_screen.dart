@@ -347,32 +347,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildSubNavItem(String label, bool active, Color color) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            color: color,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
-        ),
-        if (active)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: SvgPicture.asset(
-              'assets/icons/wave_sine.svg',
-              width: 24,
-              height: 8,
-              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
-          ),
-      ],
-    );
-  }
+
 
   Widget _buildPreferenceCard({
     required IconData icon,

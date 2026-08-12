@@ -1,9 +1,5 @@
-- `[x]` Robust Fallback Logic
-    - `[x]` Implement `_triggerGpuFallback` in `LlmInferenceService`
-    - `[x]` Handle generation errors in fallback flow
-- `[x]` Update `inference_worker.dart` Isolate stability
-    - `[x]` Wrap all command handlers in try-catch
-- `[x]` Update `ChatScreen` UI
-    - `[x]` Add "Compatibility Mode" badge to header
-    - `[x]` Fix blank screen / hang on error
-- `[x]` Final verification on device
+- `[x]` Research native hashing options for Flutter
+- `[x]` Update `ModelDownloadService`
+    - `[x]` Switch internal hash type to MD5
+    - `[x]` Implement native-accelerated validation logic using `background_downloader`
+- `[x]` Verify speed improvements and integrity
