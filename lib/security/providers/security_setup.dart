@@ -10,11 +10,13 @@ import '../services/lock_manager.dart';
 import '../services/security_service.dart';
 import '../repository/security_repository.dart';
 import '../repository/security_repository_impl.dart';
+import '../../services/storage_management_service.dart';
 import '../../providers/theme_provider.dart';
 import 'security_provider.dart';
 
 List<SingleChildWidget> securityProviders = [
   ChangeNotifierProvider(create: (_) => ThemeProvider()),
+  ChangeNotifierProvider(create: (_) => StorageManagementService()),
   Provider(create: (_) => SecureStorageService()),
   Provider(create: (_) => CryptoService()),
   Provider(create: (_) => BiometricService()),

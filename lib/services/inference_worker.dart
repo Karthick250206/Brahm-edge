@@ -17,6 +17,8 @@ class GenerateCommand extends WorkerCommand {
   GenerateCommand(this.prompt, this.systemPrompt);
 }
 
+class WarmupCommand extends WorkerCommand {}
+
 class StopCommand extends WorkerCommand {}
 
 /// Messages sent from the Isolate back to the main thread
@@ -25,8 +27,9 @@ abstract class WorkerResponse {}
 class LoadResult extends WorkerResponse {
   final bool success;
   final bool wasFallback;
+  final bool wasWarmup;
   final String? error;
-  LoadResult(this.success, {this.wasFallback = false, this.error});
+  LoadResult(this.success, {this.wasFallback = false, this.wasWarmup = false, this.error});
 }
 
 class TokenResponse extends WorkerResponse {
@@ -141,6 +144,19 @@ void inferenceWorkerEntryPoint(SendPort mainSendPort) {
       } catch (e) {
         isGenerating = false;
         mainSendPort.send(ErrorResponse(e.toString()));
+      }
+    } else if (message is WarmupCommand) {
+      try {
+        if (engine == null || conversation == null) {
+          mainSendPort.send(LoadResult(false, wasWarmup: true, error: "Engine not initialized"));
+          return;
+        }
+        // Minimal inference to check GPU health
+        final warmupStream = conversation!.sendMessageStream(Message.user(" "));
+        await warmupStream.first;
+        mainSendPort.send(LoadResult(true, wasWarmup: true));
+      } catch (e) {
+        mainSendPort.send(LoadResult(false, wasWarmup: true, error: e.toString()));
       }
     } else if (message is StopCommand) {
       if (isGenerating) {

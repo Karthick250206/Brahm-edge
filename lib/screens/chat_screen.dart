@@ -78,6 +78,13 @@ class _ChatScreenState extends State<ChatScreen> {
     _scrollController.addListener(_scrollListener);
     _inferenceService.addListener(_onInferenceUpdate);
     _startNewChat();
+    _checkAndAutoLoadModel();
+  }
+
+  void _checkAndAutoLoadModel() {
+    if (!_inferenceService.isModelLoaded && !_inferenceService.isModelLoading) {
+      _inferenceService.loadModel("gemma-4-E2B-it.litertlm");
+    }
   }
 
   void _startNewChat() {
@@ -460,10 +467,12 @@ class _ChatScreenState extends State<ChatScreen> {
       key: _scaffoldKey,
       backgroundColor: theme.scaffoldBackgroundColor,
       drawer: _buildSidebar(),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom Top App Bar
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                // Custom Top App Bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
@@ -641,7 +650,89 @@ class _ChatScreenState extends State<ChatScreen> {
             _buildComposer(),
           ],
         ),
+          ),
+          if (_inferenceService.isModelLoading)
+            _buildLoadingOverlay(),
+        ],
       ),
+    );
+  }
+
+  Widget _buildLoadingOverlay() {
+    final theme = Theme.of(context);
+    final String message = _inferenceService.isOptimizing 
+        ? "Optimizing engine for your device..." 
+        : "Model is initialising...";
+
+    return Stack(
+      children: [
+        // Background blur
+        Positioned.fill(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: theme.colorScheme.surface.withValues(alpha: 0.7),
+            ),
+          ),
+        ),
+        // Centered loading card
+        Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 32),
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surface,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 40,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: SizedBox(
+                    width: 32,
+                    height: 32,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3,
+                      valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  message,
+                  style: GoogleFonts.notoSans(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  "This will only take a moment.",
+                  style: GoogleFonts.notoSans(
+                    fontSize: 12,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 

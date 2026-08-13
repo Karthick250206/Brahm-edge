@@ -98,33 +98,74 @@ class LlmInferenceService extends ChangeNotifier {
   }
 
   void _handleLoadResult(LoadResult result) async {
-    _isModelLoading = false;
+    if (result.wasWarmup) {
+      _handleWarmupResult(result);
+      return;
+    }
+
+    _isModelLoading = !result.success && _useGpu && _isCompatibilityError(result.error); // Still loading if falling back
+    
     if (result.success) {
+      if (_useGpu) {
+        debugPrint("[BrahmAI] Model loaded on GPU. Starting warmup check...");
+        _isOptimizing = true;
+        _workerSendPort?.send(WarmupCommand());
+        notifyListeners();
+        return;
+      }
+      
       _isModelLoaded = true;
+      _isModelLoading = false;
       _lastError = null;
+      _isOptimizing = false;
       
       if (_isRetryingAfterFallback && _lastPrompt != null) {
-        debugPrint("[BrahmAI] Fallback complete. Auto-retrying generation.");
-        _isRetryingAfterFallback = false;
-        _isOptimizing = false;
-        generateResponse(_lastPrompt!, pillar: _lastPillar ?? "General");
+        _continueGenerationAfterFallback();
       }
     } else {
       _isModelLoaded = false;
+      _isModelLoading = false;
       _lastError = result.error;
       
-      // If load failed and we were trying GPU, automatically fallback to CPU
       if (_useGpu && _isCompatibilityError(result.error)) {
         await _triggerGpuFallback(result.error ?? "Unknown GPU error");
         return;
       }
     }
     
-    // Clear crash flag on any final result
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_crashFlagKey, false);
-    
     notifyListeners();
+  }
+
+  void _handleWarmupResult(LoadResult result) async {
+    if (result.success) {
+      debugPrint("[BrahmAI] Warmup successful. GPU is ready.");
+      _isModelLoaded = true;
+      _isModelLoading = false;
+      _isOptimizing = false;
+      _lastError = null;
+
+      if (_isRetryingAfterFallback && _lastPrompt != null) {
+        _continueGenerationAfterFallback();
+      }
+    } else {
+      debugPrint("[BrahmAI] Warmup failed: ${result.error}. Falling back to CPU.");
+      await _triggerGpuFallback(result.error ?? "GPU Warmup failed");
+      return;
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_crashFlagKey, false);
+    notifyListeners();
+  }
+
+  void _continueGenerationAfterFallback() {
+    debugPrint("[BrahmAI] Fallback complete. Auto-retrying generation.");
+    _isRetryingAfterFallback = false;
+    _isOptimizing = false;
+    // Note: We use the existing _responseController to keep the UI stream alive
+    generateResponse(_lastPrompt!, pillar: _lastPillar ?? "General");
   }
 
   bool _isCompatibilityError(String? error) {
@@ -140,6 +181,7 @@ class LlmInferenceService extends ChangeNotifier {
     _useGpu = false;
     _safeModeActive = true;
     _isModelLoaded = false;
+    _isOptimizing = true;
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_useGpuKey, false);
@@ -148,6 +190,7 @@ class LlmInferenceService extends ChangeNotifier {
     if (_lastModelFileName != null) {
       loadModel(_lastModelFileName!);
     } else {
+      _isOptimizing = false;
       notifyListeners();
     }
   }

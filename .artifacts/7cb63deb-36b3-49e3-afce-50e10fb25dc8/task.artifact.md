@@ -1,0 +1,28 @@
+- [x] Fix Model Download Failure
+    - [x] Identify root cause (missing `models/` directory)
+    - [x] Update `ModelDownloadService` to create directory pre-download
+- [x] Implement automated model loading in `LlmInferenceService`
+    - [x] Update `_triggerGpuFallback` to manage `isOptimizing` state
+    - [x] Ensure `isModelLoading` remains true during fallback
+- [x] Remove manual "LOAD" button from `LibraryScreen`
+    - [x] Modify `_buildModelCard` in `library_screen.dart`
+- [x] Implement auto-loading and pop-up in `ChatScreen`
+    - [x] Trigger `loadModel` in `initState` if necessary
+    - [x] Implement non-dismissible initialization dialog
+    - [x] Handle loading/optimization messages in the dialog
+    - [x] Clean up "Optimizing..." messages from chat bubbles
+- [x] Implement Proactive Hardware Optimization
+    - [x] Update `ModelDownloadService` to trigger model load immediately after download completion
+- [x] Implement Pre-Prompt Engine Warmup
+    - [x] Update `inference_worker.dart` to handle hidden warmup inference
+    - [x] Update `llm_inference_service.dart` to execute warmup before marking model as ready
+- [x] Improve Download Reliability
+    - [x] Reduce `chunks` from 4 to 1 in `ModelDownloadService`
+    - [x] Map network technical errors to user-friendly advice
+- [x] Fix `StorageManagementService` Provider Error
+    - [x] Add `StorageManagementService` to `securityProviders` in `security_setup.dart`
+- [x] Verification
+    - [x] Verify directory creation logic applied
+    - [x] Verify automated loading triggers correctly
+    - [x] Verify background optimization post-download
+    - [x] Verify `DataManagementScreen` opens without errors
