@@ -29,13 +29,9 @@ class SecurityProvider with ChangeNotifier {
   }
 
   Future<void> toggleAppLock(bool value) async {
-    if (!value) {
-      await _securityService.disableAppLock();
-      _isAppLockEnabled = false;
-      _selectedType = SecurityType.none;
-      notifyListeners();
-    }
-    // Note: Enabling usually happens after selecting a method in the UI
+    _isAppLockEnabled = value;
+    await _securityService.setAppLockEnabled(value);
+    notifyListeners();
   }
 
   Future<AuthenticationResult> enableWithBiometric(bool biometricOnly) async {

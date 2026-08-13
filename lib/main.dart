@@ -7,6 +7,7 @@ import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
 import 'services/llm_inference_service.dart';
 import 'providers/theme_provider.dart';
+import 'services/storage_management_service.dart';
 import 'security/providers/security_setup.dart';
 import 'security/providers/security_provider.dart';
 import 'security/models/security_type.dart';
@@ -24,7 +25,11 @@ void main() async {
   
   runApp(
     MultiProvider(
-      providers: securityProviders,
+      providers: [
+        ...securityProviders,
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => StorageManagementService()),
+      ],
       child: const MyApp(),
     ),
   );

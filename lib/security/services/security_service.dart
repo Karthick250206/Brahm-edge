@@ -136,9 +136,12 @@ class SecurityService {
     await _sessionService.updateActivity();
   }
 
+  Future<void> setAppLockEnabled(bool enabled) async {
+    await _repository.setAppLockEnabled(enabled);
+  }
+
   Future<void> disableAppLock() async {
     await _repository.setAppLockEnabled(false);
-    await _repository.setSecurityType(SecurityType.none);
   }
 
   Future<bool> shouldLock() => _sessionService.shouldLock();

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/storage_management_service.dart';
 
 class ModelDeletionScreen extends StatefulWidget {
   const ModelDeletionScreen({super.key});
@@ -8,45 +10,75 @@ class ModelDeletionScreen extends StatefulWidget {
 }
 
 class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
-  final List<Map<String, dynamic>> _models = [
-    {
-      "name": "Brahm-edge 2B",
-      "size": "1.8 GB",
-      "date": "15 OCT 2023",
-      "selected": true,
-    },
-    {
-      "name": "Brahm-edge 5B",
-      "size": "4.2 GB",
-      "date": "28 OCT 2023",
-      "selected": true,
-    },
-  ];
+  final Set<String> _selectedPaths = {};
 
-  void _deleteSelectedModels() {
-    setState(() {
-      _models.removeWhere((model) => model['selected'] == true);
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<StorageManagementService>().refresh();
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Selected models deleted successfully"),
-        backgroundColor: Colors.green,
-      ),
-    );
+  }
+
+  Future<void> _deleteSelectedModels() async {
+    final storageService = context.read<StorageManagementService>();
+    final pathsToDelete = _selectedPaths.toList();
+    
+    try {
+      for (var path in pathsToDelete) {
+        await storageService.deleteModelFile(path);
+      }
+      setState(() {
+        _selectedPaths.clear();
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Selected models deleted successfully"),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error deleting models: $e"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    final months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    return "${date.day} ${months[date.month - 1]} ${date.year}";
+  }
+
+  String _formatSize(int bytes) {
+    if (bytes >= 1024 * 1024 * 1024) {
+      return "${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB";
+    }
+    return "${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB";
   }
 
   @override
   Widget build(BuildContext context) {
-    const bgColor = Color(0xFF0B1019);
-    const cardColor = Color(0xFF161B22);
-    const accentColor = Color(0xFF4FD1C5);
-    const textSecondary = Color(0xFF94A3B8);
-    const errorRed = Color(0xFFB91C1C);
+    final theme = Theme.of(context);
+    final storageService = context.watch<StorageManagementService>();
+    final models = storageService.currentStorage.modelDetails;
 
-    int selectedCount = _models.where((m) => m['selected'] == true).length;
-    double totalSize = _models
-        .where((m) => m['selected'] == true)
-        .fold(0.0, (sum, m) => sum + double.parse(m['size'].split(' ')[0]));
+    final bgColor = theme.scaffoldBackgroundColor;
+    final cardColor = theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
+    final accentColor = theme.colorScheme.primary;
+    final textSecondary = theme.colorScheme.onSurfaceVariant;
+    final errorRed = theme.colorScheme.error;
+
+    int selectedCount = _selectedPaths.length;
+    double totalSizeGB = models
+        .where((m) => _selectedPaths.contains(m.path))
+        .fold(0.0, (sum, m) => sum + (m.bytes / (1024 * 1024 * 1024)));
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -54,12 +86,12 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
         backgroundColor: bgColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           "Select models to delete",
-          style: TextStyle(color: accentColor, fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -69,9 +101,9 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 10),
             child: Row(
               children: [
-                Container(width: 30, height: 1.5, color: accentColor.withOpacity(0.3)),
+                Container(width: 30, height: 1.5, color: accentColor.withValues(alpha: 0.3)),
                 const SizedBox(width: 10),
-                const Text(
+                Text(
                   "INSTALLED MODELS",
                   style: TextStyle(color: accentColor, fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 1.5),
                 ),
@@ -79,71 +111,101 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-              itemCount: _models.length,
-              itemBuilder: (context, index) {
-                final model = _models[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: InkWell(
-                    onTap: () => setState(() => model['selected'] = !model['selected']),
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: cardColor,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: model['selected'] ? accentColor.withOpacity(0.3) : Colors.white.withOpacity(0.05),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: model['selected'],
-                            activeColor: accentColor,
-                            checkColor: bgColor,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                            onChanged: (val) => setState(() => model['selected'] = val!),
-                          ),
-                          const SizedBox(width: 12),
-                          Container(
-                            padding: const EdgeInsets.all(10),
+            child: models.isEmpty
+                ? Center(
+                    child: Text(
+                      "No models installed",
+                      style: TextStyle(color: textSecondary),
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                    itemCount: models.length,
+                    itemBuilder: (context, index) {
+                      final model = models[index];
+                      final isSelected = _selectedPaths.contains(model.path);
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (isSelected) {
+                                _selectedPaths.remove(model.path);
+                              } else {
+                                _selectedPaths.add(model.path);
+                              }
+                            });
+                          },
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1C2431),
-                              borderRadius: BorderRadius.circular(12),
+                              color: cardColor,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: isSelected ? accentColor.withValues(alpha: 0.3) : theme.colorScheme.outline.withValues(alpha: 0.1),
+                              ),
                             ),
-                            child: const Icon(Icons.psychology_rounded, color: accentColor, size: 24),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
                               children: [
-                                Text(
-                                  model['name'],
-                                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                Checkbox(
+                                  value: isSelected,
+                                  activeColor: accentColor,
+                                  checkColor: theme.colorScheme.onPrimary,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                                  onChanged: (val) {
+                                    setState(() {
+                                      if (val!) {
+                                        _selectedPaths.add(model.path);
+                                      } else {
+                                        _selectedPaths.remove(model.path);
+                                      }
+                                    });
+                                  },
                                 ),
-                                const SizedBox(height: 8),
-                                _buildInfoColumn("SIZE: ${model['size']}", textSecondary),
+                                const SizedBox(width: 12),
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: theme.colorScheme.onSurface.withValues(alpha: 0.05),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Icon(Icons.psychology_rounded, color: accentColor, size: 24),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        model.name,
+                                        style: TextStyle(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        children: [
+                                          _buildInfoColumn("SIZE", _formatSize(model.bytes), textSecondary, theme.colorScheme.onSurface),
+                                          const SizedBox(width: 24),
+                                          _buildInfoColumn("INSTALLED", _formatDate(model.installedDate), textSecondary, theme.colorScheme.onSurface),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
           // Bottom Action Area
           Container(
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
             decoration: BoxDecoration(
               color: bgColor,
-              border: Border(top: BorderSide(color: Colors.white.withOpacity(0.05))),
+              border: Border(top: BorderSide(color: theme.colorScheme.outline.withValues(alpha: 0.1))),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -151,11 +213,11 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
               children: [
                 RichText(
                   text: TextSpan(
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
                     children: [
                       TextSpan(text: "● ", style: TextStyle(color: Color(0xFFF87171))),
-                      TextSpan(text: "$selectedCount models selected ", style: const TextStyle(color: Colors.white)),
-                      TextSpan(text: "(${totalSize.toStringAsFixed(1)} GB total)", style: const TextStyle(color: Colors.white)),
+                      TextSpan(text: "$selectedCount models selected "),
+                      TextSpan(text: "(${totalSizeGB.toStringAsFixed(1)} GB total)"),
                     ],
                   ),
                 ),
@@ -166,18 +228,19 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
                     onPressed: selectedCount > 0 ? _deleteSelectedModels : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: errorRed,
+                      foregroundColor: theme.colorScheme.onError,
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                      disabledBackgroundColor: errorRed.withOpacity(0.3),
+                      disabledBackgroundColor: errorRed.withValues(alpha: 0.3),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Icon(Icons.delete_outline, color: Colors.white),
+                        Icon(Icons.delete_outline),
                         SizedBox(width: 10),
                         Text(
                           "Delete selected models",
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -188,49 +251,15 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: _buildBottomNav(bgColor, textSecondary),
     );
   }
 
-  Widget _buildInfoColumn(String text, Color color) {
-    List<String> parts = text.split(': ');
+  Widget _buildInfoColumn(String label, String value, Color labelColor, Color valueColor) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(parts[0], style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold)),
-        Text(parts[1], style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600)),
-      ],
-    );
-  }
-
-  Widget _buildBottomNav(Color bgColor, Color textSecondary) {
-    return Container(
-      decoration: BoxDecoration(
-        color: bgColor,
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1), width: 0.5)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(Icons.home_outlined, "HOME", textSecondary),
-            _buildNavItem(Icons.chat_bubble_outline, "CHAT", textSecondary),
-            _buildNavItem(Icons.grid_view, "LIBRARY", textSecondary),
-            _buildNavItem(Icons.person, "YOU", const Color(0xFF4FD1C5)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, Color color) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: color, size: 24),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold)),
+        Text(label, style: TextStyle(color: labelColor, fontSize: 10, fontWeight: FontWeight.bold)),
+        Text(value, style: TextStyle(color: valueColor, fontSize: 11, fontWeight: FontWeight.w600)),
       ],
     );
   }

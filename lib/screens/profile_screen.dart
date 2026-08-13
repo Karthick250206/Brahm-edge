@@ -145,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  "• हिन्दी",
+                                  "• $lang",
                                   style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -178,7 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _buildPreferenceCard(
                     icon: Icons.language,
                     title: "Language",
-                    subtitle: "हिन्दी (Hindi)",
+                    subtitle: "$lang (${languageService.getEnglishName(lang)})",
                     accentColor: accentColor,
                     cardColor: cardColor,
                     onTap: () {

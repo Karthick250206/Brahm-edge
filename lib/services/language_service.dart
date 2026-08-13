@@ -34,4 +34,23 @@ class LanguageService extends ChangeNotifier {
     await _storage.write(key: _languageKey, value: language);
     notifyListeners();
   }
+
+  String getEnglishName(String nativeName) {
+    switch (nativeName) {
+      case "हिन्दी": return "Hindi";
+      case "বাংলা": return "Bengali";
+      case "मराठी": return "Marathi";
+      case "తెలుగు": return "Telugu";
+      case "தமிழ்": return "Tamil";
+      case "ગુજરાતી": return "Gujarati";
+      case "اردو": return "Urdu";
+      case "ಕನ್ನಡ": return "Kannada";
+      case "ଓଡ଼ିଆ": return "Odia";
+      case "മലയാളം": return "Malayalam";
+      case "ਪੰਜਾਬੀ": return "Punjabi";
+      case "অসমীয়া": return "Assamese";
+      case "English": return "English";
+      default: return nativeName;
+    }
+  }
 }

@@ -1,11 +1,9 @@
-- [ ] Implement `StorageManagementService`
-    - [ ] Add file size calculation for models directory
-    - [ ] Add file size calculation for database directory
-    - [ ] Create a consolidated model for storage info
-- [ ] Refactor `DataManagementScreen`
-    - [ ] Connect to `StorageManagementService`
-    - [ ] Replace static text with dynamic values
-    - [ ] Implement dynamic segmented bar calculation
-- [ ] Verify functionality
-    - [ ] Check values update correctly
-    - [ ] Ensure theme compatibility
+- `[x]` Update `SecurityService` logic
+    - `[x]` Update `disableAppLock` to only toggle the flag
+    - `[x]` Add `setAppLockEnabled` for clean toggling
+- `[x]` Refactor `SecurityProvider`
+    - `[x]` Update `toggleAppLock` to use new service methods
+    - `[x]` Preserve `selectedType` state during toggling
+- `[x]` Verification
+    - `[x]` Test PIN persistence when toggle is OFF
+    - `[x]` Verify lock functionality when toggle is ON
