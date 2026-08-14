@@ -156,7 +156,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      "Use your fingerprint or device face recognition to unlock Brahm-edge",
+                      "Use your fingerprint or device face recognition to unlock ZiqeX",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xFF94A3B8),

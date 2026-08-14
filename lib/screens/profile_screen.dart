@@ -226,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _buildPreferenceCard(
                     icon: Icons.security_outlined,
                     title: "App lock",
-                    subtitle: "Protect Brahm-edge with your fingerprint, face, or PIN",
+                    subtitle: "Protect ZiqeX with your fingerprint, face, or PIN",
                     accentColor: accentColor,
                     cardColor: cardColor,
                     onTap: () {
@@ -242,7 +242,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _buildPreferenceCard(
                     icon: Icons.shield_outlined,
                     title: "Privacy mode",
-                    subtitle: "1 active 'Brahm-edge listening mode'",
+                    subtitle: "1 active 'ZiqeX listening mode'",
                     accentColor: accentColor,
                     cardColor: cardColor,
                   ),
@@ -280,7 +280,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 16),
 
-                  // BrahmAI Info Card
+                  // ZiqeXAI Info Card
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -309,7 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Brahm-edge",
+                                  "ZiqeX",
                                   style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
                                 ),
                                 Text(
