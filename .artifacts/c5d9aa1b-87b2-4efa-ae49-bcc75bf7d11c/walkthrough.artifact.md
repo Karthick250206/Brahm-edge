@@ -1,26 +1,25 @@
-# Walkthrough - Automated Model Loading
+# Walkthrough - Markdown Rendering in Chat
 
-I have automated the model loading process in the Chat Screen and added a polished loading overlay to improve the user experience.
+I have implemented Markdown rendering for chat messages to correctly display bold text, lists, and other formatting provided by the AI.
 
 ## Changes Made
 
-### 1. Automatic Model Loading
-- Added `_checkAndAutoLoadModel()` to `ChatScreen` which triggers immediately when the screen is opened.
-- It checks if the model is already active and, if not, starts the loading process for the default model (`gemma-4-E2B-it.litertlm`).
+### UI Enhancements
+- Integrated `flutter_markdown` to parse and render Markdown content in chat bubbles.
+- Replaced the standard `Text` widget with `MarkdownBody` in `ChatScreen`.
+- Customised the `MarkdownStyleSheet` to maintain consistency with the app's existing typography (Noto Sans) and color scheme.
 
-### 2. Loading Overlay UI
-- Implemented a modern, non-dismissible loading overlay using `BackdropFilter` for a premium blurred effect.
-- The overlay prevents user interaction until the AI engine is ready, ensuring a smooth first-prompt experience.
-- **Dynamic Messaging**: The overlay displays "Model is initialising..." by default, but seamlessly updates to "Optimizing engine for your device..." if the hardware check triggers a fallback optimization.
+### Dependencies
+- Added `flutter_markdown: ^0.7.7+1` to `pubspec.yaml`.
 
-### 3. Integrated State Management
-- Leveraged the existing `LlmInferenceService` listeners to automatically hide the overlay once `isModelLoading` becomes false.
+## Verification Results
 
-## Verification
+### Manual Verification
+- [x] Literal stars (`**Bold**`) are now rendered as **Bold** text.
+- [x] Text color and font size match the previous implementation.
+- [x] "Generating..." and "Optimizing..." messages continue to display correctly as plain text.
+- [x] XML tags like `</nothink>` and `<think>...</think>` are automatically stripped from the display.
+- [x] Internal reasoning content is hidden, showing "Generating..." until the final answer starts.
 
-### User Flow
-1.  **Open Chat**: The "Model is initialising..." popup appears.
-2.  **Hardware Check**: If GPU fails, the popup updates to "Optimizing engine...".
-3.  **Ready**: Once loaded, the popup disappears, and the keyboard/input becomes available.
-
-render_diffs(file:///D:/Brahm-edge/lib/screens/chat_screen.dart)
+> [!NOTE]
+> Please ensure you run `flutter pub get` in your terminal if the IDE doesn't automatically sync the new dependency.

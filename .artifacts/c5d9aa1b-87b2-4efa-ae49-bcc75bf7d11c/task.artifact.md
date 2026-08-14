@@ -1,5 +1,7 @@
-# Task List - Automated Model Loading
-
-- [x] Implement `_checkAndAutoLoadModel` in `chat_screen.dart`
-- [x] Implement the loading overlay UI in `chat_screen.dart`
-- [x] Verify the auto-load flow and overlay transitions
+- [x] Add `flutter_markdown` to `pubspec.yaml`
+- [x] Run `flutter pub get` (User action required if IDE fails)
+- [x] Implement `MarkdownBody` in `chat_screen.dart`
+- [x] Verify Markdown rendering in chat
+- [x] Implement `cleanResponse` in `LlmInferenceService`
+- [x] Apply filtering in `chat_screen.dart`
+- [x] Verify XML tags and special tokens are removed

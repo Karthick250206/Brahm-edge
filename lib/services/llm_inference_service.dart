@@ -206,6 +206,32 @@ class LlmInferenceService extends ChangeNotifier {
     }
   }
 
+  /// Cleans the response by removing XML tags and other internal special tokens.
+  static String cleanResponse(String text) {
+    if (text.isEmpty) return text;
+    
+    // 1. Remove XML-like tags and content between specific "thinking" tags
+    // This removes <think>...</think>, <thought>...</thought>, etc.
+    final thinkingTags = ['think', 'thought', 'nothink', 'reasoning'];
+    String cleaned = text;
+    
+    for (final tag in thinkingTags) {
+      final regExp = RegExp(
+        '<$tag>.*?</$tag>',
+        dotAll: true,
+        caseSensitive: false,
+      );
+      cleaned = cleaned.replaceAll(regExp, '');
+    }
+    
+    // 2. Remove any remaining isolated XML tags (like <|endoftext|> or stray tags)
+    // We target common LLM special tokens and general tags
+    final generalTagRegExp = RegExp(r'<[^>]*>', multiLine: true);
+    cleaned = cleaned.replaceAll(generalTagRegExp, '');
+    
+    return cleaned.trim();
+  }
+
   void _handleErrorResponse(ErrorResponse response) {
     _isGenerating = false;
     _lastError = response.error;

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import '../services/llm_inference_service.dart';
 import '../services/database_service.dart';
 
@@ -204,8 +205,9 @@ class _ChatScreenState extends State<ChatScreen> {
       (token) {
         fullResponse += token;
         if (mounted) {
+          final cleanedResponse = LlmInferenceService.cleanResponse(fullResponse);
           setState(() {
-            _messages[_messages.length - 1] = ChatMessage(text: fullResponse, isUser: false);
+            _messages[_messages.length - 1] = ChatMessage(text: cleanedResponse, isUser: false);
           });
           _scrollToBottom();
           
@@ -814,17 +816,35 @@ class _ChatScreenState extends State<ChatScreen> {
                   ],
                 ),
               ),
-            Text(
-              message.text.isEmpty && !message.isUser 
-                ? (_inferenceService.isOptimizing ? "Optimizing engine for your device..." : "Generating...")
-                : message.text,
-              style: GoogleFonts.notoSans(
-                color: theme.colorScheme.onSurface,
-                fontSize: 16,
-                fontWeight: message.isUser ? FontWeight.w500 : FontWeight.w400,
-                height: 1.5,
+            if (message.text.isEmpty && !message.isUser)
+              Text(
+                _inferenceService.isOptimizing ? "Optimizing engine for your device..." : "Generating...",
+                style: GoogleFonts.notoSans(
+                  color: theme.colorScheme.onSurface,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  height: 1.5,
+                ),
+              )
+            else
+              MarkdownBody(
+                data: message.text,
+                styleSheet: MarkdownStyleSheet(
+                  p: GoogleFonts.notoSans(
+                    color: theme.colorScheme.onSurface,
+                    fontSize: 16,
+                    fontWeight: message.isUser ? FontWeight.w500 : FontWeight.w400,
+                    height: 1.5,
+                  ),
+                  strong: GoogleFonts.notoSans(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                  listBullet: GoogleFonts.notoSans(
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
               ),
-            ),
           ],
         ),
       ),

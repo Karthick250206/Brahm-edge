@@ -1,36 +1,34 @@
-# Implementation Plan - Automated Model Loading in Chat Screen
+# Implementation Plan - Special Token Filtering in Chat
 
-Automate the model loading process when a user enters the Chat Screen, ensuring the AI is ready to use immediately without manual intervention.
+The user reported that internal reasoning tokens like `</nothink>` are appearing in the chat response. This happens because the model is prompted to "silently identify" logic, and it sometimes uses XML-like tags (e.g., `<think>`, `<nothink>`) to wrap its internal reasoning. Since these are not standard Markdown/HTML tags that the UI filters, they appear as literal text.
 
 ## User Review Required
 
-> [!IMPORTANT]
-> The app will now automatically attempt to load the default model (`gemma-4-E2B-it.litertlm`) upon entering the Chat Screen if it is not already loaded. A non-dismissible loading overlay will be shown to inform the user that the "Model is initialising...".
+> [!NOTE]
+> I will implement a filtering mechanism that removes these "thinking" tags.
+> I also need to decide whether to hide the content *between* these tags. Since the system prompt specifically says "Do not reveal this reasoning", I will proceed with hiding both the tags and the content within them.
 
 ## Proposed Changes
 
-### [Screens]
+### Reasoning Token Filtering
+
+#### [MODIFY] [llm_inference_service.dart](file:///D:/Brahm-edge/lib/services/llm_inference_service.dart)
+- Add a static utility method `cleanResponse(String text)` to strip unwanted tags and internal reasoning.
+- Define a list of tags to filter: `<think>`, `</think>`, `<thought>`, `</thought>`, `<nothink>`, `</nothink>`, `<reasoning>`, `</reasoning>`.
+- Use Regular Expressions to remove:
+    1. The tags themselves.
+    2. The content between matching pairs (e.g., `<think>...</think>`) if applicable.
 
 #### [MODIFY] [chat_screen.dart](file:///D:/Brahm-edge/lib/screens/chat_screen.dart)
-- **Auto-Load Logic**:
-    - Add `_checkAndAutoLoadModel()` to `_ChatScreenState`. This method will check if the model is already loaded and, if not, trigger the `loadModel` call.
-    - Call `_checkAndAutoLoadModel()` in `initState`.
-- **Loading UI**:
-    - Implement a loading overlay in the `build` method that appears when `_inferenceService.isModelLoading` is true.
-    - The overlay will use a `BackdropFilter` with blur and a centered card displaying:
-        - A `CircularProgressIndicator`.
-        - The message "Model is initialising...".
-        - If `_inferenceService.isOptimizing` is true, it will update to "Optimizing engine...".
-    - This overlay will prevent user interaction with the chat until the model is ready.
+- In `_generateAiResponse`, apply `LlmInferenceService.cleanResponse(fullResponse)` before updating the message state.
+- This ensures the UI always shows the "cleaned" version of the response.
 
 ## Verification Plan
 
+### Automated Tests
+- Verify that strings containing tags like `Hello <think>reasoning</think> World` are correctly cleaned to `Hello World`.
+- Verify that incomplete tags during streaming (e.g., `Hello </no`) are handled gracefully (they might show up momentarily until the tag is completed and filtered, which is standard for streaming).
+
 ### Manual Verification
-1.  **Fresh Start**: Close the app, ensure the model is downloaded but NOT loaded.
-2.  **Enter Chat**: Open the app and go to the Chat Screen.
-3.  **Expectation**:
-    - A popup saying "Model is initialising..." should appear immediately.
-    - If the device triggers GPU-to-CPU fallback, the message should change to "Optimizing engine...".
-    - Once finished, the popup should disappear, and the chat should be functional.
-4.  **Already Loaded**: Go to another screen and come back. Verify the popup does NOT appear if the model is already loaded.
-5.  **Model Missing**: If the model is not downloaded, verify the app handles it gracefully (likely by showing the existing "Model not loaded" snackbar when trying to send a message, as per current logic, or I can add a check in the auto-load).
+- Trigger responses that might contain reasoning (e.g., complex advice in the "General" or "Operational" pillars).
+- Verify that no tags like `</nothink>` are visible in the chat bubbles.
