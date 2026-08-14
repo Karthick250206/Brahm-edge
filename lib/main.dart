@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
     final themeProvider = context.watch<ThemeProvider>();
     
     return MaterialApp(
-      title: 'BrahmAI',
+      title: 'ZiqeXAI',
       debugShowCheckedModeBanner: false,
       theme: SystematicIntegrity.lightTheme,
       darkTheme: SystematicIntegrity.darkTheme,
@@ -221,7 +221,7 @@ class _LockedScreenState extends State<LockedScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "BRAHM EDGE",
+                  "ZiqeX",
                   style: GoogleFonts.ibmPlexMono(
                     color: tealColor,
                     fontSize: 14,
@@ -359,7 +359,7 @@ class _LockedScreenState extends State<LockedScreen> {
                   border: Border.all(color: const Color(0xFFE2E8F0), width: 0.8),
                 ),
                 child: Text(
-                  "BRAHM EDGE",
+                  "ZiqeX",
                   style: GoogleFonts.ibmPlexMono(
                     color: const Color(0xFF475569),
                     fontSize: 10,

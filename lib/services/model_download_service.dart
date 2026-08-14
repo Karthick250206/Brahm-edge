@@ -37,7 +37,7 @@ class ModelDownloadService extends ChangeNotifier {
   Future<void> _init() async {
     // Configure system notifications for background visibility
     FileDownloader().configureNotification(
-      running: const TaskNotification('BrahmAI Model', 'Downloading: {progress}'),
+      running: const TaskNotification('ZiqeXAI Model', 'Downloading: {progress}'),
       complete: const TaskNotification('Download Complete', 'The model is ready for on-device AI.'),
       error: const TaskNotification('Download Failed', 'Please check your connection and try again.'),
       progressBar: true,
@@ -75,14 +75,14 @@ class ModelDownloadService extends ChangeNotifier {
         // If we find any model file, mark as complete for now 
         // (In production, we'd check for specific expected filenames)
         if (files.any((f) => f.path.endsWith('.litertlm') || f.path.endsWith('.bin'))) {
-          debugPrint("[BrahmAI] Found existing model file on disk.");
+          debugPrint("[ZiqeXAI] Found existing model file on disk.");
           _status = DownloadStatus.complete;
           _downloadProgress = 1.0;
           notifyListeners();
         }
       }
     } catch (e) {
-      debugPrint("[BrahmAI] Error checking disk for models: $e");
+      debugPrint("[ZiqeXAI] Error checking disk for models: $e");
     }
   }
 
@@ -185,7 +185,7 @@ class ModelDownloadService extends ChangeNotifier {
       allowPause: true,
       requiresWiFi: false,
       retries: 3,
-      displayName: "BrahmAI Model Download",
+      displayName: "ZiqeXAI Model Download",
     );
 
     // Enqueue the task for background execution

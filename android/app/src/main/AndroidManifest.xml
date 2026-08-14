@@ -12,7 +12,7 @@
     <uses-feature android:name="android.hardware.biometrics.iris" android:required="false"/>
 
     <application
-        android:label="Brahm-edge"
+        android:label="ZiqeX"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

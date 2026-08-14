@@ -138,7 +138,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                   ),
                                   SizedBox(height: 4),
                                   Text(
-                                    "Require authentication to open Brahm-edge",
+                                    "Require authentication to open ZiqeX",
                                     style: TextStyle(
                                       color: Color(0xFF8B949E),
                                       fontSize: 12,
@@ -180,7 +180,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       // App-Specific PIN Card
                       _buildMethodCard(
                         icon: Icons.grid_view_rounded,
-                        title: "Brahm-edge PIN",
+                        title: "ZiqeX PIN",
                         subtitle: hasPin ? "PIN is active" : "Set a unique 4-digit code to unlock the app",
                         cardColor: cardColor,
                         accentColor: accentColor,
@@ -237,7 +237,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
-                                  "If an incorrect PIN is entered 10 times, Brahm-edge will automatically reset. All data saved on this device will be permanently deleted",
+                                  "If an incorrect PIN is entered 10 times, ZiqeX will automatically reset. All data saved on this device will be permanently deleted",
                                   style: TextStyle(
                                     color: textSecondary,
                                     fontSize: 14,

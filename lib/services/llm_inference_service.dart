@@ -64,7 +64,7 @@ class LlmInferenceService extends ChangeNotifier {
     
     // Crash Detection or manual override
     if (prefs.getBool(_crashFlagKey) ?? false) {
-      debugPrint("[BrahmAI] Potential crash detected. Defaulting to CPU mode.");
+      debugPrint("[ZiqeXAI] Potential crash detected. Defaulting to CPU mode.");
       _useGpu = false;
       _safeModeActive = true;
       await prefs.setBool(_crashFlagKey, false);
@@ -107,7 +107,7 @@ class LlmInferenceService extends ChangeNotifier {
     
     if (result.success) {
       if (_useGpu) {
-        debugPrint("[BrahmAI] Model loaded on GPU. Starting warmup check...");
+        debugPrint("[ZiqeXAI] Model loaded on GPU. Starting warmup check...");
         _isOptimizing = true;
         _workerSendPort?.send(WarmupCommand());
         notifyListeners();
@@ -140,7 +140,7 @@ class LlmInferenceService extends ChangeNotifier {
 
   void _handleWarmupResult(LoadResult result) async {
     if (result.success) {
-      debugPrint("[BrahmAI] Warmup successful. GPU is ready.");
+      debugPrint("[ZiqeXAI] Warmup successful. GPU is ready.");
       _isModelLoaded = true;
       _isModelLoading = false;
       _isOptimizing = false;
@@ -150,7 +150,7 @@ class LlmInferenceService extends ChangeNotifier {
         _continueGenerationAfterFallback();
       }
     } else {
-      debugPrint("[BrahmAI] Warmup failed: ${result.error}. Falling back to CPU.");
+      debugPrint("[ZiqeXAI] Warmup failed: ${result.error}. Falling back to CPU.");
       await _triggerGpuFallback(result.error ?? "GPU Warmup failed");
       return;
     }
@@ -161,7 +161,7 @@ class LlmInferenceService extends ChangeNotifier {
   }
 
   void _continueGenerationAfterFallback() {
-    debugPrint("[BrahmAI] Fallback complete. Auto-retrying generation.");
+    debugPrint("[ZiqeXAI] Fallback complete. Auto-retrying generation.");
     _isRetryingAfterFallback = false;
     _isOptimizing = false;
     // Note: We use the existing _responseController to keep the UI stream alive
@@ -177,7 +177,7 @@ class LlmInferenceService extends ChangeNotifier {
   }
 
   Future<void> _triggerGpuFallback(String error) async {
-    debugPrint("[BrahmAI] Critical GPU error detected: $error. Triggering automatic CPU fallback.");
+    debugPrint("[ZiqeXAI] Critical GPU error detected: $error. Triggering automatic CPU fallback.");
     _useGpu = false;
     _safeModeActive = true;
     _isModelLoaded = false;
@@ -520,7 +520,7 @@ MESSAGE assistant
 
 """;
       default:
-        return "You are Brahm-edge, a helpful AI companion.";
+        return "You are ZiqeX, a helpful AI companion.";
     }
   }
 

@@ -71,7 +71,7 @@ class IntelligenceInfoScreen extends StatelessWidget {
                       icon: Icons.shield_outlined,
                       iconBg: const Color(0xFFE0F2F1),
                       title: "Privacy first",
-                      description: "Brahm-edge is designed to keep intelligence and your information close to your device.",
+                      description: "ZiqeX is designed to keep intelligence and your information close to your device.",
                     ),
                     const SizedBox(height: 32),
                     _buildFeatureRow(
@@ -130,7 +130,7 @@ class IntelligenceInfoScreen extends StatelessWidget {
                     elevation: 0,
                   ),
                   child: Text(
-                    "Set up your Brahm",
+                    "Set up your ZiqeX",
                     style: GoogleFonts.notoSans(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
