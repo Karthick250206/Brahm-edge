@@ -225,7 +225,7 @@ class _ChatScreenState extends State<ChatScreen> {
           });
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("A hardware error occurred. BrahmAI is switching to Safe Mode.", style: GoogleFonts.notoSans()),
+              content: Text("A hardware error occurred. ZiqeXAI is switching to Safe Mode.", style: GoogleFonts.notoSans()),
               backgroundColor: Colors.blue.shade800,
             ),
           );
@@ -270,7 +270,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    "BRAHM-EDGE PILLAR",
+                    "ZIQEX PILLAR",
                     style: GoogleFonts.notoSans(
                       color: theme.colorScheme.primary,
                       fontSize: 11,
@@ -369,7 +369,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Brahm-edge",
+                        "ZiqeX",
                         style: GoogleFonts.notoSans(color: theme.colorScheme.primary, fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -509,7 +509,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Brahm-edge",
+                                    "ZiqeX",
                                     style: GoogleFonts.notoSans(
                                       fontSize: 14,
                                       color: theme.colorScheme.primary,
@@ -745,7 +745,7 @@ class _ChatScreenState extends State<ChatScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Brahm-edge",
+            "ZiqeX",
             style: GoogleFonts.notoSans(
               color: _isIncognito ? theme.colorScheme.onSurface : theme.colorScheme.primary,
               fontSize: 40,
@@ -888,7 +888,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     keyboardType: TextInputType.multiline,
                     style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 16),
                     decoration: InputDecoration(
-                      hintText: "Ask BrahmAI anything...",
+                      hintText: "Ask ZiqeXAI anything...",
                       hintStyle: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 14),
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),

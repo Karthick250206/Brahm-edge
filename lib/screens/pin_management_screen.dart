@@ -50,7 +50,7 @@ class PinManagementScreen extends StatelessWidget {
                     _buildActionCard(
                       icon: Icons.edit_outlined,
                       title: "Change PIN",
-                      subtitle: "Update your 4-digit Brahm-edge security code",
+                      subtitle: "Update your 4-digit ZiqeX security code",
                       cardColor: cardColor,
                       accentColor: accentColor,
                       onTap: () {
@@ -77,7 +77,7 @@ class PinManagementScreen extends StatelessWidget {
                     _buildActionCard(
                       icon: Icons.delete_outline,
                       title: "Remove PIN",
-                      subtitle: "Turn off PIN access for Brahm-edge",
+                      subtitle: "Turn off PIN access for ZiqeX",
                       cardColor: cardColor,
                       accentColor: Colors.redAccent,
                       onTap: () {

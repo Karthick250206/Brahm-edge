@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                // Refined "BRAHM EDGE" label
+                // Refined "ZiqeX" label
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
@@ -57,7 +57,7 @@ class WelcomeScreen extends StatelessWidget {
                         border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2), width: 0.8),
                       ),
                       child: Text(
-                        "BRAHM EDGE",
+                        "ZiqeX",
                         style: GoogleFonts.notoSans(
                           color: theme.colorScheme.onSurfaceVariant,
                           fontSize: 10,
@@ -114,7 +114,7 @@ class WelcomeScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              "Welcome to\nBrahm Edge",
+                              "Welcome to\nZiqeX",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.notoSans(
                                 color: theme.colorScheme.onSurface,
@@ -248,3 +248,5 @@ class GridPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
+
+
