@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'new_language_selection_screen.dart';
+import 'model_download_screen.dart';
 
 class PillarsGridSelectionScreen extends StatefulWidget {
   const PillarsGridSelectionScreen({super.key});
@@ -185,7 +185,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                       onPressed: _selectedPillar == null ? null : () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => NewLanguageSelectionScreen()),
+                          MaterialPageRoute(builder: (context) => ModelDownloadScreen()),
                         );
                       },
                       style: TextButton.styleFrom(

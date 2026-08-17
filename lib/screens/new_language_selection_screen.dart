@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'model_download_screen.dart';
+import 'welcome_screen.dart';
 import '../services/language_service.dart';
 
 class NewLanguageSelectionScreen extends StatefulWidget {
@@ -48,10 +48,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
       appBar: AppBar(
         backgroundColor: theme.colorScheme.surface,
         elevation: 0.5,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
         title: Text(
           "Language Selection",
           style: GoogleFonts.notoSans(
@@ -170,33 +167,12 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                   child: SizedBox(
                     height: 56,
                     child: TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: TextButton.styleFrom(
-                        backgroundColor: theme.colorScheme.onSurface.withValues(alpha: 0.05),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                      ),
-                      child: Text(
-                        "Back",
-                        style: GoogleFonts.notoSans(
-                          color: theme.colorScheme.onSurfaceVariant,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: SizedBox(
-                    height: 56,
-                    child: TextButton(
                       onPressed: () async {
                         await _languageService.setLanguage(_selectedLanguage);
                         if (context.mounted) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ModelDownloadScreen()),
+                            MaterialPageRoute(builder: (context) => const WelcomeScreen()),
                           );
                         }
                       },

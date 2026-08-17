@@ -5,10 +5,7 @@ import '../services/localization_service.dart';
 import '../services/model_download_service.dart';
 import '../services/llm_inference_service.dart';
 
-/// [LibraryScreen] serves as the repository and model manager dashboard for the app.
-/// It utilizes [ListenableBuilder] to listen for active language and localization state updates,
-/// displays filter tabs for models, threads, and voice items, shows on-device models with storage metrics,
-/// and handles local AI model download/activation statuses.
+
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
 
@@ -68,21 +65,6 @@ class LibraryScreen extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              InkWell(
-                                onTap: () => _showSettings(context, inferenceService),
-                                borderRadius: BorderRadius.circular(12),
-                                child: Container(
-                                  width: 44,
-                                  height: 44,
-                                  decoration: BoxDecoration(
-                                    color: theme.colorScheme.surface,
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
-                                  ),
-                                  child: Icon(Icons.settings_outlined, color: theme.colorScheme.onSurface),
                                 ),
                               ),
                             ],
@@ -218,89 +200,6 @@ class LibraryScreen extends StatelessWidget {
   String _getLanguageTag(String language) {
     if (language == "English") return "14 langs";
     return "15 langs (+ $language)";
-  }
-
-  void _showSettings(BuildContext context, LlmInferenceService inferenceService) {
-    final theme = Theme.of(context);
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: theme.colorScheme.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return ListenableBuilder(
-          listenable: inferenceService,
-          builder: (context, _) {
-            return Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Library Settings",
-                    style: GoogleFonts.notoSans(fontSize: 20, fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "GPU Acceleration",
-                            style: GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.w600, color: theme.colorScheme.onSurface),
-                          ),
-                          Text(
-                            "Enable OpenCL (requires device support)",
-                            style: GoogleFonts.notoSans(fontSize: 12, color: theme.colorScheme.onSurfaceVariant),
-                          ),
-                        ],
-                      ),
-                      Switch(
-                        value: inferenceService.useGpu,
-                        onChanged: (val) {
-                          inferenceService.setUseGpu(val);
-                          // Clear loaded state if switching so user can reload with new setting
-                          if (inferenceService.isModelLoaded) {
-                            inferenceService.loadModel("gemma-4-E2B-it.litertlm");
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  if (inferenceService.safeModeActive)
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.blue.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.info_outline, size: 16, color: Colors.blue),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              "Safe Mode Active: App is running in CPU mode for maximum compatibility.",
-                              style: GoogleFonts.notoSans(fontSize: 12, color: Colors.blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  const SizedBox(height: 32),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
   }
 
   /// Helper widget to build interactive filter chip elements

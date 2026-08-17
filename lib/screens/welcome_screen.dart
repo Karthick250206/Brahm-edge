@@ -43,13 +43,15 @@ class WelcomeScreen extends StatelessWidget {
           SafeArea(
             child: Column(
               children: [
-                const SizedBox(height: 20),
-                // Refined "ZiqeX" label
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 24.0),
-                    child: Container(
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurfaceVariant),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    // Refined "ZiqeX" label
+                    Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
                         color: theme.colorScheme.surface,
@@ -66,7 +68,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
 
                 const Spacer(flex: 2),
