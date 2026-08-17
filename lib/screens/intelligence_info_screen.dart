@@ -56,17 +56,7 @@ class IntelligenceInfoScreen extends StatelessWidget {
                   height: 1.2,
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(
-                "Useful AI with privacy, choice, and control built into the experience.",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.notoSans(
-                  color: const Color(0xFF64748B),
-                  fontSize: 16,
-                  height: 1.5,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+
               const SizedBox(height: 48),
               
               // Features List
