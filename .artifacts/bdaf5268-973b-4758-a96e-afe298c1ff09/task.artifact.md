@@ -1,0 +1,4 @@
+- `[x]` Update `main.dart` to show `NewLanguageSelectionScreen` as the initial screen
+- `[x]` Update `NewLanguageSelectionScreen` navigation (to `WelcomeScreen`) and hide "Back"
+- `[x]` Update `WelcomeScreen` navigation (to `IntelligenceInfoScreen`) and add "Back"
+- `[x]` Verify navigation flow
