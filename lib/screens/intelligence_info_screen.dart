@@ -8,8 +8,9 @@ class IntelligenceInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const tealColor = Color(0xFF00444F);
-    const lightBgColor = Color(0xFFF7FAFF);
+    final theme = Theme.of(context);
+    final tealColor = theme.colorScheme.primary;
+    final lightBgColor = theme.scaffoldBackgroundColor;
 
     return Scaffold(
       backgroundColor: lightBgColor,

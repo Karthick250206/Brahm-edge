@@ -40,14 +40,14 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final tealColor = theme.colorScheme.primary;
-    final bgColor = theme.colorScheme.surface;
+    final bgColor = theme.scaffoldBackgroundColor;
     final cardBgColor = theme.colorScheme.surfaceContainerHighest;
 
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: theme.colorScheme.surface,
-        elevation: 0.5,
+        backgroundColor: bgColor,
+        elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
           "Language Selection",
@@ -158,7 +158,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
           Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
+              color: bgColor,
               border: Border(top: BorderSide(color: theme.colorScheme.outline.withValues(alpha: 0.1))),
             ),
             child: Row(

@@ -13,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Stack(
         children: [
           // Subtlest Grid Background
@@ -76,11 +76,9 @@ class WelcomeScreen extends StatelessWidget {
                 // Branded Central Logo
                 Center(
                   child: SvgPicture.asset(
-                    'assets/icons/app_icon_dark.svg',
+                    'assets/icons/app_icon_light.svg',
                     width: 120,
                     height: 120,
-                    // Note: We might need a light version of the icon or filter it if it looks bad in dark mode
-                    // For now keeping as is.
                   ),
                 ),
 
