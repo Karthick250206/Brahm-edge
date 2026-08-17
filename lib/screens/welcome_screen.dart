@@ -22,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
               painter: GridPainter(color: theme.colorScheme.onSurface.withValues(alpha: 0.04)),
             ),
           ),
-          
+
           // Precisely placed decorative dots
           Positioned(
             top: MediaQuery.of(context).size.height * 0.2,
@@ -68,7 +68,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                
+
                 const Spacer(flex: 2),
 
                 // Branded Central Logo
@@ -103,47 +103,63 @@ class WelcomeScreen extends StatelessWidget {
                       border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
                     ),
                     child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         // Corner brackets
                         Positioned(top: 0, left: 0, child: _buildCornerBracket(top: true, left: true, color: theme.colorScheme.outline)),
                         Positioned(top: 0, right: 0, child: _buildCornerBracket(top: true, left: false, color: theme.colorScheme.outline)),
                         Positioned(bottom: 0, left: 0, child: _buildCornerBracket(top: false, left: true, color: theme.colorScheme.outline)),
                         Positioned(bottom: 0, right: 0, child: _buildCornerBracket(top: false, left: false, color: theme.colorScheme.outline)),
-                        
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Welcome to\nZiqeX",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.notoSans(
-                                color: theme.colorScheme.onSurface,
-                                fontSize: 34,
-                                fontWeight: FontWeight.w800,
-                                height: 1.1,
+
+                        Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Meet ZiqeX",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.notoSans(
+                                  color: theme.colorScheme.primary,
+                                  fontSize: 34,
+                                  fontWeight: FontWeight.w800,
+                                  height: 1.1,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 18),
-                            Container(
-                              width: 54,
-                              height: 2.5,
-                              decoration: BoxDecoration(
-                                color: theme.colorScheme.outline.withValues(alpha: 0.5),
-                                borderRadius: BorderRadius.circular(1.25),
+                              const SizedBox(height: 16),
+                              Text(
+                                "Intelligence at the edge",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.notoSans(
+                                  color: theme.colorScheme.onSurface,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  height: 1.1,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 28),
-                            Text(
-                              "Designed and envisioned to be your\nprivate confidant, always.",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.notoSans(
-                                color: theme.colorScheme.onSurfaceVariant,
-                                fontSize: 16.5,
-                                height: 1.5,
-                                fontWeight: FontWeight.w500,
+                              const SizedBox(height: 18),
+                              Container(
+                                width: 54,
+                                height: 2.5,
+                                decoration: BoxDecoration(
+                                  color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                                  borderRadius: BorderRadius.circular(1.25),
+                                ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 28),
+                              Text(
+                                "Private and Edge AI\nby ZenteiQ",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.notoSans(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                  fontSize: 22,
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -248,5 +264,4 @@ class GridPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
-
 
