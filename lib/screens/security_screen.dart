@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../security/providers/security_provider.dart';
 import '../security/models/security_type.dart';
 import 'pin_setup_screen.dart';
@@ -17,28 +16,37 @@ class SecurityScreen extends StatefulWidget {
 class _SecurityScreenState extends State<SecurityScreen> {
   Future<bool> _handleBackPress() async {
     final securityProvider = context.read<SecurityProvider>();
+    final theme = Theme.of(context);
     
     // If App Lock is enabled but no method is set, warn and disable
     if (securityProvider.isAppLockEnabled && securityProvider.selectedType == SecurityType.none) {
       await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          backgroundColor: const Color(0xFF161B22),
+          backgroundColor: theme.colorScheme.surface,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Text(
             "Security Setup Incomplete",
-            style: GoogleFonts.notoSans(color: const Color(0xFF00E5FF), fontWeight: FontWeight.bold),
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: theme.colorScheme.primary,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           content: Text(
             "You have enabled App Lock but haven't set a PIN or Biometrics. App Lock will be disabled until a method is configured.",
-            style: GoogleFonts.notoSans(color: Colors.white70, fontSize: 14),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text(
                 "GOT IT",
-                style: GoogleFonts.notoSans(color: const Color(0xFF00E5FF), fontWeight: FontWeight.bold),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
@@ -54,10 +62,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
   @override
   Widget build(BuildContext context) {
     final securityProvider = context.watch<SecurityProvider>();
-    const bgColor = Color(0xFF0B1019);
-    const cardColor = Color(0xFF161B22);
-    const accentColor = Color(0xFF00E5FF);
-    const textSecondary = Color(0xFF8B949E);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     final bool globalSecurityEnabled = securityProvider.isAppLockEnabled;
     final bool hasPin = securityProvider.selectedType == SecurityType.pin;
@@ -72,7 +78,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: bgColor,
+        backgroundColor: theme.scaffoldBackgroundColor,
         body: SafeArea(
           child: Column(
             children: [
@@ -82,7 +88,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
                       onPressed: () async {
                         final navigator = Navigator.of(context);
                         if (await _handleBackPress()) {
@@ -91,16 +97,15 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       },
                     ),
                     const SizedBox(width: 8),
-                    const Text(
+                    Text(
                       "App Security",
-                      style: TextStyle(
-                        color: accentColor,
-                        fontSize: 24,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        color: colorScheme.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const Spacer(),
-                    const Icon(Icons.notifications_outlined, color: Color(0xFF8B949E)),
+                    Icon(Icons.notifications_outlined, color: colorScheme.onSurfaceVariant),
                   ],
                 ),
               ),
@@ -112,36 +117,34 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 24),
-                      _buildSectionTitle("GLOBAL PROTECTION", accentColor),
+                      _buildSectionTitle(context, "GLOBAL PROTECTION", colorScheme.primary),
                       const SizedBox(height: 16),
                       // Global Toggle Card
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: cardColor,
+                          color: colorScheme.surfaceContainerLow,
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                          border: Border.all(color: colorScheme.outline.withValues(alpha: 0.1)),
                         ),
                         child: Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "App lock",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
+                                    style: theme.textTheme.titleMedium?.copyWith(
+                                      color: colorScheme.onSurface,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Text(
                                     "Require authentication to open ZiqeX",
-                                    style: TextStyle(
-                                      color: Color(0xFF8B949E),
-                                      fontSize: 12,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: colorScheme.onSurfaceVariant,
                                     ),
                                   ),
                                 ],
@@ -151,23 +154,24 @@ class _SecurityScreenState extends State<SecurityScreen> {
                               value: globalSecurityEnabled,
                               onChanged: (val) => securityProvider.toggleAppLock(val),
                               activeThumbColor: Colors.white,
-                              activeTrackColor: const Color(0xFF4DB6AC),
+                              activeTrackColor: colorScheme.primary,
                             ),
                           ],
                         ),
                       ),
 
                       const SizedBox(height: 32),
-                      _buildSectionTitle("AUTHENTICATION METHODS", accentColor),
+                      _buildSectionTitle(context, "AUTHENTICATION METHODS", colorScheme.primary),
                       const SizedBox(height: 16),
 
                       // Device Biometrics Card
                       _buildMethodCard(
+                        context,
                         icon: Icons.lock_outline,
                         title: "Device biometrics",
                         subtitle: "Unlock instantly with your fingerprint or face",
-                        cardColor: cardColor,
-                        accentColor: accentColor,
+                        cardColor: colorScheme.surfaceContainerLow,
+                        accentColor: colorScheme.primary,
                         onTap: () {
                           Navigator.push(
                             context,
@@ -179,11 +183,12 @@ class _SecurityScreenState extends State<SecurityScreen> {
 
                       // App-Specific PIN Card
                       _buildMethodCard(
+                        context,
                         icon: Icons.grid_view_rounded,
                         title: "ZiqeX PIN",
                         subtitle: hasPin ? "PIN is active" : "Set a unique 4-digit code to unlock the app",
-                        cardColor: cardColor,
-                        accentColor: accentColor,
+                        cardColor: colorScheme.surfaceContainerLow,
+                        accentColor: colorScheme.primary,
                         onTap: () {
                           if (hasPin) {
                             Navigator.push(
@@ -207,9 +212,9 @@ class _SecurityScreenState extends State<SecurityScreen> {
                           Container(
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: cardColor.withValues(alpha: 0.3),
+                              color: colorScheme.surfaceContainerLow.withValues(alpha: 0.3),
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: const Color(0xFF00E5FF).withValues(alpha: 0.1)),
+                              border: Border.all(color: colorScheme.primary.withValues(alpha: 0.1)),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,16 +225,15 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                       padding: const EdgeInsets.all(4),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        border: Border.all(color: accentColor.withValues(alpha: 0.5)),
+                                        border: Border.all(color: colorScheme.primary.withValues(alpha: 0.5)),
                                       ),
-                                      child: Icon(Icons.info_outline, color: accentColor, size: 16),
+                                      child: Icon(Icons.info_outline, color: colorScheme.primary, size: 16),
                                     ),
                                     const SizedBox(width: 12),
                                     Text(
                                       "Too many incorrect attempts",
-                                      style: TextStyle(
-                                        color: accentColor,
-                                        fontSize: 16,
+                                      style: theme.textTheme.titleMedium?.copyWith(
+                                        color: colorScheme.primary,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -238,9 +242,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 const SizedBox(height: 16),
                                 Text(
                                   "If an incorrect PIN is entered 10 times, ZiqeX will automatically reset. All data saved on this device will be permanently deleted",
-                                  style: TextStyle(
-                                    color: textSecondary,
-                                    fontSize: 14,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
                                     height: 1.5,
                                   ),
                                 ),
@@ -252,7 +255,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                             bottom: -20,
                             child: Opacity(
                               opacity: 0.03,
-                              child: Icon(Icons.shield_outlined, size: 120, color: accentColor),
+                              child: Icon(Icons.shield_outlined, size: 120, color: colorScheme.primary),
                             ),
                           ),
                         ],
@@ -260,8 +263,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
 
                       const SizedBox(height: 48),
                       // Centered Shield Icon
-                      const Center(
-                        child: Icon(Icons.shield_outlined, color: Colors.white10, size: 48),
+                      Center(
+                        child: Icon(Icons.shield_outlined, color: colorScheme.onSurface.withValues(alpha: 0.1), size: 48),
                       ),
                       const SizedBox(height: 40),
                     ],
@@ -271,41 +274,31 @@ class _SecurityScreenState extends State<SecurityScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: bgColor,
-          ),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: bgColor,
-            currentIndex: 3, // "You" tab
-            selectedItemColor: accentColor,
-            unselectedItemColor: textSecondary,
-            selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-            unselectedLabelStyle: const TextStyle(fontSize: 12),
-            onTap: (index) {
-              if (index != 3) Navigator.pop(context);
-            },
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-              BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-              BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
-            ],
-          ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: 3, // "You" tab
+          onTap: (index) {
+            if (index != 3) Navigator.pop(context);
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
+            BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title, Color color) {
+  Widget _buildSectionTitle(BuildContext context, String title, Color color) {
+    final theme = Theme.of(context);
     return Row(
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: theme.textTheme.labelSmall?.copyWith(
             color: color,
-            fontSize: 10,
             fontWeight: FontWeight.bold,
             letterSpacing: 1.2,
           ),
@@ -314,14 +307,15 @@ class _SecurityScreenState extends State<SecurityScreen> {
         Expanded(
           child: Container(
             height: 1,
-            color: Colors.white.withValues(alpha: 0.1),
+            color: theme.colorScheme.outline.withValues(alpha: 0.1),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildMethodCard({
+  Widget _buildMethodCard(
+    BuildContext context, {
     required IconData icon,
     required String title,
     required String subtitle,
@@ -329,6 +323,9 @@ class _SecurityScreenState extends State<SecurityScreen> {
     required Color accentColor,
     required VoidCallback onTap,
   }) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -336,13 +333,14 @@ class _SecurityScreenState extends State<SecurityScreen> {
         decoration: BoxDecoration(
           color: cardColor,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: colorScheme.outline.withValues(alpha: 0.05)),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.05),
+                color: colorScheme.primary.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: accentColor, size: 24),
@@ -354,24 +352,22 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: const TextStyle(
-                      color: Color(0xFF8B949E),
-                      fontSize: 14,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Color(0xFF8B949E), size: 16),
+            Icon(Icons.arrow_forward_ios, color: colorScheme.onSurfaceVariant, size: 16),
           ],
         ),
       ),

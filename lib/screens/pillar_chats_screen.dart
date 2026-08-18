@@ -83,7 +83,7 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFB91C1C).withOpacity(0.1),
+                      color: const Color(0xFFB91C1C).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Icon(Icons.warning_amber_rounded, color: Color(0xFFF87171), size: 20),
@@ -316,7 +316,7 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
                   foregroundColor: bgColor,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  disabledBackgroundColor: accentColor.withOpacity(0.3),
+                  disabledBackgroundColor: accentColor.withValues(alpha: 0.3),
                 ),
               ),
             ),
@@ -344,7 +344,7 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
   Widget _buildSectionTitle(String title, Color color) {
     return Row(
       children: [
-        Container(width: 24, height: 1.5, color: color.withOpacity(0.3)),
+        Container(width: 24, height: 1.5, color: color.withValues(alpha: 0.3)),
         const SizedBox(width: 12),
         Text(title, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
       ],
@@ -384,7 +384,7 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: chat['selected'] ? accent.withOpacity(0.3) : Colors.transparent),
+        border: Border.all(color: chat['selected'] ? accent.withValues(alpha: 0.3) : Colors.transparent),
       ),
       child: Row(
         children: [

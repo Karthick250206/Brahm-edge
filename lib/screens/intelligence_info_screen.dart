@@ -61,40 +61,35 @@ class IntelligenceInfoScreen extends StatelessWidget {
               const SizedBox(height: 48),
               
               // Features List
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    _buildFeatureRow(
-                      icon: Icons.shield_outlined,
-                      iconBg: const Color(0xFFE0F2F1),
-                      title: "Privacy first",
-                      description: "ZiqeX is designed to keep intelligence and your information close to your device.",
-                    ),
-                    const SizedBox(height: 32),
-                    _buildFeatureRow(
-                      icon: Icons.app_shortcut_outlined,
-                      iconBg: const Color(0xFFE0F2F1),
-                      title: "Intelligence in your hand",
-                      description: "Everyday intelligence, available directly on your device.",
-                    ),
-                    const SizedBox(height: 32),
-                    _buildFeatureRow(
-                      icon: Icons.analytics_outlined,
-                      iconBg: const Color(0xFFE0F2F1),
-                      title: "Your data. Your control.",
-                      description: "Choose what is kept, manage what is stored, and delete what you no longer need.",
-                    ),
-                    const SizedBox(height: 32),
-                    _buildFeatureRow(
-                      icon: Icons.language_outlined,
-                      iconBg: const Color(0xFFE0F2F1),
-                      title: "Designed for every place",
-                      description: "Built for different languages, devices, and ways people use technology.",
-                    ),
-                  ],
-                ),
+              _buildFeatureRow(
+                icon: Icons.shield_outlined,
+                iconBg: const Color(0xFFE0F2F1),
+                title: "Privacy first",
+                description: "ZiqeX is designed to keep intelligence and your information close to your device.",
               ),
+              const SizedBox(height: 32),
+              _buildFeatureRow(
+                icon: Icons.app_shortcut_outlined,
+                iconBg: const Color(0xFFE0F2F1),
+                title: "Intelligence in your hand",
+                description: "Everyday intelligence, available directly on your device.",
+              ),
+              const SizedBox(height: 32),
+              _buildFeatureRow(
+                icon: Icons.analytics_outlined,
+                iconBg: const Color(0xFFE0F2F1),
+                title: "Your data. Your control.",
+                description: "Choose what is kept, manage what is stored, and delete what you no longer need.",
+              ),
+              const SizedBox(height: 32),
+              _buildFeatureRow(
+                icon: Icons.language_outlined,
+                iconBg: const Color(0xFFE0F2F1),
+                title: "Designed for every place",
+                description: "Built for different languages, devices, and ways people use technology.",
+              ),
+              
+              const Spacer(),
               
               const SizedBox(height: 24),
               Text(

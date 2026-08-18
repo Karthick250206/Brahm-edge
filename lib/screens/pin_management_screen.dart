@@ -8,13 +8,11 @@ class PinManagementScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const bgColor = Color(0xFF0B1019);
-    const cardColor = Color(0xFF161B22);
-    const accentColor = Color(0xFF00E5FF);
-    const textSecondary = Color(0xFF8B949E);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -24,15 +22,14 @@ class PinManagementScreen extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                    icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const SizedBox(width: 8),
-                  const Text(
+                  Text(
                     "App-Specific PIN",
-                    style: TextStyle(
-                      color: accentColor,
-                      fontSize: 24,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -48,11 +45,12 @@ class PinManagementScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 32),
                     _buildActionCard(
+                      context,
                       icon: Icons.edit_outlined,
                       title: "Change PIN",
                       subtitle: "Update your 4-digit ZiqeX security code",
-                      cardColor: cardColor,
-                      accentColor: accentColor,
+                      cardColor: colorScheme.surfaceContainerLow,
+                      accentColor: colorScheme.primary,
                       onTap: () {
                         // 1. Verify Old PIN
                         Navigator.push(
@@ -61,6 +59,7 @@ class PinManagementScreen extends StatelessWidget {
                             builder: (context) => const PinSetupScreen(mode: PinMode.verify),
                           ),
                         ).then((verified) {
+                          if (!context.mounted) return;
                           // 2. If success, navigate to Setup New PIN
                           if (verified == true) {
                             Navigator.push(
@@ -75,11 +74,12 @@ class PinManagementScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     _buildActionCard(
+                      context,
                       icon: Icons.delete_outline,
                       title: "Remove PIN",
                       subtitle: "Turn off PIN access for ZiqeX",
-                      cardColor: cardColor,
-                      accentColor: Colors.redAccent,
+                      cardColor: colorScheme.surfaceContainerLow,
+                      accentColor: colorScheme.error,
                       onTap: () {
                         // Verify before deletion
                         Navigator.push(
@@ -88,6 +88,7 @@ class PinManagementScreen extends StatelessWidget {
                             builder: (context) => const PinSetupScreen(mode: PinMode.verify),
                           ),
                         ).then((verified) async {
+                          if (!context.mounted) return;
                           if (verified == true) {
                             await context.read<SecurityProvider>().toggleAppLock(false);
                             if (context.mounted) {
@@ -107,33 +108,24 @@ class PinManagementScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: bgColor,
-        ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: bgColor,
-          currentIndex: 3,
-          selectedItemColor: accentColor,
-          unselectedItemColor: textSecondary,
-          selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-          unselectedLabelStyle: const TextStyle(fontSize: 12),
-          onTap: (index) {
-            if (index != 3) Navigator.pop(context);
-          },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-            BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 3,
+        onTap: (index) {
+          if (index != 3) Navigator.pop(context);
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
+          BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
+        ],
       ),
     );
   }
 
-  Widget _buildActionCard({
+  Widget _buildActionCard(
+    BuildContext context, {
     required IconData icon,
     required String title,
     required String subtitle,
@@ -141,6 +133,9 @@ class PinManagementScreen extends StatelessWidget {
     required Color accentColor,
     required VoidCallback onTap,
   }) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -148,13 +143,14 @@ class PinManagementScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: cardColor,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: colorScheme.outline.withValues(alpha: 0.05)),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+                color: accentColor.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: accentColor, size: 24),
@@ -166,24 +162,22 @@ class PinManagementScreen extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: const TextStyle(
-                      color: Color(0xFF8B949E),
-                      fontSize: 14,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Color(0xFF8B949E), size: 16),
+            Icon(Icons.arrow_forward_ios, color: colorScheme.onSurfaceVariant, size: 16),
           ],
         ),
       ),

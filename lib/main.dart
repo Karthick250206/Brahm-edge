@@ -11,7 +11,6 @@ import 'providers/theme_provider.dart';
 import 'services/storage_management_service.dart';
 import 'security/providers/security_setup.dart';
 import 'security/providers/security_provider.dart';
-import 'security/models/security_type.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,7 +85,7 @@ class _LifecycleManagerState extends State<LifecycleManager> with WidgetsBinding
       
       // Trigger a check which will cause AuthenticationWrapper to rebuild if needed
       if (await securityProvider.shouldLock()) {
-        securityProvider.notifyListeners(); 
+        securityProvider.refresh(); 
       }
     }
   }
@@ -212,7 +211,7 @@ class _LockedScreenState extends State<LockedScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF64748B).withOpacity(0.12),
+                  color: const Color(0xFF64748B).withValues(alpha: 0.12),
                   blurRadius: 40,
                   offset: const Offset(0, 15),
                 ),
@@ -239,7 +238,7 @@ class _LockedScreenState extends State<LockedScreen> {
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE2E8F0).withOpacity(0.5),
+                    color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.shield, color: tealColor, size: 40),
@@ -250,7 +249,7 @@ class _LockedScreenState extends State<LockedScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE2E8F0).withOpacity(0.5),
+                    color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -375,7 +374,7 @@ class _LockedScreenState extends State<LockedScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE2E8F0).withOpacity(0.5),
+                  color: const Color(0xFFE2E8F0).withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Row(

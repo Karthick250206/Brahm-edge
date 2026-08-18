@@ -14,16 +14,14 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
   @override
   Widget build(BuildContext context) {
     final securityProvider = context.watch<SecurityProvider>();
-    const bgColor = Color(0xFF0B1019);
-    const cardColor = Color(0xFF161B22);
-    const accentColor = Color(0xFF00E5FF);
-    const textSecondary = Color(0xFF8B949E);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     final bool appLockEnabled = securityProvider.isAppLockEnabled && 
                                 securityProvider.selectedType == SecurityType.biometric;
 
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Stack(
         children: [
           // Background Content
@@ -38,13 +36,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.shield_outlined, color: accentColor, size: 24),
+                            Icon(Icons.shield_outlined, color: colorScheme.primary, size: 24),
                             const SizedBox(width: 12),
-                            const Text(
+                            Text(
                               "Vault Security",
-                              style: TextStyle(
-                                color: accentColor,
-                                fontSize: 18,
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                color: colorScheme.primary,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -55,35 +52,34 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                           width: 32,
                           height: 2,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
+                            color: colorScheme.onSurface.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(1),
                           ),
                         ),
                         const SizedBox(height: 24),
-                        const Text(
+                        Text(
                           "Secure Lock Setup",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
+                          style: theme.textTheme.headlineMedium?.copyWith(
+                            color: colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
+                        Text(
                           "Protect your vault with your preferred\nauthentication method.",
-                          style: TextStyle(
-                            color: textSecondary,
-                            fontSize: 16,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
                             height: 1.4,
                           ),
                         ),
                         const SizedBox(height: 40),
                         _buildOptionCard(
+                          context,
                           icon: Icons.fingerprint,
                           title: "Device Biometrics",
                           subtitle: "Use FaceID or Fingerprint",
-                          cardColor: cardColor,
-                          accentColor: accentColor,
+                          cardColor: colorScheme.surfaceContainerLow,
+                          accentColor: colorScheme.primary,
                           trailing: Switch(
                             value: appLockEnabled,
                             onChanged: (val) async {
@@ -94,20 +90,21 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                                 }
                               }
                             },
-                            activeColor: Colors.white,
-                            activeTrackColor: accentColor,
+                            activeThumbColor: Colors.white,
+                            activeTrackColor: colorScheme.primary,
                             inactiveThumbColor: Colors.grey.shade400,
                             inactiveTrackColor: Colors.grey.shade800,
                           ),
                         ),
                         const SizedBox(height: 16),
                         _buildOptionCard(
+                          context,
                           icon: Icons.pin_outlined,
                           title: "App-Specific PIN",
                           subtitle: "Set a unique 4-digit code",
-                          cardColor: cardColor,
-                          accentColor: accentColor,
-                          trailing: const Icon(Icons.arrow_forward_ios, color: textSecondary, size: 16),
+                          cardColor: colorScheme.surfaceContainerLow,
+                          accentColor: colorScheme.primary,
+                          trailing: Icon(Icons.arrow_forward_ios, color: colorScheme.onSurfaceVariant, size: 16),
                         ),
                       ],
                     ),
@@ -121,15 +118,15 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: Colors.black.withOpacity(0.8),
+            color: Colors.black.withValues(alpha: 0.8),
             child: Center(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 32),
                 padding: const EdgeInsets.all(32),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1C2431),
+                  color: colorScheme.surface,
                   borderRadius: BorderRadius.circular(28),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  border: Border.all(color: colorScheme.outline.withValues(alpha: 0.1)),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -138,29 +135,27 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.05),
+                        color: colorScheme.primary.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: accentColor.withOpacity(0.2)),
+                        border: Border.all(color: colorScheme.primary.withValues(alpha: 0.2)),
                       ),
-                      child: const Icon(Icons.shield_outlined, color: accentColor, size: 48),
+                      child: Icon(Icons.shield_outlined, color: colorScheme.primary, size: 48),
                     ),
                     const SizedBox(height: 32),
-                    const Text(
+                    Text(
                       "Allow biometric access",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 26,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        color: colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
+                    Text(
                       "Use your fingerprint or device face recognition to unlock ZiqeX",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFF94A3B8),
-                        fontSize: 16,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
                         height: 1.5,
                       ),
                     ),
@@ -172,12 +167,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                             onPressed: () => Navigator.pop(context),
                             style: OutlinedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(vertical: 18),
-                              side: BorderSide(color: Colors.white.withOpacity(0.2)),
+                              side: BorderSide(color: colorScheme.outline.withValues(alpha: 0.2)),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Cancel",
-                              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                              style: TextStyle(color: colorScheme.onSurface, fontSize: 16, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
@@ -188,18 +183,19 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                               final result = await securityProvider.authenticate(type: SecurityType.biometric);
                               if (result.success) {
                                 await securityProvider.setSecurityType(SecurityType.biometric);
-                                if (mounted) Navigator.pop(context);
+                                if (context.mounted) Navigator.pop(context);
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF4FD1C5), // Vibrant Teal
+                              backgroundColor: colorScheme.primary,
+                              foregroundColor: colorScheme.onPrimary,
                               padding: const EdgeInsets.symmetric(vertical: 18),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                               elevation: 0,
                             ),
                             child: const Text(
                               "Allow biometrics",
-                              style: TextStyle(color: Color(0xFF0B1019), fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -212,28 +208,24 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(canvasColor: bgColor),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: bgColor,
-          currentIndex: 3,
-          selectedItemColor: accentColor,
-          unselectedItemColor: textSecondary,
-          selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-          unselectedLabelStyle: const TextStyle(fontSize: 12),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-            BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 3,
+        onTap: (index) {
+          if (index != 3) Navigator.pop(context);
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
+          BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
+        ],
       ),
     );
   }
 
-  Widget _buildOptionCard({
+  Widget _buildOptionCard(
+    BuildContext context, {
     required IconData icon,
     required String title,
     required String subtitle,
@@ -241,18 +233,20 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
     required Color accentColor,
     required Widget trailing,
   }) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.05)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.05),
+              color: accentColor.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: accentColor, size: 24),
@@ -264,18 +258,16 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: theme.colorScheme.onSurface,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    color: Color(0xFF8B949E),
-                    fontSize: 14,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],

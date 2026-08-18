@@ -101,8 +101,8 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const bgColor = Color(0xFF0B1019);
-    const accentColor = Color(0xFF00E5FF);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     String title;
     String subtitle;
@@ -123,7 +123,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
     }
 
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -136,15 +136,14 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                     Row(
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.arrow_back, color: Colors.white),
+                          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
                           onPressed: () => Navigator.pop(context),
                         ),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           "Security",
-                          style: TextStyle(
-                            color: accentColor,
-                            fontSize: 18,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: colorScheme.primary,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -154,10 +153,10 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                     // Title
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        color: colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
+                        fontSize: 32,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -165,16 +164,15 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                     Text(
                       subtitle,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Color(0xFF8B949E),
-                        fontSize: 16,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
                       ),
                     ),
                     if (_errorMessage.isNotEmpty) ...[
                       const SizedBox(height: 16),
                       Text(
                         _errorMessage,
-                        style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+                        style: TextStyle(color: colorScheme.error, fontWeight: FontWeight.bold),
                       ),
                     ],
                     const SizedBox(height: 40),
@@ -189,9 +187,9 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                           height: 16,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: filled ? accentColor : Colors.transparent,
+                            color: filled ? colorScheme.primary : Colors.transparent,
                             border: Border.all(
-                              color: filled ? accentColor : Colors.white.withOpacity(0.2),
+                              color: filled ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.2),
                               width: 2,
                             ),
                           ),
@@ -200,65 +198,71 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                     ),
                     const Spacer(),
                     // Numeric Pad
-                    _buildNumericPad(),
+                    _buildNumericPad(context),
                     const SizedBox(height: 40),
                   ],
                 ),
               ),
             ),
-            _buildBottomNav(),
+            _buildBottomNav(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNumericPad() {
+  Widget _buildNumericPad(BuildContext context) {
     return Column(
       children: [
-        _buildRow(["1", "2", "3"]),
+        _buildRow(context, ["1", "2", "3"]),
         const SizedBox(height: 12),
-        _buildRow(["4", "5", "6"]),
+        _buildRow(context, ["4", "5", "6"]),
         const SizedBox(height: 12),
-        _buildRow(["7", "8", "9"]),
+        _buildRow(context, ["7", "8", "9"]),
         const SizedBox(height: 12),
         Row(
           children: [
-            Expanded(child: _buildKey("delete", isAction: true)),
+            Expanded(child: _buildKey(context, "delete", isAction: true)),
             const SizedBox(width: 12),
-            Expanded(child: _buildKey("0")),
+            Expanded(child: _buildKey(context, "0")),
             const SizedBox(width: 12),
-            Expanded(child: _buildKey("submit", isAction: true)),
+            Expanded(child: _buildKey(context, "submit", isAction: true)),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildRow(List<String> keys) {
+  Widget _buildRow(BuildContext context, List<String> keys) {
     return Row(
       children: keys.map((key) => Expanded(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: _buildKey(key),
+          child: _buildKey(context, key),
         ),
       )).toList(),
     );
   }
 
-  Widget _buildKey(String key, {bool isAction = false}) {
-    const keyColor = Color(0xFF161B22);
-    const actionColor = Color(0xFF4DB6AC);
+  Widget _buildKey(BuildContext context, String key, {bool isAction = false}) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    
+    final keyColor = colorScheme.surfaceContainerLow;
+    final actionColor = colorScheme.primary;
 
     Widget content;
     if (key == "delete") {
-      content = const Icon(Icons.backspace_outlined, color: Color(0xFF0B1019));
+      content = Icon(Icons.backspace_outlined, color: isAction ? colorScheme.onPrimary : colorScheme.onSurface);
     } else if (key == "submit") {
-      content = const Icon(Icons.check, color: Color(0xFF0B1019));
+      content = Icon(Icons.check, color: isAction ? colorScheme.onPrimary : colorScheme.onSurface);
     } else {
       content = Text(
         key,
-        style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+        style: theme.textTheme.headlineMedium?.copyWith(
+          color: colorScheme.onSurface,
+          fontWeight: FontWeight.bold,
+        ),
       );
     }
 
@@ -277,28 +281,29 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
         decoration: BoxDecoration(
           color: isAction ? actionColor : keyColor,
           borderRadius: BorderRadius.circular(12),
+          border: isAction ? null : Border.all(color: colorScheme.outline.withValues(alpha: 0.05)),
         ),
         child: Center(child: content),
       ),
     );
   }
 
-  Widget _buildBottomNav() {
-    const accentColor = Color(0xFF00E5FF);
-    const textSecondary = Color(0xFF8B949E);
+  Widget _buildBottomNav(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1), width: 0.5)),
+        border: Border(top: BorderSide(color: colorScheme.outline.withValues(alpha: 0.1), width: 0.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home_outlined, "Home", false, textSecondary),
-          _buildNavItem(Icons.chat_bubble_outline, "Chat", false, textSecondary),
-          _buildNavItem(Icons.library_books_outlined, "Library", false, textSecondary),
-          _buildNavItem(Icons.person, "You", true, accentColor),
+          _buildNavItem(Icons.home_outlined, "Home", false, colorScheme.onSurfaceVariant),
+          _buildNavItem(Icons.chat_bubble_outline, "Chat", false, colorScheme.onSurfaceVariant),
+          _buildNavItem(Icons.library_books_outlined, "Library", false, colorScheme.onSurfaceVariant),
+          _buildNavItem(Icons.person, "You", true, colorScheme.primary),
         ],
       ),
     );

@@ -1,0 +1,5 @@
+- [x] Update `welcome_screen.dart` background
+- [x] Update `new_language_selection_screen.dart` background and app bar
+- [x] Update `pillars_grid_selection_screen.dart` background and app bar
+- [x] Update `intelligence_info_screen.dart` to use theme-based background
+- [x] Verify background consistency across all onboarding screens
