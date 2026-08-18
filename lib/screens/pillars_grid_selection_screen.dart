@@ -14,11 +14,11 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
 
   final List<Map<String, dynamic>> _pillars = [
     {"title": "General", "icon": Icons.shield_outlined},
-    {"title": "Workplace", "icon": Icons.psychology_outlined},
-    {"title": "Personal Counsel", "icon": Icons.gavel_outlined},
-    {"title": "Daily Journal", "icon": Icons.verified_user_outlined},
-    {"title": "Culture and Family", "icon": Icons.smart_toy_outlined},
-    {"title": "Defence", "icon": Icons.bar_chart_outlined},
+    {"title": "Operational", "icon": Icons.auto_awesome_outlined},
+    {"title": "Personal Counsel", "icon": Icons.face_retouching_natural_outlined},
+    {"title": "Workplace", "icon": Icons.work_outline},
+    {"title": "Culture and Family", "icon": Icons.groups_outlined},
+    {"title": "Daily Journal", "icon": Icons.edit_note_outlined},
   ];
 
   void _selectPillar(String title) {

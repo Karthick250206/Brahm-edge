@@ -63,7 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
       "icon": Icons.groups_outlined,
     },
     {
-      "title": "Defence",
+      "title": "Daily Journal",
       "subtitle": "Record Thoughts",
       "icon": Icons.edit_note_outlined,
     },
@@ -246,102 +246,6 @@ class _ChatScreenState extends State<ChatScreen> {
     _inferenceService.stopGeneration();
   }
 
-  void _showPillarSelector() {
-    final theme = Theme.of(context);
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: theme.colorScheme.surface,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 24,
-                    height: 1,
-                    color: theme.colorScheme.primary,
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    "ZIQEX PILLAR",
-                    style: GoogleFonts.notoSans(
-                      color: theme.colorScheme.primary,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              ..._pillars.map((pillar) {
-                bool isSelected = pillar['title'] == _selectedPillar;
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _selectedPillar = pillar['title'];
-                    });
-                    _startNewChat();
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: isSelected ? theme.colorScheme.primary.withValues(alpha: 0.1) : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isSelected ? theme.colorScheme.primary : theme.colorScheme.outline.withValues(alpha: 0.1),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          pillar['icon'],
-                          color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
-                          size: 24,
-                        ),
-                        const SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              pillar['title'],
-                              style: GoogleFonts.notoSans(
-                                color: theme.colorScheme.onSurface,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              pillar['subtitle'],
-                              style: GoogleFonts.notoSans(
-                                color: theme.colorScheme.onSurfaceVariant,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   Widget _buildSidebar() {
     final theme = Theme.of(context);
     return Drawer(
@@ -469,8 +373,56 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const Spacer(),
                   // Pillar Selector
-                  GestureDetector(
-                    onTap: _showPillarSelector,
+                  PopupMenuButton<String>(
+                    onSelected: (String value) {
+                      setState(() {
+                        _selectedPillar = value;
+                      });
+                      _startNewChat();
+                    },
+                    offset: const Offset(0, 50),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    color: theme.colorScheme.surface,
+                    elevation: 8,
+                    itemBuilder: (BuildContext context) {
+                      return _pillars.map((pillar) {
+                        bool isSelected = pillar['title'] == _selectedPillar;
+                        return PopupMenuItem<String>(
+                          value: pillar['title'],
+                          child: Row(
+                            children: [
+                              Icon(
+                                pillar['icon'],
+                                color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 12),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    pillar['title'],
+                                    style: GoogleFonts.notoSans(
+                                      color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurface,
+                                      fontSize: 14,
+                                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    pillar['subtitle'],
+                                    style: GoogleFonts.notoSans(
+                                      color: theme.colorScheme.onSurfaceVariant,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList();
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       decoration: BoxDecoration(
