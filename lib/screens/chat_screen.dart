@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'library_screen.dart';
 import '../services/llm_inference_service.dart';
 import '../services/database_service.dart';
 
@@ -391,26 +392,6 @@ class _ChatScreenState extends State<ChatScreen> {
             _buildSidebarItem(Icons.settings_outlined, "Model", () {}),
             _buildSidebarItem(Icons.book_outlined, "Prompt Library", () {}),
             _buildSidebarItem(Icons.history, "History", () => _loadSessions()),
-            const SizedBox(height: 32),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(width: 24, height: 1, color: theme.colorScheme.primary),
-                  const SizedBox(height: 8),
-                  Text(
-                    "RECENT ANALYSIS",
-                    style: GoogleFonts.notoSans(
-                      color: theme.colorScheme.primary,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 16),
             Expanded(
               child: _sessions.isEmpty 
@@ -653,7 +634,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
           ),
-          if (_inferenceService.isModelLoading)
+          if (_inferenceService.isModelLoading || _inferenceService.lastError == "MODEL_FILE_NOT_FOUND")
             _buildLoadingOverlay(),
         ],
       ),
@@ -662,6 +643,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildLoadingOverlay() {
     final theme = Theme.of(context);
+    final isModelMissing = _inferenceService.lastError == "MODEL_FILE_NOT_FOUND";
+    
     final String message = _inferenceService.isOptimizing 
         ? "Optimizing engine for your device..." 
         : "Model is initialising...";
@@ -677,7 +660,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
         ),
-        // Centered loading card
+        // Centered card
         Center(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 32),
@@ -694,43 +677,124 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ],
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: SizedBox(
-                    width: 32,
-                    height: 32,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3,
-                      valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+            child: isModelMissing 
+              ? _buildModelAttentionContent(theme)
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: SizedBox(
+                        width: 32,
+                        height: 32,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3,
+                          valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 24),
+                    Text(
+                      message,
+                      style: GoogleFonts.notoSans(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      "This will only take a moment.",
+                      style: GoogleFonts.notoSans(
+                        fontSize: 12,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 24),
-                Text(
-                  message,
-                  style: GoogleFonts.notoSans(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: theme.colorScheme.onSurface,
-                  ),
-                  textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildModelAttentionContent(ThemeData theme) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: Colors.amber.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.amber.withValues(alpha: 0.3)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.warning_amber_rounded, color: Colors.amber, size: 16),
+              const SizedBox(width: 8),
+              Text(
+                "Model not detected",
+                style: GoogleFonts.notoSans(
+                  color: Colors.amber.shade800,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.5,
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  "This will only take a moment.",
-                  style: GoogleFonts.notoSans(
-                    fontSize: 12,
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 24),
+        Text(
+          "Model needs attention",
+          style: GoogleFonts.notoSans(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: theme.colorScheme.onSurface,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          "Chat requires an intelligence\nto power it",
+          style: GoogleFonts.notoSans(
+            fontSize: 18,
+            color: theme.colorScheme.onSurfaceVariant,
+            height: 1.3,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 32),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LibraryScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: theme.colorScheme.primary,
+              foregroundColor: theme.colorScheme.onPrimary,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              elevation: 0,
+            ),
+            child: Text(
+              "Download the model to start chatting",
+              style: GoogleFonts.notoSans(fontWeight: FontWeight.bold, fontSize: 18),
+              textAlign: TextAlign.center,
             ),
           ),
         ),

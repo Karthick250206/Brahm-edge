@@ -265,7 +265,7 @@ class LlmInferenceService extends ChangeNotifier {
       final modelPath = "${directory.path}/models/$fileName";
 
       if (!await File(modelPath).exists()) {
-        _lastError = "Model file not found at $modelPath";
+        _lastError = "MODEL_FILE_NOT_FOUND";
         _isModelLoading = false;
         notifyListeners();
         return false;
@@ -313,6 +313,14 @@ class LlmInferenceService extends ChangeNotifier {
     if (_isGenerating) {
       _workerSendPort?.send(StopCommand());
     }
+  }
+
+  /// Clears the current loading or error state.
+  void clearLoadingState() {
+    _isModelLoading = false;
+    _isOptimizing = false;
+    _lastError = null;
+    notifyListeners();
   }
 
   String _getSystemPrompt(String pillar) {

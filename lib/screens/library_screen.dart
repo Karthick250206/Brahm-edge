@@ -521,7 +521,7 @@ class LibraryScreen extends StatelessWidget {
             const SizedBox(height: 16),
           ],
 
-          if (error != null) ...[
+          if (error != null && error != "MODEL_FILE_NOT_FOUND") ...[
             Text(
               "Error: $error",
               style: GoogleFonts.notoSans(color: Colors.red, fontSize: 10, fontWeight: FontWeight.bold),
