@@ -1,24 +1,23 @@
-# Walkthrough - Splash Screen Logo Resizing & Centering
+# Walkthrough: Universal Adaptive Scaling for Intelligence Info Screen
 
-I have optimized the native Android splash screen to ensure the logo is correctly centered and sized appropriately across all mobile device screen sizes.
+I have upgraded the `IntelligenceInfoScreen` with a mathematical scaling engine that ensures a perfect fit on any device and in any language (Tamil, Hindi, Urdu, etc.) without requiring a scrollbar.
 
-## Key Changes
+## Key Accomplishments
 
-### 1. Logo Size Capping (API 23+)
-I created [drawable-v23/launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable-v23/launch_background.xml) to explicitly set the logo dimensions.
-- **Fixed Size:** Set the logo to **100dp x 100dp**. This ensures the logo doesn't "overload" small screens while remaining crisp on high-density displays.
-- **Centering:** Used `android:gravity="center"` to ensure the logo stays perfectly in the middle of the screen.
+### 1. Continuous Dynamic Scaling
+Instead of a simple "Small/Large" switch, the screen now calculates a `scaleFactor` based on the actual pixel height of the device.
+- **The formula:** `(Available Height / 800dp)` clamped between `0.7` and `1.0`.
+- All dimensions (icons, fonts, padding, margins) now multiply by this factor.
 
-### 2. Standard Centering (All API levels)
-Updated [drawable/launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable/launch_background.xml) and its v21 variant.
-- **Uncommented Logo:** Enabled the logo layer which was previously commented out.
-- **Bitmap Gravity:** Configured the `<bitmap>` tag with `android:gravity="center"` to prevent the image from being stretched to fill the screen, which was the primary cause of it appearing too large.
+### 2. Vertical Optimization
+- **Proportional Icons:** The top ZenteiQ logo and feature icons shrink proportionally on smaller screens to prevent pushing the bottom button away.
+- **Tighter Line Heights:** Added `height` properties to the `GoogleFonts` configuration. This ensures that multi-line translations (which are common in Tamil and Telugu) stay compact and don't "balloon" vertically.
+- **Adaptive Spacing:** All `SizedBox` gaps now scale with the screen height.
 
-### 3. Resource Alignment
-- Changed the logo source to use the official `@mipmap/ic_launcher`, ensuring consistency with the app's brand identity.
+### 3. CTA Visibility
+- The "Set up your ZiqeX" button's height and font size are now linked to the scaling engine. This guarantees the button is always fully visible and within the safe area of the screen.
 
 ## Verification Results
-
-- **Small Screens:** The logo will no longer stretch to fill the width/height, but instead sit comfortably in the center.
-- **Large Screens:** The logo remains at a professional 100dp size, avoiding an oversized look on tablets or large phones.
-- **Background:** Confirmed the background remains white as requested.
+- **Language Resilience:** Verified that the layout holds up even with the tall characters and long strings found in South Indian languages.
+- **Aspect Ratio Handling:** The layout handles both narrow "Cinema" aspect ratios and wider "Legacy" ratios by centering and scaling correctly.
+- **Zero Overflow:** No "Bottom Overflow" warnings are triggered on standard or small screen simulations.

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../i18n/strings.g.dart';
 
 /// [LanguageService] manages the persistent application language/locale preference.
 /// Implemented as a singleton extending [ChangeNotifier], it securely stores the user's
@@ -24,6 +25,7 @@ class LanguageService extends ChangeNotifier {
     String? lang = await _storage.read(key: _languageKey);
     if (lang != null) {
       _selectedLanguage = lang;
+      LocaleSettings.setLocale(_getLocaleFromNativeName(lang));
       notifyListeners();
     }
   }
@@ -31,8 +33,28 @@ class LanguageService extends ChangeNotifier {
   /// Updates the active language state, saves it securely, and notifies all listening widgets
   Future<void> setLanguage(String language) async {
     _selectedLanguage = language;
+    LocaleSettings.setLocale(_getLocaleFromNativeName(language));
     await _storage.write(key: _languageKey, value: language);
     notifyListeners();
+  }
+
+  AppLocale _getLocaleFromNativeName(String nativeName) {
+    switch (nativeName) {
+      case "हिन्दी": return AppLocale.hi;
+      case "বাংলা": return AppLocale.bn;
+      case "मराठी": return AppLocale.mr;
+      case "తెలుగు": return AppLocale.te;
+      case "தமிழ்": return AppLocale.ta;
+      case "ગુજરાતી": return AppLocale.gu;
+      case "اردو": return AppLocale.ur;
+      case "ಕನ್ನಡ": return AppLocale.kn;
+      case "ଓଡ଼ିଆ": return AppLocale.or;
+      case "മലയാളം": return AppLocale.ml;
+      case "ਪੰਜਾਬੀ": return AppLocale.pa;
+      case "অসমীয়া": return AppLocale.as;
+      case "English": return AppLocale.en;
+      default: return AppLocale.en;
+    }
   }
 
   String getEnglishName(String nativeName) {

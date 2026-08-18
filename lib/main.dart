@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'theme/design_system.dart';
+import 'i18n/strings.g.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/new_language_selection_screen.dart';
 import 'screens/main_wrapper.dart';
@@ -24,13 +26,15 @@ void main() async {
   await inferenceService.init();
   
   runApp(
-    MultiProvider(
-      providers: [
-        ...securityProviders,
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => StorageManagementService()),
-      ],
-      child: const MyApp(),
+    TranslationProvider(
+      child: MultiProvider(
+        providers: [
+          ...securityProviders,
+          ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => StorageManagementService()),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -45,6 +49,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ZiqeXAI',
       debugShowCheckedModeBanner: false,
+      locale: TranslationProvider.of(context).flutterLocale, // use slang locale
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       theme: SystematicIntegrity.lightTheme,
       darkTheme: SystematicIntegrity.darkTheme,
       themeMode: themeProvider.themeMode,

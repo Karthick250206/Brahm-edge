@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../i18n/strings.g.dart';
 import 'pillars_grid_selection_screen.dart';
 
 class IntelligenceInfoScreen extends StatelessWidget {
@@ -17,107 +18,109 @@ class IntelligenceInfoScreen extends StatelessWidget {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            // Calculate if the content fits in the static height
-            // Base required height is around 680-700px
-            final bool needsScaling = constraints.maxHeight < 720;
-
+            // Calculate a scaling factor based on a standard height of 800dp
+            // We clamp it to ensure it doesn't get TOO small or too large.
+            final double scale = (constraints.maxHeight / 800).clamp(0.7, 1.0);
+            
             return Center(
               child: Container(
                 constraints: BoxConstraints(maxWidth: 450, maxHeight: constraints.maxHeight),
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: EdgeInsets.symmetric(horizontal: 24.0 * scale),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: needsScaling ? 12 : 24),
+                    SizedBox(height: 20 * scale),
+                    
                     // Decorative Top Circle with Branded Icon
                     Container(
-                      width: needsScaling ? 80 : 100,
-                      height: needsScaling ? 80 : 100,
+                      width: 100 * scale,
+                      height: 100 * scale,
                       decoration: BoxDecoration(
                         color: theme.colorScheme.surface,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
                             color: tealColor.withValues(alpha: 0.05),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
+                            blurRadius: 20 * scale,
+                            offset: Offset(0, 10 * scale),
                           ),
                         ],
                       ),
                       child: Center(
                         child: SvgPicture.asset(
                           'assets/icons/zenteiq-ai-icon-enhanced.svg',
-                          width: needsScaling ? 45 : 60,
-                          height: needsScaling ? 45 : 60,
+                          width: 55 * scale,
+                          height: 55 * scale,
                         ),
                       ),
                     ),
-                    SizedBox(height: needsScaling ? 20 : 40),
+                    
+                    SizedBox(height: 30 * scale),
 
                     Text(
-                      "Intelligence designed around you",
+                      t.info.title,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.notoSans(
                         color: const Color(0xFF1E293B),
-                        fontSize: needsScaling ? 24 : 28,
+                        fontSize: 28 * scale,
                         fontWeight: FontWeight.w800,
-                        height: 1.2,
+                        height: 1.1,
                       ),
                     ),
 
-                    SizedBox(height: needsScaling ? 24 : 48),
+                    SizedBox(height: 32 * scale),
                     
                     // Features List
                     _buildFeatureRow(
                       icon: Icons.shield_outlined,
                       iconBg: const Color(0xFFE0F2F1),
-                      title: "Privacy first",
-                      description: "ZiqeX is designed to keep intelligence and your information close to your device.",
-                      isSmall: needsScaling,
+                      title: t.info.privacy_title,
+                      description: t.info.privacy_desc,
+                      scale: scale,
                     ),
-                    SizedBox(height: needsScaling ? 20 : 32),
+                    SizedBox(height: 24 * scale),
                     _buildFeatureRow(
                       icon: Icons.app_shortcut_outlined,
                       iconBg: const Color(0xFFE0F2F1),
-                      title: "Intelligence in your hand",
-                      description: "Everyday intelligence, available directly on your device.",
-                      isSmall: needsScaling,
+                      title: t.info.hand_title,
+                      description: t.info.hand_desc,
+                      scale: scale,
                     ),
-                    SizedBox(height: needsScaling ? 20 : 32),
+                    SizedBox(height: 24 * scale),
                     _buildFeatureRow(
                       icon: Icons.analytics_outlined,
                       iconBg: const Color(0xFFE0F2F1),
-                      title: "Your data. Your control.",
-                      description: "Choose what is kept, manage what is stored, and delete what you no longer need.",
-                      isSmall: needsScaling,
+                      title: t.info.control_title,
+                      description: t.info.control_desc,
+                      scale: scale,
                     ),
-                    SizedBox(height: needsScaling ? 20 : 32),
+                    SizedBox(height: 24 * scale),
                     _buildFeatureRow(
                       icon: Icons.language_outlined,
                       iconBg: const Color(0xFFE0F2F1),
-                      title: "Designed for every place",
-                      description: "Built for different languages, devices, and ways people use technology.",
-                      isSmall: needsScaling,
+                      title: t.info.place_title,
+                      description: t.info.place_desc,
+                      scale: scale,
                     ),
                     
                     const Spacer(),
                     
-                    SizedBox(height: needsScaling ? 16 : 24),
                     Text(
-                      "Your intelligence. Your device. Your control.",
+                      t.info.footer,
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.notoSans(
                         color: tealColor,
-                        fontSize: 14,
+                        fontSize: 13 * scale,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.5,
                       ),
                     ),
-                    SizedBox(height: needsScaling ? 12 : 24),
+                    SizedBox(height: 16 * scale),
                     
                     // CTA Button
                     SizedBox(
                       width: double.infinity,
-                      height: needsScaling ? 56 : 64,
+                      height: 60 * scale,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -129,20 +132,20 @@ class IntelligenceInfoScreen extends StatelessWidget {
                           backgroundColor: tealColor,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32),
+                            borderRadius: BorderRadius.circular(32 * scale),
                           ),
                           elevation: 0,
                         ),
                         child: Text(
-                          "Set up your ZiqeX",
+                          t.info.setup,
                           style: GoogleFonts.notoSans(
-                            fontSize: needsScaling ? 16 : 18,
+                            fontSize: 17 * scale,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: needsScaling ? 20 : 32),
+                    SizedBox(height: 24 * scale),
                   ],
                 ),
               ),
@@ -158,20 +161,20 @@ class IntelligenceInfoScreen extends StatelessWidget {
     required Color iconBg,
     required String title,
     required String description,
-    bool isSmall = false,
+    required double scale,
   }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10 * scale),
           decoration: BoxDecoration(
             color: iconBg,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10 * scale),
           ),
-          child: Icon(icon, color: const Color(0xFF004D40), size: isSmall ? 20 : 24),
+          child: Icon(icon, color: const Color(0xFF004D40), size: 24 * scale),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16 * scale),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,17 +183,18 @@ class IntelligenceInfoScreen extends StatelessWidget {
                 title,
                 style: GoogleFonts.notoSans(
                   color: const Color(0xFF1E293B),
-                  fontSize: isSmall ? 15 : 16,
+                  fontSize: 16 * scale,
                   fontWeight: FontWeight.w700,
+                  height: 1.1,
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4 * scale),
               Text(
                 description,
                 style: GoogleFonts.notoSans(
                   color: const Color(0xFF64748B),
-                  fontSize: isSmall ? 13 : 14,
-                  height: 1.4,
+                  fontSize: 13.5 * scale,
+                  height: 1.3,
                   fontWeight: FontWeight.w500,
                 ),
               ),

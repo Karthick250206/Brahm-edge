@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../i18n/strings.g.dart';
 import 'welcome_screen.dart';
 import '../services/language_service.dart';
 
@@ -50,7 +51,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          "Language Selection",
+          t.languageSelection.appBar,
           style: GoogleFonts.notoSans(
             color: theme.colorScheme.onSurface,
             fontSize: 18,
@@ -67,7 +68,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Choose your language",
+                    t.languageSelection.title,
                     style: GoogleFonts.notoSans(
                       color: theme.colorScheme.onSurface,
                       fontSize: 32,
@@ -76,7 +77,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    "Select the language for your interface.",
+                    t.languageSelection.subtitle,
                     style: GoogleFonts.notoSans(
                       color: theme.colorScheme.onSurfaceVariant,
                       fontSize: 16,
@@ -181,7 +182,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                       ),
                       child: Text(
-                        "Continue",
+                        t.languageSelection.continueBtn,
                         style: GoogleFonts.notoSans(
                           color: theme.colorScheme.onPrimary,
                           fontSize: 16,

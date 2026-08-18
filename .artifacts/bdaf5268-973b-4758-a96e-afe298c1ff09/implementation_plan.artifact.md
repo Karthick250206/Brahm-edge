@@ -1,32 +1,34 @@
-# Implementation Plan: Resize and Center Splash Screen Logo
+# Implementation Plan: Universal Adaptive Scaling for Intelligence Info Screen
 
-The goal is to fix the splash screen logo appearing too large on certain devices and ensuring it is correctly centered on a white background.
+This plan details a robust, mathematical approach to ensure the `IntelligenceInfoScreen` fits perfectly on **any** device size and in **any** language (Hindi, Tamil, Urdu, etc.) without requiring a scrollbar.
 
-## User Review Required
+## The Problem
+The current "Small vs Large" logic is too binary. Modern phones have high resolutions but narrow aspect ratios, and languages like Tamil or Telugu use more vertical space per character. This combination causes "Bottom Overflow" even on medium-sized screens.
 
-> [!IMPORTANT]
-> I will explicitly define the logo size in the native Android resources. This will ensure that on modern devices (API 23+), the logo maintains a consistent, professional size (e.g., 100dp) rather than scaling up to fill the screen or appearing too large on small displays.
+## Proposed Solution: Continuous Dynamic Scaling
 
-## Proposed Changes
+Instead of a "Yes/No" scaling toggle, I will implement a **Scaling Factor** based on the actual available height.
 
-### Android Native Resources
+### 1. Scaling Logic
+I will establish a "Standard Height" (e.g., 800dp).
+- **Scale Factor:** `constraints.maxHeight / 800` (clamped between 0.75 and 1.0).
+- All font sizes, icon dimensions, and vertical margins will be multiplied by this factor.
 
-#### [MODIFY] [launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable/launch_background.xml)
-- Uncomment the logo item.
-- Change the source from `@mipmap/launch_image` to `@mipmap/ic_launcher`.
-- Set `android:gravity="center"` to ensure it's in the middle.
+### 2. Layout Refinements
+- **Icon Sizing:** The top ZenteiQ logo and feature icons will shrink proportionally to save vertical space.
+- **Line Heights:** Set specific `height` properties on `GoogleFonts` to prevent multi-line translations from expanding too far.
+- **Flexible Spacing:** Replace some `SizedBox` gaps with `MainAxisAlignment.spaceBetween` or `Flexible` widgets to "push" content together on smaller screens.
+- **Button Sizing:** The "Set up your ZiqeX" button will have a height that scales, ensuring it never gets pushed off-screen.
 
-#### [MODIFY] [launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable-v21/launch_background.xml)
-- Uncomment the logo item.
-- Change the source to `@mipmap/ic_launcher`.
-- Add `android:width="100dp"` and `android:height="100dp"` to the `<item>` tag (supported in API 23+) to cap the size.
-- Ensure the background remains `@android:color/white`.
-
-#### [MODIFY] [styles.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/values/styles.xml) & [values-night/styles.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/values-night/styles.xml)
-- Add the `android:windowSplashScreenIconSize` attribute (for Android 12+) to control the splash icon size if necessary. However, relying on `launch_background.xml` is often more consistent for Flutter's initial frame transition.
+### 3. Language-Specific Tweaks
+- Ensure the Urdu (RTL) layout is also respected by this scaling logic.
 
 ## Verification Plan
 
+### Automated Checks
+- Use `flutter analyze` to ensure no syntax errors.
+
 ### Manual Verification
-- **Multiple Device Sizes:** Run the app on devices/emulators with different screen resolutions (e.g., a small phone and a large tablet).
-- **Verification:** Confirm the logo is centered, has a white background, and its size is proportional and not "overloading" the screen.
+- **Test Device Simulation:** Simulate a 360x640 (very small) and 411x891 (tall) device.
+- **Language Stress Test:** Switch to **Tamil** (long text) and **Hindi** (tall characters) on the smallest simulated screen.
+- **Button Visibility:** Confirm the "Set up your ZiqeX" button is always fully visible and clickable without scrolling.

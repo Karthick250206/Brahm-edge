@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../i18n/strings.g.dart';
 import 'model_download_screen.dart';
 
 class PillarsGridSelectionScreen extends StatefulWidget {
@@ -11,15 +12,6 @@ class PillarsGridSelectionScreen extends StatefulWidget {
 
 class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen> {
   String? _selectedPillar;
-
-  final List<Map<String, dynamic>> _pillars = [
-    {"title": "General", "icon": Icons.shield_outlined},
-    {"title": "Operational", "icon": Icons.auto_awesome_outlined},
-    {"title": "Personal Counsel", "icon": Icons.face_retouching_natural_outlined},
-    {"title": "Workplace", "icon": Icons.work_outline},
-    {"title": "Culture and Family", "icon": Icons.groups_outlined},
-    {"title": "Daily Journal", "icon": Icons.edit_note_outlined},
-  ];
 
   void _selectPillar(String title) {
     setState(() {
@@ -34,6 +26,15 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
     final bgColor = theme.scaffoldBackgroundColor;
     final cardBgColor = theme.colorScheme.surfaceContainerHighest;
 
+    final List<Map<String, dynamic>> pillars = [
+      {"title": t.pillars.general, "icon": Icons.shield_outlined},
+      {"title": t.pillars.operational, "icon": Icons.auto_awesome_outlined},
+      {"title": t.pillars.personal, "icon": Icons.face_retouching_natural_outlined},
+      {"title": t.pillars.workplace, "icon": Icons.work_outline},
+      {"title": t.pillars.culture, "icon": Icons.groups_outlined},
+      {"title": t.pillars.journal, "icon": Icons.edit_note_outlined},
+    ];
+
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -44,7 +45,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          "Pillars Selection",
+          t.pillars.appBar,
           style: GoogleFonts.notoSans(
             color: theme.colorScheme.onSurface,
             fontSize: 18,
@@ -61,7 +62,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Select your pillars",
+                    t.pillars.title,
                     style: GoogleFonts.notoSans(
                       color: theme.colorScheme.onSurface,
                       fontSize: 32,
@@ -70,7 +71,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    "Choose the core capabilities you want to focus on.",
+                    t.pillars.subtitle,
                     style: GoogleFonts.notoSans(
                       color: theme.colorScheme.onSurfaceVariant,
                       fontSize: 16,
@@ -89,9 +90,9 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                       mainAxisSpacing: 16,
                       childAspectRatio: 0.85,
                     ),
-                    itemCount: _pillars.length,
+                    itemCount: pillars.length,
                     itemBuilder: (context, index) {
-                      final pillar = _pillars[index];
+                      final pillar = pillars[index];
                       final isSelected = _selectedPillar == pillar["title"];
                       
                       return GestureDetector(
@@ -167,7 +168,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                       ),
                       child: Text(
-                        "Back",
+                        t.pillars.back,
                         style: GoogleFonts.notoSans(
                           color: theme.colorScheme.onSurfaceVariant,
                           fontSize: 16,
@@ -193,7 +194,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                       ),
                       child: Text(
-                        "Continue",
+                        t.pillars.continueBtn,
                         style: GoogleFonts.notoSans(
                           color: _selectedPillar == null ? theme.colorScheme.onSurfaceVariant : theme.colorScheme.onPrimary,
                           fontSize: 16,

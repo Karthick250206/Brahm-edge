@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../i18n/strings.g.dart';
 import '../services/language_service.dart';
-import '../services/localization_service.dart';
 import '../services/model_download_service.dart';
 import '../services/llm_inference_service.dart';
 
@@ -12,183 +12,175 @@ class LibraryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Access LanguageService, ModelDownloadService, and LlmInferenceService to listen for updates
-    final languageService = LanguageService();
     final downloadService = ModelDownloadService();
     final inferenceService = LlmInferenceService();
     final theme = Theme.of(context);
+    final t = Translations.of(context);
 
     return ListenableBuilder(
-      listenable: languageService,
+      listenable: downloadService,
       builder: (context, _) {
         return ListenableBuilder(
-          listenable: downloadService,
+          listenable: inferenceService,
           builder: (context, _) {
-            return ListenableBuilder(
-              listenable: inferenceService,
-              builder: (context, _) {
-                final lang = languageService.selectedLanguage;
-                String t(String key) => LocalizationService.translate(lang, key);
+            return Scaffold(
+              backgroundColor: theme.scaffoldBackgroundColor,
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
 
-                return Scaffold(
-                  backgroundColor: theme.scaffoldBackgroundColor,
-                  body: SafeArea(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      // Top Header Row with Title, Subtitle, and Settings Icon
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const SizedBox(height: 20),
-
-                          // Top Header Row with Title, Subtitle, and Settings Icon
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      t('library'),
-                                      style: GoogleFonts.notoSans(
-                                        color: theme.colorScheme.onSurface,
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      t('library_sub'),
-                                      style: GoogleFonts.notoSans(
-                                        color: theme.colorScheme.onSurfaceVariant,
-                                        fontSize: 14,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 32),
-
-                          // Filter Chips Selection Row (Models, Threads, Voice)
-                          Row(
-                            children: [
-                              _buildFilterChip(context, "models", true),
-                              const SizedBox(width: 8),
-                              _buildFilterChip(context, "threads", false),
-                              const SizedBox(width: 8),
-                              _buildFilterChip(context, "voice", false),
-                            ],
-                          ),
-
-                          const SizedBox(height: 40),
-
-                          // Section Title: On-Device Status Indicator
-                          Text(
-                            t('on_this_device').toUpperCase(),
-                            style: GoogleFonts.notoSans(
-                              color: theme.colorScheme.onSurfaceVariant,
-                              fontSize: 11,
-                              letterSpacing: 1.2,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-
-                          _buildModelCard(
-                            context,
-                            title: "BrahmAI - 2B",
-                            subtitle: "Mobile optimized · low latency",
-                            isActive: true,
-                            activeLabel: t('active'),
-                            tags: ["~22 tok/s", "QAT", _getLanguageTag(languageService.selectedLanguage)],
-                            hasDownloadButton: true,
-                            status: downloadService.status,
-                            downloadProgress: downloadService.downloadProgress,
-                            onDownload: () {
-                              downloadService.downloadModel(
-                                "https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/main/gemma-4-E2B-it.litertlm?download=true",
-                                "gemma-4-E2B-it.litertlm"
-                              );
-                            },
-                            // Inference loading logic
-                            isLoaded: inferenceService.isModelLoaded,
-                            isLoading: inferenceService.isModelLoading,
-                            error: inferenceService.lastError,
-                            isSafeMode: inferenceService.safeModeActive,
-                            onLoad: () => inferenceService.loadModel("gemma-4-E2B-it.litertlm"),
-                          ),
-
-                          const SizedBox(height: 16),
-
-                          // Secondary Model Card 2: BrahmAI 5B (Available for download/addition)
-                          _buildModelCard(
-                            context,
-                            title: "BrahmAI · 5B",
-                            subtitle: "3.2 GB · larger context · better reasoning",
-                            isActive: false,
-                            addLabel: t('add'),
-                            tags: ["~9 tok/s", "Q4_K_M", _getLanguageTag(languageService.selectedLanguage)],
-                            hasAddButton: true,
-                          ),
-
-                          const SizedBox(height: 32),
-
-                          // Local Storage Usage Breakdown Section Container
-                          Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-                              borderRadius: BorderRadius.circular(24),
-                              border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
-                            ),
+                          Expanded(
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      t('storage_used').toUpperCase(),
-                                      style: GoogleFonts.notoSans(
-                                        color: theme.colorScheme.onSurfaceVariant,
-                                        fontSize: 10,
-                                        letterSpacing: 1.2,
-                                        fontWeight: FontWeight.w900,
-                                      ),
-                                    ),
-                                    Text(
-                                      "1.27 / 8 GB",
-                                      style: GoogleFonts.notoSans(
-                                        color: theme.colorScheme.onSurface,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 12),
-
-                                // Storage Progress Bar Indicator
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(4),
-                                  child: LinearProgressIndicator(
-                                    value: 0.16,
-                                    minHeight: 8,
-                                    backgroundColor: theme.colorScheme.surface,
-                                    valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+                                Text(
+                                  t.library,
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurface,
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w800,
                                   ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  t.library_sub,
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                    fontSize: 14,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 40),
                         ],
                       ),
-                    ),
+                      const SizedBox(height: 32),
+
+                      // Filter Chips Selection Row (Models, Threads, Voice)
+                      Row(
+                        children: [
+                          _buildFilterChip(context, "models", true),
+                          const SizedBox(width: 8),
+                          _buildFilterChip(context, "threads", false),
+                          const SizedBox(width: 8),
+                          _buildFilterChip(context, "voice", false),
+                        ],
+                      ),
+
+                      const SizedBox(height: 40),
+
+                      // Section Title: On-Device Status Indicator
+                      Text(
+                        t.on_this_device.toUpperCase(),
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onSurfaceVariant,
+                          fontSize: 11,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+
+                      _buildModelCard(
+                        context,
+                        title: "BrahmAI - 2B",
+                        subtitle: "Mobile optimized · low latency",
+                        isActive: true,
+                        activeLabel: t.active,
+                        tags: ["~22 tok/s", "QAT", _getLanguageTag(context)],
+                        hasDownloadButton: true,
+                        status: downloadService.status,
+                        downloadProgress: downloadService.downloadProgress,
+                        onDownload: () {
+                          downloadService.downloadModel(
+                            "https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/main/gemma-4-E2B-it.litertlm?download=true",
+                            "gemma-4-E2B-it.litertlm"
+                          );
+                        },
+                        // Inference loading logic
+                        isLoaded: inferenceService.isModelLoaded,
+                        isLoading: inferenceService.isModelLoading,
+                        error: inferenceService.lastError,
+                        isSafeMode: inferenceService.safeModeActive,
+                        onLoad: () => inferenceService.loadModel("gemma-4-E2B-it.litertlm"),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      // Secondary Model Card 2: BrahmAI 5B (Available for download/addition)
+                      _buildModelCard(
+                        context,
+                        title: "BrahmAI · 5B",
+                        subtitle: "3.2 GB · larger context · better reasoning",
+                        isActive: false,
+                        addLabel: t.add,
+                        tags: ["~9 tok/s", "Q4_K_M", _getLanguageTag(context)],
+                        hasAddButton: true,
+                      ),
+
+                      const SizedBox(height: 32),
+
+                      // Local Storage Usage Breakdown Section Container
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  t.storage_used.toUpperCase(),
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                    fontSize: 10,
+                                    letterSpacing: 1.2,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                Text(
+                                  "1.27 / 8 GB",
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurface,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+
+                            // Storage Progress Bar Indicator
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: LinearProgressIndicator(
+                                value: 0.16,
+                                minHeight: 8,
+                                backgroundColor: theme.colorScheme.surface,
+                                valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                    ],
                   ),
-                );
-              },
+                ),
+              ),
             );
           },
         );
@@ -197,7 +189,8 @@ class LibraryScreen extends StatelessWidget {
   }
 
   /// Helper utility to construct language model tags matching current locale profile
-  String _getLanguageTag(String language) {
+  String _getLanguageTag(BuildContext context) {
+    final language = LanguageService().selectedLanguage;
     if (language == "English") return "14 langs";
     return "15 langs (+ $language)";
   }

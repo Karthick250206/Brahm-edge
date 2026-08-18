@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../i18n/strings.g.dart';
 import 'home_screen.dart';
 import 'chat_screen.dart';
 import 'library_screen.dart';
 import 'profile_screen.dart';
 import '../services/language_service.dart';
-import '../services/localization_service.dart';
 
 /// [MainWrapper] serves as the primary shell container for the application post-onboarding.
 /// It maintains a bottom navigation bar with a persistent index state (`_index`) to switch
@@ -33,89 +33,80 @@ class _MainWrapperState extends State<MainWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    // Access the LanguageService to listen for locale/language changes across the shell
-    final languageService = LanguageService();
     final theme = Theme.of(context);
+    final t = Translations.of(context);
 
-    return ListenableBuilder(
-      listenable: languageService,
-      builder: (context, _) {
-        final lang = languageService.selectedLanguage;
-        String t(String key) => LocalizationService.translate(lang, key);
-
-        return Scaffold(
-          // Display the currently selected page based on the bottom navigation index
-          body: _pages[_index],
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
-              border: Border(
-                top: BorderSide(
-                  color: theme.colorScheme.outline.withValues(alpha: 0.1), 
-                  width: 0.5
-                )
-              ),
-            ),
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: theme.colorScheme.surface,
-              currentIndex: _index,
-              selectedItemColor: theme.colorScheme.primary,
-              unselectedItemColor: theme.colorScheme.onSurfaceVariant,
-              selectedLabelStyle: GoogleFonts.notoSans(fontSize: 12, fontWeight: FontWeight.bold),
-              unselectedLabelStyle: GoogleFonts.notoSans(fontSize: 12),
-              // Update state to render the chosen tab view on tap
-              onTap: (i) => setState(() => _index = i),
-              items: [
-                BottomNavigationBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.home_outlined),
-                  ),
-                  activeIcon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.home),
-                  ),
-                  label: t('home'),
-                ),
-                BottomNavigationBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.chat_bubble_outline),
-                  ),
-                  activeIcon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.chat_bubble),
-                  ),
-                  label: t('chat'),
-                ),
-                BottomNavigationBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.grid_view),
-                  ),
-                  activeIcon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.grid_view_rounded),
-                  ),
-                  label: t('library'),
-                ),
-                BottomNavigationBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.person_outline),
-                  ),
-                  activeIcon: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.person),
-                  ),
-                  label: t('you'),
-                ),
-              ],
-            ),
+    return Scaffold(
+      // Display the currently selected page based on the bottom navigation index
+      body: _pages[_index],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          border: Border(
+            top: BorderSide(
+              color: theme.colorScheme.outline.withValues(alpha: 0.1), 
+              width: 0.5
+            )
           ),
-        );
-      },
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: theme.colorScheme.surface,
+          currentIndex: _index,
+          selectedItemColor: theme.colorScheme.primary,
+          unselectedItemColor: theme.colorScheme.onSurfaceVariant,
+          selectedLabelStyle: GoogleFonts.notoSans(fontSize: 12, fontWeight: FontWeight.bold),
+          unselectedLabelStyle: GoogleFonts.notoSans(fontSize: 12),
+          // Update state to render the chosen tab view on tap
+          onTap: (i) => setState(() => _index = i),
+          items: [
+            BottomNavigationBarItem(
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.home_outlined),
+              ),
+              activeIcon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.home),
+              ),
+              label: t.home,
+            ),
+            BottomNavigationBarItem(
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.chat_bubble_outline),
+              ),
+              activeIcon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.chat_bubble),
+              ),
+              label: t.chat,
+            ),
+            BottomNavigationBarItem(
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.grid_view),
+              ),
+              activeIcon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.grid_view_rounded),
+              ),
+              label: t.library,
+            ),
+            BottomNavigationBarItem(
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.person_outline),
+              ),
+              activeIcon: const Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Icon(Icons.person),
+              ),
+              label: t.you,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

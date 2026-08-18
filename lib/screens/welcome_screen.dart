@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../i18n/strings.g.dart';
 import '../security/providers/security_provider.dart';
 import 'intelligence_info_screen.dart';
 
@@ -118,7 +119,7 @@ class WelcomeScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Meet ZiqeX",
+                                t.welcome.meet,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.notoSans(
                                   color: theme.colorScheme.primary,
@@ -129,7 +130,7 @@ class WelcomeScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                "Intelligence at the edge",
+                                t.welcome.at_edge,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.notoSans(
                                   color: theme.colorScheme.onSurface,
@@ -149,7 +150,7 @@ class WelcomeScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 28),
                               Text(
-                                "Private and Edge AI\nby ZenteiQ",
+                                t.welcome.private,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.notoSans(
                                   color: theme.colorScheme.onSurfaceVariant,
@@ -189,7 +190,7 @@ class WelcomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "BEGIN ONBOARDING",
+                            t.welcome.begin,
                             style: GoogleFonts.notoSans(
                               fontSize: 16,
                               fontWeight: FontWeight.w800,
