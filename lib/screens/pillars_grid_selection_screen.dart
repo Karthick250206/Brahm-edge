@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'new_language_selection_screen.dart';
+import 'model_download_screen.dart';
 
 class PillarsGridSelectionScreen extends StatefulWidget {
   const PillarsGridSelectionScreen({super.key});
@@ -31,14 +31,14 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final tealColor = theme.colorScheme.primary;
-    final bgColor = theme.colorScheme.surface;
+    final bgColor = theme.scaffoldBackgroundColor;
     final cardBgColor = theme.colorScheme.surfaceContainerHighest;
 
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: theme.colorScheme.surface,
-        elevation: 0.5,
+        backgroundColor: bgColor,
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
@@ -152,7 +152,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
           Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
+              color: bgColor,
               border: Border(top: BorderSide(color: theme.colorScheme.outline.withValues(alpha: 0.1))),
             ),
             child: Row(
@@ -185,7 +185,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                       onPressed: _selectedPillar == null ? null : () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => NewLanguageSelectionScreen()),
+                          MaterialPageRoute(builder: (context) => ModelDownloadScreen()),
                         );
                       },
                       style: TextButton.styleFrom(

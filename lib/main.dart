@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'theme/design_system.dart';
 import 'screens/welcome_screen.dart';
+import 'screens/new_language_selection_screen.dart';
 import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
 import 'services/llm_inference_service.dart';
@@ -121,7 +122,7 @@ class AuthenticationWrapper extends StatelessWidget {
         final bool onboarded = snapshot.data![2];
         
         if (isFirstLaunch) {
-          return const WelcomeScreen();
+          return const NewLanguageSelectionScreen();
         }
 
         final bool isLocked = securityProvider.isAppLockEnabled && shouldLock;

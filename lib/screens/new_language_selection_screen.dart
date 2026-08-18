@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'model_download_screen.dart';
+import 'welcome_screen.dart';
 import '../services/language_service.dart';
 
 class NewLanguageSelectionScreen extends StatefulWidget {
@@ -40,18 +40,15 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final tealColor = theme.colorScheme.primary;
-    final bgColor = theme.colorScheme.surface;
+    final bgColor = theme.scaffoldBackgroundColor;
     final cardBgColor = theme.colorScheme.surfaceContainerHighest;
 
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: theme.colorScheme.surface,
-        elevation: 0.5,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
-          onPressed: () => Navigator.pop(context),
-        ),
+        backgroundColor: bgColor,
+        elevation: 0,
+        automaticallyImplyLeading: false,
         title: Text(
           "Language Selection",
           style: GoogleFonts.notoSans(
@@ -161,32 +158,11 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
           Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
+              color: bgColor,
               border: Border(top: BorderSide(color: theme.colorScheme.outline.withValues(alpha: 0.1))),
             ),
             child: Row(
               children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 56,
-                    child: TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: TextButton.styleFrom(
-                        backgroundColor: theme.colorScheme.onSurface.withValues(alpha: 0.05),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                      ),
-                      child: Text(
-                        "Back",
-                        style: GoogleFonts.notoSans(
-                          color: theme.colorScheme.onSurfaceVariant,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
                 Expanded(
                   child: SizedBox(
                     height: 56,
@@ -196,7 +172,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                         if (context.mounted) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ModelDownloadScreen()),
+                            MaterialPageRoute(builder: (context) => const WelcomeScreen()),
                           );
                         }
                       },
