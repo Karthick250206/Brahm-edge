@@ -1,4 +1,3 @@
-- `[x]` Update `main.dart` to show `NewLanguageSelectionScreen` as the initial screen
-- `[x]` Update `NewLanguageSelectionScreen` navigation (to `WelcomeScreen`) and hide "Back"
-- `[x]` Update `WelcomeScreen` navigation (to `IntelligenceInfoScreen`) and add "Back"
-- `[x]` Verify navigation flow
+- [ ] Configure logo in `drawable/launch_background.xml`
+- [ ] Configure fixed-size logo in `drawable-v21/launch_background.xml`
+- [ ] Verify splash screen appearance on different device simulations

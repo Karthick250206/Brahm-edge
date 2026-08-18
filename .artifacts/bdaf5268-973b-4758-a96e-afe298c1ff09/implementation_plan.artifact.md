@@ -1,30 +1,32 @@
-# Implementation Plan: Reorder Onboarding Flow (Language First)
+# Implementation Plan: Resize and Center Splash Screen Logo
 
-Move the `NewLanguageSelectionScreen` to be the first screen shown during onboarding.
+The goal is to fix the splash screen logo appearing too large on certain devices and ensuring it is correctly centered on a white background.
+
+## User Review Required
+
+> [!IMPORTANT]
+> I will explicitly define the logo size in the native Android resources. This will ensure that on modern devices (API 23+), the logo maintains a consistent, professional size (e.g., 100dp) rather than scaling up to fill the screen or appearing too large on small displays.
 
 ## Proposed Changes
 
-### [MODIFY] [main.dart](file:///D:/develop/Projects/Brahm-edge/lib/main.dart)
-- Import `new_language_selection_screen.dart`.
-- In `AuthenticationWrapper`, change the initial screen for `isFirstLaunch` from `WelcomeScreen` to `NewLanguageSelectionScreen`.
+### Android Native Resources
 
-### [MODIFY] [NewLanguageSelectionScreen](file:///D:/develop/Projects/Brahm-edge/lib/screens/new_language_selection_screen.dart)
-- Import `welcome_screen.dart`.
-- Remove import of `intelligence_info_screen.dart`.
-- Change navigation logic in the "Continue" button to go to `WelcomeScreen` instead of `IntelligenceInfoScreen`.
-- Adjust "Back" button behavior: since it's now the first screen, "Back" could either be removed or handled as an app exit.
+#### [MODIFY] [launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable/launch_background.xml)
+- Uncomment the logo item.
+- Change the source from `@mipmap/launch_image` to `@mipmap/ic_launcher`.
+- Set `android:gravity="center"` to ensure it's in the middle.
 
-### [MODIFY] [WelcomeScreen](file:///D:/develop/Projects/Brahm-edge/lib/screens/welcome_screen.dart)
-- Remove import of `new_language_selection_screen.dart`.
-- Ensure `intelligence_info_screen.dart` is imported.
-- Change navigation logic in the "BEGIN ONBOARDING" button to go to `IntelligenceInfoScreen` instead of `NewLanguageSelectionScreen`.
-- (Optional) Add a "Back" button to return to the language selection.
+#### [MODIFY] [launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable-v21/launch_background.xml)
+- Uncomment the logo item.
+- Change the source to `@mipmap/ic_launcher`.
+- Add `android:width="100dp"` and `android:height="100dp"` to the `<item>` tag (supported in API 23+) to cap the size.
+- Ensure the background remains `@android:color/white`.
+
+#### [MODIFY] [styles.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/values/styles.xml) & [values-night/styles.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/values-night/styles.xml)
+- Add the `android:windowSplashScreenIconSize` attribute (for Android 12+) to control the splash icon size if necessary. However, relying on `launch_background.xml` is often more consistent for Flutter's initial frame transition.
 
 ## Verification Plan
 
 ### Manual Verification
-- Launch the app for the first time.
-- Verify that **Language Selection** is the first screen shown.
-- Verify that clicking "Continue" on the Language screen leads to the **Welcome Screen**.
-- Verify that clicking "BEGIN ONBOARDING" on the Welcome screen leads to **Intelligence Info**.
-- Verify the rest of the flow remains intact.
+- **Multiple Device Sizes:** Run the app on devices/emulators with different screen resolutions (e.g., a small phone and a large tablet).
+- **Verification:** Confirm the logo is centered, has a white background, and its size is proportional and not "overloading" the screen.

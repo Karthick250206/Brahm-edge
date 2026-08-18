@@ -1,27 +1,24 @@
-# Walkthrough - Enhanced Onboarding Flow (Language First)
+# Walkthrough - Splash Screen Logo Resizing & Centering
 
-I have updated the onboarding sequence to prioritize language selection, making it the very first interaction for new users.
+I have optimized the native Android splash screen to ensure the logo is correctly centered and sized appropriately across all mobile device screen sizes.
 
 ## Key Changes
 
-### 1. New Entry Point
-In [main.dart](file:///D:/develop/Projects/Brahm-edge/lib/main.dart), I updated the `AuthenticationWrapper` to return the `NewLanguageSelectionScreen` as the home screen for first-time users.
+### 1. Logo Size Capping (API 23+)
+I created [drawable-v23/launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable-v23/launch_background.xml) to explicitly set the logo dimensions.
+- **Fixed Size:** Set the logo to **100dp x 100dp**. This ensures the logo doesn't "overload" small screens while remaining crisp on high-density displays.
+- **Centering:** Used `android:gravity="center"` to ensure the logo stays perfectly in the middle of the screen.
 
-### 2. Language Selection Refinement
-- **Navigation:** Updated the "Continue" button in [new_language_selection_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/new_language_selection_screen.dart) to navigate to the `WelcomeScreen`.
-- **UI Clean-up:** Hidden the "Back" button in the bottom row and the AppBar's leading icon, as this is now the starting point of the application.
+### 2. Standard Centering (All API levels)
+Updated [drawable/launch_background.xml](file:///D:/develop/Projects/Brahm-edge/android/app/src/main/res/drawable/launch_background.xml) and its v21 variant.
+- **Uncommented Logo:** Enabled the logo layer which was previously commented out.
+- **Bitmap Gravity:** Configured the `<bitmap>` tag with `android:gravity="center"` to prevent the image from being stretched to fill the screen, which was the primary cause of it appearing too large.
 
-### 3. Welcome Screen Enhancements
-- **Navigation:** Updated the onboarding trigger to lead to the `IntelligenceInfoScreen`.
-- **UX Improvements:** Added a back button in the top header to allow users to return and change their language selection if needed.
+### 3. Resource Alignment
+- Changed the logo source to use the official `@mipmap/ic_launcher`, ensuring consistency with the app's brand identity.
 
-## New Onboarding Flow
-1.  **Language Selection** (Start)
-2.  **Welcome Screen** (Introduction)
-3.  **Intelligence Info** (Capabilities)
-4.  **Pillars Selection** (Personalization)
-5.  **Model Download** (Final Setup)
+## Verification Results
 
-## Verification
-- Confirmed that the initial app state correctly triggers the Language Selection screen.
-- Verified bi-directional navigation between Language and Welcome screens.
+- **Small Screens:** The logo will no longer stretch to fill the width/height, but instead sit comfortably in the center.
+- **Large Screens:** The logo remains at a professional 100dp size, avoiding an oversized look on tablets or large phones.
+- **Background:** Confirmed the background remains white as requested.
