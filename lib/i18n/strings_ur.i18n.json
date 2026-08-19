@@ -3,5 +3,23 @@
   "languageSelection": {
     "title": "اپنی زبان منتخب کریں",
     "subtitle": "اپنے انٹرفیس کے لیے زبان منتخب کریں۔"
+  },
+  "modelDownload": {
+    "title1": "BrahmAI-کو\nآپ کے پاس ",
+    "title2": "لا رہے ہیں۔",
+    "subtitle": "ایک بار۔ اس کے بعد، ہم آپ کے ڈیٹا کو دوبارہ کبھی نہیں چھوئیں گے۔",
+    "modelName": "BrahmAI · 2B",
+    "modelSpecs": "2.0 B params · Q4_K_M · v0.9",
+    "ready": "تیار",
+    "validating": "تصدیق ہو رہی ہے...",
+    "langs": "14 زبانیں",
+    "toks": "~18 tok/s",
+    "ttft": "~140 ms TTFT",
+    "error": "خرابی: {error}",
+    "retry": "دوبارہ کوشش کریں",
+    "open": "BrahmAI کھولیں",
+    "download": "ماڈل ڈاؤن لوڈ کریں",
+    "later": "بعد میں سیٹ اپ کریں",
+    "continueSub": "ماڈل ڈاؤن لوڈ کیے بغیر جاری رکھیں۔ جب آپ تیار ہوں تو آپ ایک شامل کر سکتے ہیں"
   }
 }

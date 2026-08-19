@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../i18n/strings.g.dart';
 import 'chat_screen.dart';
-import '../services/language_service.dart';
 
 /// [HomeScreen] serves as the primary dashboard interface after authentication/onboarding.
 /// It provides local status information, multi-language support reactivity via [ListenableBuilder],

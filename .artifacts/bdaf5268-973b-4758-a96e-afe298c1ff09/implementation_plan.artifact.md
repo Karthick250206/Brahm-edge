@@ -1,34 +1,27 @@
-# Implementation Plan: Universal Adaptive Scaling for Intelligence Info Screen
+# Implementation Plan: Localization for Model Download Screen
 
-This plan details a robust, mathematical approach to ensure the `IntelligenceInfoScreen` fits perfectly on **any** device size and in **any** language (Hindi, Tamil, Urdu, etc.) without requiring a scrollbar.
+This plan covers the localization of all hardcoded strings in the `ModelDownloadScreen` across all 13 supported languages.
 
-## The Problem
-The current "Small vs Large" logic is too binary. Modern phones have high resolutions but narrow aspect ratios, and languages like Tamil or Telugu use more vertical space per character. This combination causes "Bottom Overflow" even on medium-sized screens.
+## User Review Required
 
-## Proposed Solution: Continuous Dynamic Scaling
+> [!IMPORTANT]
+> Some technical terms (like "params", "tok/s", "TTFT") will be kept in their technical format or transliterated to ensure clarity for users familiar with AI terminology.
 
-Instead of a "Yes/No" scaling toggle, I will implement a **Scaling Factor** based on the actual available height.
+## Proposed Changes
 
-### 1. Scaling Logic
-I will establish a "Standard Height" (e.g., 800dp).
-- **Scale Factor:** `constraints.maxHeight / 800` (clamped between 0.75 and 1.0).
-- All font sizes, icon dimensions, and vertical margins will be multiplied by this factor.
+### 1. Translation Assets
+- **`lib/i18n/strings.i18n.json`**: Add a new `modelDownload` section containing all English strings.
+- **Other 12 JSON files**: Add the corresponding translated sections.
 
-### 2. Layout Refinements
-- **Icon Sizing:** The top ZenteiQ logo and feature icons will shrink proportionally to save vertical space.
-- **Line Heights:** Set specific `height` properties on `GoogleFonts` to prevent multi-line translations from expanding too far.
-- **Flexible Spacing:** Replace some `SizedBox` gaps with `MainAxisAlignment.spaceBetween` or `Flexible` widgets to "push" content together on smaller screens.
-- **Button Sizing:** The "Set up your ZiqeX" button will have a height that scales, ensuring it never gets pushed off-screen.
+### 2. Screen Refactoring
+- **`lib/screens/model_download_screen.dart`**: Replace hardcoded strings with `t.modelDownload.<key>`.
 
-### 3. Language-Specific Tweaks
-- Ensure the Urdu (RTL) layout is also respected by this scaling logic.
+### 3. Code Generation
+- Run `dart run slang` to regenerate `strings.g.dart`.
 
 ## Verification Plan
 
-### Automated Checks
-- Use `flutter analyze` to ensure no syntax errors.
-
 ### Manual Verification
-- **Test Device Simulation:** Simulate a 360x640 (very small) and 411x891 (tall) device.
-- **Language Stress Test:** Switch to **Tamil** (long text) and **Hindi** (tall characters) on the smallest simulated screen.
-- **Button Visibility:** Confirm the "Set up your ZiqeX" button is always fully visible and clickable without scrolling.
+- Switch between English, Hindi, Tamil, and Telugu on the `ModelDownloadScreen`.
+- Verify that the layout remains stable even with longer translated strings.
+- Confirm the download progress and status messages (e.g., "Validating...") update correctly in the selected language.

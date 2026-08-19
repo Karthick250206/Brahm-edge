@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../i18n/strings.g.dart';
 import 'main_wrapper.dart';
 import '../security/providers/security_provider.dart';
 import '../services/model_download_service.dart';
@@ -34,6 +35,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
   Widget build(BuildContext context) {
     final downloadService = ModelDownloadService();
     final theme = Theme.of(context);
+    final t = Translations.of(context);
 
     return ListenableBuilder(
       listenable: downloadService,
@@ -63,9 +65,9 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                         fontWeight: FontWeight.w400,
                       ),
                       children: [
-                        const TextSpan(text: "Bringing\nBrahmAI "),
+                        TextSpan(text: t.modelDownload.title1),
                         TextSpan(
-                          text: "home.",
+                          text: t.modelDownload.title2,
                           style: GoogleFonts.notoSans(
                             color: theme.colorScheme.primary,
                           ),
@@ -75,7 +77,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "One-time. After this, we never touch your data again.",
+                    t.modelDownload.subtitle,
                     style: GoogleFonts.notoSans(
                       color: theme.colorScheme.onSurfaceVariant,
                       fontSize: 14,
@@ -101,7 +103,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "BrahmAI · 2B",
+                                  t.modelDownload.modelName,
                                   style: GoogleFonts.notoSans(
                                     color: theme.colorScheme.onSurface,
                                     fontSize: 18,
@@ -109,7 +111,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "2.0 B params · Q4_K_M · v0.9",
+                                  t.modelDownload.modelSpecs,
                                   style: GoogleFonts.notoSans(
                                     color: theme.colorScheme.onSurfaceVariant,
                                     fontSize: 12,
@@ -129,7 +131,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                                     Icon(Icons.check, size: 12, color: theme.colorScheme.primary),
                                     const SizedBox(width: 4),
                                     Text(
-                                      "Ready",
+                                      t.modelDownload.ready,
                                       style: GoogleFonts.notoSans(
                                         color: theme.colorScheme.primary,
                                         fontSize: 10,
@@ -165,7 +167,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                             ),
                             if (!isComplete)
                               Text(
-                                isValidating ? "Validating..." : "${(progress * 100).toInt()}%",
+                                isValidating ? t.modelDownload.validating : "${(progress * 100).toInt()}%",
                                 style: GoogleFonts.notoSans(
                                   color: theme.colorScheme.primary,
                                   fontSize: 12,
@@ -178,11 +180,11 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                         // Stats Badges
                         Row(
                           children: [
-                            _buildStatBadge(context, "~18 tok/s"),
+                            _buildStatBadge(context, t.modelDownload.toks),
                             const SizedBox(width: 8),
-                            _buildStatBadge(context, "~140 ms TTFT"),
+                            _buildStatBadge(context, t.modelDownload.ttft),
                             const SizedBox(width: 8),
-                            _buildStatBadge(context, "14 languages"),
+                            _buildStatBadge(context, t.modelDownload.langs),
                           ],
                         ),
                       ],
@@ -192,12 +194,12 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                   if (isError) ...[
                     const SizedBox(height: 16),
                     Text(
-                      "Error: ${downloadService.error ?? 'Unknown error'}",
+                      t.modelDownload.error(error: downloadService.error ?? 'Unknown error'),
                       style: GoogleFonts.notoSans(color: theme.colorScheme.error, fontSize: 14),
                     ),
                     TextButton(
                       onPressed: () => downloadService.downloadModel(_modelUrl, _modelFileName),
-                      child: Text("Retry Download", style: GoogleFonts.notoSans(color: theme.colorScheme.primary)),
+                      child: Text(t.modelDownload.retry, style: GoogleFonts.notoSans(color: theme.colorScheme.primary)),
                     ),
                   ],
 
@@ -226,7 +228,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            isComplete ? "Open BrahmAI" : "Download Model",
+                            isComplete ? t.modelDownload.open : t.modelDownload.download,
                             style: GoogleFonts.notoSans(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -245,7 +247,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                       child: TextButton(
                         onPressed: _onSetupComplete,
                         child: Text(
-                          "Set up later",
+                          t.modelDownload.later,
                           style: GoogleFonts.notoSans(
                             color: theme.colorScheme.primary,
                             fontSize: 16,
@@ -256,7 +258,7 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "Continue without downloading a model. You can add one when you are ready",
+                      t.modelDownload.continueSub,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.notoSans(
                         color: theme.colorScheme.primary,
