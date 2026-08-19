@@ -114,6 +114,17 @@
     "later": "Set up later",
     "continueSub": "Continue without downloading a model. You can add one when you are ready"
   },
+  "library_v2": {
+    "subtitle": "Manage your AI resources",
+    "language_title": "Language",
+    "language_desc": "Choose and manage your preferred languages",
+    "model_title": "Model",
+    "model_desc": "Explore and manage available AI models",
+    "saved_title": "Saved",
+    "saved_desc": "Your prompt library",
+    "skills_title": "Skills",
+    "skills_desc": "AI capabilities"
+  },
   "biometric": {
     "vault": "Vault Security",
     "setupTitle": "Secure Lock Setup",
@@ -126,6 +137,23 @@
     "dialogSub": "Use your fingerprint or device face recognition to unlock ZiqeX",
     "cancel": "Cancel",
     "allow": "Allow biometrics"
+  },
+  "security_screen": {
+    "appBar": "App Security",
+    "global_protection": "GLOBAL PROTECTION",
+    "app_lock": "App lock",
+    "app_lock_sub": "Require authentication to open ZiqeX",
+    "auth_methods": "AUTHENTICATION METHODS",
+    "biometrics_title": "Device biometrics",
+    "biometrics_sub": "Unlock instantly with your fingerprint or face",
+    "pin_title": "ZiqeX PIN",
+    "pin_active": "PIN is active",
+    "pin_setup": "Set a unique 4-digit code to unlock the app",
+    "warning_title": "Too many incorrect attempts",
+    "warning_sub": "If an incorrect PIN is entered 10 times, ZiqeX will automatically reset. All data saved on this device will be permanently deleted",
+    "incomplete_title": "Security Setup Incomplete",
+    "incomplete_content": "You have enabled App Lock but haven't set a PIN or Biometrics. App Lock will be disabled until a method is configured.",
+    "got_it": "GOT IT"
   },
   "data": {
     "appBar": "Data Management &\nRetention",
@@ -147,5 +175,32 @@
     "deleteAllPillar": "Delete all",
     "space": "Space:",
     "activeInstances": "Active Instances:"
+  },
+  "pin_setup": {
+    "title_setup": "Set 4-Digit PIN",
+    "subtitle_setup": "Create a secure code to access the app",
+    "title_confirm": "Confirm PIN",
+    "subtitle_confirm": "Re-enter your 4-digit code to verify",
+    "title_verify": "Enter Current PIN",
+    "subtitle_verify": "Enter your existing code to continue",
+    "error_mismatch": "PINs do not match. Try again.",
+    "error_incorrect": "Incorrect PIN. Please try again.",
+    "snack_success": "PIN set successfully"
+  },
+  "pin_mgmt": {
+    "appBar": "App-Specific PIN",
+    "change_title": "Change PIN",
+    "change_sub": "Update your 4-digit ZiqeX security code",
+    "remove_title": "Remove PIN",
+    "remove_sub": "Turn off PIN access for ZiqeX",
+    "snack_removed": "PIN removed successfully"
+  },
+  "lang_legacy": {
+    "title1": "Which language\nfeels like ",
+    "title2": "home?",
+    "subtitle": "Voice, text and replies in your mother tongue. Switch anytime.",
+    "first_reply": "FIRST REPLY WILL SAY",
+    "script_info": "{lang} - transcribed and spoken in your script",
+    "continueBtn": "Continue"
   }
 }

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 13
-/// Strings: 1465 (112 per locale)
+/// Strings: 2161 (166 per locale)
 ///
-/// Built on 2026-08-19 at 08:38 UTC
+/// Built on 2026-08-19 at 11:12 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -207,8 +207,13 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsLanguageSelectionEn languageSelection = _StringsLanguageSelectionEn._(_root);
 	late final _StringsPillarsEn pillars = _StringsPillarsEn._(_root);
 	late final _StringsModelDownloadEn modelDownload = _StringsModelDownloadEn._(_root);
+	late final _StringsLibraryV2En library_v2 = _StringsLibraryV2En._(_root);
 	late final _StringsBiometricEn biometric = _StringsBiometricEn._(_root);
+	late final _StringsSecurityScreenEn security_screen = _StringsSecurityScreenEn._(_root);
 	late final _StringsDataEn data = _StringsDataEn._(_root);
+	late final _StringsPinSetupEn pin_setup = _StringsPinSetupEn._(_root);
+	late final _StringsPinMgmtEn pin_mgmt = _StringsPinMgmtEn._(_root);
+	late final _StringsLangLegacyEn lang_legacy = _StringsLangLegacyEn._(_root);
 }
 
 // Path: profile
@@ -326,6 +331,24 @@ class _StringsModelDownloadEn {
 	String get continueSub => 'Continue without downloading a model. You can add one when you are ready';
 }
 
+// Path: library_v2
+class _StringsLibraryV2En {
+	_StringsLibraryV2En._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get subtitle => 'Manage your AI resources';
+	String get language_title => 'Language';
+	String get language_desc => 'Choose and manage your preferred languages';
+	String get model_title => 'Model';
+	String get model_desc => 'Explore and manage available AI models';
+	String get saved_title => 'Saved';
+	String get saved_desc => 'Your prompt library';
+	String get skills_title => 'Skills';
+	String get skills_desc => 'AI capabilities';
+}
+
 // Path: biometric
 class _StringsBiometricEn {
 	_StringsBiometricEn._(this._root);
@@ -344,6 +367,30 @@ class _StringsBiometricEn {
 	String get dialogSub => 'Use your fingerprint or device face recognition to unlock ZiqeX';
 	String get cancel => 'Cancel';
 	String get allow => 'Allow biometrics';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenEn {
+	_StringsSecurityScreenEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appBar => 'App Security';
+	String get global_protection => 'GLOBAL PROTECTION';
+	String get app_lock => 'App lock';
+	String get app_lock_sub => 'Require authentication to open ZiqeX';
+	String get auth_methods => 'AUTHENTICATION METHODS';
+	String get biometrics_title => 'Device biometrics';
+	String get biometrics_sub => 'Unlock instantly with your fingerprint or face';
+	String get pin_title => 'ZiqeX PIN';
+	String get pin_active => 'PIN is active';
+	String get pin_setup => 'Set a unique 4-digit code to unlock the app';
+	String get warning_title => 'Too many incorrect attempts';
+	String get warning_sub => 'If an incorrect PIN is entered 10 times, ZiqeX will automatically reset. All data saved on this device will be permanently deleted';
+	String get incomplete_title => 'Security Setup Incomplete';
+	String get incomplete_content => 'You have enabled App Lock but haven\'t set a PIN or Biometrics. App Lock will be disabled until a method is configured.';
+	String get got_it => 'GOT IT';
 }
 
 // Path: data
@@ -372,6 +419,54 @@ class _StringsDataEn {
 	String get deleteAllPillar => 'Delete all';
 	String get space => 'Space:';
 	String get activeInstances => 'Active Instances:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupEn {
+	_StringsPinSetupEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title_setup => 'Set 4-Digit PIN';
+	String get subtitle_setup => 'Create a secure code to access the app';
+	String get title_confirm => 'Confirm PIN';
+	String get subtitle_confirm => 'Re-enter your 4-digit code to verify';
+	String get title_verify => 'Enter Current PIN';
+	String get subtitle_verify => 'Enter your existing code to continue';
+	String get error_mismatch => 'PINs do not match. Try again.';
+	String get error_incorrect => 'Incorrect PIN. Please try again.';
+	String get snack_success => 'PIN set successfully';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtEn {
+	_StringsPinMgmtEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appBar => 'App-Specific PIN';
+	String get change_title => 'Change PIN';
+	String get change_sub => 'Update your 4-digit ZiqeX security code';
+	String get remove_title => 'Remove PIN';
+	String get remove_sub => 'Turn off PIN access for ZiqeX';
+	String get snack_removed => 'PIN removed successfully';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyEn {
+	_StringsLangLegacyEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title1 => 'Which language\nfeels like ';
+	String get title2 => 'home?';
+	String get subtitle => 'Voice, text and replies in your mother tongue. Switch anytime.';
+	String get first_reply => 'FIRST REPLY WILL SAY';
+	String script_info({required Object lang}) => '${lang} - transcribed and spoken in your script';
+	String get continueBtn => 'Continue';
 }
 
 // Path: <root>
@@ -448,6 +543,11 @@ class _StringsAs extends Translations {
 	@override late final _StringsLanguageSelectionAs languageSelection = _StringsLanguageSelectionAs._(_root);
 	@override late final _StringsPillarsAs pillars = _StringsPillarsAs._(_root);
 	@override late final _StringsModelDownloadAs modelDownload = _StringsModelDownloadAs._(_root);
+	@override late final _StringsLibraryV2As library_v2 = _StringsLibraryV2As._(_root);
+	@override late final _StringsSecurityScreenAs security_screen = _StringsSecurityScreenAs._(_root);
+	@override late final _StringsPinSetupAs pin_setup = _StringsPinSetupAs._(_root);
+	@override late final _StringsPinMgmtAs pin_mgmt = _StringsPinMgmtAs._(_root);
+	@override late final _StringsLangLegacyAs lang_legacy = _StringsLangLegacyAs._(_root);
 }
 
 // Path: profile
@@ -565,6 +665,96 @@ class _StringsModelDownloadAs extends _StringsModelDownloadEn {
 	@override String get continueSub => 'মডেল ডাউনলোড নকৰাকৈ আগবাঢ়ক। আপুনি সাজু হ\'লে এটা যোগ কৰিব পাৰিব';
 }
 
+// Path: library_v2
+class _StringsLibraryV2As extends _StringsLibraryV2En {
+	_StringsLibraryV2As._(_StringsAs root) : this._root = root, super._(root);
+
+	@override final _StringsAs _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'আপোনাৰ AI সম্পদসমূহ পৰিচালনা কৰক';
+	@override String get language_title => 'ভাষা';
+	@override String get language_desc => 'আপোনাৰ পচন্দের ভাষাসমূহ বাছনি আৰু পৰিচালনা কৰক';
+	@override String get model_title => 'মডেল';
+	@override String get model_desc => 'উপলব্ধ AI মডেলসমূহ অন্বেষণ আৰু পৰিচালনা কৰক';
+	@override String get saved_title => 'সংৰক্ষিত';
+	@override String get saved_desc => 'আপোনাৰ প্ৰম্পট লাইব্ৰেৰী';
+	@override String get skills_title => 'দক্ষতা';
+	@override String get skills_desc => 'AI ক্ষমতা';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenAs extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenAs._(_StringsAs root) : this._root = root, super._(root);
+
+	@override final _StringsAs _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'এপ সুৰক্ষা';
+	@override String get global_protection => 'গোলকীয় সুৰক্ষা';
+	@override String get app_lock => 'এপ লক';
+	@override String get app_lock_sub => 'ZiqeX খুলিবলৈ প্ৰমাণীকৰণৰ প্ৰয়োজন';
+	@override String get auth_methods => 'প্ৰমাণীকৰণ পদ্ধতিসমূহ';
+	@override String get biometrics_title => 'ডিভাইচ বায়োমেট্ৰিক্স';
+	@override String get biometrics_sub => 'আপোনাৰ ফিংগাৰপ্ৰিন্ট বা মুখৰ সহায়ত তৎক্ষণাত আনলক কৰক';
+	@override String get pin_title => 'ZiqeX পিন';
+	@override String get pin_active => 'পিন সক্ৰিয় হৈ আছে';
+	@override String get pin_setup => 'এপটো আনলক কৰিবলৈ এটা অনন্য ৪-অংকৰ ক\'ড ছেট কৰক';
+	@override String get warning_title => 'অত্যধিক ভুল প্ৰচেষ্টা';
+	@override String get warning_sub => 'যদি ১০ বাৰ ভুল পিন দিয়া হয়, তেন্তে ZiqeX স্বয়ংক্ৰিয়ভাৱে ৰিছেট হ\'ব। এই ডিভাইচত সংৰক্ষিত সকলো তথ্য স্থায়ীভাৱে মচি পেলোৱা হ\'ব';
+	@override String get incomplete_title => 'সুৰক্ষা ছেটআপ অসম্পূৰ্ণ';
+	@override String get incomplete_content => 'আপুনি এপ লক সক্ষম কৰিছে কিন্তু পিন বা বায়োমেট্ৰিক্স ছেট কৰা নাই। পদ্ধতি এটা কনফিগৰ নকৰালৈকে এপ লক নিষ্ক্ৰিয় হৈ থাকিব।';
+	@override String get got_it => 'বুজিলোঁ';
+}
+
+// Path: pin_setup
+class _StringsPinSetupAs extends _StringsPinSetupEn {
+	_StringsPinSetupAs._(_StringsAs root) : this._root = root, super._(root);
+
+	@override final _StringsAs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '৪-অংকৰ পিন ছেট কৰক';
+	@override String get subtitle_setup => 'এপটো ব্যৱহাৰ কৰিবলৈ এটা সুৰক্ষিত ক’ড তৈয়াৰ কৰক';
+	@override String get title_confirm => 'পিন নিশ্চিত কৰক';
+	@override String get subtitle_confirm => 'যাচাই কৰিবলৈ আপোনাৰ ৪-অংকৰ ক’ডটো আকৌ লিখক';
+	@override String get title_verify => 'বৰ্তমানৰ পিন লিখক';
+	@override String get subtitle_verify => 'আগবাঢ়িবলৈ আপোনাৰ বৰ্তমানৰ ক’ডটো লিখক';
+	@override String get error_mismatch => 'পিন দুটা মিল খোৱা নাই। আকৌ চেষ্টা কৰক।';
+	@override String get error_incorrect => 'ভুল পিন। অনুগ্ৰহ কৰি আকৌ চেষ্টা কৰক।';
+	@override String get snack_success => 'পিন সফলতাৰে ছেট কৰা হ’ল';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtAs extends _StringsPinMgmtEn {
+	_StringsPinMgmtAs._(_StringsAs root) : this._root = root, super._(root);
+
+	@override final _StringsAs _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'এপ-নিৰ্দিষ্ট পিন';
+	@override String get change_title => 'পিন সলনি কৰক';
+	@override String get change_sub => 'আপোনাৰ ৪-অংকৰ ZiqeX সুৰক্ষা ক’ডটো আপডেট কৰক';
+	@override String get remove_title => 'পিন আঁতৰাওক';
+	@override String get remove_sub => 'ZiqeX-ৰ বাবে পিন ব্যৱহাৰ বন্ধ কৰক';
+	@override String get snack_removed => 'পিন সফলতাৰে আঁতৰোৱা হ’ল';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyAs extends _StringsLangLegacyEn {
+	_StringsLangLegacyAs._(_StringsAs root) : this._root = root, super._(root);
+
+	@override final _StringsAs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'কোনটো ভাষা\n';
+	@override String get title2 => 'আপোন যেন লাগে?';
+	@override String get subtitle => 'আপোনাৰ মাতৃভাষাত কণ্ঠ, পাঠ আৰু উত্তৰ। যিকোনো সময়তে সলনি কৰক।';
+	@override String get first_reply => 'প্ৰথম উত্তৰটো হ’ব';
+	@override String script_info({required Object lang}) => '${lang} - আপোনাৰ লিপিত লিখা আৰু কোৱা হ’ব';
+	@override String get continueBtn => 'আগবাঢ়ক';
+}
+
 // Path: <root>
 class _StringsBn extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -639,6 +829,13 @@ class _StringsBn extends Translations {
 	@override late final _StringsLanguageSelectionBn languageSelection = _StringsLanguageSelectionBn._(_root);
 	@override late final _StringsPillarsBn pillars = _StringsPillarsBn._(_root);
 	@override late final _StringsModelDownloadBn modelDownload = _StringsModelDownloadBn._(_root);
+	@override late final _StringsLibraryV2Bn library_v2 = _StringsLibraryV2Bn._(_root);
+	@override late final _StringsBiometricBn biometric = _StringsBiometricBn._(_root);
+	@override late final _StringsSecurityScreenBn security_screen = _StringsSecurityScreenBn._(_root);
+	@override late final _StringsDataBn data = _StringsDataBn._(_root);
+	@override late final _StringsPinSetupBn pin_setup = _StringsPinSetupBn._(_root);
+	@override late final _StringsPinMgmtBn pin_mgmt = _StringsPinMgmtBn._(_root);
+	@override late final _StringsLangLegacyBn lang_legacy = _StringsLangLegacyBn._(_root);
 }
 
 // Path: profile
@@ -693,7 +890,7 @@ class _StringsInfoBn extends _StringsInfoEn {
 	@override String get control_desc => 'কি রাখা হবে তা বেছে নিন, যা সংরক্ষিত আছে তা পরিচালনা করুন এবং যা আপনার আর প্রয়োজন নেই তা মুছে দিন।';
 	@override String get place_title => 'প্রতিটি জায়গার জন্য ডিজাইন করা হয়েছে';
 	@override String get place_desc => 'বিভিন্ন ভাষা, ডিভাইস এবং লোকেদের প্রযুক্তি ব্যবহারের পদ্ধতির জন্য তৈরি।';
-	@override String get footer => 'আপনার বুদ্ধিমত্তা। আপনার ডিভাইস। আপনার নিয়ন্ত্রণ।';
+	@override String get footer => 'Your intelligence. Your device. Your control.';
 	@override String get setup => 'আপনার ZiqeX সেট আপ করুন';
 }
 
@@ -754,6 +951,144 @@ class _StringsModelDownloadBn extends _StringsModelDownloadEn {
 	@override String get download => 'মডেল ডাউনলোড করুন';
 	@override String get later => 'পরে সেটআপ করুন';
 	@override String get continueSub => 'মডেল ডাউনলোড না করেই এগিয়ে যান। আপনি প্রস্তুত হলে একটি যোগ করতে পারেন';
+}
+
+// Path: library_v2
+class _StringsLibraryV2Bn extends _StringsLibraryV2En {
+	_StringsLibraryV2Bn._(_StringsBn root) : this._root = root, super._(root);
+
+	@override final _StringsBn _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'আপনার AI সম্পদগুলি পরিচালনা করুন';
+	@override String get language_title => 'ভাষা';
+	@override String get language_desc => 'আপনার পছন্দের ভাষাগুলি চয়ন এবং পরিচালনা করুন';
+	@override String get model_title => 'মডেল';
+	@override String get model_desc => 'উপলব্ধ AI মডেলগুলি অন্বেষণ এবং পরিচালনা করুন';
+	@override String get saved_title => 'সংরক্ষিত';
+	@override String get saved_desc => 'আপনার প্রম্পট লাইব্রেরি';
+	@override String get skills_title => 'দক্ষতা';
+	@override String get skills_desc => 'AI ক্ষমতা';
+}
+
+// Path: biometric
+class _StringsBiometricBn extends _StringsBiometricEn {
+	_StringsBiometricBn._(_StringsBn root) : this._root = root, super._(root);
+
+	@override final _StringsBn _root; // ignore: unused_field
+
+	// Translations
+	@override String get vault => 'ভল্ট সুরক্ষা';
+	@override String get setupTitle => 'সুরক্ষিত লক সেটআপ';
+	@override String get setupSub => 'আপনার পছন্দের প্রমাণীকরণ পদ্ধতির মাধ্যমে আপনার ভল্ট সুরক্ষিত করুন।';
+	@override String get deviceTitle => 'ডিভাইস বায়োমেট্রিক্স';
+	@override String get deviceSub => 'FaceID বা আঙুলের ছাপ ব্যবহার করুন';
+	@override String get pinTitle => 'অ্যাপ-নির্দিষ্ট পিন';
+	@override String get pinSub => 'একটি অনন্য ৪-অঙ্কের কোড সেট করুন';
+	@override String get dialogTitle => 'বায়োমেট্রিক অ্যাক্সেসের অনুমতি দিন';
+	@override String get dialogSub => 'ZiqeX আনলক করতে আপনার আঙুলের ছাপ বা ডিভাইসের মুখ শনাক্তকরণ ব্যবহার করুন';
+	@override String get cancel => 'বাতিল করুন';
+	@override String get allow => 'বায়োমেট্রিক্সের অনুমতি দিন';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenBn extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenBn._(_StringsBn root) : this._root = root, super._(root);
+
+	@override final _StringsBn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'অ্যাপ নিরাপত্তা';
+	@override String get global_protection => 'গ্লোবাল সুরক্ষা';
+	@override String get app_lock => 'অ্যাপ লক';
+	@override String get app_lock_sub => 'ZiqeX খোলার জন্য প্রমাণীকরণ প্রয়োজন';
+	@override String get auth_methods => 'প্রমাণীকরণ পদ্ধতি';
+	@override String get biometrics_title => 'ডিভাইস বায়োমেট্রিক্স';
+	@override String get biometrics_sub => 'আপনার ফিঙ্গারপ্রিন্ট বা মুখ দিয়ে তাৎক্ষণিকভাবে আনলক করুন';
+	@override String get pin_title => 'ZiqeX পিন';
+	@override String get pin_active => 'পিন সক্রিয় আছে';
+	@override String get pin_setup => 'অ্যাপটি আনলক করতে একটি অনন্য ৪-সংখ্যার কোড সেট করুন';
+	@override String get warning_title => 'অনেকগুলি ভুল প্রচেষ্টা';
+	@override String get warning_sub => 'যদি ১০ বার ভুল পিন দেওয়া হয়, তবে ZiqeX স্বয়ংক্রিয়ভাবে রিসেট হয়ে যাবে। এই ডিভাইসে সংরক্ষিত সমস্ত ডেটা স্থায়ীভাবে মুছে ফেলা হবে';
+	@override String get incomplete_title => 'নিরাপত্তা সেটআপ অসম্পূর্ণ';
+	@override String get incomplete_content => 'আপনি অ্যাপ লক সক্ষম করেছেন কিন্তু পিন বা বায়োমেট্রিক্স সেট করেননি। কোনো পদ্ধতি কনফিগার না করা পর্যন্ত অ্যাপ লক নিষ্ক্রিয় থাকবে।';
+	@override String get got_it => 'বুঝেছি';
+}
+
+// Path: data
+class _StringsDataBn extends _StringsDataEn {
+	_StringsDataBn._(_StringsBn root) : this._root = root, super._(root);
+
+	@override final _StringsBn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ডেটা ম্যানেজমেন্ট এবং\nধারণ';
+	@override String get summary => 'স্টোরেজ সারাংশ';
+	@override String get totalUsed => 'মোট ব্যবহৃত: ';
+	@override String get legendModel => 'মডেল ওয়েট';
+	@override String get legendFree => 'খালি জায়গা';
+	@override String get mgmt => 'মডেল ম্যানেজমেন্ট';
+	@override String get deleteModels => 'সব ডাউনলোড করা মডেল মুছে ফেলুন';
+	@override String get deleteModelsSub => 'এই ডিভাইস থেকে সমস্ত স্থানীয় মডেল ওয়েট এবং ফাইন-টিউন করা প্যারামিটার সম্পূর্ণরূপে সরিয়ে দিন।';
+	@override String get selectDelete => 'মুছে ফেলার জন্য মডেল নির্বাচন করুন';
+	@override String get autoDelete => 'এর থেকে পুরানো চ্যাট স্বয়ংক্রিয়ভাবে মুছুন:';
+	@override String get autoDeleteSub => 'এই সেটিংটি সমস্ত अनलिঙ্কড কথোপকথন মোডে প্রযোজ্য।';
+	@override String get modes => 'মোডসমূহ';
+	@override String get noData => 'কোনো সক্রিয় চ্যাট ডেটা নেই';
+	@override String get deleteAll => 'সমস্ত ডেটা মুছুন';
+	@override String get authReq => 'অ্যাপ লক পুনরায় প্রমাণীকরণ প্রয়োজন';
+	@override String get viewChats => 'চ্যাট দেখুন';
+	@override String get deleteAllPillar => 'সব মুছুন';
+	@override String get space => 'জায়গা:';
+	@override String get activeInstances => 'সক্রিয় ইনস্ট্যান্স:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupBn extends _StringsPinSetupEn {
+	_StringsPinSetupBn._(_StringsBn root) : this._root = root, super._(root);
+
+	@override final _StringsBn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '৪-সংখ্যার পিন সেট করুন';
+	@override String get subtitle_setup => 'অ্যাপটি অ্যাক্সেস করার জন্য একটি সুরক্ষিত কোড তৈরি করুন';
+	@override String get title_confirm => 'পিন নিশ্চিত করুন';
+	@override String get subtitle_confirm => 'যাচাই করতে আপনার ৪-সংখ্যার কোডটি পুনরায় লিখুন';
+	@override String get title_verify => 'বর্তমান পিন লিখুন';
+	@override String get subtitle_verify => 'চালিয়ে যেতে আপনার বিদ্যমান কোডটি লিখুন';
+	@override String get error_mismatch => 'পিন মেলেনি। আবার চেষ্টা করুন।';
+	@override String get error_incorrect => 'ভুল পিন। দয়া করে আবার চেষ্টা করুন।';
+	@override String get snack_success => 'পিন সফলভাবে সেট করা হয়েছে';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtBn extends _StringsPinMgmtEn {
+	_StringsPinMgmtBn._(_StringsBn root) : this._root = root, super._(root);
+
+	@override final _StringsBn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'অ্যাপ-নির্দিষ্ট পিন';
+	@override String get change_title => 'পিন পরিবর্তন করুন';
+	@override String get change_sub => 'আপনার ৪-সংখ্যার ZiqeX সুরক্ষা কোডটি আপডেট করুন';
+	@override String get remove_title => 'পিন সরান';
+	@override String get remove_sub => 'ZiqeX-এর জন্য পিন অ্যাক্সেস বন্ধ করুন';
+	@override String get snack_removed => 'পিন সফলভাবে সরানো হয়েছে';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyBn extends _StringsLangLegacyEn {
+	_StringsLangLegacyBn._(_StringsBn root) : this._root = root, super._(root);
+
+	@override final _StringsBn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'কোন ভাষাটি\n';
+	@override String get title2 => 'নিজের মনে হয়?';
+	@override String get subtitle => 'আপনার মাতৃভাষায় ভয়েস, টেক্সট এবং উত্তর। যেকোনো সময় পরিবর্তন করুন।';
+	@override String get first_reply => 'প্রথম উত্তরটি হবে';
+	@override String script_info({required Object lang}) => '${lang} - আপনার লিপিতে লেখা এবং বলা হবে';
+	@override String get continueBtn => 'চালিয়ে যান';
 }
 
 // Path: <root>
@@ -830,8 +1165,13 @@ class _StringsGu extends Translations {
 	@override late final _StringsLanguageSelectionGu languageSelection = _StringsLanguageSelectionGu._(_root);
 	@override late final _StringsPillarsGu pillars = _StringsPillarsGu._(_root);
 	@override late final _StringsModelDownloadGu modelDownload = _StringsModelDownloadGu._(_root);
+	@override late final _StringsLibraryV2Gu library_v2 = _StringsLibraryV2Gu._(_root);
 	@override late final _StringsBiometricGu biometric = _StringsBiometricGu._(_root);
+	@override late final _StringsSecurityScreenGu security_screen = _StringsSecurityScreenGu._(_root);
 	@override late final _StringsDataGu data = _StringsDataGu._(_root);
+	@override late final _StringsPinSetupGu pin_setup = _StringsPinSetupGu._(_root);
+	@override late final _StringsPinMgmtGu pin_mgmt = _StringsPinMgmtGu._(_root);
+	@override late final _StringsLangLegacyGu lang_legacy = _StringsLangLegacyGu._(_root);
 }
 
 // Path: profile
@@ -949,6 +1289,24 @@ class _StringsModelDownloadGu extends _StringsModelDownloadEn {
 	@override String get continueSub => 'મોડલ ડાઉનલોડ કર્યા વગર આગળ વધો. જ્યારે તમે તૈયાર હોવ ત્યારે તમે એક ઉમેરી શકો છો';
 }
 
+// Path: library_v2
+class _StringsLibraryV2Gu extends _StringsLibraryV2En {
+	_StringsLibraryV2Gu._(_StringsGu root) : this._root = root, super._(root);
+
+	@override final _StringsGu _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'તમારા AI સંસાધનોનું સંચાલન કરો';
+	@override String get language_title => 'ભાષા';
+	@override String get language_desc => 'તમારી પસંદગીની ભાષાઓ પસંદ કરો અને સંચાલિત કરો';
+	@override String get model_title => 'મોડલ';
+	@override String get model_desc => 'ઉપલબ્ધ AI મોડલ્સ શોધો અને સંચાલિત કરો';
+	@override String get saved_title => 'સાચવેલું';
+	@override String get saved_desc => 'તમારી પ્રોમ્પ્ટ લાઇબ્રેરી';
+	@override String get skills_title => 'કૌશલ્યો';
+	@override String get skills_desc => 'AI ક્ષમતાઓ';
+}
+
 // Path: biometric
 class _StringsBiometricGu extends _StringsBiometricEn {
 	_StringsBiometricGu._(_StringsGu root) : this._root = root, super._(root);
@@ -967,6 +1325,30 @@ class _StringsBiometricGu extends _StringsBiometricEn {
 	@override String get dialogSub => 'ZiqeX ને અનલોક કરવા માટે તમારી ફિંગરપ્રિન્ટ અથવા ઉપકરણ ચહેરાની ઓળખનો ઉપયોગ કરો';
 	@override String get cancel => 'રદ કરો';
 	@override String get allow => 'બાયોમેટ્રિક્સને મંજૂરી આપો';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenGu extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenGu._(_StringsGu root) : this._root = root, super._(root);
+
+	@override final _StringsGu _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'એપ સુરક્ષા';
+	@override String get global_protection => 'વૈશ્વિક સુરક્ષા';
+	@override String get app_lock => 'એપ લોક';
+	@override String get app_lock_sub => 'ZiqeX ખોલવા માટે પ્રમાણીકરણ જરૂરી છે';
+	@override String get auth_methods => 'પ્રમાણીકરણ પદ્ધતિઓ';
+	@override String get biometrics_title => 'ડિવાઇસ બાયોમેટ્રિક્સ';
+	@override String get biometrics_sub => 'તમારી ફિંગરપ્રિન્ટ અથવા ચહેરા વડે તરત જ અનલોક કરો';
+	@override String get pin_title => 'ZiqeX પિન';
+	@override String get pin_active => 'પિન સક્રિય છે';
+	@override String get pin_setup => 'એપને અનલોક કરવા માટે એક અનન્ય 4-અંકનો કોડ સેટ કરો';
+	@override String get warning_title => 'ખૂબ વધારે ખોટા પ્રયાસો';
+	@override String get warning_sub => 'જો ખોટો પિન 10 વાર દાખલ કરવામાં આવે તો, ZiqeX આપમેળે રીસેટ થઈ જશે. આ ડિવાઇસ પર સાચવેલ તમામ ડેટા કાયમી ધોરણે ભૂંસી નાખવામાં આવશે';
+	@override String get incomplete_title => 'સુરક્ષા સેટઅપ અપૂર્ણ';
+	@override String get incomplete_content => 'તમે એપ લોક સક્ષમ કર્યું છે પરંતુ પિન અથવા બાયોમેટ્રિક્સ સેટ નથી કર્યું. જ્યાં સુધી પદ્ધતિ ગોઠવવામાં ન આવે ત્યાં સુધી એપ લોક અક્ષમ રહેશે.';
+	@override String get got_it => 'સમજાઈ ગયું';
 }
 
 // Path: data
@@ -995,6 +1377,54 @@ class _StringsDataGu extends _StringsDataEn {
 	@override String get deleteAllPillar => 'બધું કાઢી નાખો';
 	@override String get space => 'જગ્યા:';
 	@override String get activeInstances => 'સક્રિય ઇન્સ્ટન્સ:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupGu extends _StringsPinSetupEn {
+	_StringsPinSetupGu._(_StringsGu root) : this._root = root, super._(root);
+
+	@override final _StringsGu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4-અંકનો પિન સેટ કરો';
+	@override String get subtitle_setup => 'એપ્લિકેશન એક્સેસ કરવા માટે સુરક્ષિત કોડ બનાવો';
+	@override String get title_confirm => 'પિનની પુષ્ટિ કરો';
+	@override String get subtitle_confirm => 'ચકાસવા માટે તમારો 4-અંકનો કોડ ફરીથી દાખલ કરો';
+	@override String get title_verify => 'વર્તમાન પિન દાખલ કરો';
+	@override String get subtitle_verify => 'ચાલુ રાખવા માટે તમારો હાલનો કોડ દાખલ કરો';
+	@override String get error_mismatch => 'પિન મેચ થતા નથી. ફરી પ્રયાસ કરો.';
+	@override String get error_incorrect => 'ખોટો પિન. મહેરબાની કરીને ફરી પ્રયાસ કરો.';
+	@override String get snack_success => 'પિન સફળતાપૂર્વક સેટ થયો';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtGu extends _StringsPinMgmtEn {
+	_StringsPinMgmtGu._(_StringsGu root) : this._root = root, super._(root);
+
+	@override final _StringsGu _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'એપ્લિકેશન-વિશિષ્ટ પિન';
+	@override String get change_title => 'પિન બદલો';
+	@override String get change_sub => 'તમારો 4-અંકનો ZiqeX સુરક્ષા કોડ અપડેટ કરો';
+	@override String get remove_title => 'પિન દૂર કરો';
+	@override String get remove_sub => 'ZiqeX માટે પિન એક્સેસ બંધ કરો';
+	@override String get snack_removed => 'પિન સફળતાપૂર્વક દૂર કરવામાં આવ્યો';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyGu extends _StringsLangLegacyEn {
+	_StringsLangLegacyGu._(_StringsGu root) : this._root = root, super._(root);
+
+	@override final _StringsGu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'કઈ ભાષા\n';
+	@override String get title2 => 'ઘર જેવી લાગે છે?';
+	@override String get subtitle => 'તમારી માતૃભાષામાં અવાજ, લખાણ અને જવાબો. ગમે ત્યારે બદલો.';
+	@override String get first_reply => 'પહેલો જવાબ આ હશે';
+	@override String script_info({required Object lang}) => '${lang} - તમારી લિપિમાં લખાયેલ અને બોલાયેલ';
+	@override String get continueBtn => 'ચાલુ રાખો';
 }
 
 // Path: <root>
@@ -1071,8 +1501,13 @@ class _StringsHi extends Translations {
 	@override late final _StringsLanguageSelectionHi languageSelection = _StringsLanguageSelectionHi._(_root);
 	@override late final _StringsPillarsHi pillars = _StringsPillarsHi._(_root);
 	@override late final _StringsModelDownloadHi modelDownload = _StringsModelDownloadHi._(_root);
+	@override late final _StringsLibraryV2Hi library_v2 = _StringsLibraryV2Hi._(_root);
 	@override late final _StringsBiometricHi biometric = _StringsBiometricHi._(_root);
+	@override late final _StringsSecurityScreenHi security_screen = _StringsSecurityScreenHi._(_root);
 	@override late final _StringsDataHi data = _StringsDataHi._(_root);
+	@override late final _StringsPinSetupHi pin_setup = _StringsPinSetupHi._(_root);
+	@override late final _StringsPinMgmtHi pin_mgmt = _StringsPinMgmtHi._(_root);
+	@override late final _StringsLangLegacyHi lang_legacy = _StringsLangLegacyHi._(_root);
 }
 
 // Path: profile
@@ -1190,6 +1625,24 @@ class _StringsModelDownloadHi extends _StringsModelDownloadEn {
 	@override String get continueSub => 'बिना मॉडल डाउनलोड किए जारी रखें। आप तैयार होने पर इसे जोड़ सकते हैं';
 }
 
+// Path: library_v2
+class _StringsLibraryV2Hi extends _StringsLibraryV2En {
+	_StringsLibraryV2Hi._(_StringsHi root) : this._root = root, super._(root);
+
+	@override final _StringsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'अपने एआई संसाधनों को प्रबंधित करें';
+	@override String get language_title => 'भाषा';
+	@override String get language_desc => 'अपनी पसंदीदा भाषाएं चुनें और प्रबंधित करें';
+	@override String get model_title => 'मॉडल';
+	@override String get model_desc => 'उपलब्ध एआई मॉडल खोजें और प्रबंधित करें';
+	@override String get saved_title => 'सहेजा गया';
+	@override String get saved_desc => 'आपकी प्रॉम्प्ट लाइब्रेरी';
+	@override String get skills_title => 'कौशल';
+	@override String get skills_desc => 'एआई क्षमताएं';
+}
+
 // Path: biometric
 class _StringsBiometricHi extends _StringsBiometricEn {
 	_StringsBiometricHi._(_StringsHi root) : this._root = root, super._(root);
@@ -1208,6 +1661,30 @@ class _StringsBiometricHi extends _StringsBiometricEn {
 	@override String get dialogSub => 'ZiqeX को अनलॉक करने के लिए अपने फिंगरप्रिंट या डिवाइस फेस रिकग्निशन का उपयोग करें';
 	@override String get cancel => 'रद्द करें';
 	@override String get allow => 'बायोमेट्रिक्स की अनुमति दें';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenHi extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenHi._(_StringsHi root) : this._root = root, super._(root);
+
+	@override final _StringsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ऐप सुरक्षा';
+	@override String get global_protection => 'वैश्विक सुरक्षा';
+	@override String get app_lock => 'ऐप लॉक';
+	@override String get app_lock_sub => 'ZiqeX खोलने के लिए प्रमाणीकरण की आवश्यकता है';
+	@override String get auth_methods => 'प्रमाणीकरण विधियाँ';
+	@override String get biometrics_title => 'डिवाइस बायोमेट्रिक्स';
+	@override String get biometrics_sub => 'अपने फिंगरप्रिंट या चेहरे से तुरंत अनलॉक करें';
+	@override String get pin_title => 'ZiqeX पिन';
+	@override String get pin_active => 'पिन सक्रिय है';
+	@override String get pin_setup => 'ऐप को अनलॉक करने के लिए एक अद्वितीय 4-अंकीय कोड सेट करें';
+	@override String get warning_title => 'बहुत अधिक गलत प्रयास';
+	@override String get warning_sub => 'यदि 10 बार गलत पिन दर्ज किया जाता है, तो ZiqeX स्वचालित रूप से रीसेट हो जाएगा। इस डिवाइस पर सहेजा गया सभी डेटा स्थायी रूप से हटा दिया जाएगा';
+	@override String get incomplete_title => 'सुरक्षा सेटअप अधूरा';
+	@override String get incomplete_content => 'आपने ऐप लॉक सक्षम कर दिया है लेकिन पिन या बायोमेट्रिक्स सेट नहीं किया है। ऐप लॉक तब तक अक्षम रहेगा जब तक कि कोई विधि कॉन्फ़िगर नहीं की जाती है।';
+	@override String get got_it => 'ठीक है';
 }
 
 // Path: data
@@ -1236,6 +1713,54 @@ class _StringsDataHi extends _StringsDataEn {
 	@override String get deleteAllPillar => 'सभी हटाएं';
 	@override String get space => 'जगह:';
 	@override String get activeInstances => 'सक्रिय इंस्टेंस:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupHi extends _StringsPinSetupEn {
+	_StringsPinSetupHi._(_StringsHi root) : this._root = root, super._(root);
+
+	@override final _StringsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4-अंकों का पिन सेट करें';
+	@override String get subtitle_setup => 'ऐप एक्सेस करने के लिए एक सुरक्षित कोड बनाएं';
+	@override String get title_confirm => 'पिन की पुष्टि करें';
+	@override String get subtitle_confirm => 'सत्यापित करने के लिए अपना 4-अंकों का कोड फिर से दर्ज करें';
+	@override String get title_verify => 'वर्तमान पिन दर्ज करें';
+	@override String get subtitle_verify => 'जारी रखने के لیے अपना मौजूदा कोड दर्ज करें';
+	@override String get error_mismatch => 'पिन मेल नहीं खाते। फिर से कोशिश करें।';
+	@override String get error_incorrect => 'गलत पिन। कृपया फिर से कोशिश करें।';
+	@override String get snack_success => 'पिन सफलतापूर्वक सेट हो गया';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtHi extends _StringsPinMgmtEn {
+	_StringsPinMgmtHi._(_StringsHi root) : this._root = root, super._(root);
+
+	@override final _StringsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ऐप-विशिष्ट पिन';
+	@override String get change_title => 'पिन बदलें';
+	@override String get change_sub => 'अपना 4-अंकों का ZiqeX सुरक्षा कोड अपडेट करें';
+	@override String get remove_title => 'पिन हटाएं';
+	@override String get remove_sub => 'ZiqeX के लिए पिन एक्सेस बंद करें';
+	@override String get snack_removed => 'पिन सफलतापूर्वक हटा दिया गया';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyHi extends _StringsLangLegacyEn {
+	_StringsLangLegacyHi._(_StringsHi root) : this._root = root, super._(root);
+
+	@override final _StringsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'कौन सी भाषा\n';
+	@override String get title2 => 'घर जैसी लगती है?';
+	@override String get subtitle => 'अपनी मातृभाषा में वॉयस, टेक्स्ट और जवाब। कभी भी बदलें।';
+	@override String get first_reply => 'पहला जवाब यह होगा';
+	@override String script_info({required Object lang}) => '${lang} - आपकी लिपि में लिखा और बोला गया';
+	@override String get continueBtn => 'जारी रखें';
 }
 
 // Path: <root>
@@ -1312,8 +1837,13 @@ class _StringsKn extends Translations {
 	@override late final _StringsLanguageSelectionKn languageSelection = _StringsLanguageSelectionKn._(_root);
 	@override late final _StringsPillarsKn pillars = _StringsPillarsKn._(_root);
 	@override late final _StringsModelDownloadKn modelDownload = _StringsModelDownloadKn._(_root);
+	@override late final _StringsLibraryV2Kn library_v2 = _StringsLibraryV2Kn._(_root);
 	@override late final _StringsBiometricKn biometric = _StringsBiometricKn._(_root);
+	@override late final _StringsSecurityScreenKn security_screen = _StringsSecurityScreenKn._(_root);
 	@override late final _StringsDataKn data = _StringsDataKn._(_root);
+	@override late final _StringsPinSetupKn pin_setup = _StringsPinSetupKn._(_root);
+	@override late final _StringsPinMgmtKn pin_mgmt = _StringsPinMgmtKn._(_root);
+	@override late final _StringsLangLegacyKn lang_legacy = _StringsLangLegacyKn._(_root);
 }
 
 // Path: profile
@@ -1431,6 +1961,24 @@ class _StringsModelDownloadKn extends _StringsModelDownloadEn {
 	@override String get continueSub => 'ಮಾದರಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡದೆಯೇ ಮುಂದುವರಿಯಿರಿ. ನೀವು ಸಿದ್ಧವಾದಾಗ ಒಂದನ್ನು ಸೇರಿಸಬಹುದು';
 }
 
+// Path: library_v2
+class _StringsLibraryV2Kn extends _StringsLibraryV2En {
+	_StringsLibraryV2Kn._(_StringsKn root) : this._root = root, super._(root);
+
+	@override final _StringsKn _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'ನಿಮ್ಮ AI ಸಂಪನ್ಮೂಲಗಳನ್ನು ನಿರ್ವಹಿಸಿ';
+	@override String get language_title => 'ಭಾಷೆ';
+	@override String get language_desc => 'ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆಗಳನ್ನು ಆರಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
+	@override String get model_title => 'ಮಾದರಿ (Model)';
+	@override String get model_desc => 'ಲಭ್ಯವಿರುವ AI ಮಾದರಿಗಳನ್ನು ಅನ್ವೇಷಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
+	@override String get saved_title => 'ಉಳಿಸಲಾಗಿದೆ';
+	@override String get saved_desc => 'ನಿಮ್ಮ ಪ್ರಾಂಪ್ಟ್ ಲೈಬ್ರರಿ';
+	@override String get skills_title => 'ಕೌಶಲಗಳು';
+	@override String get skills_desc => 'AI ಸಾಮರ್ಥ್ಯಗಳು';
+}
+
 // Path: biometric
 class _StringsBiometricKn extends _StringsBiometricEn {
 	_StringsBiometricKn._(_StringsKn root) : this._root = root, super._(root);
@@ -1451,6 +1999,30 @@ class _StringsBiometricKn extends _StringsBiometricEn {
 	@override String get allow => 'ಬಯೋಮೆಟ್ರಿಕ್ಸ್ ಅನುಮತಿಸಿ';
 }
 
+// Path: security_screen
+class _StringsSecurityScreenKn extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenKn._(_StringsKn root) : this._root = root, super._(root);
+
+	@override final _StringsKn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ಆ್ಯಪ್ ಭದ್ರತೆ';
+	@override String get global_protection => 'ಜಾಗತಿಕ ರಕ್ಷಣೆ';
+	@override String get app_lock => 'ಆ್ಯಪ್ ಲಾಕ್';
+	@override String get app_lock_sub => 'ZiqeX ತೆರೆಯಲು ದೃಢೀಕರಣದ ಅಗತ್ಯವಿದೆ';
+	@override String get auth_methods => 'ದೃಢೀಕರಣ ವಿಧಾನಗಳು';
+	@override String get biometrics_title => 'ಸಾಧನ ಬಯೋಮೆಟ್ರಿಕ್ಸ್';
+	@override String get biometrics_sub => 'ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅಥವಾ ಮುಖದೊಂದಿಗೆ ತಕ್ಷಣವೇ ಅನ್‌ಲಾಕ್ ಮಾಡಿ';
+	@override String get pin_title => 'ZiqeX ಪಿನ್';
+	@override String get pin_active => 'ಪಿನ್ ಸಕ್ರಿಯವಾಗಿದೆ';
+	@override String get pin_setup => 'ಆ್ಯಪ್ ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಅನನ್ಯ 4-ಅಂಕಿಯ ಕೋಡ್ ಸೆಟ್ ಮಾಡಿ';
+	@override String get warning_title => 'ಬಹಳಷ್ಟು ತಪ್ಪು ಪ್ರಯತ್ನಗಳು';
+	@override String get warning_sub => 'ತಪ್ಪು ಪಿನ್ ಅನ್ನು 10 ಬಾರಿ ನಮೂದಿಸಿದರೆ, ZiqeX ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮರುಹೊಂದಿಸಲ್ಪಡುತ್ತದೆ. ಈ ಸಾಧನದಲ್ಲಿ ಉಳಿಸಲಾದ ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ';
+	@override String get incomplete_title => 'ಭದ್ರತಾ ಸೆಟಪ್ ಅಪೂರ್ಣವಾಗಿದೆ';
+	@override String get incomplete_content => 'ನೀವು ಆ್ಯಪ್ ಲಾಕ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದ್ದೀರಿ ಆದರೆ ಪಿನ್ ಅಥವಾ ಬಯೋಮೆಟ್ರಿಕ್ಸ್ ಅನ್ನು ಸೆಟ್ ಮಾಡಿಲ್ಲ. ಒಂದು ವಿಧಾನವನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡುವವರೆಗೆ ಆ್ಯಪ್ ಲಾಕ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ.';
+	@override String get got_it => 'ಸರಿ';
+}
+
 // Path: data
 class _StringsDataKn extends _StringsDataEn {
 	_StringsDataKn._(_StringsKn root) : this._root = root, super._(root);
@@ -1464,9 +2036,9 @@ class _StringsDataKn extends _StringsDataEn {
 	@override String get legendModel => 'ಮಾದರಿ ತೂಕಗಳು';
 	@override String get legendFree => 'ಖಾಲಿ ಸ್ಥಳ';
 	@override String get mgmt => 'ಮಾದರಿ ನಿರ್ವಹಣೆ';
-	@override String get deleteModels => 'ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಎಲ್ಲಾ ಮಾದರಿಗಳನ್ನು ಅಳಿಸಿ';
+	@override String get deleteModels => 'ದೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಎಲ್ಲಾ ಮಾದರಿಗಳನ್ನು ಅಳಿಸಿ';
 	@override String get deleteModelsSub => 'ಈ ಸಾಧನದಿಂದ ಎಲ್ಲಾ ಸ್ಥಳೀಯ ಮಾದರಿ ತೂಕಗಳನ್ನು ಮತ್ತು ನಿಯತಾಂಕಗಳನ್ನು ಸಂಪೂರ್ಣವಾಗಿ ತೆಗೆದುಹಾಕಿ.';
-	@override String get selectDelete => 'ಅಳಿಸಲು ಮಾದರಿಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ';
+	@override String get selectDelete => 'ಅಳಿಸಲು ಮಾದರಿಗಳನ್ನು ಆಯ್કેಮಾಡಿ';
 	@override String get autoDelete => 'ಇದಕ್ಕಿಂತ ಹಳೆಯದಾದ ಚಾಟ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಿ:';
 	@override String get autoDeleteSub => 'ಈ ಸೆಟ್ಟಿಂಗ್ ಎಲ್ಲಾ ಅನ್‌ಲಿಂಕ್ಡ್ ಸಂಭಾಷಣೆ ಮೋಡ್‌ಗಳಿಗೆ ಅನ್ವಯಿಸುತ್ತದೆ.';
 	@override String get modes => 'ಮೋಡ್‌ಗಳು';
@@ -1477,6 +2049,54 @@ class _StringsDataKn extends _StringsDataEn {
 	@override String get deleteAllPillar => 'ಎಲ್ಲವನ್ನೂ ಅಳಿಸಿ';
 	@override String get space => 'ಸ್ಥಳ:';
 	@override String get activeInstances => 'ಸಕ್ರಿಯ ಇನ್‌ಸ್ಟೆನ್ಸ್‌ಗಳು:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupKn extends _StringsPinSetupEn {
+	_StringsPinSetupKn._(_StringsKn root) : this._root = root, super._(root);
+
+	@override final _StringsKn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4-ಅಂಕಿಯ ಪಿನ್ ಹೊಂದಿಸಿ';
+	@override String get subtitle_setup => 'ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಿಸಲು ಸುರಕ್ಷಿತ ಕೋಡ್ ರಚಿಸಿ';
+	@override String get title_confirm => 'ಪಿನ್ ಖಚಿತಪಡಿಸಿ';
+	@override String get subtitle_confirm => 'ಪರಿಶೀಲಿಸಲು ನಿಮ್ಮ 4-ಅಂಕಿಯ ಕೋಡ್ ಅನ್ನು ಮರು-ನಮೂದಿಸಿ';
+	@override String get title_verify => 'ಪ್ರಸ್ತುತ ಪಿನ್ ನಮೂದಿಸಿ';
+	@override String get subtitle_verify => 'ಮುಂದುವರಿಯಲು ನಿಮ್ಮ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ';
+	@override String get error_mismatch => 'ಪಿನ್‌ಗಳು ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
+	@override String get error_incorrect => 'ತಪ್ಪು ಪಿನ್. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
+	@override String get snack_success => 'ಪಿನ್ ಯಶಸ್ವಿಯಾಗಿ ಹೊಂದಿಸಲಾಗಿದೆ';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtKn extends _StringsPinMgmtEn {
+	_StringsPinMgmtKn._(_StringsKn root) : this._root = root, super._(root);
+
+	@override final _StringsKn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ಅಪ್ಲಿಕೇಶನ್-ನಿರ್ದಿಷ್ಟ ಪಿನ್';
+	@override String get change_title => 'ಪಿನ್ ಬದಲಾಯಿಸಿ';
+	@override String get change_sub => 'ನಿಮ್ಮ 4-ಅಂಕಿಯ ZiqeX ಭದ್ರತಾ ಕೋಡ್ ಅನ್ನು ನವೀಕರಿಸಿ';
+	@override String get remove_title => 'ಪಿನ್ ತೆಗೆದುಹಾಕಿ';
+	@override String get remove_sub => 'ZiqeX ಗಾಗಿ ಪಿನ್ ಪ್ರವೇಶವನ್ನು ಆಫ್ ಮಾಡಿ';
+	@override String get snack_removed => 'ಪಿನ್ ಯಶಸ್ವಿಯಾಗಿ ತೆಗೆದುಹಾಕಲಾಗಿದೆ';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyKn extends _StringsLangLegacyEn {
+	_StringsLangLegacyKn._(_StringsKn root) : this._root = root, super._(root);
+
+	@override final _StringsKn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'ಯಾವ ಭಾಷೆ\n';
+	@override String get title2 => 'ತವರು ಎನಿಸುತ್ತದೆ?';
+	@override String get subtitle => 'ನಿಮ್ಮ ಮಾತೃಭಾಷೆಯಲ್ಲಿ ಧ್ವನಿ, ಪಠ್ಯ ಮತ್ತು ಉತ್ತರಗಳು. ಯಾವಾಗ ಬೇಕಾದರೂ ಬದಲಾಯಿಸಿ.';
+	@override String get first_reply => 'ಮೊದಲ ಉತ್ತರ ಹೀಗಿರುತ್ತದೆ';
+	@override String script_info({required Object lang}) => '${lang} - ನಿಮ್ಮ ಲಿಪಿಯಲ್ಲಿ ಲಿಪ್ಯಂತರ ಮತ್ತು ಮಾತನಾಡಲಾಗುತ್ತದೆ';
+	@override String get continueBtn => 'ಮುಂದುವರಿಸಿ';
 }
 
 // Path: <root>
@@ -1553,6 +2173,13 @@ class _StringsMl extends Translations {
 	@override late final _StringsLanguageSelectionMl languageSelection = _StringsLanguageSelectionMl._(_root);
 	@override late final _StringsPillarsMl pillars = _StringsPillarsMl._(_root);
 	@override late final _StringsModelDownloadMl modelDownload = _StringsModelDownloadMl._(_root);
+	@override late final _StringsLibraryV2Ml library_v2 = _StringsLibraryV2Ml._(_root);
+	@override late final _StringsBiometricMl biometric = _StringsBiometricMl._(_root);
+	@override late final _StringsSecurityScreenMl security_screen = _StringsSecurityScreenMl._(_root);
+	@override late final _StringsDataMl data = _StringsDataMl._(_root);
+	@override late final _StringsPinSetupMl pin_setup = _StringsPinSetupMl._(_root);
+	@override late final _StringsPinMgmtMl pin_mgmt = _StringsPinMgmtMl._(_root);
+	@override late final _StringsLangLegacyMl lang_legacy = _StringsLangLegacyMl._(_root);
 }
 
 // Path: profile
@@ -1637,7 +2264,7 @@ class _StringsPillarsMl extends _StringsPillarsEn {
 	@override String get subtitle => 'നിങ്ങൾ ശ്രദ്ധ കേന്ദ്രീകരിക്കാൻ ആഗ്രഹിക്കുന്ന പ്രധാന കാര്യങ്ങൾ തിരഞ്ഞെടുക്കുക.';
 	@override String get general => 'പൊതുവായത്';
 	@override String get operational => 'പ്രവർത്തനക്ഷമം';
-	@override String get personal => 'വ്യക്തിഗത ഉപദേശം';
+	@override String get personal => 'ব্যക്തിഗത ഉപദേശം';
 	@override String get workplace => 'തൊഴിലിടം';
 	@override String get culture => 'സംസ്കാരവും കുടുംബവും';
 	@override String get journal => 'ദിനചര്യ കുറിപ്പുകൾ';
@@ -1668,6 +2295,144 @@ class _StringsModelDownloadMl extends _StringsModelDownloadEn {
 	@override String get download => 'ഡൗൺലോഡ്';
 	@override String get later => 'പിന്നീട് സജ്ജമാക്കുക';
 	@override String get continueSub => 'മോഡൽ ഡൗൺലോഡ് ചെയ്യാതെ തുടരുക. നിങ്ങൾ തയ്യാറാകുമ്പോൾ ഒരെണ്ണം ചേർക്കാം';
+}
+
+// Path: library_v2
+class _StringsLibraryV2Ml extends _StringsLibraryV2En {
+	_StringsLibraryV2Ml._(_StringsMl root) : this._root = root, super._(root);
+
+	@override final _StringsMl _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'നിങ്ങളുടെ AI വിഭവങ്ങൾ മാനേജ് ചെയ്യുക';
+	@override String get language_title => 'ഭാഷ';
+	@override String get language_desc => 'നിങ്ങളുടെ ഭാഷകൾ നിയന്ത്രിക്കുക';
+	@override String get model_title => 'മോഡൽ';
+	@override String get model_desc => 'AI മോഡലുകൾ മാനേജ് ചെയ്യുക';
+	@override String get saved_title => 'സേവ് ചെയ്തവ';
+	@override String get saved_desc => 'നിങ്ങളുടെ പ്രോംപ്റ്റ് ലൈബ്രറി';
+	@override String get skills_title => 'നൈപുണ്യങ്ങൾ';
+	@override String get skills_desc => 'AI കഴിവുകൾ';
+}
+
+// Path: biometric
+class _StringsBiometricMl extends _StringsBiometricEn {
+	_StringsBiometricMl._(_StringsMl root) : this._root = root, super._(root);
+
+	@override final _StringsMl _root; // ignore: unused_field
+
+	// Translations
+	@override String get vault => 'വോൾട്ട് സുരക്ഷ';
+	@override String get setupTitle => 'സുരക്ഷിത ലോക്ക് സജ്ജീകരണം';
+	@override String get setupSub => 'നിങ്ങളുടെ പ്രിയപ്പെട്ട രീതി ഉപയോഗിച്ച് നിങ്ങളുടെ വോൾട്ട് സുരക്ഷിതമാക്കുക.';
+	@override String get deviceTitle => 'ബയോമെട്രിക്സ്';
+	@override String get deviceSub => 'വിരലടയാളം ഉപയോഗിക്കുക';
+	@override String get pinTitle => 'പിൻ കോഡ്';
+	@override String get pinSub => '4 അക്ക പിൻ സജ്ജമാക്കുക';
+	@override String get dialogTitle => 'അനുമതി നൽകുക';
+	@override String get dialogSub => 'ZiqeX തുറക്കാൻ വിരലടയാളം ഉപയോഗിക്കുക';
+	@override String get cancel => 'റദ്ദാക്കുക';
+	@override String get allow => 'അനുവദിക്കുക';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenMl extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenMl._(_StringsMl root) : this._root = root, super._(root);
+
+	@override final _StringsMl _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ആപ്പ് സെക്യൂരിറ്റി';
+	@override String get global_protection => 'ഗ്ലോബൽ പ്രൊട്ടക്ഷൻ';
+	@override String get app_lock => 'ആപ്പ് ലോക്ക്';
+	@override String get app_lock_sub => 'ZiqeX തുറക്കാൻ ഓതന്റിക്കേഷൻ ആവശ്യമാണ്';
+	@override String get auth_methods => 'ഓതന്റിക്കേഷൻ രീതികൾ';
+	@override String get biometrics_title => 'ഡിവൈസ് ബയോമെട്രിക്സ്';
+	@override String get biometrics_sub => 'നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് അല്ലെങ്കിൽ മുഖം ഉപയോഗിച്ച് തൽക്ഷണം അൺലോക്ക് ചെയ്യുക';
+	@override String get pin_title => 'ZiqeX പിൻ';
+	@override String get pin_active => 'പിൻ സജീവമാണ്';
+	@override String get pin_setup => 'ആപ്പ് അൺലോക്ക് ചെയ്യാൻ 4 അക്കങ്ങളുള്ള ഒരു തനതായ കോഡ് സജ്ജമാക്കുക';
+	@override String get warning_title => 'തെറ്റായ ശ്രമങ്ങൾ പരിധി കവിഞ്ഞു';
+	@override String get warning_sub => 'തെറ്റായ പിൻ 10 തവണ നൽകിയാൽ, ZiqeX സ്വയമേവ റീസെറ്റ് ചെയ്യപ്പെടും. ഈ ഉപകരണത്തിൽ സംരക്ഷിച്ചിട്ടുള്ള എല്ലാ ഡാറ്റയും ശാശ്വതമായി ഇല്ലാതാക്കപ്പെടും';
+	@override String get incomplete_title => 'സെക്യൂരിറ്റി സെറ്റപ്പ് അപൂർണ്ണമാണ്';
+	@override String get incomplete_content => 'നിങ്ങൾ ആപ്പ് ലോക്ക് പ്രവർത്തനക്ഷമമാക്കി, പക്ഷേ പിൻ അല്ലെങ്കിൽ ബയോമെട്രിക്സ് സജ്ജീകരിച്ചിട്ടില്ല. ഒരു രീതി കോൺഫിഗർ ചെയ്യുന്നത് വരെ ആപ്പ് ലോക്ക് പ്രവർത്തനരഹിതമായിരിക്കും.';
+	@override String get got_it => 'മനസ്സിലായി';
+}
+
+// Path: data
+class _StringsDataMl extends _StringsDataEn {
+	_StringsDataMl._(_StringsMl root) : this._root = root, super._(root);
+
+	@override final _StringsMl _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ഡാറ്റ മാനേജ്‌മെന്റ്';
+	@override String get summary => 'ശേഖരണ വിവരങ്ങൾ';
+	@override String get totalUsed => 'ഉപയോഗിച്ചത്: ';
+	@override String get legendModel => 'മോഡലുകൾ';
+	@override String get legendFree => 'ശൂന്യമായ ഇടം';
+	@override String get mgmt => 'മോഡൽ മാനേജ്‌മെന്റ്';
+	@override String get deleteModels => 'മോഡലുകൾ നീക്കം ചെയ്യുക';
+	@override String get deleteModelsSub => 'ഉപകരണത്തിലെ മോഡൽ വിവരങ്ങൾ പൂർണ്ണമായും ഒഴിവാക്കുക.';
+	@override String get selectDelete => 'നീക്കം ചെയ്യേണ്ടവ തിരഞ്ഞെടുക്കാം';
+	@override String get autoDelete => 'പഴയവ ഓട്ടോ-ഡിലീറ്റ് ചെയ്യുക:';
+	@override String get autoDeleteSub => 'എല്ലാ ചാറ്റ് മോഡുകൾക്കും ഇത് ബാധകമാണ്.';
+	@override String get modes => 'മോഡുകൾ';
+	@override String get noData => 'ചാറ്റുകൾ ലഭ്യമല്ല';
+	@override String get deleteAll => 'എല്ലാ ഡാറ്റയും ഡിലീറ്റ് ചെയ്യുക';
+	@override String get authReq => 'വീണ്ടും ലോഗിൻ ചെയ്യേണ്ടതുണ്ട്';
+	@override String get viewChats => 'കാണുക';
+	@override String get deleteAllPillar => 'ഡിലീറ്റ്';
+	@override String get space => 'ഇടം:';
+	@override String get activeInstances => 'സജീവമായവ:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupMl extends _StringsPinSetupEn {
+	_StringsPinSetupMl._(_StringsMl root) : this._root = root, super._(root);
+
+	@override final _StringsMl _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4-അക്ക പിൻ സജ്ജമാക്കുക';
+	@override String get subtitle_setup => 'ആപ്പ് ആക്സസ് ചെയ്യുന്നതിന് ഒരു സുരക്ഷിത കോഡ് സൃഷ്ടിക്കുക';
+	@override String get title_confirm => 'പിൻ സ്ഥിരീകരിക്കുക';
+	@override String get subtitle_confirm => 'സ്ഥിരീകരിക്കുന്നതിന് നിങ്ങളുടെ 4-അക്ക കോഡ് വീണ്ടും നൽകുക';
+	@override String get title_verify => 'നിലവിലെ പിൻ നൽകുക';
+	@override String get subtitle_verify => 'തുടരുന്നതിന് നിങ്ങളുടെ നിലവിലുള്ള കോഡ് നൽകുക';
+	@override String get error_mismatch => 'പിന്നുകൾ പൊരുത്തപ്പെടുന്നില്ല. വീണ്ടും ശ്രമിക്കുക.';
+	@override String get error_incorrect => 'തെറ്റായ പിൻ. ദയവായി വീണ്ടും ശ്രമിക്കുക.';
+	@override String get snack_success => 'പിൻ വിജയകരമായി സജ്ਜമാക്കി';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtMl extends _StringsPinMgmtEn {
+	_StringsPinMgmtMl._(_StringsMl root) : this._root = root, super._(root);
+
+	@override final _StringsMl _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ആപ്പ്-നിർദ്ദിഷ്ട പിൻ';
+	@override String get change_title => 'പിൻ മാറ്റുക';
+	@override String get change_sub => 'നിങ്ങളുടെ 4-അക്ക ZiqeX സുരക്ഷാ കോഡ് പുതുക്കുക';
+	@override String get remove_title => 'പിൻ ഒഴിവാക്കുക';
+	@override String get remove_sub => 'ZiqeX-നായുള്ള പിൻ ആക്‌സസ് ഓഫാക്കുക';
+	@override String get snack_removed => 'പിൻ വിജയകരമായി ഒഴിവാക്കി';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyMl extends _StringsLangLegacyEn {
+	_StringsLangLegacyMl._(_StringsMl root) : this._root = root, super._(root);
+
+	@override final _StringsMl _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'ഏത് ഭാഷയാണ്\n';
+	@override String get title2 => 'സ്വന്തമായി തോന്നുന്നത്?';
+	@override String get subtitle => 'നിങ്ങളുടെ മാതൃഭാഷയിൽ ശബ്‌ദവും ടെക്‌സ്‌റ്റും മറുപടികളും. എപ്പോൾ വേണമെങ്കിലും മാറ്റാം.';
+	@override String get first_reply => 'ആദ്യ മറുപടി ഇങ്ങനെയായിരിക്കും';
+	@override String script_info({required Object lang}) => '${lang} - നിങ്ങളുടെ ലിപിയിൽ എഴുതുകയും സംസാരിക്കുകയും ചെയ്യുന്നു';
+	@override String get continueBtn => 'തുടരുക';
 }
 
 // Path: <root>
@@ -1728,7 +2493,7 @@ class _StringsMr extends Translations {
 	@override String get ephemeral_mode => 'गुप्त चॅट';
 	@override String get about => 'सिस्टम माहिती';
 	@override String get reset_prototype => 'प्रोटोटाइप रीसेट करा';
-	@override String get built_in_india => 'भारतात निर्मित. जगासाठी.';
+	@override String get built_in_india => 'भारतात निर्मित। जगासाठी.';
 	@override String get library_sub => 'प्रत्येक मॉडेल · प्रत्येक मेमरी · या डिव्हाइसवर';
 	@override String get on_this_device => 'या डिव्हाइसवर';
 	@override String get active => 'सक्रिय';
@@ -1744,6 +2509,13 @@ class _StringsMr extends Translations {
 	@override late final _StringsLanguageSelectionMr languageSelection = _StringsLanguageSelectionMr._(_root);
 	@override late final _StringsPillarsMr pillars = _StringsPillarsMr._(_root);
 	@override late final _StringsModelDownloadMr modelDownload = _StringsModelDownloadMr._(_root);
+	@override late final _StringsLibraryV2Mr library_v2 = _StringsLibraryV2Mr._(_root);
+	@override late final _StringsBiometricMr biometric = _StringsBiometricMr._(_root);
+	@override late final _StringsSecurityScreenMr security_screen = _StringsSecurityScreenMr._(_root);
+	@override late final _StringsDataMr data = _StringsDataMr._(_root);
+	@override late final _StringsPinSetupMr pin_setup = _StringsPinSetupMr._(_root);
+	@override late final _StringsPinMgmtMr pin_mgmt = _StringsPinMgmtMr._(_root);
+	@override late final _StringsLangLegacyMr lang_legacy = _StringsLangLegacyMr._(_root);
 }
 
 // Path: profile
@@ -1777,7 +2549,7 @@ class _StringsWelcomeMr extends _StringsWelcomeEn {
 	// Translations
 	@override String get meet => 'ZiqeX ला भेटा';
 	@override String get at_edge => 'टोकावर बुद्धिमत्ता (Edge)';
-	@override String get private => 'खाजगी आणि एज एआय\nZenteiQ द्वारे';
+	@override String get private => 'खाजगी and एज एआय\nZenteiQ द्वारे';
 	@override String get begin => 'ऑनबोर्डिंग सुरू करा';
 }
 
@@ -1861,6 +2633,144 @@ class _StringsModelDownloadMr extends _StringsModelDownloadEn {
 	@override String get continueSub => 'मॉडेल डाउनलोड न करता पुढे जा. तुम्ही तयार असाल तेव्हा एक जोडू शकता';
 }
 
+// Path: library_v2
+class _StringsLibraryV2Mr extends _StringsLibraryV2En {
+	_StringsLibraryV2Mr._(_StringsMr root) : this._root = root, super._(root);
+
+	@override final _StringsMr _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'तुमची AI संसाधने व्यवस्थापित करा';
+	@override String get language_title => 'भाषा';
+	@override String get language_desc => 'तुमच्या पसंतीच्या भाषा निवडा आणि व्यवस्थापित करा';
+	@override String get model_title => 'मॉडेल';
+	@override String get model_desc => 'उपलब्ध AI मॉडेल्स शोधा आणि व्यवस्थापित करा';
+	@override String get saved_title => 'जतन केलेले';
+	@override String get saved_desc => 'तुमची प्रॉम्प्ट लायब्ररी';
+	@override String get skills_title => 'कौशल्ये';
+	@override String get skills_desc => 'AI क्षमता';
+}
+
+// Path: biometric
+class _StringsBiometricMr extends _StringsBiometricEn {
+	_StringsBiometricMr._(_StringsMr root) : this._root = root, super._(root);
+
+	@override final _StringsMr _root; // ignore: unused_field
+
+	// Translations
+	@override String get vault => 'तिजोरी सुरक्षा';
+	@override String get setupTitle => 'सुरक्षित लॉक सेटअप';
+	@override String get setupSub => 'तुमच्या पसंतीच्या प्रमाणीकरण पद्धतीसह तुमची तिजोरी सुरक्षित करा.';
+	@override String get deviceTitle => 'डिव्हाइस बायोमेट्रिक्स';
+	@override String get deviceSub => 'FaceID किंवा फिंगरप्रिंट वापरा';
+	@override String get pinTitle => 'अॅप-विशिष्ट पिन';
+	@override String get pinSub => 'एक अनन्य ४-अंकी कोड सेट करा';
+	@override String get dialogTitle => 'बायोमेट्रिक प्रवेशाची परवानगी द्या';
+	@override String get dialogSub => 'ZiqeX अनलॉक करण्यासाठी तुमचा फिंगरप्रिंट किंवा डिव्हाइस फेस रिकग्निशन वापरा';
+	@override String get cancel => 'रद्द करा';
+	@override String get allow => 'बायोमेट्रिक्सला अनुमती द्या';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenMr extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenMr._(_StringsMr root) : this._root = root, super._(root);
+
+	@override final _StringsMr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ॲप सुरक्षा';
+	@override String get global_protection => 'जागतिक संरक्षण';
+	@override String get app_lock => 'ॲप लॉक';
+	@override String get app_lock_sub => 'ZiqeX उघडण्यासाठी प्रमाणीकरण आवश्यक आहे';
+	@override String get auth_methods => 'प्रमाणीकरण पद्धती';
+	@override String get biometrics_title => 'डिव्हाइस बायोमेट्रिक्स';
+	@override String get biometrics_sub => 'तुमच्या फिंगरप्रिंट किंवा चेहऱ्याने त्वरित अनलॉक करा';
+	@override String get pin_title => 'ZiqeX पिन';
+	@override String get pin_active => 'पिन सक्रिय आहे';
+	@override String get pin_setup => 'ॲप अनलॉक करण्यासाठी एक अद्वितीय ४-अंकी कोड सेट करा';
+	@override String get warning_title => 'खूप जास्त चुकीचे प्रयत्न';
+	@override String get warning_sub => 'चुकीचा पिन १० वेळा टाकल्यास, ZiqeX आपोआप रीसेट होईल. या डिव्हाइसवर जतन केलेला सर्व डेटा कायमचा हटवला जाईल';
+	@override String get incomplete_title => 'सुरक्षा सेटअप अपूर्ण';
+	@override String get incomplete_content => 'तुम्ही ॲप लॉक सक्षम केले आहे पण पिन किंवा बायोमेट्रिक्स सेट केलेले नाही. जोपर्यंत एखादी पद्धत कॉन्फिगर केली जात नाही तोपर्यंत ॲप लॉक अक्षम केले जाईल.';
+	@override String get got_it => 'समजले';
+}
+
+// Path: data
+class _StringsDataMr extends _StringsDataEn {
+	_StringsDataMr._(_StringsMr root) : this._root = root, super._(root);
+
+	@override final _StringsMr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'डेटा व्यवस्थापन आणि\nधारणा';
+	@override String get summary => 'स्टोरेज सारांश';
+	@override String get totalUsed => 'एकूण वापरलेले: ';
+	@override String get legendModel => 'मॉडेल वेट';
+	@override String get legendFree => 'मोकळी जागा';
+	@override String get mgmt => 'मॉडेल व्यवस्थापन';
+	@override String get deleteModels => 'सर्व डाउनलोड केलेले मॉडेल हटवा';
+	@override String get deleteModelsSub => 'या डिव्हाइसवरून सर्व स्थानिक मॉडेल वेट आणि फाइन-ट्यून्ड पॅरामीटर्स पूर्णपणे काढून टाका.';
+	@override String get selectDelete => 'हटवण्यासाठी मॉडेल निवडा';
+	@override String get autoDelete => 'यापेक्षा जुने चॅट आपोआप हटवा:';
+	@override String get autoDeleteSub => 'हा बदल सर्व अनलिंक केलेल्या संवाद मोड्सवर लागू होतो.';
+	@override String get modes => 'मोड्स';
+	@override String get noData => 'कोणताही सक्रिय चॅट डेटा नाही';
+	@override String get deleteAll => 'सर्व डेटा हटवा';
+	@override String get authReq => 'अॅप लॉक पुन: प्रमाणीकरण आवश्यक आहे';
+	@override String get viewChats => 'चॅट पहा';
+	@override String get deleteAllPillar => 'सर्व हटवा';
+	@override String get space => 'जागा:';
+	@override String get activeInstances => 'सक्रिय इंस्टन्स:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupMr extends _StringsPinSetupEn {
+	_StringsPinSetupMr._(_StringsMr root) : this._root = root, super._(root);
+
+	@override final _StringsMr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '४-अंकी पिन सेट करा';
+	@override String get subtitle_setup => 'अ‍ॅप अ‍ॅक्सेस करण्यासाठी सुरक्षित कोड तयार करा';
+	@override String get title_confirm => 'पिनची पुष्टी करा';
+	@override String get subtitle_confirm => 'सत्यापित करण्यासाठी तुमचा ४-अंकी कोड पुन्हा प्रविष्ट करा';
+	@override String get title_verify => 'सध्याचा पिन प्रविष्ट करा';
+	@override String get subtitle_verify => 'पुढे चालू ठेवण्यासाठी तुमचा अस्तित्वातील कोड प्रविष्ट करा';
+	@override String get error_mismatch => 'पिन जुळत नाहीत. पुन्हा प्रयत्न करा.';
+	@override String get error_incorrect => 'चुकीचा पिन. कृपया पुन्हा प्रयत्न करा.';
+	@override String get snack_success => 'पिन यशस्वीरित्या सेट झाला';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtMr extends _StringsPinMgmtEn {
+	_StringsPinMgmtMr._(_StringsMr root) : this._root = root, super._(root);
+
+	@override final _StringsMr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'अ‍ॅप-विशिष्ट पिन';
+	@override String get change_title => 'पिन बदला';
+	@override String get change_sub => 'तुमचा ४-अंकी ZiqeX सुरक्षा कोड अपडेट करा';
+	@override String get remove_title => 'पिन काढून टाका';
+	@override String get remove_sub => 'ZiqeX साठी पिन अ‍ॅक्सेस बंद करा';
+	@override String get snack_removed => 'पिन यशस्वीरित्या काढून टाकला';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyMr extends _StringsLangLegacyEn {
+	_StringsLangLegacyMr._(_StringsMr root) : this._root = root, super._(root);
+
+	@override final _StringsMr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'कोणती भाषा\n';
+	@override String get title2 => 'घरच्यासारखी वाटते?';
+	@override String get subtitle => 'तुमच्या मातृभाषेत व्हॉइस, टेक्स्ट आणि उत्तरे. कधीही बदला.';
+	@override String get first_reply => 'पहिले उत्तर असे असेल';
+	@override String script_info({required Object lang}) => '${lang} - तुमच्या लिपीमध्ये लिहिलेले आणि बोललेले';
+	@override String get continueBtn => 'चालू ठेवा';
+}
+
 // Path: <root>
 class _StringsOr extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -1917,7 +2827,7 @@ class _StringsOr extends Translations {
 	@override String get storage_purge => 'ଡାଟା ଏବଂ ସଂରକ୍ଷଣ';
 	@override String get storage_purge_sub => 'ଡିଭାଇସରେ ୧୮୪ KB';
 	@override String get ephemeral_mode => 'ଗୋପନୀୟ ଚାଟ୍';
-	@override String get about => 'ସିଷ୍ଟମ୍ ସୂଚନା';
+	@override String get about => 'ସିଷ୍ਟମ୍ ସୂଚନା';
 	@override String get reset_prototype => 'ପ୍ରୋଟୋଟାଇପ୍ ରିସେଟ୍ କରନ୍ତୁ';
 	@override String get built_in_india => 'ଭାରତରେ ନିର୍ମିତ। ବିଶ୍ୱ ପାଇଁ।';
 	@override String get library_sub => 'ପ୍ରତ୍ୟେକ ମଡେଲ୍ · ପ୍ରତ୍ୟେକ ସ୍ମୃତି · ଏହି ଡିଭାଇସରେ';
@@ -1935,6 +2845,13 @@ class _StringsOr extends Translations {
 	@override late final _StringsLanguageSelectionOr languageSelection = _StringsLanguageSelectionOr._(_root);
 	@override late final _StringsPillarsOr pillars = _StringsPillarsOr._(_root);
 	@override late final _StringsModelDownloadOr modelDownload = _StringsModelDownloadOr._(_root);
+	@override late final _StringsLibraryV2Or library_v2 = _StringsLibraryV2Or._(_root);
+	@override late final _StringsBiometricOr biometric = _StringsBiometricOr._(_root);
+	@override late final _StringsSecurityScreenOr security_screen = _StringsSecurityScreenOr._(_root);
+	@override late final _StringsDataOr data = _StringsDataOr._(_root);
+	@override late final _StringsPinSetupOr pin_setup = _StringsPinSetupOr._(_root);
+	@override late final _StringsPinMgmtOr pin_mgmt = _StringsPinMgmtOr._(_root);
+	@override late final _StringsLangLegacyOr lang_legacy = _StringsLangLegacyOr._(_root);
 }
 
 // Path: profile
@@ -1954,8 +2871,8 @@ class _StringsProfileOr extends _StringsProfileEn {
 	@override String get data_mgmt => 'ଚାଟ୍ ଡାଟା ପରିଚାଳନା ଏବଂ ସଂରକ୍ଷଣ';
 	@override String get data_mgmt_sub => 'ଆପଣଙ୍କର ବାର୍ତ୍ତାଳାପ ଇତିହାସ ପରିଚାଳନା କରନ୍ତୁ';
 	@override String get app_lock => 'ଆପ୍ ଲକ୍';
-	@override String get app_lock_sub => 'ଆପଣଙ୍କର ଆଙ୍ଗୁଠି ଚିହ୍ନ, ମୁହଁ କିମ୍ବା ପିନ୍ ସହିତ ZiqeX କୁ ସୁରକ୍ଷିତ କରନ୍ତୁ';
-	@override String get incognito_sub => 'ଇତିହାସରେ ସଞ୍ଚୟ ନକରି ଚାଟ୍ କରନ୍ତୁ। ଚାଟ୍ ରୁ ବାହାରିବା ପରେ ପୁନରୁଦ୍ଧାର କରାଯାଇପାରିବ ନାହିଁ';
+	@override String get app_lock_sub => 'ଆପଣଙ୍କର ଆଙ୍ଗୁଠି ଚିହ୍ନ, ମୁହଁ କିମ୍ବା ପିନ୍ ସହିତ ZiqeX କୁ ସୁରକ୍ଷିત କରନ୍ତୁ';
+	@override String get incognito_sub => 'ଇତିହାସରେ ସଞ୍ચୟ ନକରି ଚାଟ୍ କରନ୍ତୁ। ଚାଟ୍ ରୁ ବାହାରିବା ପରେ ପୁନରୁଦ୍ଧାର କରାଯାଇପାରିବ ନାହିଁ';
 	@override String get version => 'V0.1 • ସାର୍ବଭୌମ • ଅନ୍-ଡିଭାଇସ୍';
 }
 
@@ -1984,7 +2901,7 @@ class _StringsInfoOr extends _StringsInfoEn {
 	@override String get privacy_title => 'ପ୍ରଥମେ ଗୋପନୀୟତା';
 	@override String get privacy_desc => 'ZiqeX ବୁଦ୍ଧିମତା ଏବଂ ଆପଣଙ୍କ ସୂଚନାକୁ ଆପଣଙ୍କ ଡିଭାଇସ୍ ନିକଟରେ ରଖିବା ପାଇଁ ଡିଜାଇନ୍ କରାଯାଇଛି।';
 	@override String get hand_title => 'ଆପଣଙ୍କ ହାତରେ ବୁଦ୍ଧିମତା';
-	@override String get hand_desc => 'ଦୈନନ୍ଦିନ ବୁଦ୍ଧିମତା, ସିଧାସଳଖ ଆପଣଙ୍କ ଡିଭାଇସରେ ଉପଲବ୍ଧ।';
+	@override String get hand_desc => 'ଦୈନନ୍ଦିନ ବୁଦ୍ଧିମତା, ସିଧାସଳଖ ଆପଣଙ୍କ ଡିଭାଇସରେ ଉପଲବ୍ધ।';
 	@override String get control_title => 'ଆପଣଙ୍କର ଡାଟା। ଆପଣଙ୍କର ନିୟନ୍ତ୍ରଣ।';
 	@override String get control_desc => 'କ’ଣ ରଖାଯିବ ତାହା ବାଛନ୍ତୁ, ସଂରକ୍ଷିତ ହୋଇଥିବା ଜିନିଷକୁ ପରିଚାଳନା କରନ୍ତୁ ଏବଂ ଯାହା ଆପଣଙ୍କର ଆବଶ୍ୟକ ନାହିଁ ତାହାକୁ ଡିଲିଟ୍ କରନ୍ତୁ।';
 	@override String get place_title => 'ପ୍ରତ୍ୟେକ ସ୍ଥାନ ପାଇଁ ଡିଜାଇନ୍ କରାଯାଇଛି';
@@ -2045,11 +2962,149 @@ class _StringsModelDownloadOr extends _StringsModelDownloadEn {
 	@override String get toks => '~୧୮ tok/s';
 	@override String get ttft => '~୧୪୦ ms TTFT';
 	@override String error({required Object error}) => 'ତ୍ରୁଟି: ${error}';
-	@override String get retry => 'ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ';
+	@override String get retry => 'ପୁନର୍ବାର ଚେଷ୍ਟା କରନ୍ତୁ';
 	@override String get open => 'BrahmAI ଖୋଲନ୍ତୁ';
 	@override String get download => 'ମଡେଲ୍ ଡାଉନଲୋଡ୍ କରନ୍ତୁ';
 	@override String get later => 'ପରେ ସେଟଅପ୍ କରନ୍ତୁ';
 	@override String get continueSub => 'ମଡେଲ୍ ଡାଉନଲୋଡ୍ ନକରି ଆଗକୁ ବଢନ୍ତୁ। ଆପଣ ପ୍ରସ୍ତୁତ ହେଲେ ଗୋଟିଏ ଯୋଡିପାରିବେ';
+}
+
+// Path: library_v2
+class _StringsLibraryV2Or extends _StringsLibraryV2En {
+	_StringsLibraryV2Or._(_StringsOr root) : this._root = root, super._(root);
+
+	@override final _StringsOr _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'ଆପଣଙ୍କର AI ସମ୍ବଳ ପରିଚାଳନା କରନ୍ତୁ';
+	@override String get language_title => 'ଭାଷା';
+	@override String get language_desc => 'ଆପଣଙ୍କର ପସନ୍ଦର ଭାଷା ବାଛନ୍ତୁ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
+	@override String get model_title => 'ମଡେଲ୍';
+	@override String get model_desc => 'ଉପଲବ୍ଧ AI ମଡେଲଗୁଡିକୁ ଅନୁସନ୍ଧାନ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
+	@override String get saved_title => 'ସଂରକ୍ଷିତ';
+	@override String get saved_desc => 'ଆପଣଙ୍କର ପ୍ରମ୍ପ୍ଟ ଲାଇବ୍ରେରୀ';
+	@override String get skills_title => 'ଦକ୍ଷତା';
+	@override String get skills_desc => 'AI କ୍ଷମତା';
+}
+
+// Path: biometric
+class _StringsBiometricOr extends _StringsBiometricEn {
+	_StringsBiometricOr._(_StringsOr root) : this._root = root, super._(root);
+
+	@override final _StringsOr _root; // ignore: unused_field
+
+	// Translations
+	@override String get vault => 'ଭଲ୍ଟ ସୁରକ୍ଷା';
+	@override String get setupTitle => 'ସୁରକ୍ଷିତ ଲକ୍ ସେଟଅପ୍';
+	@override String get setupSub => 'ଆପଣଙ୍କର ପସନ୍ଦର ପ୍ରାମାଣିକିକରଣ ପଦ୍ଧତି ସହିତ ଆପଣଙ୍କର ଭଲ୍ଟକୁ ସୁରକ୍ଷିତ କରନ୍ତୁ |';
+	@override String get deviceTitle => 'ଡିଭାଇସ୍ ବାୟୋମେଟ୍ରିକ୍ସ';
+	@override String get deviceSub => 'FaceID କିମ୍ବା ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ବ୍ୟବહાર କରନ୍ତୁ';
+	@override String get pinTitle => 'ଆପ୍-ନିର୍ଦ୍ଦିଷ୍ଟ ପିନ୍';
+	@override String get pinSub => 'ଏକ ଅନନ୍ୟ 4-ଅଙ୍କ ବିଶିષ્ટ କୋଡ୍ ସେଟ୍ କରନ୍ତୁ';
+	@override String get dialogTitle => 'ବାୟୋମେଟ୍ରିକ୍ ଆକ୍ସେସ୍ ଅନୁମତି ଦିଅନ୍ତୁ';
+	@override String get dialogSub => 'ZiqeX କୁ ଅନଲକ୍ କରିବାକୁ ଆପଣଙ୍କର ଫିଙ୍ગରପ୍ରିଣ୍ଟ କିମ୍ବା ଡିଭାଇସ୍ ଫେସ୍ ଚିହ୍ନଟ ବ୍ୟବହାର କରନ୍ତୁ';
+	@override String get cancel => 'ବାତିଲ୍ କରନ୍ତୁ';
+	@override String get allow => 'ବାୟୋମେଟ୍ରିକ୍ସ ଅନୁମତି ଦିଅନ୍ତୁ';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenOr extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenOr._(_StringsOr root) : this._root = root, super._(root);
+
+	@override final _StringsOr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ଆପ୍ ସୁରକ୍ଷା';
+	@override String get global_protection => 'ଗ୍ଲୋବାଲ୍ ସୁରକ୍ଷା';
+	@override String get app_lock => 'ଆପ୍ ଲକ୍';
+	@override String get app_lock_sub => 'ZiqeX ଖୋଲିବା ପାଇଁ ପ୍ରମାଣୀକରଣ ଆବଶ୍ୟକ';
+	@override String get auth_methods => 'ପ୍ରମାଣୀକରଣ ପଦ୍ଧତି';
+	@override String get biometrics_title => 'ଡିଭାଇସ୍ ବାୟୋମେଟ୍ରିକ୍ସ';
+	@override String get biometrics_sub => 'ଆପଣଙ୍କର ଫିଙ୍ଗرପ୍ରିଣ୍ଟ କିମ୍ବା ମୁହଁ ସହିତ ତୁରନ୍ତ ଅନଲକ୍ କରନ୍ତୁ';
+	@override String get pin_title => 'ZiqeX ପିନ୍';
+	@override String get pin_active => 'ପିନ୍ ସକ୍ରିୟ ଅଛି';
+	@override String get pin_setup => 'ଆପ୍ ଅନଲକ୍ କରିବା ପାଇଁ ଏକ ସ୍ୱତନ୍ତ୍ର 4-ଅଙ୍କ ବିଶିଷ୍ਟ କୋଡ୍ ସେଟ୍ କରନ୍ତୁ';
+	@override String get warning_title => 'ଅତ୍ୟଧିକ ଭୁଲ୍ ପ୍ରୟାସ';
+	@override String get warning_sub => 'ଯଦି ଭୁଲ୍ ପିନ୍ 10 ଥର ଏଣ୍ଟର୍ କରାଯାଏ, ତେବେ ZiqeX ସ୍ୱୟଂଚାଳିତ ଭାବରେ ରିସେଟ୍ ହୋଇଯିବ | ଏହି ଡିଭାଇସରେ ସଂରକ୍ଷିତ ସମସ୍ତ ତଥ୍ୟ ସ୍ଥାୟୀ ଭାବରେ ବିଲୁପ୍ତ ହୋଇଯିବ';
+	@override String get incomplete_title => 'ସୁରକ୍ଷା ସେଟଅପ୍ ଅସମ୍ପୂର୍ଣ୍ଣ';
+	@override String get incomplete_content => 'ଆପଣ ଆପ୍ ଲକ୍ ସକ୍ଷମ କରିଛନ୍ତି କିନ୍ତୁ ପିନ୍ କିମ୍ବା ବାୟୋମେଟ୍ରିକ୍ସ ସେଟ୍ କରିନାହାଁନ୍ତି | କୌଣସି ପଦ୍ଧତି ବିନ୍ୟାସ ନହେବା ପର୍ଯ୍ୟନ୍ତ ଆପ୍ ଲକ୍ ଅକ୍ଷମ ରହିବ |';
+	@override String get got_it => 'ବୁଝିଲି';
+}
+
+// Path: data
+class _StringsDataOr extends _StringsDataEn {
+	_StringsDataOr._(_StringsOr root) : this._root = root, super._(root);
+
+	@override final _StringsOr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ଡାଟା ପରିଚାଳନା ଏବଂ\nସଂରକ୍ଷଣ';
+	@override String get summary => 'ଷ୍ଟୋରେଜ୍ ସାରାଂଶ';
+	@override String get totalUsed => 'ମୋଟ ବ୍ୟବହୃତ: ';
+	@override String get legendModel => 'ମଡେଲ୍ ଓଜନ';
+	@override String get legendFree => 'ଖାଲି ସ୍ଥାନ';
+	@override String get mgmt => 'ମଡେଲ୍ ପରିଚାଳନା';
+	@override String get deleteModels => 'ସମସ୍ତ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ମଡେଲଗୁଡିକ ଡିଲିଟ୍ କରନ୍ତୁ';
+	@override String get deleteModelsSub => 'ଏହି ଡିଭਾਈସରୁ ସମସ୍ତ ସ୍ଥାନୀୟ ମଡେଲ୍ ଓଜନ ଏବଂ ପାରାମିଟରଗୁଡିକ ସମ୍ପୂର୍ଣ୍ଣ ରୂପେ ବାହାର କରନ୍ତୁ |';
+	@override String get selectDelete => 'ଡିଲିଟ୍ କରିବାକୁ ମଡେଲଗୁଡିକ ଚୟନ କରନ୍ତୁ';
+	@override String get autoDelete => 'ଏହାଠାରୁ ପୁରୁଣା ଚାଟ୍ ଗୁଡିକୁ ଅଟୋ-ଡିଲିଟ୍ କରନ୍ତୁ:';
+	@override String get autoDeleteSub => 'ଏହି ସେଟିଂ ସମସ୍ତ ଅଲିଙ୍କ୍ ହୋଇଥିବା ବାର୍ତ୍ତାଳାପ ମୋଡ୍ ପାଇଁ ପ୍ରଯୁଜ୍ୟ |';
+	@override String get modes => 'ମୋଡ୍ ଗୁଡିକ';
+	@override String get noData => 'କୌଣସି ସକ୍ରିୟ ଚାଟ୍ ଡାଟା ନାହିଁ';
+	@override String get deleteAll => 'ସମସ୍ତ ଡାଟା ଡିଲିଟ୍ କରନ୍ତୁ';
+	@override String get authReq => 'ଆପ୍ ଲକ୍ ପୁନ-ପ୍ରାମାଣିକିକରଣ ଆବଶ୍ୟକ କରେ';
+	@override String get viewChats => 'ଚାଟ୍ ଦେଖନ୍ତୁ';
+	@override String get deleteAllPillar => 'ସବୁ ଡିଲିଟ୍ କରନ୍ତୁ';
+	@override String get space => 'ସ୍ଥାନ:';
+	@override String get activeInstances => 'ସକ୍ରିୟ ଇନଷ୍ଟାନ୍ସ:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupOr extends _StringsPinSetupEn {
+	_StringsPinSetupOr._(_StringsOr root) : this._root = root, super._(root);
+
+	@override final _StringsOr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '୪-ଅଙ୍କ ବିଶିଷ୍ଟ ପିନ୍ ସେଟ୍ କରନ୍ତୁ';
+	@override String get subtitle_setup => 'ଆପ୍ ଆକ୍ସେସ୍ କରିବା ପାଇଁ ଏକ ସୁରକ୍ଷିତ କୋଡ୍ ସୃଷ୍ଟି କରନ୍ତୁ';
+	@override String get title_confirm => 'ପିନ୍ ନିଶ୍ଚିତ କରନ୍ତୁ';
+	@override String get subtitle_confirm => 'ଯାଞ୍ଚ କରିବା ପାଇଁ ଆପଣଙ୍କର ୪-ଅଙ୍କ ବିଶିଷ୍ଟ କୋଡ୍ ପୁନର୍ବାର ପ୍ରବେଶ କରନ୍ତୁ';
+	@override String get title_verify => 'ବର୍ତ୍ତମାନର ପିନ୍ ପ୍ରବେଶ କରନ୍ତୁ';
+	@override String get subtitle_verify => 'ଜାରି ରଖିବା ପାଇଁ ଆପଣଙ୍କର ବିଦ୍ୟମାନ କୋଡ୍ ପ୍ରବେଶ କରନ୍ତୁ';
+	@override String get error_mismatch => 'ପିନ୍ ମେଳ ହେଉନାହିଁ | ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ |';
+	@override String get error_incorrect => 'ଭୁଲ୍ ପିନ୍ | ଦୟାକରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ |';
+	@override String get snack_success => 'ପିନ୍ ସଫଳତାର ସହିତ ସେଟ୍ ହୋଇଛି';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtOr extends _StringsPinMgmtEn {
+	_StringsPinMgmtOr._(_StringsOr root) : this._root = root, super._(root);
+
+	@override final _StringsOr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ଆପ୍-ନିର୍ଦ୍ଦିଷ୍ଟ ପିନ୍';
+	@override String get change_title => 'ପିନ୍ ପରିବର୍ତ୍ତନ କରନ୍ତୁ';
+	@override String get change_sub => 'ଆପଣଙ୍କର ୪-ଅଙ୍କ ବିଶିଷ୍ଟ ZiqeX ସୁରକ୍ଷା କୋଡ୍ ଅପଡେਟ୍ କରନ୍ତୁ';
+	@override String get remove_title => 'ପିନ୍ ହଟାନ୍ତୁ';
+	@override String get remove_sub => 'ZiqeX ପାଇଁ ପିନ୍ ଆକ୍ସେସ୍ ବନ୍ଦ କରନ୍ତୁ';
+	@override String get snack_removed => 'ପିନ୍ ସଫଳତାର ସହିତ ହଟାଗଲା';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyOr extends _StringsLangLegacyEn {
+	_StringsLangLegacyOr._(_StringsOr root) : this._root = root, super._(root);
+
+	@override final _StringsOr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'କେଉଁ ଭାଷା\n';
+	@override String get title2 => 'ନିଜର ପରି ଲାଗେ?';
+	@override String get subtitle => 'ଆପଣଙ୍କ ମାତୃଭାଷାରେ ସ୍ୱର, ପାଠ୍ୟ ଏବଂ ଉତ୍ତର | ଯେକୌଣସି ସମୟରେ ପରିବର୍ତ୍ତନ କରନ୍ତୁ |';
+	@override String get first_reply => 'ପ୍ରଥਮ ଉତ୍ତର ଏହିପରି ହେବ';
+	@override String script_info({required Object lang}) => '${lang} - ଆପଣଙ୍କ ଲିପିରେ ଲିଖିତ ଏବଂ କଥିତ';
+	@override String get continueBtn => 'ଜାରି ରଖନ୍ତୁ';
 }
 
 // Path: <root>
@@ -2126,8 +3181,13 @@ class _StringsPa extends Translations {
 	@override late final _StringsLanguageSelectionPa languageSelection = _StringsLanguageSelectionPa._(_root);
 	@override late final _StringsPillarsPa pillars = _StringsPillarsPa._(_root);
 	@override late final _StringsModelDownloadPa modelDownload = _StringsModelDownloadPa._(_root);
+	@override late final _StringsLibraryV2Pa library_v2 = _StringsLibraryV2Pa._(_root);
 	@override late final _StringsBiometricPa biometric = _StringsBiometricPa._(_root);
+	@override late final _StringsSecurityScreenPa security_screen = _StringsSecurityScreenPa._(_root);
 	@override late final _StringsDataPa data = _StringsDataPa._(_root);
+	@override late final _StringsPinSetupPa pin_setup = _StringsPinSetupPa._(_root);
+	@override late final _StringsPinMgmtPa pin_mgmt = _StringsPinMgmtPa._(_root);
+	@override late final _StringsLangLegacyPa lang_legacy = _StringsLangLegacyPa._(_root);
 }
 
 // Path: profile
@@ -2182,7 +3242,7 @@ class _StringsInfoPa extends _StringsInfoEn {
 	@override String get control_desc => 'ਚੁਣੋ ਕਿ ਕੀ ਰੱਖਣਾ ਹੈ, ਜੋ ਸਟੋਰ ਕੀਤਾ ਗਿਆ ਹੈ ਉਸਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ, ਅਤੇ ਜਿਸਦੀ ਤੁਹਾਨੂੰ ਹੁਣ ਲੋੜ ਨਹੀਂ ਹੈ ਉਸਨੂੰ ਮਿਟਾਓ।';
 	@override String get place_title => 'ਹਰ ਜਗ੍ਹਾ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ';
 	@override String get place_desc => 'ਵੱਖ-ਵੱਖ ਭਾਸ਼ਾਵਾਂ, ਡਿਵਾਈਸਾਂ ਅਤੇ ਲੋਕਾਂ ਦੇ ਤਕਨਾਲੋਜੀ ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੇ ਤਰੀਕਿਆਂ ਲਈ ਬਣਾਇਆ ਗਿਆ।';
-	@override String get footer => 'ਤੁਹਾਡੀ ਬੁੱਧੀ। ਤੁਹਾਡਾ ਡਿਵਾਈਸ। ਤੁਹਾਡਾ ਨਿਯੰਤਰਣ।';
+	@override String get footer => 'ਤੁਹਾਡੀ ਬੁੱਧੀ. ਤੁਹਾਡਾ ਡਿਵਾਈਸ. ਤੁਹਾਡਾ ਨਿਯੰਤਰਣ।';
 	@override String get setup => 'ਆਪਣਾ ZiqeX ਸੈੱਟ ਅੱਪ ਕਰੋ';
 }
 
@@ -2245,6 +3305,24 @@ class _StringsModelDownloadPa extends _StringsModelDownloadEn {
 	@override String get continueSub => 'ਮਾਡਲ ਡਾਊਨਲੋਡ ਕੀਤੇ ਬਿਨਾਂ ਜਾਰੀ ਰੱਖੋ। ਜਦੋਂ ਤੁਸੀਂ ਤਿਆਰ ਹੋਵੋ ਤਾਂ ਇੱਕ ਜੋੜ ਸਕਦੇ ਹੋ';
 }
 
+// Path: library_v2
+class _StringsLibraryV2Pa extends _StringsLibraryV2En {
+	_StringsLibraryV2Pa._(_StringsPa root) : this._root = root, super._(root);
+
+	@override final _StringsPa _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'ਆਪਣੇ AI ਸਰੋਤਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ';
+	@override String get language_title => 'ਭਾਸ਼ਾ';
+	@override String get language_desc => 'ਆਪਣੀਆਂ ਪਸੰਦੀਦਾ ਭਾਸ਼ਾਵਾਂ ਚੁਣੋ ਅਤੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ';
+	@override String get model_title => 'ਮਾਡਲ';
+	@override String get model_desc => 'ਉਪਲਬਧ AI ਮਾਡਲਾਂ ਦੀ ਖੋਜ ਅਤੇ ਪ੍ਰਬੰਧਨ ਕਰੋ';
+	@override String get saved_title => 'ਸੁਰੱਖਿਅਤ';
+	@override String get saved_desc => 'ਤੁਹਾਡੀ ਪ੍ਰੋਂਪਟ ਲਾਇਬ੍ਰੇਰੀ';
+	@override String get skills_title => 'ਹੁਨਰ';
+	@override String get skills_desc => 'AI ਸਮਰੱਥਾਵਾਂ';
+}
+
 // Path: biometric
 class _StringsBiometricPa extends _StringsBiometricEn {
 	_StringsBiometricPa._(_StringsPa root) : this._root = root, super._(root);
@@ -2263,6 +3341,30 @@ class _StringsBiometricPa extends _StringsBiometricEn {
 	@override String get dialogSub => 'ZiqeX ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਜਾਂ ਡਿਵਾਈਸ ਫੇਸ ਰਿਕੋਗਨੀਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ';
 	@override String get cancel => 'ਰੱਦ ਕਰੋ';
 	@override String get allow => 'ਬਾਇਓਮੈਟ੍ਰਿਕਸ ਦੀ ਆਗਿਆ ਦਿਓ';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenPa extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenPa._(_StringsPa root) : this._root = root, super._(root);
+
+	@override final _StringsPa _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ਐਪ ਸੁਰੱਖਿਆ';
+	@override String get global_protection => 'ਗਲੋਬਲ ਸੁਰੱਖਿਆ';
+	@override String get app_lock => 'ਐਪ ਲਾਕ';
+	@override String get app_lock_sub => 'ZiqeX ਖੋਲ੍ਹਣ ਲਈ ਪ੍ਰਮਾਣੀਕਰਨ ਦੀ ਲੋੜ ਹੈ';
+	@override String get auth_methods => 'ਪ੍ਰਮਾਣੀਕਰਨ ਵਿਧੀਆਂ';
+	@override String get biometrics_title => 'ਡਿਵਾਈਸ ਬਾਇਓਮੈਟ੍ਰਿਕਸ';
+	@override String get biometrics_sub => 'ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਜਾਂ ਚਿਹਰੇ ਨਾਲ ਤੁਰੰਤ ਅਨਲਾਕ ਕਰੋ';
+	@override String get pin_title => 'ZiqeX ਪਿੰਨ';
+	@override String get pin_active => 'ਪਿੰਨ ਸਰਗਰਮ ਹੈ';
+	@override String get pin_setup => 'ਐਪ ਨੂੰ ਅਨਲਾਕ ਕਰਨ ਲਈ ਇੱਕ ਵਿਲੱਖਣ 4-ਅੰਕਾਂ ਵਾਲਾ ਕੋਡ ਸੈੱਟ ਕਰੋ';
+	@override String get warning_title => 'ਬਹੁਤ ਜ਼ਿਆਦਾ ਗਲਤ ਕੋਸ਼ਿਸ਼ਾਂ';
+	@override String get warning_sub => 'ਜੇਕਰ ਗਲਤ ਪਿੰਨ 10 ਵਾਰ ਦਰਜ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ZiqeX ਆਪਣੇ ਆਪ ਰੀਸੈਟ ਹੋ ਜਾਵੇਗਾ। ਇਸ ਡਿਵਾਈਸ \'ਤੇ ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਸਾਰਾ ਡਾਟਾ ਪੱਕੇ ਤੌਰ \'ਤੇ ਮਿਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ';
+	@override String get incomplete_title => 'ਸੁਰੱਖਿਆ ਸੈੱਟਅੱਪ ਅਧੂਰਾ';
+	@override String get incomplete_content => 'ਤੁਸੀਂ ਐਪ ਲਾਕ ਨੂੰ ਚਾਲੂ ਕਰ ਦਿੱਤਾ ਹੈ ਪਰ ਪਿੰਨ ਜਾਂ ਬਾਇਓਮੈਟ੍ਰਿਕਸ ਸੈੱਟ ਨਹੀਂ ਕੀਤਾ ਹੈ। ਐਪ ਲਾਕ ਉਦੋਂ ਤੱਕ ਬੰਦ ਰਹੇਗਾ ਜਦੋਂ ਤੱਕ ਕੋਈ ਤਰੀਕਾ ਸੈੱਟ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ।';
+	@override String get got_it => 'ਠੀਕ ਹੈ';
 }
 
 // Path: data
@@ -2291,6 +3393,54 @@ class _StringsDataPa extends _StringsDataEn {
 	@override String get deleteAllPillar => 'ਸਭ ਮਿਟਾਓ';
 	@override String get space => 'ਥਾਂ:';
 	@override String get activeInstances => 'ਸਰਗਰਮ ਇੰਸਟੈਂਸ:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupPa extends _StringsPinSetupEn {
+	_StringsPinSetupPa._(_StringsPa root) : this._root = root, super._(root);
+
+	@override final _StringsPa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4-ਅੰਕਾਂ ਦਾ ਪਿੰਨ ਸੈੱਟ ਕਰੋ';
+	@override String get subtitle_setup => 'ਐਪ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਇੱਕ ਸੁਰੱਖਿਅਤ ਕੋਡ ਬਣਾਓ';
+	@override String get title_confirm => 'ਪਿੰਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ';
+	@override String get subtitle_confirm => 'ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਆਪਣਾ 4-ਅੰਕਾਂ ਵਾਲਾ ਕੋਡ ਦੁਬਾਰਾ ਦਰਜ ਕਰੋ';
+	@override String get title_verify => 'ਮੌਜੂਦਾ ਪਿੰਨ ਦਰਜ ਕਰੋ';
+	@override String get subtitle_verify => 'ਜਾਰੀ ਰੱਖਣ ਲਈ ਆਪਣਾ ਮੌਜੂਦਾ ਕੋਡ ਦਰਜ ਕਰੋ';
+	@override String get error_mismatch => 'ਪਿੰਨ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।';
+	@override String get error_incorrect => 'ਗਲਤ ਪਿੰਨ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।';
+	@override String get snack_success => 'ਪਿੰਨ ਸਫਲਤਾਪੂਰਵਕ ਸੈੱਟ ਕੀਤਾ ਗਿਆ';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtPa extends _StringsPinMgmtEn {
+	_StringsPinMgmtPa._(_StringsPa root) : this._root = root, super._(root);
+
+	@override final _StringsPa _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ਐਪ-ਵਿਸ਼ੇਸ਼ ਪਿੰਨ';
+	@override String get change_title => 'ਪਿੰਨ ਬਦਲੋ';
+	@override String get change_sub => 'ਆਪਣਾ 4-ਅੰਕਾਂ ਵਾਲਾ ZiqeX ਸੁਰੱਖਿਆ ਕੋਡ ਅਪਡੇਟ ਕਰੋ';
+	@override String get remove_title => 'ਪਿੰਨ ਹਟਾਓ';
+	@override String get remove_sub => 'ZiqeX ਲਈ ਪਿੰਨ ਪਹੁੰਚ ਬੰਦ ਕਰੋ';
+	@override String get snack_removed => 'ਪਿੰਨ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyPa extends _StringsLangLegacyEn {
+	_StringsLangLegacyPa._(_StringsPa root) : this._root = root, super._(root);
+
+	@override final _StringsPa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'ਕਿਹੜੀ ਭਾਸ਼ਾ\n';
+	@override String get title2 => 'ਆਪਣੀ ਲੱਗਦੀ ਹੈ?';
+	@override String get subtitle => 'ਤੁਹਾਡੀ ਮਾਤ੍ਰ ਭਾਸ਼ਾ ਵਿੱਚ ਆਵਾਜ਼, ਟੈਕਸਟ ਅਤੇ ਜਵਾਬ। ਕਿਸੇ ਵੀ ਸਮੇਂ ਬਦਲੋ।';
+	@override String get first_reply => 'ਪਹਿਲਾ ਜਵਾਬ ਇਹ ਹੋਵੇਗਾ';
+	@override String script_info({required Object lang}) => '${lang} - ਤੁਹਾਡੀ ਲਿਪੀ ਵਿੱਚ ਲਿਖਿਆ ਅਤੇ ਬੋਲਿਆ ਗਿਆ';
+	@override String get continueBtn => 'ਜਾਰੀ ਰੱਖੋ';
 }
 
 // Path: <root>
@@ -2367,8 +3517,13 @@ class _StringsTa extends Translations {
 	@override late final _StringsLanguageSelectionTa languageSelection = _StringsLanguageSelectionTa._(_root);
 	@override late final _StringsPillarsTa pillars = _StringsPillarsTa._(_root);
 	@override late final _StringsModelDownloadTa modelDownload = _StringsModelDownloadTa._(_root);
+	@override late final _StringsLibraryV2Ta library_v2 = _StringsLibraryV2Ta._(_root);
 	@override late final _StringsBiometricTa biometric = _StringsBiometricTa._(_root);
+	@override late final _StringsSecurityScreenTa security_screen = _StringsSecurityScreenTa._(_root);
 	@override late final _StringsDataTa data = _StringsDataTa._(_root);
+	@override late final _StringsPinSetupTa pin_setup = _StringsPinSetupTa._(_root);
+	@override late final _StringsPinMgmtTa pin_mgmt = _StringsPinMgmtTa._(_root);
+	@override late final _StringsLangLegacyTa lang_legacy = _StringsLangLegacyTa._(_root);
 }
 
 // Path: profile
@@ -2384,12 +3539,12 @@ class _StringsProfileTa extends _StringsProfileEn {
 	@override String get security_active => 'பாதுகாப்பு செயலில் உள்ளது';
 	@override String get security_inactive => 'பாதுகாப்பு செயலிழந்துள்ளது';
 	@override String get dark_mode => 'இருண்ட பயன்முறை';
-	@override String get dark_mode_sub => 'ஒளி மற்றும் இருண்ட பணி இட தீம்களுக்கு இடையே மாறவும்';
-	@override String get data_mgmt => 'அரட்டை தரவு மேலாண்மை மற்றும் தக்கவைத்தல்';
-	@override String get data_mgmt_sub => 'உங்கள் உரையாடல் வரலாற்றை நிர்வகிக்கவும்';
+	@override String get dark_mode_sub => 'ஒளி மற்றும் இருண்ட தீம்களுக்கு இடையே மாறவும்';
+	@override String get data_mgmt => 'தரவு மேலாண்மை';
+	@override String get data_mgmt_sub => 'அரட்டை வரலாற்றை நிர்வகிக்கவும்';
 	@override String get app_lock => 'ஆப் லாக்';
-	@override String get app_lock_sub => 'உங்கள் கைரேகை, முகம் அல்லது பின் (PIN) மூலம் ZiqeX ஐ பாதுகாக்கவும்';
-	@override String get incognito_sub => 'வரலாற்றில் சேமிக்காமல் அரட்டை அடிக்கவும். அரட்டையிலிருந்து வெளியேறிய பிறகு மீட்டெடுக்க முடியாது';
+	@override String get app_lock_sub => 'கைரேகை, முகம் அல்லது பின் (PIN) மூலம் பாதுகாக்கவும்';
+	@override String get incognito_sub => 'வரலாற்றில் சேமிக்காமல் அரட்டை அடிக்கவும். மீட்டெடுக்க முடியாது';
 	@override String get version => 'V0.1 • இறையாண்மை • சாதனத்தில்';
 }
 
@@ -2400,10 +3555,10 @@ class _StringsWelcomeTa extends _StringsWelcomeEn {
 	@override final _StringsTa _root; // ignore: unused_field
 
 	// Translations
-	@override String get meet => 'ZiqeX ஐ சந்திக்கவும்';
+	@override String get meet => 'ZiqeX-ஐ சந்திக்கவும்';
 	@override String get at_edge => 'எட்ஜில் உள்ள நுண்ணறிவு';
-	@override String get private => 'தனியார் மற்றும் எட்ஜ் AI\nZenteiQ வழங்கியது';
-	@override String get begin => 'தொடங்குங்கள்';
+	@override String get private => 'தனியார் எட்ஜ் AI\nZenteiQ வழங்கியது';
+	@override String get begin => 'தொடங்கலாம்';
 }
 
 // Path: info
@@ -2480,10 +3635,28 @@ class _StringsModelDownloadTa extends _StringsModelDownloadEn {
 	@override String get ttft => '~140 ms TTFT';
 	@override String error({required Object error}) => 'பிழை: ${error}';
 	@override String get retry => 'மீண்டும் முயற்சிக்கவும்';
-	@override String get open => 'BrahmAI-ஐத் திறக்கவும்';
-	@override String get download => 'மாடலைப் பதிவிறக்கவும்';
+	@override String get open => 'திறக்கவும்';
+	@override String get download => 'பதிவிறக்கவும்';
 	@override String get later => 'பிறகு அமைக்கவும்';
-	@override String get continueSub => 'மாடலைப் பதிவிறக்காமல் தொடரவும். நீங்கள் தயாராக இருக்கும்போது ஒன்றைச் சேர்க்கலாம்';
+	@override String get continueSub => 'பதிவிறக்காமல் தொடரவும். நீங்கள் தயாராக இருக்கும்போது ஒன்றைச் சேர்க்கலாம்';
+}
+
+// Path: library_v2
+class _StringsLibraryV2Ta extends _StringsLibraryV2En {
+	_StringsLibraryV2Ta._(_StringsTa root) : this._root = root, super._(root);
+
+	@override final _StringsTa _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'AI வளங்களை நிர்வகிக்கவும்';
+	@override String get language_title => 'மொழி';
+	@override String get language_desc => 'மொழிகளைத் தேர்ந்தெடுத்து நிர்வகிக்கவும்';
+	@override String get model_title => 'மாதிரி';
+	@override String get model_desc => 'AI மாதிரிகளை ஆராய்ந்து நிர்வகிக்கவும்';
+	@override String get saved_title => 'சேமிக்கப்பட்டது';
+	@override String get saved_desc => 'உங்கள் ப்ராம்ப்ட் நூலகம்';
+	@override String get skills_title => 'திறன்கள்';
+	@override String get skills_desc => 'AI திறன்கள்';
 }
 
 // Path: biometric
@@ -2494,16 +3667,40 @@ class _StringsBiometricTa extends _StringsBiometricEn {
 
 	// Translations
 	@override String get vault => 'பெட்டக பாதுகாப்பு';
-	@override String get setupTitle => 'பாதுகாப்பான லாக் அமைப்பு';
-	@override String get setupSub => 'உங்களுக்கு விருப்பமான அங்கீகார முறை மூலம் உங்கள் பெட்டகத்தைப் பாதுகாக்கவும்.';
-	@override String get deviceTitle => 'சாதன பயோமெட்ரிக்ஸ்';
-	@override String get deviceSub => 'FaceID அல்லது கைரேகையைப் பயன்படுத்தவும்';
-	@override String get pinTitle => 'ஆப்-குறிப்பிட்ட பின் (PIN)';
-	@override String get pinSub => 'தனித்துவமான 4-இலக்க குறியீட்டை அமைக்கவும்';
-	@override String get dialogTitle => 'பயோமெட்ரிக் அணுகலை அனுமதி';
-	@override String get dialogSub => 'ZiqeX ஐத் திறக்க உங்கள் கைரேகை அல்லது சாதன முக அங்கீகாரத்தைப் பயன்படுத்தவும்';
-	@override String get cancel => 'ரத்துசெய்';
-	@override String get allow => 'பயோமெட்ரிக்ஸை அனுமதி';
+	@override String get setupTitle => 'பாதுகாப்பான லாக்';
+	@override String get setupSub => 'விரும்பிய முறையில் உங்கள் பெட்டகத்தைப் பாதுகாக்கவும்.';
+	@override String get deviceTitle => 'பயோமெட்ரிக்ஸ்';
+	@override String get deviceSub => 'FaceID அல்லது கைரேகை';
+	@override String get pinTitle => 'பின் (PIN) குறியீடு';
+	@override String get pinSub => '4-இலக்க குறியீட்டை அமைக்கவும்';
+	@override String get dialogTitle => 'அனுமதி';
+	@override String get dialogSub => 'ZiqeX ஐத் திறக்க உங்கள் கைரேகை அல்லது முகத்தை பயன்படுத்தவும்';
+	@override String get cancel => 'ரத்து';
+	@override String get allow => 'அனுமதி';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenTa extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenTa._(_StringsTa root) : this._root = root, super._(root);
+
+	@override final _StringsTa _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'செயலி பாதுகாப்பு';
+	@override String get global_protection => 'உலகளாவிய பாதுகாப்பு';
+	@override String get app_lock => 'செயலி பூட்டு';
+	@override String get app_lock_sub => 'ZiqeX ஐத் திறக்க அங்கீகாரம் தேவை';
+	@override String get auth_methods => 'அங்கீகார முறைகள்';
+	@override String get biometrics_title => 'சாதன பயோமெட்ரிக்ஸ்';
+	@override String get biometrics_sub => 'உங்கள் கைரேகை அல்லது முகத்தைக் கொண்டு உடனடியாகத் திறக்கவும்';
+	@override String get pin_title => 'ZiqeX பின்';
+	@override String get pin_active => 'பின் செயல்பாட்டில் உள்ளது';
+	@override String get pin_setup => 'செயலியைத் திறக்க ஒரு தனித்துவமான 4 இலக்க குறியீட்டை அமைக்கவும்';
+	@override String get warning_title => 'அதிகப்படியான தவறான முயற்சிகள்';
+	@override String get warning_sub => 'தவறான பின் 10 முறை உள்ளிடப்பட்டால், ZiqeX தானாகவே மீட்டமைக்கப்படும். இந்த சாதனத்தில் சேமிக்கப்பட்ட அனைத்து தரவுகளும் நிரந்தரமாக நீக்கப்படும்';
+	@override String get incomplete_title => 'பாதுகாப்பு அமைப்பு முழுமையடையவில்லை';
+	@override String get incomplete_content => 'நீங்கள் செயலி பூட்டை இயக்கியுள்ளீர்கள், ஆனால் பின் அல்லது பயோமெட்ரிக்ஸை அமைக்கவில்லை. ஒரு முறை கட்டமைக்கப்படும் வரை செயலி பூட்டு முடக்கப்படும்.';
+	@override String get got_it => 'புரிந்தது';
 }
 
 // Path: data
@@ -2513,25 +3710,73 @@ class _StringsDataTa extends _StringsDataEn {
 	@override final _StringsTa _root; // ignore: unused_field
 
 	// Translations
-	@override String get appBar => 'தரவு மேலாண்மை மற்றும்\nதக்கவைத்தல்';
+	@override String get appBar => 'தரவு மேலாண்மை';
 	@override String get summary => 'சேமிப்பக சுருக்கம்';
-	@override String get totalUsed => 'மொத்தம் பயன்படுத்தப்பட்டது: ';
+	@override String get totalUsed => 'பயன்படுத்தப்பட்டது: ';
 	@override String get legendModel => 'மாடல் எடைகள்';
 	@override String get legendFree => 'வெற்று இடம்';
 	@override String get mgmt => 'மாடல் மேலாண்மை';
-	@override String get deleteModels => 'பதிவிறக்கம் செய்யப்பட்ட அனைத்து மாடல்களையும் நீக்கு';
-	@override String get deleteModelsSub => 'இந்த சாதனத்திலிருந்து அனைத்து உள்ளூர் மாடல் எடைகளையும் அளவுருக்களையும் முழுமையாக அகற்றவும்.';
-	@override String get selectDelete => 'நீக்க வேண்டிய மாடல்களைத் தேர்ந்தெடுக்கவும்';
-	@override String get autoDelete => 'இதற்கு மேலான பழைய அரட்டைகளைத் தானாக நீக்கு:';
-	@override String get autoDeleteSub => 'இந்த அமைப்பு அனைத்து அரட்டை முறைகளுக்கும் பொருந்தும்.';
+	@override String get deleteModels => 'அனைத்தையும் நீக்கு';
+	@override String get deleteModelsSub => 'மாடல் எடைகளை சாதனத்திலிருந்து முழுமையாக அகற்றவும்.';
+	@override String get selectDelete => 'நீக்க வேண்டியவற்றைத் தேர்ந்தெடுக்கவும்';
+	@override String get autoDelete => 'தானாக நீக்கு:';
+	@override String get autoDeleteSub => 'அனைத்து அரட்டை முறைகளுக்கும் பொருந்தும்.';
 	@override String get modes => 'முறைகள்';
-	@override String get noData => 'செயலில் உள்ள அரட்டை தரவு இல்லை';
-	@override String get deleteAll => 'அனைத்து தரவையும் நீக்கு';
-	@override String get authReq => 'ஆப் லாக் மீண்டும் அங்கீகாரம் தேவை';
-	@override String get viewChats => 'அரட்டைகளைப் பார்';
-	@override String get deleteAllPillar => 'அனைத்தையும் நீக்கு';
+	@override String get noData => 'தகவல்கள் இல்லை';
+	@override String get deleteAll => 'அனைத்தையும் நீக்கு';
+	@override String get authReq => 'மீண்டும் அங்கீகாரம் தேவை';
+	@override String get viewChats => 'பார்';
+	@override String get deleteAllPillar => 'நீக்கு';
 	@override String get space => 'இடம்:';
-	@override String get activeInstances => 'செயலில் உள்ள நிகழ்வுகள்:';
+	@override String get activeInstances => 'நிகழ்வுகள்:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupTa extends _StringsPinSetupEn {
+	_StringsPinSetupTa._(_StringsTa root) : this._root = root, super._(root);
+
+	@override final _StringsTa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4-இலக்க PIN-ஐ அமைக்கவும்';
+	@override String get subtitle_setup => 'பயன்பாட்டை அணுக பாதுகாப்பான குறியீட்டை உருவாக்கவும்';
+	@override String get title_confirm => 'PIN-ஐ உறுதிப்படுத்தவும்';
+	@override String get subtitle_confirm => 'சரிபார்க்க உங்கள் 4-இலக்க குறியீட்டை மீண்டும் உள்ளிடவும்';
+	@override String get title_verify => 'தற்போதைய PIN-ஐ உள்ளிடவும்';
+	@override String get subtitle_verify => 'தொடர உங்கள் தற்போதைய குறியீட்டை உள்ளிடவும்';
+	@override String get error_mismatch => 'PIN-கள் பொருந்தவில்லை. மீண்டும் முயற்சிக்கவும்.';
+	@override String get error_incorrect => 'தவறான PIN. மீண்டும் முயற்சிக்கவும்.';
+	@override String get snack_success => 'PIN வெற்றிகரமாக அமைக்கப்பட்டது';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtTa extends _StringsPinMgmtEn {
+	_StringsPinMgmtTa._(_StringsTa root) : this._root = root, super._(root);
+
+	@override final _StringsTa _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'செயலி சார்ந்த PIN';
+	@override String get change_title => 'PIN-ஐ மாற்றவும்';
+	@override String get change_sub => 'உங்கள் 4-இலக்க ZiqeX பாதுகாப்புக் குறியீட்டைப் புதுப்பிக்கவும்';
+	@override String get remove_title => 'PIN-ஐ அகற்றவும்';
+	@override String get remove_sub => 'ZiqeX க்கான PIN அணுகலை முடக்கவும்';
+	@override String get snack_removed => 'PIN வெற்றிகரமாக அகற்றப்பட்டது';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyTa extends _StringsLangLegacyEn {
+	_StringsLangLegacyTa._(_StringsTa root) : this._root = root, super._(root);
+
+	@override final _StringsTa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'எந்த மொழி\n';
+	@override String get title2 => 'சொந்த உணர்வைத் தருகிறது?';
+	@override String get subtitle => 'உங்கள் தாய்மொழியில் குரல், உரை மற்றும் பதில்கள். எப்போது வேண்டுமானாலும் மாற்றிக்கொள்ளலாம்.';
+	@override String get first_reply => 'முதல் பதில் இவ்வாறு இருக்கும்';
+	@override String script_info({required Object lang}) => '${lang} - உங்கள் எழுத்துருவில் எழுதப்பட்டு பேசப்படும்';
+	@override String get continueBtn => 'தொடரவும்';
 }
 
 // Path: <root>
@@ -2591,11 +3836,11 @@ class _StringsTe extends Translations {
 	@override String get storage_purge_sub => 'పరికరంలో 184 KB';
 	@override String get ephemeral_mode => 'ఇన్కాగ్నిటో చాట్';
 	@override String get about => 'సిస్టమ్ సమాచారం';
-	@override String get reset_prototype => 'ప్రోటోటైప్‌ని రీసెట్ చేయండి';
+	@override String get reset_prototype => 'ప్రోటోటోపిని రీసెట్ చేయండి';
 	@override String get built_in_india => 'భారతదేశంలో నిర్మించబడింది. ప్రపంచం కోసం.';
 	@override String get library_sub => 'ప్రతి మోడల్ · ప్రతి మెమరీ · ఈ పరికరంలో';
 	@override String get on_this_device => 'ఈ పరికరంలో';
-	@override String get active => 'యాక్тив్';
+	@override String get active => 'యాక్టివ్';
 	@override String get add => '+ జోడించు';
 	@override String get storage_used => 'ఉపయోగించిన స్టోరేజ్';
 	@override String get health_question => 'ఆరోగ్య ప్రశ్న';
@@ -2608,8 +3853,13 @@ class _StringsTe extends Translations {
 	@override late final _StringsLanguageSelectionTe languageSelection = _StringsLanguageSelectionTe._(_root);
 	@override late final _StringsPillarsTe pillars = _StringsPillarsTe._(_root);
 	@override late final _StringsModelDownloadTe modelDownload = _StringsModelDownloadTe._(_root);
+	@override late final _StringsLibraryV2Te library_v2 = _StringsLibraryV2Te._(_root);
 	@override late final _StringsBiometricTe biometric = _StringsBiometricTe._(_root);
+	@override late final _StringsSecurityScreenTe security_screen = _StringsSecurityScreenTe._(_root);
 	@override late final _StringsDataTe data = _StringsDataTe._(_root);
+	@override late final _StringsPinSetupTe pin_setup = _StringsPinSetupTe._(_root);
+	@override late final _StringsPinMgmtTe pin_mgmt = _StringsPinMgmtTe._(_root);
+	@override late final _StringsLangLegacyTe lang_legacy = _StringsLangLegacyTe._(_root);
 }
 
 // Path: profile
@@ -2660,7 +3910,7 @@ class _StringsInfoTe extends _StringsInfoEn {
 	@override String get privacy_desc => 'ZiqeX ఇంటెలిజెన్స్ మరియు మీ సమాచారాన్ని మీ పరికరానికి దగ్గరగా ఉంచడానికి రూపొందించబడింది.';
 	@override String get hand_title => 'మీ చేతిలో ఇంటెలిజెన్స్';
 	@override String get hand_desc => 'రోజువారీ ఇంటెలిజెన్స్, నేరుగా మీ పరికరంలో అందుబాటులో ఉంటుంది.';
-	@override String get control_title => 'మీ డేటా. మీ నియন্ত্রণ.';
+	@override String get control_title => 'మీ డేటా. మీ నియంత్రణ.';
 	@override String get control_desc => 'దేనిని ఉంచుకోవాలో ఎంచుకోండి, నిల్వ చేయబడిన దానిని నిర్వహించండి మరియు మీకు అవసరం లేని వాటిని తొలగించండి.';
 	@override String get place_title => 'ప్రతి ప్రదేశం కోసం రూపొందించబడింది';
 	@override String get place_desc => 'విభిన్న భాషలు, పరికరాలు మరియు ప్రజలు సాంకేతికతను ఉపయోగించే మార్గాల కోసం నిర్మించబడింది.';
@@ -2727,6 +3977,24 @@ class _StringsModelDownloadTe extends _StringsModelDownloadEn {
 	@override String get continueSub => 'మోడల్‌ను డౌన్‌లోడ్ చేయకుండా కొనసాగించండి. మీరు సిద్ధంగా ఉన్నప్పుడు ఒకదాన్ని జోడించవచ్చు';
 }
 
+// Path: library_v2
+class _StringsLibraryV2Te extends _StringsLibraryV2En {
+	_StringsLibraryV2Te._(_StringsTe root) : this._root = root, super._(root);
+
+	@override final _StringsTe _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => 'మీ AI వనరులను నిర్వహించండి';
+	@override String get language_title => 'భాష';
+	@override String get language_desc => 'మీకు నచ్చిన భాషలను ఎంచుకోండి మరియు నిర్వహించండి';
+	@override String get model_title => 'మోడల్';
+	@override String get model_desc => 'అందుబాటులో ఉన్న AI మోడల్‌లను అన్వేషించండి మరియు నిర్వహించండి';
+	@override String get saved_title => 'సేవ్ చేయబడింది';
+	@override String get saved_desc => 'మీ ప్రాంప్ట్ లైబ్రరీ';
+	@override String get skills_title => 'నైపుణ్యాలు';
+	@override String get skills_desc => 'AI సామర్థ్యాలు';
+}
+
 // Path: biometric
 class _StringsBiometricTe extends _StringsBiometricEn {
 	_StringsBiometricTe._(_StringsTe root) : this._root = root, super._(root);
@@ -2747,6 +4015,30 @@ class _StringsBiometricTe extends _StringsBiometricEn {
 	@override String get allow => 'బయోమెట్రిక్స్‌ను అనుమతించు';
 }
 
+// Path: security_screen
+class _StringsSecurityScreenTe extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenTe._(_StringsTe root) : this._root = root, super._(root);
+
+	@override final _StringsTe _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'యాప్ భద్రత';
+	@override String get global_protection => 'గ్లోబల్ ప్రొటెక్షన్';
+	@override String get app_lock => 'యాప్ లాక్';
+	@override String get app_lock_sub => 'ZiqeX తెరవడానికి ప్రమాణీకరణ అవసరం';
+	@override String get auth_methods => 'ప్రమాణీకరణ పద్ధతులు';
+	@override String get biometrics_title => 'పరికర బయోమెట్రిక్స్';
+	@override String get biometrics_sub => 'మీ వేలిముద్ర లేదా ముఖంతో తక్షణమే అన్‌లాక్ చేయండి';
+	@override String get pin_title => 'ZiqeX పిన్';
+	@override String get pin_active => 'పిన్ యాక్టివ్‌గా ఉంది';
+	@override String get pin_setup => 'యాప్‌ను అన్‌లాక్ చేయడానికి ప్రత్యేకమైన 4-అంకెల కోడ్‌ను సెట్ చేయండి';
+	@override String get warning_title => 'చాలా తప్పుడు ప్రయత్నాలు';
+	@override String get warning_sub => 'తప్పుడు పిన్ 10 సార్లు నమోదు చేస్తే, ZiqeX స్వయంచాలకంగా రీసెట్ చేయబడుతుంది. ఈ పరికరంలో సేవ్ చేయబడిన మొత్తం డేటా శాశ్వతంగా తొలగించబడుతుంది';
+	@override String get incomplete_title => 'సెక్యూరిటీ సెటప్ అసంపూర్తిగా ఉంది';
+	@override String get incomplete_content => 'మీరు యాప్ లాక్‌ని ప్రారంభించారు కానీ పిన్ లేదా బయోమెట్రిక్స్‌ని సెట్ చేయలేదు. ఒక పద్ధతి కాన్ఫిగర్ చేయబడే వరకు యాప్ లాక్ నిలిపివేయబడుతుంది.';
+	@override String get got_it => 'సరే';
+}
+
 // Path: data
 class _StringsDataTe extends _StringsDataEn {
 	_StringsDataTe._(_StringsTe root) : this._root = root, super._(root);
@@ -2760,7 +4052,7 @@ class _StringsDataTe extends _StringsDataEn {
 	@override String get legendModel => 'మోడల్ వెయిట్స్';
 	@override String get legendFree => 'ఖాళీ స్థలం';
 	@override String get mgmt => 'మోడల్ నిర్వహణ';
-	@override String get deleteModels => 'డೌన్‌లోడ్ చేసిన అన్ని మోడళ్లను తొలగించు';
+	@override String get deleteModels => 'డೌน์โหลด చేసిన అన్ని మోడళ్లను తొలగించు';
 	@override String get deleteModelsSub => 'ఈ పరికరం నుండి అన్ని స్థానిక మోడల్ వెయిట్స్ మరియు పారామితులను పూర్తిగా తొలగించండి.';
 	@override String get selectDelete => 'తొలగించడానికి మోడళ్లను ఎంచుకోండి';
 	@override String get autoDelete => 'దీనికంటే పాత చాట్‌లను ఆటోమేటిక్‌గా తొలగించు:';
@@ -2773,6 +4065,54 @@ class _StringsDataTe extends _StringsDataEn {
 	@override String get deleteAllPillar => 'అన్నీ తొలగించు';
 	@override String get space => 'స్థలం:';
 	@override String get activeInstances => 'యాక్టివ్ ఇన్‌స్టాన్స్:';
+}
+
+// Path: pin_setup
+class _StringsPinSetupTe extends _StringsPinSetupEn {
+	_StringsPinSetupTe._(_StringsTe root) : this._root = root, super._(root);
+
+	@override final _StringsTe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4-అంకెల పిన్ సెట్ చేయండి';
+	@override String get subtitle_setup => 'యాప్‌ని యాక్సెస్ చేయడానికి సురక్షితమైన కోడ్‌ని సృష్టించండి';
+	@override String get title_confirm => 'పిన్‌ని ధృవీకరించండి';
+	@override String get subtitle_confirm => 'ధృవీకరించడానికి మీ 4-అంకెల కోడ్‌ని మళ్లీ నమోదు చేయండి';
+	@override String get title_verify => 'ప్రస్తుత పిన్‌ని నమోదు చేయండి';
+	@override String get subtitle_verify => 'కొనసాగించడానికి మీ ప్రస్తుత కోడ్‌ని నమోదు చేయండి';
+	@override String get error_mismatch => 'పిన్‌లు సరిపోలలేదు. మళ్లీ ప్రయత్నించండి.';
+	@override String get error_incorrect => 'తప్పు పిన్. దయచేసి మళ్లీ ప్రయత్నించండి.';
+	@override String get snack_success => 'పిన్ విజయవంతంగా సెట్ చేయబడింది';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtTe extends _StringsPinMgmtEn {
+	_StringsPinMgmtTe._(_StringsTe root) : this._root = root, super._(root);
+
+	@override final _StringsTe _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'యాప్-నిర్దిష్ట పిన్';
+	@override String get change_title => 'పిన్ మార్చండి';
+	@override String get change_sub => 'మీ 4-అంకెల ZiqeX భద్రతా కోడ్‌ను అప్‌డేట్ చేయండి';
+	@override String get remove_title => 'పిన్‌ని తొలగించండి';
+	@override String get remove_sub => 'ZiqeX కోసం పిన్ యాక్సెస్‌ని ఆఫ్ చేయండి';
+	@override String get snack_removed => 'పిన్ విజయవంతంగా తొలగించబడింది';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyTe extends _StringsLangLegacyEn {
+	_StringsLangLegacyTe._(_StringsTe root) : this._root = root, super._(root);
+
+	@override final _StringsTe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'ఏ భాష\n';
+	@override String get title2 => 'సొంతం అనిపిస్తుంది?';
+	@override String get subtitle => 'మీ మాతృభాషలో వాయిస్, టెక్స్ట్ మరియు ప్రత్యుత్తరాలు. ఎప్పుడైనా మారండి.';
+	@override String get first_reply => 'మొదటి సమాధానం ఇలా ఉంటుంది';
+	@override String script_info({required Object lang}) => '${lang} - మీ లిపిలో వ్రాయబడినది మరియు మాట్లాడబడేది';
+	@override String get continueBtn => 'కొనసాగించండి';
 }
 
 // Path: <root>
@@ -2804,6 +4144,10 @@ class _StringsUr extends Translations {
 	@override String get hello => 'سلام';
 	@override late final _StringsLanguageSelectionUr languageSelection = _StringsLanguageSelectionUr._(_root);
 	@override late final _StringsModelDownloadUr modelDownload = _StringsModelDownloadUr._(_root);
+	@override late final _StringsSecurityScreenUr security_screen = _StringsSecurityScreenUr._(_root);
+	@override late final _StringsPinSetupUr pin_setup = _StringsPinSetupUr._(_root);
+	@override late final _StringsPinMgmtUr pin_mgmt = _StringsPinMgmtUr._(_root);
+	@override late final _StringsLangLegacyUr lang_legacy = _StringsLangLegacyUr._(_root);
 }
 
 // Path: languageSelection
@@ -2840,6 +4184,78 @@ class _StringsModelDownloadUr extends _StringsModelDownloadEn {
 	@override String get download => 'ماڈل ڈاؤن لوڈ کریں';
 	@override String get later => 'بعد میں سیٹ اپ کریں';
 	@override String get continueSub => 'ماڈل ڈاؤن لوڈ کیے بغیر جاری رکھیں۔ جب آپ تیار ہوں تو آپ ایک شامل کر سکتے ہیں';
+}
+
+// Path: security_screen
+class _StringsSecurityScreenUr extends _StringsSecurityScreenEn {
+	_StringsSecurityScreenUr._(_StringsUr root) : this._root = root, super._(root);
+
+	@override final _StringsUr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ایپ سیکیورٹی';
+	@override String get global_protection => 'عالمی تحفظ';
+	@override String get app_lock => 'ایپ لاک';
+	@override String get app_lock_sub => 'ZiqeX کھولنے کے لیے تصدیق درکار ہے';
+	@override String get auth_methods => 'تصدیق کے طریقے';
+	@override String get biometrics_title => 'ڈیوائس بائیو میٹرکس';
+	@override String get biometrics_sub => 'اپنے فنگر پرنٹ یا چہرے سے فوری طور پر ان لاک کریں';
+	@override String get pin_title => 'ZiqeX پن';
+	@override String get pin_active => 'پن فعال ہے';
+	@override String get pin_setup => 'ایپ کو ان لاک کرنے کے لیے ایک منفرد 4 ہندسوں کا کوڈ سیٹ کریں';
+	@override String get warning_title => 'بہت زیادہ غلط کوششیں';
+	@override String get warning_sub => 'اگر غلط پن 10 بار درج کیا جاتا ہے تو ZiqeX خود بخود ری سیٹ ہو جائے گا۔ اس ڈیوائس پر محفوظ تمام ڈیٹا مستقل طور بر حذف کر دیا جائے گا';
+	@override String get incomplete_title => 'سیکیورٹی سیٹ اپ نامکمل';
+	@override String get incomplete_content => 'آپ نے ایپ لاک فعال کر دیا ہے لیکن پن یا بائیو میٹرکس سیٹ نہیں کیا ہے۔ ایپ لاک اس وقت تک غیر فعال رہے گا جب تک کہ کوئی طریقہ کنفیگر نہیں کیا جاتا۔';
+	@override String get got_it => 'ٹھیک ہے';
+}
+
+// Path: pin_setup
+class _StringsPinSetupUr extends _StringsPinSetupEn {
+	_StringsPinSetupUr._(_StringsUr root) : this._root = root, super._(root);
+
+	@override final _StringsUr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_setup => '4 ہندسوں کا پن سیٹ کریں';
+	@override String get subtitle_setup => 'ایپ تک رسائی کے لیے ایک محفوظ کوڈ بنائیں';
+	@override String get title_confirm => 'پن کی تصدیق کریں';
+	@override String get subtitle_confirm => 'تصدیق کے لیے اپنا 4 ہندسوں کا کوڈ دوبارہ درج کریں';
+	@override String get title_verify => 'موجودہ پن درج کریں';
+	@override String get subtitle_verify => 'جاری رکھنے کے لیے اپنا موجودہ کوڈ درج کریں';
+	@override String get error_mismatch => 'پن مطابقت نہیں رکھتے۔ دوبارہ کوشش کریں۔';
+	@override String get error_incorrect => 'غلط پن۔ براہ کرم دوبارہ کوشش کریں۔';
+	@override String get snack_success => 'پن کامیابی کے ساتھ سیٹ ہو گیا';
+}
+
+// Path: pin_mgmt
+class _StringsPinMgmtUr extends _StringsPinMgmtEn {
+	_StringsPinMgmtUr._(_StringsUr root) : this._root = root, super._(root);
+
+	@override final _StringsUr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'ایپ کے لیے مخصوص پن';
+	@override String get change_title => 'پن تبدیل کریں';
+	@override String get change_sub => 'اپنا 4 ہندسوں والا ZiqeX سیکیورٹی کوڈ اپ ڈیٹ کریں';
+	@override String get remove_title => 'پن ختم کریں';
+	@override String get remove_sub => 'ZiqeX کے لیے پن تک رسائی بند کریں';
+	@override String get snack_removed => 'پن کامیابی کے ساتھ ختم کر دیا گیا';
+}
+
+// Path: lang_legacy
+class _StringsLangLegacyUr extends _StringsLangLegacyEn {
+	_StringsLangLegacyUr._(_StringsUr root) : this._root = root, super._(root);
+
+	@override final _StringsUr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title1 => 'کون سی زبان\n';
+	@override String get title2 => 'اپنی سی لگتی ہے؟';
+	@override String get subtitle => 'آپ کی مادری زبان میں آواز، متن اور جوابات۔ کسی بھی وقت تبدیل کریں۔';
+	@override String get first_reply => 'پہلا جواب یہ ہوگا';
+	@override String script_info({required Object lang}) => '${lang} - آپ کے رسم الخط میں لکھا اور بولا گیا';
+	@override String get continueBtn => 'جاری رکھیں';
 }
 
 /// Flat map(s) containing all translations.
@@ -2951,6 +4367,15 @@ extension on Translations {
 			case 'modelDownload.download': return 'Download Model';
 			case 'modelDownload.later': return 'Set up later';
 			case 'modelDownload.continueSub': return 'Continue without downloading a model. You can add one when you are ready';
+			case 'library_v2.subtitle': return 'Manage your AI resources';
+			case 'library_v2.language_title': return 'Language';
+			case 'library_v2.language_desc': return 'Choose and manage your preferred languages';
+			case 'library_v2.model_title': return 'Model';
+			case 'library_v2.model_desc': return 'Explore and manage available AI models';
+			case 'library_v2.saved_title': return 'Saved';
+			case 'library_v2.saved_desc': return 'Your prompt library';
+			case 'library_v2.skills_title': return 'Skills';
+			case 'library_v2.skills_desc': return 'AI capabilities';
 			case 'biometric.vault': return 'Vault Security';
 			case 'biometric.setupTitle': return 'Secure Lock Setup';
 			case 'biometric.setupSub': return 'Protect your vault with your preferred\nauthentication method.';
@@ -2962,6 +4387,21 @@ extension on Translations {
 			case 'biometric.dialogSub': return 'Use your fingerprint or device face recognition to unlock ZiqeX';
 			case 'biometric.cancel': return 'Cancel';
 			case 'biometric.allow': return 'Allow biometrics';
+			case 'security_screen.appBar': return 'App Security';
+			case 'security_screen.global_protection': return 'GLOBAL PROTECTION';
+			case 'security_screen.app_lock': return 'App lock';
+			case 'security_screen.app_lock_sub': return 'Require authentication to open ZiqeX';
+			case 'security_screen.auth_methods': return 'AUTHENTICATION METHODS';
+			case 'security_screen.biometrics_title': return 'Device biometrics';
+			case 'security_screen.biometrics_sub': return 'Unlock instantly with your fingerprint or face';
+			case 'security_screen.pin_title': return 'ZiqeX PIN';
+			case 'security_screen.pin_active': return 'PIN is active';
+			case 'security_screen.pin_setup': return 'Set a unique 4-digit code to unlock the app';
+			case 'security_screen.warning_title': return 'Too many incorrect attempts';
+			case 'security_screen.warning_sub': return 'If an incorrect PIN is entered 10 times, ZiqeX will automatically reset. All data saved on this device will be permanently deleted';
+			case 'security_screen.incomplete_title': return 'Security Setup Incomplete';
+			case 'security_screen.incomplete_content': return 'You have enabled App Lock but haven\'t set a PIN or Biometrics. App Lock will be disabled until a method is configured.';
+			case 'security_screen.got_it': return 'GOT IT';
 			case 'data.appBar': return 'Data Management &\nRetention';
 			case 'data.summary': return 'STORAGE SUMMARY';
 			case 'data.totalUsed': return 'Total Used: ';
@@ -2981,6 +4421,27 @@ extension on Translations {
 			case 'data.deleteAllPillar': return 'Delete all';
 			case 'data.space': return 'Space:';
 			case 'data.activeInstances': return 'Active Instances:';
+			case 'pin_setup.title_setup': return 'Set 4-Digit PIN';
+			case 'pin_setup.subtitle_setup': return 'Create a secure code to access the app';
+			case 'pin_setup.title_confirm': return 'Confirm PIN';
+			case 'pin_setup.subtitle_confirm': return 'Re-enter your 4-digit code to verify';
+			case 'pin_setup.title_verify': return 'Enter Current PIN';
+			case 'pin_setup.subtitle_verify': return 'Enter your existing code to continue';
+			case 'pin_setup.error_mismatch': return 'PINs do not match. Try again.';
+			case 'pin_setup.error_incorrect': return 'Incorrect PIN. Please try again.';
+			case 'pin_setup.snack_success': return 'PIN set successfully';
+			case 'pin_mgmt.appBar': return 'App-Specific PIN';
+			case 'pin_mgmt.change_title': return 'Change PIN';
+			case 'pin_mgmt.change_sub': return 'Update your 4-digit ZiqeX security code';
+			case 'pin_mgmt.remove_title': return 'Remove PIN';
+			case 'pin_mgmt.remove_sub': return 'Turn off PIN access for ZiqeX';
+			case 'pin_mgmt.snack_removed': return 'PIN removed successfully';
+			case 'lang_legacy.title1': return 'Which language\nfeels like ';
+			case 'lang_legacy.title2': return 'home?';
+			case 'lang_legacy.subtitle': return 'Voice, text and replies in your mother tongue. Switch anytime.';
+			case 'lang_legacy.first_reply': return 'FIRST REPLY WILL SAY';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - transcribed and spoken in your script';
+			case 'lang_legacy.continueBtn': return 'Continue';
 			default: return null;
 		}
 	}
@@ -3092,6 +4553,51 @@ extension on _StringsAs {
 			case 'modelDownload.download': return 'মডেল ডাউনলোড কৰক';
 			case 'modelDownload.later': return 'পাছত ছেটআপ কৰক';
 			case 'modelDownload.continueSub': return 'মডেল ডাউনলোড নকৰাকৈ আগবাঢ়ক। আপুনি সাজু হ\'লে এটা যোগ কৰিব পাৰিব';
+			case 'library_v2.subtitle': return 'আপোনাৰ AI সম্পদসমূহ পৰিচালনা কৰক';
+			case 'library_v2.language_title': return 'ভাষা';
+			case 'library_v2.language_desc': return 'আপোনাৰ পচন্দের ভাষাসমূহ বাছনি আৰু পৰিচালনা কৰক';
+			case 'library_v2.model_title': return 'মডেল';
+			case 'library_v2.model_desc': return 'উপলব্ধ AI মডেলসমূহ অন্বেষণ আৰু পৰিচালনা কৰক';
+			case 'library_v2.saved_title': return 'সংৰক্ষিত';
+			case 'library_v2.saved_desc': return 'আপোনাৰ প্ৰম্পট লাইব্ৰেৰী';
+			case 'library_v2.skills_title': return 'দক্ষতা';
+			case 'library_v2.skills_desc': return 'AI ক্ষমতা';
+			case 'security_screen.appBar': return 'এপ সুৰক্ষা';
+			case 'security_screen.global_protection': return 'গোলকীয় সুৰক্ষা';
+			case 'security_screen.app_lock': return 'এপ লক';
+			case 'security_screen.app_lock_sub': return 'ZiqeX খুলিবলৈ প্ৰমাণীকৰণৰ প্ৰয়োজন';
+			case 'security_screen.auth_methods': return 'প্ৰমাণীকৰণ পদ্ধতিসমূহ';
+			case 'security_screen.biometrics_title': return 'ডিভাইচ বায়োমেট্ৰিক্স';
+			case 'security_screen.biometrics_sub': return 'আপোনাৰ ফিংগাৰপ্ৰিন্ট বা মুখৰ সহায়ত তৎক্ষণাত আনলক কৰক';
+			case 'security_screen.pin_title': return 'ZiqeX পিন';
+			case 'security_screen.pin_active': return 'পিন সক্ৰিয় হৈ আছে';
+			case 'security_screen.pin_setup': return 'এপটো আনলক কৰিবলৈ এটা অনন্য ৪-অংকৰ ক\'ড ছেট কৰক';
+			case 'security_screen.warning_title': return 'অত্যধিক ভুল প্ৰচেষ্টা';
+			case 'security_screen.warning_sub': return 'যদি ১০ বাৰ ভুল পিন দিয়া হয়, তেন্তে ZiqeX স্বয়ংক্ৰিয়ভাৱে ৰিছেট হ\'ব। এই ডিভাইচত সংৰক্ষিত সকলো তথ্য স্থায়ীভাৱে মচি পেলোৱা হ\'ব';
+			case 'security_screen.incomplete_title': return 'সুৰক্ষা ছেটআপ অসম্পূৰ্ণ';
+			case 'security_screen.incomplete_content': return 'আপুনি এপ লক সক্ষম কৰিছে কিন্তু পিন বা বায়োমেট্ৰিক্স ছেট কৰা নাই। পদ্ধতি এটা কনফিগৰ নকৰালৈকে এপ লক নিষ্ক্ৰিয় হৈ থাকিব।';
+			case 'security_screen.got_it': return 'বুজিলোঁ';
+			case 'pin_setup.title_setup': return '৪-অংকৰ পিন ছেট কৰক';
+			case 'pin_setup.subtitle_setup': return 'এপটো ব্যৱহাৰ কৰিবলৈ এটা সুৰক্ষিত ক’ড তৈয়াৰ কৰক';
+			case 'pin_setup.title_confirm': return 'পিন নিশ্চিত কৰক';
+			case 'pin_setup.subtitle_confirm': return 'যাচাই কৰিবলৈ আপোনাৰ ৪-অংকৰ ক’ডটো আকৌ লিখক';
+			case 'pin_setup.title_verify': return 'বৰ্তমানৰ পিন লিখক';
+			case 'pin_setup.subtitle_verify': return 'আগবাঢ়িবলৈ আপোনাৰ বৰ্তমানৰ ক’ডটো লিখক';
+			case 'pin_setup.error_mismatch': return 'পিন দুটা মিল খোৱা নাই। আকৌ চেষ্টা কৰক।';
+			case 'pin_setup.error_incorrect': return 'ভুল পিন। অনুগ্ৰহ কৰি আকৌ চেষ্টা কৰক।';
+			case 'pin_setup.snack_success': return 'পিন সফলতাৰে ছেট কৰা হ’ল';
+			case 'pin_mgmt.appBar': return 'এপ-নিৰ্দিষ্ট পিন';
+			case 'pin_mgmt.change_title': return 'পিন সলনি কৰক';
+			case 'pin_mgmt.change_sub': return 'আপোনাৰ ৪-অংকৰ ZiqeX সুৰক্ষা ক’ডটো আপডেট কৰক';
+			case 'pin_mgmt.remove_title': return 'পিন আঁতৰাওক';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX-ৰ বাবে পিন ব্যৱহাৰ বন্ধ কৰক';
+			case 'pin_mgmt.snack_removed': return 'পিন সফলতাৰে আঁতৰোৱা হ’ল';
+			case 'lang_legacy.title1': return 'কোনটো ভাষা\n';
+			case 'lang_legacy.title2': return 'আপোন যেন লাগে?';
+			case 'lang_legacy.subtitle': return 'আপোনাৰ মাতৃভাষাত কণ্ঠ, পাঠ আৰু উত্তৰ। যিকোনো সময়তে সলনি কৰক।';
+			case 'lang_legacy.first_reply': return 'প্ৰথম উত্তৰটো হ’ব';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - আপোনাৰ লিপিত লিখা আৰু কোৱা হ’ব';
+			case 'lang_legacy.continueBtn': return 'আগবাঢ়ক';
 			default: return null;
 		}
 	}
@@ -3169,7 +4675,7 @@ extension on _StringsBn {
 			case 'info.control_desc': return 'কি রাখা হবে তা বেছে নিন, যা সংরক্ষিত আছে তা পরিচালনা করুন এবং যা আপনার আর প্রয়োজন নেই তা মুছে দিন।';
 			case 'info.place_title': return 'প্রতিটি জায়গার জন্য ডিজাইন করা হয়েছে';
 			case 'info.place_desc': return 'বিভিন্ন ভাষা, ডিভাইস এবং লোকেদের প্রযুক্তি ব্যবহারের পদ্ধতির জন্য তৈরি।';
-			case 'info.footer': return 'আপনার বুদ্ধিমত্তা। আপনার ডিভাইস। আপনার নিয়ন্ত্রণ।';
+			case 'info.footer': return 'Your intelligence. Your device. Your control.';
 			case 'info.setup': return 'আপনার ZiqeX সেট আপ করুন';
 			case 'languageSelection.appBar': return 'ভাষা নির্বাচন';
 			case 'languageSelection.title': return 'আপনার ভাষা চয়ন করুন';
@@ -3203,6 +4709,81 @@ extension on _StringsBn {
 			case 'modelDownload.download': return 'মডেল ডাউনলোড করুন';
 			case 'modelDownload.later': return 'পরে সেটআপ করুন';
 			case 'modelDownload.continueSub': return 'মডেল ডাউনলোড না করেই এগিয়ে যান। আপনি প্রস্তুত হলে একটি যোগ করতে পারেন';
+			case 'library_v2.subtitle': return 'আপনার AI সম্পদগুলি পরিচালনা করুন';
+			case 'library_v2.language_title': return 'ভাষা';
+			case 'library_v2.language_desc': return 'আপনার পছন্দের ভাষাগুলি চয়ন এবং পরিচালনা করুন';
+			case 'library_v2.model_title': return 'মডেল';
+			case 'library_v2.model_desc': return 'উপলব্ধ AI মডেলগুলি অন্বেষণ এবং পরিচালনা করুন';
+			case 'library_v2.saved_title': return 'সংরক্ষিত';
+			case 'library_v2.saved_desc': return 'আপনার প্রম্পট লাইব্রেরি';
+			case 'library_v2.skills_title': return 'দক্ষতা';
+			case 'library_v2.skills_desc': return 'AI ক্ষমতা';
+			case 'biometric.vault': return 'ভল্ট সুরক্ষা';
+			case 'biometric.setupTitle': return 'সুরক্ষিত লক সেটআপ';
+			case 'biometric.setupSub': return 'আপনার পছন্দের প্রমাণীকরণ পদ্ধতির মাধ্যমে আপনার ভল্ট সুরক্ষিত করুন।';
+			case 'biometric.deviceTitle': return 'ডিভাইস বায়োমেট্রিক্স';
+			case 'biometric.deviceSub': return 'FaceID বা আঙুলের ছাপ ব্যবহার করুন';
+			case 'biometric.pinTitle': return 'অ্যাপ-নির্দিষ্ট পিন';
+			case 'biometric.pinSub': return 'একটি অনন্য ৪-অঙ্কের কোড সেট করুন';
+			case 'biometric.dialogTitle': return 'বায়োমেট্রিক অ্যাক্সেসের অনুমতি দিন';
+			case 'biometric.dialogSub': return 'ZiqeX আনলক করতে আপনার আঙুলের ছাপ বা ডিভাইসের মুখ শনাক্তকরণ ব্যবহার করুন';
+			case 'biometric.cancel': return 'বাতিল করুন';
+			case 'biometric.allow': return 'বায়োমেট্রিক্সের অনুমতি দিন';
+			case 'security_screen.appBar': return 'অ্যাপ নিরাপত্তা';
+			case 'security_screen.global_protection': return 'গ্লোবাল সুরক্ষা';
+			case 'security_screen.app_lock': return 'অ্যাপ লক';
+			case 'security_screen.app_lock_sub': return 'ZiqeX খোলার জন্য প্রমাণীকরণ প্রয়োজন';
+			case 'security_screen.auth_methods': return 'প্রমাণীকরণ পদ্ধতি';
+			case 'security_screen.biometrics_title': return 'ডিভাইস বায়োমেট্রিক্স';
+			case 'security_screen.biometrics_sub': return 'আপনার ফিঙ্গারপ্রিন্ট বা মুখ দিয়ে তাৎক্ষণিকভাবে আনলক করুন';
+			case 'security_screen.pin_title': return 'ZiqeX পিন';
+			case 'security_screen.pin_active': return 'পিন সক্রিয় আছে';
+			case 'security_screen.pin_setup': return 'অ্যাপটি আনলক করতে একটি অনন্য ৪-সংখ্যার কোড সেট করুন';
+			case 'security_screen.warning_title': return 'অনেকগুলি ভুল প্রচেষ্টা';
+			case 'security_screen.warning_sub': return 'যদি ১০ বার ভুল পিন দেওয়া হয়, তবে ZiqeX স্বয়ংক্রিয়ভাবে রিসেট হয়ে যাবে। এই ডিভাইসে সংরক্ষিত সমস্ত ডেটা স্থায়ীভাবে মুছে ফেলা হবে';
+			case 'security_screen.incomplete_title': return 'নিরাপত্তা সেটআপ অসম্পূর্ণ';
+			case 'security_screen.incomplete_content': return 'আপনি অ্যাপ লক সক্ষম করেছেন কিন্তু পিন বা বায়োমেট্রিক্স সেট করেননি। কোনো পদ্ধতি কনফিগার না করা পর্যন্ত অ্যাপ লক নিষ্ক্রিয় থাকবে।';
+			case 'security_screen.got_it': return 'বুঝেছি';
+			case 'data.appBar': return 'ডেটা ম্যানেজমেন্ট এবং\nধারণ';
+			case 'data.summary': return 'স্টোরেজ সারাংশ';
+			case 'data.totalUsed': return 'মোট ব্যবহৃত: ';
+			case 'data.legendModel': return 'মডেল ওয়েট';
+			case 'data.legendFree': return 'খালি জায়গা';
+			case 'data.mgmt': return 'মডেল ম্যানেজমেন্ট';
+			case 'data.deleteModels': return 'সব ডাউনলোড করা মডেল মুছে ফেলুন';
+			case 'data.deleteModelsSub': return 'এই ডিভাইস থেকে সমস্ত স্থানীয় মডেল ওয়েট এবং ফাইন-টিউন করা প্যারামিটার সম্পূর্ণরূপে সরিয়ে দিন।';
+			case 'data.selectDelete': return 'মুছে ফেলার জন্য মডেল নির্বাচন করুন';
+			case 'data.autoDelete': return 'এর থেকে পুরানো চ্যাট স্বয়ংক্রিয়ভাবে মুছুন:';
+			case 'data.autoDeleteSub': return 'এই সেটিংটি সমস্ত अनलिঙ্কড কথোপকথন মোডে প্রযোজ্য।';
+			case 'data.modes': return 'মোডসমূহ';
+			case 'data.noData': return 'কোনো সক্রিয় চ্যাট ডেটা নেই';
+			case 'data.deleteAll': return 'সমস্ত ডেটা মুছুন';
+			case 'data.authReq': return 'অ্যাপ লক পুনরায় প্রমাণীকরণ প্রয়োজন';
+			case 'data.viewChats': return 'চ্যাট দেখুন';
+			case 'data.deleteAllPillar': return 'সব মুছুন';
+			case 'data.space': return 'জায়গা:';
+			case 'data.activeInstances': return 'সক্রিয় ইনস্ট্যান্স:';
+			case 'pin_setup.title_setup': return '৪-সংখ্যার পিন সেট করুন';
+			case 'pin_setup.subtitle_setup': return 'অ্যাপটি অ্যাক্সেস করার জন্য একটি সুরক্ষিত কোড তৈরি করুন';
+			case 'pin_setup.title_confirm': return 'পিন নিশ্চিত করুন';
+			case 'pin_setup.subtitle_confirm': return 'যাচাই করতে আপনার ৪-সংখ্যার কোডটি পুনরায় লিখুন';
+			case 'pin_setup.title_verify': return 'বর্তমান পিন লিখুন';
+			case 'pin_setup.subtitle_verify': return 'চালিয়ে যেতে আপনার বিদ্যমান কোডটি লিখুন';
+			case 'pin_setup.error_mismatch': return 'পিন মেলেনি। আবার চেষ্টা করুন।';
+			case 'pin_setup.error_incorrect': return 'ভুল পিন। দয়া করে আবার চেষ্টা করুন।';
+			case 'pin_setup.snack_success': return 'পিন সফলভাবে সেট করা হয়েছে';
+			case 'pin_mgmt.appBar': return 'অ্যাপ-নির্দিষ্ট পিন';
+			case 'pin_mgmt.change_title': return 'পিন পরিবর্তন করুন';
+			case 'pin_mgmt.change_sub': return 'আপনার ৪-সংখ্যার ZiqeX সুরক্ষা কোডটি আপডেট করুন';
+			case 'pin_mgmt.remove_title': return 'পিন সরান';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX-এর জন্য পিন অ্যাক্সেস বন্ধ করুন';
+			case 'pin_mgmt.snack_removed': return 'পিন সফলভাবে সরানো হয়েছে';
+			case 'lang_legacy.title1': return 'কোন ভাষাটি\n';
+			case 'lang_legacy.title2': return 'নিজের মনে হয়?';
+			case 'lang_legacy.subtitle': return 'আপনার মাতৃভাষায় ভয়েস, টেক্সট এবং উত্তর। যেকোনো সময় পরিবর্তন করুন।';
+			case 'lang_legacy.first_reply': return 'প্রথম উত্তরটি হবে';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - আপনার লিপিতে লেখা এবং বলা হবে';
+			case 'lang_legacy.continueBtn': return 'চালিয়ে যান';
 			default: return null;
 		}
 	}
@@ -3314,6 +4895,15 @@ extension on _StringsGu {
 			case 'modelDownload.download': return 'મોડલ ડાઉનલોડ કરો';
 			case 'modelDownload.later': return 'પછીથી સેટઅપ કરો';
 			case 'modelDownload.continueSub': return 'મોડલ ડાઉનલોડ કર્યા વગર આગળ વધો. જ્યારે તમે તૈયાર હોવ ત્યારે તમે એક ઉમેરી શકો છો';
+			case 'library_v2.subtitle': return 'તમારા AI સંસાધનોનું સંચાલન કરો';
+			case 'library_v2.language_title': return 'ભાષા';
+			case 'library_v2.language_desc': return 'તમારી પસંદગીની ભાષાઓ પસંદ કરો અને સંચાલિત કરો';
+			case 'library_v2.model_title': return 'મોડલ';
+			case 'library_v2.model_desc': return 'ઉપલબ્ધ AI મોડલ્સ શોધો અને સંચાલિત કરો';
+			case 'library_v2.saved_title': return 'સાચવેલું';
+			case 'library_v2.saved_desc': return 'તમારી પ્રોમ્પ્ટ લાઇબ્રેરી';
+			case 'library_v2.skills_title': return 'કૌશલ્યો';
+			case 'library_v2.skills_desc': return 'AI ક્ષમતાઓ';
 			case 'biometric.vault': return 'વોલ્ટ સુરક્ષા';
 			case 'biometric.setupTitle': return 'સુરક્ષિત લોક સેટઅપ';
 			case 'biometric.setupSub': return 'તમારી પસંદગીની પ્રમાણીકરણ પદ્ધતિ વડે તમારા વોલ્ટને સુરક્ષિત કરો.';
@@ -3325,6 +4915,21 @@ extension on _StringsGu {
 			case 'biometric.dialogSub': return 'ZiqeX ને અનલોક કરવા માટે તમારી ફિંગરપ્રિન્ટ અથવા ઉપકરણ ચહેરાની ઓળખનો ઉપયોગ કરો';
 			case 'biometric.cancel': return 'રદ કરો';
 			case 'biometric.allow': return 'બાયોમેટ્રિક્સને મંજૂરી આપો';
+			case 'security_screen.appBar': return 'એપ સુરક્ષા';
+			case 'security_screen.global_protection': return 'વૈશ્વિક સુરક્ષા';
+			case 'security_screen.app_lock': return 'એપ લોક';
+			case 'security_screen.app_lock_sub': return 'ZiqeX ખોલવા માટે પ્રમાણીકરણ જરૂરી છે';
+			case 'security_screen.auth_methods': return 'પ્રમાણીકરણ પદ્ધતિઓ';
+			case 'security_screen.biometrics_title': return 'ડિવાઇસ બાયોમેટ્રિક્સ';
+			case 'security_screen.biometrics_sub': return 'તમારી ફિંગરપ્રિન્ટ અથવા ચહેરા વડે તરત જ અનલોક કરો';
+			case 'security_screen.pin_title': return 'ZiqeX પિન';
+			case 'security_screen.pin_active': return 'પિન સક્રિય છે';
+			case 'security_screen.pin_setup': return 'એપને અનલોક કરવા માટે એક અનન્ય 4-અંકનો કોડ સેટ કરો';
+			case 'security_screen.warning_title': return 'ખૂબ વધારે ખોટા પ્રયાસો';
+			case 'security_screen.warning_sub': return 'જો ખોટો પિન 10 વાર દાખલ કરવામાં આવે તો, ZiqeX આપમેળે રીસેટ થઈ જશે. આ ડિવાઇસ પર સાચવેલ તમામ ડેટા કાયમી ધોરણે ભૂંસી નાખવામાં આવશે';
+			case 'security_screen.incomplete_title': return 'સુરક્ષા સેટઅપ અપૂર્ણ';
+			case 'security_screen.incomplete_content': return 'તમે એપ લોક સક્ષમ કર્યું છે પરંતુ પિન અથવા બાયોમેટ્રિક્સ સેટ નથી કર્યું. જ્યાં સુધી પદ્ધતિ ગોઠવવામાં ન આવે ત્યાં સુધી એપ લોક અક્ષમ રહેશે.';
+			case 'security_screen.got_it': return 'સમજાઈ ગયું';
 			case 'data.appBar': return 'ડેટા મેનેજમેન્ટ અને\nરીટેન્શન';
 			case 'data.summary': return 'સ્ટોરેજ સારાંશ';
 			case 'data.totalUsed': return 'કુલ વપરાયેલ: ';
@@ -3344,6 +4949,27 @@ extension on _StringsGu {
 			case 'data.deleteAllPillar': return 'બધું કાઢી નાખો';
 			case 'data.space': return 'જગ્યા:';
 			case 'data.activeInstances': return 'સક્રિય ઇન્સ્ટન્સ:';
+			case 'pin_setup.title_setup': return '4-અંકનો પિન સેટ કરો';
+			case 'pin_setup.subtitle_setup': return 'એપ્લિકેશન એક્સેસ કરવા માટે સુરક્ષિત કોડ બનાવો';
+			case 'pin_setup.title_confirm': return 'પિનની પુષ્ટિ કરો';
+			case 'pin_setup.subtitle_confirm': return 'ચકાસવા માટે તમારો 4-અંકનો કોડ ફરીથી દાખલ કરો';
+			case 'pin_setup.title_verify': return 'વર્તમાન પિન દાખલ કરો';
+			case 'pin_setup.subtitle_verify': return 'ચાલુ રાખવા માટે તમારો હાલનો કોડ દાખલ કરો';
+			case 'pin_setup.error_mismatch': return 'પિન મેચ થતા નથી. ફરી પ્રયાસ કરો.';
+			case 'pin_setup.error_incorrect': return 'ખોટો પિન. મહેરબાની કરીને ફરી પ્રયાસ કરો.';
+			case 'pin_setup.snack_success': return 'પિન સફળતાપૂર્વક સેટ થયો';
+			case 'pin_mgmt.appBar': return 'એપ્લિકેશન-વિશિષ્ટ પિન';
+			case 'pin_mgmt.change_title': return 'પિન બદલો';
+			case 'pin_mgmt.change_sub': return 'તમારો 4-અંકનો ZiqeX સુરક્ષા કોડ અપડેટ કરો';
+			case 'pin_mgmt.remove_title': return 'પિન દૂર કરો';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX માટે પિન એક્સેસ બંધ કરો';
+			case 'pin_mgmt.snack_removed': return 'પિન સફળતાપૂર્વક દૂર કરવામાં આવ્યો';
+			case 'lang_legacy.title1': return 'કઈ ભાષા\n';
+			case 'lang_legacy.title2': return 'ઘર જેવી લાગે છે?';
+			case 'lang_legacy.subtitle': return 'તમારી માતૃભાષામાં અવાજ, લખાણ અને જવાબો. ગમે ત્યારે બદલો.';
+			case 'lang_legacy.first_reply': return 'પહેલો જવાબ આ હશે';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - તમારી લિપિમાં લખાયેલ અને બોલાયેલ';
+			case 'lang_legacy.continueBtn': return 'ચાલુ રાખો';
 			default: return null;
 		}
 	}
@@ -3455,6 +5081,15 @@ extension on _StringsHi {
 			case 'modelDownload.download': return 'मॉडल डाउनलोड करें';
 			case 'modelDownload.later': return 'बाद में सेटअप करें';
 			case 'modelDownload.continueSub': return 'बिना मॉडल डाउनलोड किए जारी रखें। आप तैयार होने पर इसे जोड़ सकते हैं';
+			case 'library_v2.subtitle': return 'अपने एआई संसाधनों को प्रबंधित करें';
+			case 'library_v2.language_title': return 'भाषा';
+			case 'library_v2.language_desc': return 'अपनी पसंदीदा भाषाएं चुनें और प्रबंधित करें';
+			case 'library_v2.model_title': return 'मॉडल';
+			case 'library_v2.model_desc': return 'उपलब्ध एआई मॉडल खोजें और प्रबंधित करें';
+			case 'library_v2.saved_title': return 'सहेजा गया';
+			case 'library_v2.saved_desc': return 'आपकी प्रॉम्प्ट लाइब्रेरी';
+			case 'library_v2.skills_title': return 'कौशल';
+			case 'library_v2.skills_desc': return 'एआई क्षमताएं';
 			case 'biometric.vault': return 'वॉल्ट सुरक्षा';
 			case 'biometric.setupTitle': return 'सुरक्षित लॉक सेटअप';
 			case 'biometric.setupSub': return 'अपनी पसंदीदा प्रमाणीकरण विधि के साथ अपने वॉल्ट को सुरक्षित रखें।';
@@ -3466,6 +5101,21 @@ extension on _StringsHi {
 			case 'biometric.dialogSub': return 'ZiqeX को अनलॉक करने के लिए अपने फिंगरप्रिंट या डिवाइस फेस रिकग्निशन का उपयोग करें';
 			case 'biometric.cancel': return 'रद्द करें';
 			case 'biometric.allow': return 'बायोमेट्रिक्स की अनुमति दें';
+			case 'security_screen.appBar': return 'ऐप सुरक्षा';
+			case 'security_screen.global_protection': return 'वैश्विक सुरक्षा';
+			case 'security_screen.app_lock': return 'ऐप लॉक';
+			case 'security_screen.app_lock_sub': return 'ZiqeX खोलने के लिए प्रमाणीकरण की आवश्यकता है';
+			case 'security_screen.auth_methods': return 'प्रमाणीकरण विधियाँ';
+			case 'security_screen.biometrics_title': return 'डिवाइस बायोमेट्रिक्स';
+			case 'security_screen.biometrics_sub': return 'अपने फिंगरप्रिंट या चेहरे से तुरंत अनलॉक करें';
+			case 'security_screen.pin_title': return 'ZiqeX पिन';
+			case 'security_screen.pin_active': return 'पिन सक्रिय है';
+			case 'security_screen.pin_setup': return 'ऐप को अनलॉक करने के लिए एक अद्वितीय 4-अंकीय कोड सेट करें';
+			case 'security_screen.warning_title': return 'बहुत अधिक गलत प्रयास';
+			case 'security_screen.warning_sub': return 'यदि 10 बार गलत पिन दर्ज किया जाता है, तो ZiqeX स्वचालित रूप से रीसेट हो जाएगा। इस डिवाइस पर सहेजा गया सभी डेटा स्थायी रूप से हटा दिया जाएगा';
+			case 'security_screen.incomplete_title': return 'सुरक्षा सेटअप अधूरा';
+			case 'security_screen.incomplete_content': return 'आपने ऐप लॉक सक्षम कर दिया है लेकिन पिन या बायोमेट्रिक्स सेट नहीं किया है। ऐप लॉक तब तक अक्षम रहेगा जब तक कि कोई विधि कॉन्फ़िगर नहीं की जाती है।';
+			case 'security_screen.got_it': return 'ठीक है';
 			case 'data.appBar': return 'डेटा प्रबंधन और\nप्रतिधारण';
 			case 'data.summary': return 'स्टोरेज सारांश';
 			case 'data.totalUsed': return 'कुल उपयोग किया गया: ';
@@ -3485,6 +5135,27 @@ extension on _StringsHi {
 			case 'data.deleteAllPillar': return 'सभी हटाएं';
 			case 'data.space': return 'जगह:';
 			case 'data.activeInstances': return 'सक्रिय इंस्टेंस:';
+			case 'pin_setup.title_setup': return '4-अंकों का पिन सेट करें';
+			case 'pin_setup.subtitle_setup': return 'ऐप एक्सेस करने के लिए एक सुरक्षित कोड बनाएं';
+			case 'pin_setup.title_confirm': return 'पिन की पुष्टि करें';
+			case 'pin_setup.subtitle_confirm': return 'सत्यापित करने के लिए अपना 4-अंकों का कोड फिर से दर्ज करें';
+			case 'pin_setup.title_verify': return 'वर्तमान पिन दर्ज करें';
+			case 'pin_setup.subtitle_verify': return 'जारी रखने के لیے अपना मौजूदा कोड दर्ज करें';
+			case 'pin_setup.error_mismatch': return 'पिन मेल नहीं खाते। फिर से कोशिश करें।';
+			case 'pin_setup.error_incorrect': return 'गलत पिन। कृपया फिर से कोशिश करें।';
+			case 'pin_setup.snack_success': return 'पिन सफलतापूर्वक सेट हो गया';
+			case 'pin_mgmt.appBar': return 'ऐप-विशिष्ट पिन';
+			case 'pin_mgmt.change_title': return 'पिन बदलें';
+			case 'pin_mgmt.change_sub': return 'अपना 4-अंकों का ZiqeX सुरक्षा कोड अपडेट करें';
+			case 'pin_mgmt.remove_title': return 'पिन हटाएं';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX के लिए पिन एक्सेस बंद करें';
+			case 'pin_mgmt.snack_removed': return 'पिन सफलतापूर्वक हटा दिया गया';
+			case 'lang_legacy.title1': return 'कौन सी भाषा\n';
+			case 'lang_legacy.title2': return 'घर जैसी लगती है?';
+			case 'lang_legacy.subtitle': return 'अपनी मातृभाषा में वॉयस, टेक्स्ट और जवाब। कभी भी बदलें।';
+			case 'lang_legacy.first_reply': return 'पहला जवाब यह होगा';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - आपकी लिपि में लिखा और बोला गया';
+			case 'lang_legacy.continueBtn': return 'जारी रखें';
 			default: return null;
 		}
 	}
@@ -3596,6 +5267,15 @@ extension on _StringsKn {
 			case 'modelDownload.download': return 'ಮಾದರಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ';
 			case 'modelDownload.later': return 'ನಂತರ ಹೊಂದಿಸಿ';
 			case 'modelDownload.continueSub': return 'ಮಾದರಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡದೆಯೇ ಮುಂದುವರಿಯಿರಿ. ನೀವು ಸಿದ್ಧವಾದಾಗ ಒಂದನ್ನು ಸೇರಿಸಬಹುದು';
+			case 'library_v2.subtitle': return 'ನಿಮ್ಮ AI ಸಂಪನ್ಮೂಲಗಳನ್ನು ನಿರ್ವಹಿಸಿ';
+			case 'library_v2.language_title': return 'ಭಾಷೆ';
+			case 'library_v2.language_desc': return 'ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆಗಳನ್ನು ಆರಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
+			case 'library_v2.model_title': return 'ಮಾದರಿ (Model)';
+			case 'library_v2.model_desc': return 'ಲಭ್ಯವಿರುವ AI ಮಾದರಿಗಳನ್ನು ಅನ್ವೇಷಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
+			case 'library_v2.saved_title': return 'ಉಳಿಸಲಾಗಿದೆ';
+			case 'library_v2.saved_desc': return 'ನಿಮ್ಮ ಪ್ರಾಂಪ್ಟ್ ಲೈಬ್ರರಿ';
+			case 'library_v2.skills_title': return 'ಕೌಶಲಗಳು';
+			case 'library_v2.skills_desc': return 'AI ಸಾಮರ್ಥ್ಯಗಳು';
 			case 'biometric.vault': return 'ವೋಲ್ಟ್ ಭದ್ರತೆ';
 			case 'biometric.setupTitle': return 'ಸುರಕ್ಷಿತ ಲಾಕ್ ಸೆಟಪ್';
 			case 'biometric.setupSub': return 'ನಿಮ್ಮ ಆದ್ಯತೆಯ ಪ್ರಮಾಣೀಕರಣ ವಿಧಾನದೊಂದಿಗೆ ನಿಮ್ಮ ವೋಲ್ಟ್ ಅನ್ನು ರಕ್ಷಿಸಿ.';
@@ -3607,15 +5287,30 @@ extension on _StringsKn {
 			case 'biometric.dialogSub': return 'ZiqeX ಅನ್‌ಲಾಕ್ ಮಾಡಲು ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅಥವಾ ಸಾಧನದ ಫೇಸ್ ರೆಕಗ್ನಿಷನ್ ಬಳಸಿ';
 			case 'biometric.cancel': return 'ರದ್ದುಗೊಳಿಸಿ';
 			case 'biometric.allow': return 'ಬಯೋಮೆಟ್ರಿಕ್ಸ್ ಅನುಮತಿಸಿ';
+			case 'security_screen.appBar': return 'ಆ್ಯಪ್ ಭದ್ರತೆ';
+			case 'security_screen.global_protection': return 'ಜಾಗತಿಕ ರಕ್ಷಣೆ';
+			case 'security_screen.app_lock': return 'ಆ್ಯಪ್ ಲಾಕ್';
+			case 'security_screen.app_lock_sub': return 'ZiqeX ತೆರೆಯಲು ದೃಢೀಕರಣದ ಅಗತ್ಯವಿದೆ';
+			case 'security_screen.auth_methods': return 'ದೃಢೀಕರಣ ವಿಧಾನಗಳು';
+			case 'security_screen.biometrics_title': return 'ಸಾಧನ ಬಯೋಮೆಟ್ರಿಕ್ಸ್';
+			case 'security_screen.biometrics_sub': return 'ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅಥವಾ ಮುಖದೊಂದಿಗೆ ತಕ್ಷಣವೇ ಅನ್‌ಲಾಕ್ ಮಾಡಿ';
+			case 'security_screen.pin_title': return 'ZiqeX ಪಿನ್';
+			case 'security_screen.pin_active': return 'ಪಿನ್ ಸಕ್ರಿಯವಾಗಿದೆ';
+			case 'security_screen.pin_setup': return 'ಆ್ಯಪ್ ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಅನನ್ಯ 4-ಅಂಕಿಯ ಕೋಡ್ ಸೆಟ್ ಮಾಡಿ';
+			case 'security_screen.warning_title': return 'ಬಹಳಷ್ಟು ತಪ್ಪು ಪ್ರಯತ್ನಗಳು';
+			case 'security_screen.warning_sub': return 'ತಪ್ಪು ಪಿನ್ ಅನ್ನು 10 ಬಾರಿ ನಮೂದಿಸಿದರೆ, ZiqeX ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮರುಹೊಂದಿಸಲ್ಪಡುತ್ತದೆ. ಈ ಸಾಧನದಲ್ಲಿ ಉಳಿಸಲಾದ ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ';
+			case 'security_screen.incomplete_title': return 'ಭದ್ರತಾ ಸೆಟಪ್ ಅಪೂರ್ಣವಾಗಿದೆ';
+			case 'security_screen.incomplete_content': return 'ನೀವು ಆ್ಯಪ್ ಲಾಕ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದ್ದೀರಿ ಆದರೆ ಪಿನ್ ಅಥವಾ ಬಯೋಮೆಟ್ರಿಕ್ಸ್ ಅನ್ನು ಸೆಟ್ ಮಾಡಿಲ್ಲ. ಒಂದು ವಿಧಾನವನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡುವವರೆಗೆ ಆ್ಯಪ್ ಲಾಕ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ.';
+			case 'security_screen.got_it': return 'ಸರಿ';
 			case 'data.appBar': return 'ಡೇಟಾ ನಿರ್ವಹಣೆ ಮತ್ತು\nಸಂಗ್ರಹಣೆ';
 			case 'data.summary': return 'ಸಂಗ್ರಹಣೆ ಸಾರಾಂಶ';
 			case 'data.totalUsed': return 'ಒಟ್ಟು ಬಳಸಲಾಗಿದೆ: ';
 			case 'data.legendModel': return 'ಮಾದರಿ ತೂಕಗಳು';
 			case 'data.legendFree': return 'ಖಾಲಿ ಸ್ಥಳ';
 			case 'data.mgmt': return 'ಮಾದರಿ ನಿರ್ವಹಣೆ';
-			case 'data.deleteModels': return 'ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಎಲ್ಲಾ ಮಾದರಿಗಳನ್ನು ಅಳಿಸಿ';
+			case 'data.deleteModels': return 'ದೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಎಲ್ಲಾ ಮಾದರಿಗಳನ್ನು ಅಳಿಸಿ';
 			case 'data.deleteModelsSub': return 'ಈ ಸಾಧನದಿಂದ ಎಲ್ಲಾ ಸ್ಥಳೀಯ ಮಾದರಿ ತೂಕಗಳನ್ನು ಮತ್ತು ನಿಯತಾಂಕಗಳನ್ನು ಸಂಪೂರ್ಣವಾಗಿ ತೆಗೆದುಹಾಕಿ.';
-			case 'data.selectDelete': return 'ಅಳಿಸಲು ಮಾದರಿಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ';
+			case 'data.selectDelete': return 'ಅಳಿಸಲು ಮಾದರಿಗಳನ್ನು ಆಯ್કેಮಾಡಿ';
 			case 'data.autoDelete': return 'ಇದಕ್ಕಿಂತ ಹಳೆಯದಾದ ಚಾಟ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಿ:';
 			case 'data.autoDeleteSub': return 'ಈ ಸೆಟ್ಟಿಂಗ್ ಎಲ್ಲಾ ಅನ್‌ಲಿಂಕ್ಡ್ ಸಂಭಾಷಣೆ ಮೋಡ್‌ಗಳಿಗೆ ಅನ್ವಯಿಸುತ್ತದೆ.';
 			case 'data.modes': return 'ಮೋಡ್‌ಗಳು';
@@ -3626,6 +5321,27 @@ extension on _StringsKn {
 			case 'data.deleteAllPillar': return 'ಎಲ್ಲವನ್ನೂ ಅಳಿಸಿ';
 			case 'data.space': return 'ಸ್ಥಳ:';
 			case 'data.activeInstances': return 'ಸಕ್ರಿಯ ಇನ್‌ಸ್ಟೆನ್ಸ್‌ಗಳು:';
+			case 'pin_setup.title_setup': return '4-ಅಂಕಿಯ ಪಿನ್ ಹೊಂದಿಸಿ';
+			case 'pin_setup.subtitle_setup': return 'ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಿಸಲು ಸುರಕ್ಷಿತ ಕೋಡ್ ರಚಿಸಿ';
+			case 'pin_setup.title_confirm': return 'ಪಿನ್ ಖಚಿತಪಡಿಸಿ';
+			case 'pin_setup.subtitle_confirm': return 'ಪರಿಶೀಲಿಸಲು ನಿಮ್ಮ 4-ಅಂಕಿಯ ಕೋಡ್ ಅನ್ನು ಮರು-ನಮೂದಿಸಿ';
+			case 'pin_setup.title_verify': return 'ಪ್ರಸ್ತುತ ಪಿನ್ ನಮೂದಿಸಿ';
+			case 'pin_setup.subtitle_verify': return 'ಮುಂದುವರಿಯಲು ನಿಮ್ಮ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ';
+			case 'pin_setup.error_mismatch': return 'ಪಿನ್‌ಗಳು ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
+			case 'pin_setup.error_incorrect': return 'ತಪ್ಪು ಪಿನ್. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
+			case 'pin_setup.snack_success': return 'ಪಿನ್ ಯಶಸ್ವಿಯಾಗಿ ಹೊಂದಿಸಲಾಗಿದೆ';
+			case 'pin_mgmt.appBar': return 'ಅಪ್ಲಿಕೇಶನ್-ನಿರ್ದಿಷ್ಟ ಪಿನ್';
+			case 'pin_mgmt.change_title': return 'ಪಿನ್ ಬದಲಾಯಿಸಿ';
+			case 'pin_mgmt.change_sub': return 'ನಿಮ್ಮ 4-ಅಂಕಿಯ ZiqeX ಭದ್ರತಾ ಕೋಡ್ ಅನ್ನು ನವೀಕರಿಸಿ';
+			case 'pin_mgmt.remove_title': return 'ಪಿನ್ ತೆಗೆದುಹಾಕಿ';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX ಗಾಗಿ ಪಿನ್ ಪ್ರವೇಶವನ್ನು ಆಫ್ ಮಾಡಿ';
+			case 'pin_mgmt.snack_removed': return 'ಪಿನ್ ಯಶಸ್ವಿಯಾಗಿ ತೆಗೆದುಹಾಕಲಾಗಿದೆ';
+			case 'lang_legacy.title1': return 'ಯಾವ ಭಾಷೆ\n';
+			case 'lang_legacy.title2': return 'ತವರು ಎನಿಸುತ್ತದೆ?';
+			case 'lang_legacy.subtitle': return 'ನಿಮ್ಮ ಮಾತೃಭಾಷೆಯಲ್ಲಿ ಧ್ವನಿ, ಪಠ್ಯ ಮತ್ತು ಉತ್ತರಗಳು. ಯಾವಾಗ ಬೇಕಾದರೂ ಬದಲಾಯಿಸಿ.';
+			case 'lang_legacy.first_reply': return 'ಮೊದಲ ಉತ್ತರ ಹೀಗಿರುತ್ತದೆ';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - ನಿಮ್ಮ ಲಿಪಿಯಲ್ಲಿ ಲಿಪ್ಯಂತರ ಮತ್ತು ಮಾತನಾಡಲಾಗುತ್ತದೆ';
+			case 'lang_legacy.continueBtn': return 'ಮುಂದುವರಿಸಿ';
 			default: return null;
 		}
 	}
@@ -3715,7 +5431,7 @@ extension on _StringsMl {
 			case 'pillars.subtitle': return 'നിങ്ങൾ ശ്രദ്ധ കേന്ദ്രീകരിക്കാൻ ആഗ്രഹിക്കുന്ന പ്രധാന കാര്യങ്ങൾ തിരഞ്ഞെടുക്കുക.';
 			case 'pillars.general': return 'പൊതുവായത്';
 			case 'pillars.operational': return 'പ്രവർത്തനക്ഷമം';
-			case 'pillars.personal': return 'വ്യക്തിഗത ഉപദേശം';
+			case 'pillars.personal': return 'ব্যക്തിഗത ഉപദേശം';
 			case 'pillars.workplace': return 'തൊഴിലിടം';
 			case 'pillars.culture': return 'സംസ്കാരവും കുടുംബവും';
 			case 'pillars.journal': return 'ദിനചര്യ കുറിപ്പുകൾ';
@@ -3737,6 +5453,81 @@ extension on _StringsMl {
 			case 'modelDownload.download': return 'ഡൗൺലോഡ്';
 			case 'modelDownload.later': return 'പിന്നീട് സജ്ജമാക്കുക';
 			case 'modelDownload.continueSub': return 'മോഡൽ ഡൗൺലോഡ് ചെയ്യാതെ തുടരുക. നിങ്ങൾ തയ്യാറാകുമ്പോൾ ഒരെണ്ണം ചേർക്കാം';
+			case 'library_v2.subtitle': return 'നിങ്ങളുടെ AI വിഭവങ്ങൾ മാനേജ് ചെയ്യുക';
+			case 'library_v2.language_title': return 'ഭാഷ';
+			case 'library_v2.language_desc': return 'നിങ്ങളുടെ ഭാഷകൾ നിയന്ത്രിക്കുക';
+			case 'library_v2.model_title': return 'മോഡൽ';
+			case 'library_v2.model_desc': return 'AI മോഡലുകൾ മാനേജ് ചെയ്യുക';
+			case 'library_v2.saved_title': return 'സേവ് ചെയ്തവ';
+			case 'library_v2.saved_desc': return 'നിങ്ങളുടെ പ്രോംപ്റ്റ് ലൈബ്രറി';
+			case 'library_v2.skills_title': return 'നൈപുണ്യങ്ങൾ';
+			case 'library_v2.skills_desc': return 'AI കഴിവുകൾ';
+			case 'biometric.vault': return 'വോൾട്ട് സുരക്ഷ';
+			case 'biometric.setupTitle': return 'സുരക്ഷിത ലോക്ക് സജ്ജീകരണം';
+			case 'biometric.setupSub': return 'നിങ്ങളുടെ പ്രിയപ്പെട്ട രീതി ഉപയോഗിച്ച് നിങ്ങളുടെ വോൾട്ട് സുരക്ഷിതമാക്കുക.';
+			case 'biometric.deviceTitle': return 'ബയോമെട്രിക്സ്';
+			case 'biometric.deviceSub': return 'വിരലടയാളം ഉപയോഗിക്കുക';
+			case 'biometric.pinTitle': return 'പിൻ കോഡ്';
+			case 'biometric.pinSub': return '4 അക്ക പിൻ സജ്ജമാക്കുക';
+			case 'biometric.dialogTitle': return 'അനുമതി നൽകുക';
+			case 'biometric.dialogSub': return 'ZiqeX തുറക്കാൻ വിരലടയാളം ഉപയോഗിക്കുക';
+			case 'biometric.cancel': return 'റദ്ദാക്കുക';
+			case 'biometric.allow': return 'അനുവദിക്കുക';
+			case 'security_screen.appBar': return 'ആപ്പ് സെക്യൂരിറ്റി';
+			case 'security_screen.global_protection': return 'ഗ്ലോബൽ പ്രൊട്ടക്ഷൻ';
+			case 'security_screen.app_lock': return 'ആപ്പ് ലോക്ക്';
+			case 'security_screen.app_lock_sub': return 'ZiqeX തുറക്കാൻ ഓതന്റിക്കേഷൻ ആവശ്യമാണ്';
+			case 'security_screen.auth_methods': return 'ഓതന്റിക്കേഷൻ രീതികൾ';
+			case 'security_screen.biometrics_title': return 'ഡിവൈസ് ബയോമെട്രിക്സ്';
+			case 'security_screen.biometrics_sub': return 'നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് അല്ലെങ്കിൽ മുഖം ഉപയോഗിച്ച് തൽക്ഷണം അൺലോക്ക് ചെയ്യുക';
+			case 'security_screen.pin_title': return 'ZiqeX പിൻ';
+			case 'security_screen.pin_active': return 'പിൻ സജീവമാണ്';
+			case 'security_screen.pin_setup': return 'ആപ്പ് അൺലോക്ക് ചെയ്യാൻ 4 അക്കങ്ങളുള്ള ഒരു തനതായ കോഡ് സജ്ജമാക്കുക';
+			case 'security_screen.warning_title': return 'തെറ്റായ ശ്രമങ്ങൾ പരിധി കവിഞ്ഞു';
+			case 'security_screen.warning_sub': return 'തെറ്റായ പിൻ 10 തവണ നൽകിയാൽ, ZiqeX സ്വയമേവ റീസെറ്റ് ചെയ്യപ്പെടും. ഈ ഉപകരണത്തിൽ സംരക്ഷിച്ചിട്ടുള്ള എല്ലാ ഡാറ്റയും ശാശ്വതമായി ഇല്ലാതാക്കപ്പെടും';
+			case 'security_screen.incomplete_title': return 'സെക്യൂരിറ്റി സെറ്റപ്പ് അപൂർണ്ണമാണ്';
+			case 'security_screen.incomplete_content': return 'നിങ്ങൾ ആപ്പ് ലോക്ക് പ്രവർത്തനക്ഷമമാക്കി, പക്ഷേ പിൻ അല്ലെങ്കിൽ ബയോമെട്രിക്സ് സജ്ജീകരിച്ചിട്ടില്ല. ഒരു രീതി കോൺഫിഗർ ചെയ്യുന്നത് വരെ ആപ്പ് ലോക്ക് പ്രവർത്തനരഹിതമായിരിക്കും.';
+			case 'security_screen.got_it': return 'മനസ്സിലായി';
+			case 'data.appBar': return 'ഡാറ്റ മാനേജ്‌മെന്റ്';
+			case 'data.summary': return 'ശേഖരണ വിവരങ്ങൾ';
+			case 'data.totalUsed': return 'ഉപയോഗിച്ചത്: ';
+			case 'data.legendModel': return 'മോഡലുകൾ';
+			case 'data.legendFree': return 'ശൂന്യമായ ഇടം';
+			case 'data.mgmt': return 'മോഡൽ മാനേജ്‌മെന്റ്';
+			case 'data.deleteModels': return 'മോഡലുകൾ നീക്കം ചെയ്യുക';
+			case 'data.deleteModelsSub': return 'ഉപകരണത്തിലെ മോഡൽ വിവരങ്ങൾ പൂർണ്ണമായും ഒഴിവാക്കുക.';
+			case 'data.selectDelete': return 'നീക്കം ചെയ്യേണ്ടവ തിരഞ്ഞെടുക്കാം';
+			case 'data.autoDelete': return 'പഴയവ ഓട്ടോ-ഡിലീറ്റ് ചെയ്യുക:';
+			case 'data.autoDeleteSub': return 'എല്ലാ ചാറ്റ് മോഡുകൾക്കും ഇത് ബാധകമാണ്.';
+			case 'data.modes': return 'മോഡുകൾ';
+			case 'data.noData': return 'ചാറ്റുകൾ ലഭ്യമല്ല';
+			case 'data.deleteAll': return 'എല്ലാ ഡാറ്റയും ഡിലീറ്റ് ചെയ്യുക';
+			case 'data.authReq': return 'വീണ്ടും ലോഗിൻ ചെയ്യേണ്ടതുണ്ട്';
+			case 'data.viewChats': return 'കാണുക';
+			case 'data.deleteAllPillar': return 'ഡിലീറ്റ്';
+			case 'data.space': return 'ഇടം:';
+			case 'data.activeInstances': return 'സജീവമായവ:';
+			case 'pin_setup.title_setup': return '4-അക്ക പിൻ സജ്ജമാക്കുക';
+			case 'pin_setup.subtitle_setup': return 'ആപ്പ് ആക്സസ് ചെയ്യുന്നതിന് ഒരു സുരക്ഷിത കോഡ് സൃഷ്ടിക്കുക';
+			case 'pin_setup.title_confirm': return 'പിൻ സ്ഥിരീകരിക്കുക';
+			case 'pin_setup.subtitle_confirm': return 'സ്ഥിരീകരിക്കുന്നതിന് നിങ്ങളുടെ 4-അക്ക കോഡ് വീണ്ടും നൽകുക';
+			case 'pin_setup.title_verify': return 'നിലവിലെ പിൻ നൽകുക';
+			case 'pin_setup.subtitle_verify': return 'തുടരുന്നതിന് നിങ്ങളുടെ നിലവിലുള്ള കോഡ് നൽകുക';
+			case 'pin_setup.error_mismatch': return 'പിന്നുകൾ പൊരുത്തപ്പെടുന്നില്ല. വീണ്ടും ശ്രമിക്കുക.';
+			case 'pin_setup.error_incorrect': return 'തെറ്റായ പിൻ. ദയവായി വീണ്ടും ശ്രമിക്കുക.';
+			case 'pin_setup.snack_success': return 'പിൻ വിജയകരമായി സജ്ਜമാക്കി';
+			case 'pin_mgmt.appBar': return 'ആപ്പ്-നിർദ്ദിഷ്ട പിൻ';
+			case 'pin_mgmt.change_title': return 'പിൻ മാറ്റുക';
+			case 'pin_mgmt.change_sub': return 'നിങ്ങളുടെ 4-അക്ക ZiqeX സുരക്ഷാ കോഡ് പുതുക്കുക';
+			case 'pin_mgmt.remove_title': return 'പിൻ ഒഴിവാക്കുക';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX-നായുള്ള പിൻ ആക്‌സസ് ഓഫാക്കുക';
+			case 'pin_mgmt.snack_removed': return 'പിൻ വിജയകരമായി ഒഴിവാക്കി';
+			case 'lang_legacy.title1': return 'ഏത് ഭാഷയാണ്\n';
+			case 'lang_legacy.title2': return 'സ്വന്തമായി തോന്നുന്നത്?';
+			case 'lang_legacy.subtitle': return 'നിങ്ങളുടെ മാതൃഭാഷയിൽ ശബ്‌ദവും ടെക്‌സ്‌റ്റും മറുപടികളും. എപ്പോൾ വേണമെങ്കിലും മാറ്റാം.';
+			case 'lang_legacy.first_reply': return 'ആദ്യ മറുപടി ഇങ്ങനെയായിരിക്കും';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - നിങ്ങളുടെ ലിപിയിൽ എഴുതുകയും സംസാരിക്കുകയും ചെയ്യുന്നു';
+			case 'lang_legacy.continueBtn': return 'തുടരുക';
 			default: return null;
 		}
 	}
@@ -3777,7 +5568,7 @@ extension on _StringsMr {
 			case 'ephemeral_mode': return 'गुप्त चॅट';
 			case 'about': return 'सिस्टम माहिती';
 			case 'reset_prototype': return 'प्रोटोटाइप रीसेट करा';
-			case 'built_in_india': return 'भारतात निर्मित. जगासाठी.';
+			case 'built_in_india': return 'भारतात निर्मित। जगासाठी.';
 			case 'library_sub': return 'प्रत्येक मॉडेल · प्रत्येक मेमरी · या डिव्हाइसवर';
 			case 'on_this_device': return 'या डिव्हाइसवर';
 			case 'active': return 'सक्रिय';
@@ -3802,7 +5593,7 @@ extension on _StringsMr {
 			case 'profile.version': return 'V0.1 • सार्वभौम • ऑन-डिव्हाइस';
 			case 'welcome.meet': return 'ZiqeX ला भेटा';
 			case 'welcome.at_edge': return 'टोकावर बुद्धिमत्ता (Edge)';
-			case 'welcome.private': return 'खाजगी आणि एज एआय\nZenteiQ द्वारे';
+			case 'welcome.private': return 'खाजगी and एज एआय\nZenteiQ द्वारे';
 			case 'welcome.begin': return 'ऑनबोर्डिंग सुरू करा';
 			case 'info.title': return 'तुमच्या भोवती डिझाइन केलेली बुद्धिमत्ता';
 			case 'info.subtitle': return 'अनुभवात तयार केलेली गोपनीयता, निवड आणि नियंत्रणासह उपयुक्त AI.';
@@ -3848,6 +5639,81 @@ extension on _StringsMr {
 			case 'modelDownload.download': return 'मॉडेल डाउनलोड करा';
 			case 'modelDownload.later': return 'नंतर सेटअप करा';
 			case 'modelDownload.continueSub': return 'मॉडेल डाउनलोड न करता पुढे जा. तुम्ही तयार असाल तेव्हा एक जोडू शकता';
+			case 'library_v2.subtitle': return 'तुमची AI संसाधने व्यवस्थापित करा';
+			case 'library_v2.language_title': return 'भाषा';
+			case 'library_v2.language_desc': return 'तुमच्या पसंतीच्या भाषा निवडा आणि व्यवस्थापित करा';
+			case 'library_v2.model_title': return 'मॉडेल';
+			case 'library_v2.model_desc': return 'उपलब्ध AI मॉडेल्स शोधा आणि व्यवस्थापित करा';
+			case 'library_v2.saved_title': return 'जतन केलेले';
+			case 'library_v2.saved_desc': return 'तुमची प्रॉम्प्ट लायब्ररी';
+			case 'library_v2.skills_title': return 'कौशल्ये';
+			case 'library_v2.skills_desc': return 'AI क्षमता';
+			case 'biometric.vault': return 'तिजोरी सुरक्षा';
+			case 'biometric.setupTitle': return 'सुरक्षित लॉक सेटअप';
+			case 'biometric.setupSub': return 'तुमच्या पसंतीच्या प्रमाणीकरण पद्धतीसह तुमची तिजोरी सुरक्षित करा.';
+			case 'biometric.deviceTitle': return 'डिव्हाइस बायोमेट्रिक्स';
+			case 'biometric.deviceSub': return 'FaceID किंवा फिंगरप्रिंट वापरा';
+			case 'biometric.pinTitle': return 'अॅप-विशिष्ट पिन';
+			case 'biometric.pinSub': return 'एक अनन्य ४-अंकी कोड सेट करा';
+			case 'biometric.dialogTitle': return 'बायोमेट्रिक प्रवेशाची परवानगी द्या';
+			case 'biometric.dialogSub': return 'ZiqeX अनलॉक करण्यासाठी तुमचा फिंगरप्रिंट किंवा डिव्हाइस फेस रिकग्निशन वापरा';
+			case 'biometric.cancel': return 'रद्द करा';
+			case 'biometric.allow': return 'बायोमेट्रिक्सला अनुमती द्या';
+			case 'security_screen.appBar': return 'ॲप सुरक्षा';
+			case 'security_screen.global_protection': return 'जागतिक संरक्षण';
+			case 'security_screen.app_lock': return 'ॲप लॉक';
+			case 'security_screen.app_lock_sub': return 'ZiqeX उघडण्यासाठी प्रमाणीकरण आवश्यक आहे';
+			case 'security_screen.auth_methods': return 'प्रमाणीकरण पद्धती';
+			case 'security_screen.biometrics_title': return 'डिव्हाइस बायोमेट्रिक्स';
+			case 'security_screen.biometrics_sub': return 'तुमच्या फिंगरप्रिंट किंवा चेहऱ्याने त्वरित अनलॉक करा';
+			case 'security_screen.pin_title': return 'ZiqeX पिन';
+			case 'security_screen.pin_active': return 'पिन सक्रिय आहे';
+			case 'security_screen.pin_setup': return 'ॲप अनलॉक करण्यासाठी एक अद्वितीय ४-अंकी कोड सेट करा';
+			case 'security_screen.warning_title': return 'खूप जास्त चुकीचे प्रयत्न';
+			case 'security_screen.warning_sub': return 'चुकीचा पिन १० वेळा टाकल्यास, ZiqeX आपोआप रीसेट होईल. या डिव्हाइसवर जतन केलेला सर्व डेटा कायमचा हटवला जाईल';
+			case 'security_screen.incomplete_title': return 'सुरक्षा सेटअप अपूर्ण';
+			case 'security_screen.incomplete_content': return 'तुम्ही ॲप लॉक सक्षम केले आहे पण पिन किंवा बायोमेट्रिक्स सेट केलेले नाही. जोपर्यंत एखादी पद्धत कॉन्फिगर केली जात नाही तोपर्यंत ॲप लॉक अक्षम केले जाईल.';
+			case 'security_screen.got_it': return 'समजले';
+			case 'data.appBar': return 'डेटा व्यवस्थापन आणि\nधारणा';
+			case 'data.summary': return 'स्टोरेज सारांश';
+			case 'data.totalUsed': return 'एकूण वापरलेले: ';
+			case 'data.legendModel': return 'मॉडेल वेट';
+			case 'data.legendFree': return 'मोकळी जागा';
+			case 'data.mgmt': return 'मॉडेल व्यवस्थापन';
+			case 'data.deleteModels': return 'सर्व डाउनलोड केलेले मॉडेल हटवा';
+			case 'data.deleteModelsSub': return 'या डिव्हाइसवरून सर्व स्थानिक मॉडेल वेट आणि फाइन-ट्यून्ड पॅरामीटर्स पूर्णपणे काढून टाका.';
+			case 'data.selectDelete': return 'हटवण्यासाठी मॉडेल निवडा';
+			case 'data.autoDelete': return 'यापेक्षा जुने चॅट आपोआप हटवा:';
+			case 'data.autoDeleteSub': return 'हा बदल सर्व अनलिंक केलेल्या संवाद मोड्सवर लागू होतो.';
+			case 'data.modes': return 'मोड्स';
+			case 'data.noData': return 'कोणताही सक्रिय चॅट डेटा नाही';
+			case 'data.deleteAll': return 'सर्व डेटा हटवा';
+			case 'data.authReq': return 'अॅप लॉक पुन: प्रमाणीकरण आवश्यक आहे';
+			case 'data.viewChats': return 'चॅट पहा';
+			case 'data.deleteAllPillar': return 'सर्व हटवा';
+			case 'data.space': return 'जागा:';
+			case 'data.activeInstances': return 'सक्रिय इंस्टन्स:';
+			case 'pin_setup.title_setup': return '४-अंकी पिन सेट करा';
+			case 'pin_setup.subtitle_setup': return 'अ‍ॅप अ‍ॅक्सेस करण्यासाठी सुरक्षित कोड तयार करा';
+			case 'pin_setup.title_confirm': return 'पिनची पुष्टी करा';
+			case 'pin_setup.subtitle_confirm': return 'सत्यापित करण्यासाठी तुमचा ४-अंकी कोड पुन्हा प्रविष्ट करा';
+			case 'pin_setup.title_verify': return 'सध्याचा पिन प्रविष्ट करा';
+			case 'pin_setup.subtitle_verify': return 'पुढे चालू ठेवण्यासाठी तुमचा अस्तित्वातील कोड प्रविष्ट करा';
+			case 'pin_setup.error_mismatch': return 'पिन जुळत नाहीत. पुन्हा प्रयत्न करा.';
+			case 'pin_setup.error_incorrect': return 'चुकीचा पिन. कृपया पुन्हा प्रयत्न करा.';
+			case 'pin_setup.snack_success': return 'पिन यशस्वीरित्या सेट झाला';
+			case 'pin_mgmt.appBar': return 'अ‍ॅप-विशिष्ट पिन';
+			case 'pin_mgmt.change_title': return 'पिन बदला';
+			case 'pin_mgmt.change_sub': return 'तुमचा ४-अंकी ZiqeX सुरक्षा कोड अपडेट करा';
+			case 'pin_mgmt.remove_title': return 'पिन काढून टाका';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX साठी पिन अ‍ॅक्सेस बंद करा';
+			case 'pin_mgmt.snack_removed': return 'पिन यशस्वीरित्या काढून टाकला';
+			case 'lang_legacy.title1': return 'कोणती भाषा\n';
+			case 'lang_legacy.title2': return 'घरच्यासारखी वाटते?';
+			case 'lang_legacy.subtitle': return 'तुमच्या मातृभाषेत व्हॉइस, टेक्स्ट आणि उत्तरे. कधीही बदला.';
+			case 'lang_legacy.first_reply': return 'पहिले उत्तर असे असेल';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - तुमच्या लिपीमध्ये लिहिलेले आणि बोललेले';
+			case 'lang_legacy.continueBtn': return 'चालू ठेवा';
 			default: return null;
 		}
 	}
@@ -3886,7 +5752,7 @@ extension on _StringsOr {
 			case 'storage_purge': return 'ଡାଟା ଏବଂ ସଂରକ୍ଷଣ';
 			case 'storage_purge_sub': return 'ଡିଭାଇସରେ ୧୮୪ KB';
 			case 'ephemeral_mode': return 'ଗୋପନୀୟ ଚାଟ୍';
-			case 'about': return 'ସିଷ୍ଟମ୍ ସୂଚନା';
+			case 'about': return 'ସିଷ୍ਟମ୍ ସୂଚନା';
 			case 'reset_prototype': return 'ପ୍ରୋଟୋଟାଇପ୍ ରିସେଟ୍ କରନ୍ତୁ';
 			case 'built_in_india': return 'ଭାରତରେ ନିର୍ମିତ। ବିଶ୍ୱ ପାଇଁ।';
 			case 'library_sub': return 'ପ୍ରତ୍ୟେକ ମଡେଲ୍ · ପ୍ରତ୍ୟେକ ସ୍ମୃତି · ଏହି ଡିଭାଇସରେ';
@@ -3908,8 +5774,8 @@ extension on _StringsOr {
 			case 'profile.data_mgmt': return 'ଚାଟ୍ ଡାଟା ପରିଚାଳନା ଏବଂ ସଂରକ୍ଷଣ';
 			case 'profile.data_mgmt_sub': return 'ଆପଣଙ୍କର ବାର୍ତ୍ତାଳାପ ଇତିହାସ ପରିଚାଳନା କରନ୍ତୁ';
 			case 'profile.app_lock': return 'ଆପ୍ ଲକ୍';
-			case 'profile.app_lock_sub': return 'ଆପଣଙ୍କର ଆଙ୍ଗୁଠି ଚିହ୍ନ, ମୁହଁ କିମ୍ବା ପିନ୍ ସହିତ ZiqeX କୁ ସୁରକ୍ଷିତ କରନ୍ତୁ';
-			case 'profile.incognito_sub': return 'ଇତିହାସରେ ସଞ୍ଚୟ ନକରି ଚାଟ୍ କରନ୍ତୁ। ଚାଟ୍ ରୁ ବାହାରିବା ପରେ ପୁନରୁଦ୍ଧାର କରାଯାଇପାରିବ ନାହିଁ';
+			case 'profile.app_lock_sub': return 'ଆପଣଙ୍କର ଆଙ୍ଗୁଠି ଚିହ୍ନ, ମୁହଁ କିମ୍ବା ପିନ୍ ସହିତ ZiqeX କୁ ସୁରକ୍ଷିત କରନ୍ତୁ';
+			case 'profile.incognito_sub': return 'ଇତିହାସରେ ସଞ୍ચୟ ନକରି ଚାଟ୍ କରନ୍ତୁ। ଚାଟ୍ ରୁ ବାହାରିବା ପରେ ପୁନରୁଦ୍ଧାର କରାଯାଇପାରିବ ନାହିଁ';
 			case 'profile.version': return 'V0.1 • ସାର୍ବଭୌମ • ଅନ୍-ଡିଭାଇସ୍';
 			case 'welcome.meet': return 'ZiqeX ସହିତ ପରିଚିତ ହୁଅନ୍ତୁ';
 			case 'welcome.at_edge': return 'ଏଜ୍ ରେ ବୁଦ୍ଧିମତା';
@@ -3920,7 +5786,7 @@ extension on _StringsOr {
 			case 'info.privacy_title': return 'ପ୍ରଥମେ ଗୋପନୀୟତା';
 			case 'info.privacy_desc': return 'ZiqeX ବୁଦ୍ଧିମତା ଏବଂ ଆପଣଙ୍କ ସୂଚନାକୁ ଆପଣଙ୍କ ଡିଭାଇସ୍ ନିକଟରେ ରଖିବା ପାଇଁ ଡିଜାଇନ୍ କରାଯାଇଛି।';
 			case 'info.hand_title': return 'ଆପଣଙ୍କ ହାତରେ ବୁଦ୍ଧିମତା';
-			case 'info.hand_desc': return 'ଦୈନନ୍ଦିନ ବୁଦ୍ଧିମତା, ସିଧାସଳଖ ଆପଣଙ୍କ ଡିଭାଇସରେ ଉପଲବ୍ଧ।';
+			case 'info.hand_desc': return 'ଦୈନନ୍ଦିନ ବୁଦ୍ଧିମତା, ସିଧାସଳଖ ଆପଣଙ୍କ ଡିଭାଇସରେ ଉପଲବ୍ધ।';
 			case 'info.control_title': return 'ଆପଣଙ୍କର ଡାଟା। ଆପଣଙ୍କର ନିୟନ୍ତ୍ରଣ।';
 			case 'info.control_desc': return 'କ’ଣ ରଖାଯିବ ତାହା ବାଛନ୍ତୁ, ସଂରକ୍ଷିତ ହୋଇଥିବା ଜିନିଷକୁ ପରିଚାଳନା କରନ୍ତୁ ଏବଂ ଯାହା ଆପଣଙ୍କର ଆବଶ୍ୟକ ନାହିଁ ତାହାକୁ ଡିଲିଟ୍ କରନ୍ତୁ।';
 			case 'info.place_title': return 'ପ୍ରତ୍ୟେକ ସ୍ଥାନ ପାଇଁ ଡିଜାଇନ୍ କରାଯାଇଛି';
@@ -3954,11 +5820,86 @@ extension on _StringsOr {
 			case 'modelDownload.toks': return '~୧୮ tok/s';
 			case 'modelDownload.ttft': return '~୧୪୦ ms TTFT';
 			case 'modelDownload.error': return ({required Object error}) => 'ତ୍ରୁଟି: ${error}';
-			case 'modelDownload.retry': return 'ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ';
+			case 'modelDownload.retry': return 'ପୁନର୍ବାର ଚେଷ୍ਟା କରନ୍ତୁ';
 			case 'modelDownload.open': return 'BrahmAI ଖୋଲନ୍ତୁ';
 			case 'modelDownload.download': return 'ମଡେଲ୍ ଡାଉନଲୋଡ୍ କରନ୍ତୁ';
 			case 'modelDownload.later': return 'ପରେ ସେଟଅପ୍ କରନ୍ତୁ';
 			case 'modelDownload.continueSub': return 'ମଡେଲ୍ ଡାଉନଲୋଡ୍ ନକରି ଆଗକୁ ବଢନ୍ତୁ। ଆପଣ ପ୍ରସ୍ତୁତ ହେଲେ ଗୋଟିଏ ଯୋଡିପାରିବେ';
+			case 'library_v2.subtitle': return 'ଆପଣଙ୍କର AI ସମ୍ବଳ ପରିଚାଳନା କରନ୍ତୁ';
+			case 'library_v2.language_title': return 'ଭାଷା';
+			case 'library_v2.language_desc': return 'ଆପଣଙ୍କର ପସନ୍ଦର ଭାଷା ବାଛନ୍ତୁ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
+			case 'library_v2.model_title': return 'ମଡେଲ୍';
+			case 'library_v2.model_desc': return 'ଉପଲବ୍ଧ AI ମଡେଲଗୁଡିକୁ ଅନୁସନ୍ଧାନ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
+			case 'library_v2.saved_title': return 'ସଂରକ୍ଷିତ';
+			case 'library_v2.saved_desc': return 'ଆପଣଙ୍କର ପ୍ରମ୍ପ୍ଟ ଲାଇବ୍ରେରୀ';
+			case 'library_v2.skills_title': return 'ଦକ୍ଷତା';
+			case 'library_v2.skills_desc': return 'AI କ୍ଷମତା';
+			case 'biometric.vault': return 'ଭଲ୍ଟ ସୁରକ୍ଷା';
+			case 'biometric.setupTitle': return 'ସୁରକ୍ଷିତ ଲକ୍ ସେଟଅପ୍';
+			case 'biometric.setupSub': return 'ଆପଣଙ୍କର ପସନ୍ଦର ପ୍ରାମାଣିକିକରଣ ପଦ୍ଧତି ସହିତ ଆପଣଙ୍କର ଭଲ୍ଟକୁ ସୁରକ୍ଷିତ କରନ୍ତୁ |';
+			case 'biometric.deviceTitle': return 'ଡିଭାଇସ୍ ବାୟୋମେଟ୍ରିକ୍ସ';
+			case 'biometric.deviceSub': return 'FaceID କିମ୍ବା ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ବ୍ୟବહાર କରନ୍ତୁ';
+			case 'biometric.pinTitle': return 'ଆପ୍-ନିର୍ଦ୍ଦିଷ୍ଟ ପିନ୍';
+			case 'biometric.pinSub': return 'ଏକ ଅନନ୍ୟ 4-ଅଙ୍କ ବିଶିષ્ટ କୋଡ୍ ସେଟ୍ କରନ୍ତୁ';
+			case 'biometric.dialogTitle': return 'ବାୟୋମେଟ୍ରିକ୍ ଆକ୍ସେସ୍ ଅନୁମତି ଦିଅନ୍ତୁ';
+			case 'biometric.dialogSub': return 'ZiqeX କୁ ଅନଲକ୍ କରିବାକୁ ଆପଣଙ୍କର ଫିଙ୍ગରପ୍ରିଣ୍ଟ କିମ୍ବା ଡିଭାଇସ୍ ଫେସ୍ ଚିହ୍ନଟ ବ୍ୟବହାର କରନ୍ତୁ';
+			case 'biometric.cancel': return 'ବାତିଲ୍ କରନ୍ତୁ';
+			case 'biometric.allow': return 'ବାୟୋମେଟ୍ରିକ୍ସ ଅନୁମତି ଦିଅନ୍ତୁ';
+			case 'security_screen.appBar': return 'ଆପ୍ ସୁରକ୍ଷା';
+			case 'security_screen.global_protection': return 'ଗ୍ଲୋବାଲ୍ ସୁରକ୍ଷା';
+			case 'security_screen.app_lock': return 'ଆପ୍ ଲକ୍';
+			case 'security_screen.app_lock_sub': return 'ZiqeX ଖୋଲିବା ପାଇଁ ପ୍ରମାଣୀକରଣ ଆବଶ୍ୟକ';
+			case 'security_screen.auth_methods': return 'ପ୍ରମାଣୀକରଣ ପଦ୍ଧତି';
+			case 'security_screen.biometrics_title': return 'ଡିଭାଇସ୍ ବାୟୋମେଟ୍ରିକ୍ସ';
+			case 'security_screen.biometrics_sub': return 'ଆପଣଙ୍କର ଫିଙ୍ଗرପ୍ରିଣ୍ଟ କିମ୍ବା ମୁହଁ ସହିତ ତୁରନ୍ତ ଅନଲକ୍ କରନ୍ତୁ';
+			case 'security_screen.pin_title': return 'ZiqeX ପିନ୍';
+			case 'security_screen.pin_active': return 'ପିନ୍ ସକ୍ରିୟ ଅଛି';
+			case 'security_screen.pin_setup': return 'ଆପ୍ ଅନଲକ୍ କରିବା ପାଇଁ ଏକ ସ୍ୱତନ୍ତ୍ର 4-ଅଙ୍କ ବିଶିଷ୍ਟ କୋଡ୍ ସେଟ୍ କରନ୍ତୁ';
+			case 'security_screen.warning_title': return 'ଅତ୍ୟଧିକ ଭୁଲ୍ ପ୍ରୟାସ';
+			case 'security_screen.warning_sub': return 'ଯଦି ଭୁଲ୍ ପିନ୍ 10 ଥର ଏଣ୍ଟର୍ କରାଯାଏ, ତେବେ ZiqeX ସ୍ୱୟଂଚାଳିତ ଭାବରେ ରିସେଟ୍ ହୋଇଯିବ | ଏହି ଡିଭାଇସରେ ସଂରକ୍ଷିତ ସମସ୍ତ ତଥ୍ୟ ସ୍ଥାୟୀ ଭାବରେ ବିଲୁପ୍ତ ହୋଇଯିବ';
+			case 'security_screen.incomplete_title': return 'ସୁରକ୍ଷା ସେଟଅପ୍ ଅସମ୍ପୂର୍ଣ୍ଣ';
+			case 'security_screen.incomplete_content': return 'ଆପଣ ଆପ୍ ଲକ୍ ସକ୍ଷମ କରିଛନ୍ତି କିନ୍ତୁ ପିନ୍ କିମ୍ବା ବାୟୋମେଟ୍ରିକ୍ସ ସେଟ୍ କରିନାହାଁନ୍ତି | କୌଣସି ପଦ୍ଧତି ବିନ୍ୟାସ ନହେବା ପର୍ଯ୍ୟନ୍ତ ଆପ୍ ଲକ୍ ଅକ୍ଷମ ରହିବ |';
+			case 'security_screen.got_it': return 'ବୁଝିଲି';
+			case 'data.appBar': return 'ଡାଟା ପରିଚାଳନା ଏବଂ\nସଂରକ୍ଷଣ';
+			case 'data.summary': return 'ଷ୍ଟୋରେଜ୍ ସାରାଂଶ';
+			case 'data.totalUsed': return 'ମୋଟ ବ୍ୟବହୃତ: ';
+			case 'data.legendModel': return 'ମଡେଲ୍ ଓଜନ';
+			case 'data.legendFree': return 'ଖାଲି ସ୍ଥାନ';
+			case 'data.mgmt': return 'ମଡେଲ୍ ପରିଚାଳନା';
+			case 'data.deleteModels': return 'ସମସ୍ତ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ମଡେଲଗୁଡିକ ଡିଲିଟ୍ କରନ୍ତୁ';
+			case 'data.deleteModelsSub': return 'ଏହି ଡିଭਾਈସରୁ ସମସ୍ତ ସ୍ଥାନୀୟ ମଡେଲ୍ ଓଜନ ଏବଂ ପାରାମିଟରଗୁଡିକ ସମ୍ପୂର୍ଣ୍ଣ ରୂପେ ବାହାର କରନ୍ତୁ |';
+			case 'data.selectDelete': return 'ଡିଲିଟ୍ କରିବାକୁ ମଡେଲଗୁଡିକ ଚୟନ କରନ୍ତୁ';
+			case 'data.autoDelete': return 'ଏହାଠାରୁ ପୁରୁଣା ଚାଟ୍ ଗୁଡିକୁ ଅଟୋ-ଡିଲିଟ୍ କରନ୍ତୁ:';
+			case 'data.autoDeleteSub': return 'ଏହି ସେଟିଂ ସମସ୍ତ ଅଲିଙ୍କ୍ ହୋଇଥିବା ବାର୍ତ୍ତାଳାପ ମୋଡ୍ ପାଇଁ ପ୍ରଯୁଜ୍ୟ |';
+			case 'data.modes': return 'ମୋଡ୍ ଗୁଡିକ';
+			case 'data.noData': return 'କୌଣସି ସକ୍ରିୟ ଚାଟ୍ ଡାଟା ନାହିଁ';
+			case 'data.deleteAll': return 'ସମସ୍ତ ଡାଟା ଡିଲିଟ୍ କରନ୍ତୁ';
+			case 'data.authReq': return 'ଆପ୍ ଲକ୍ ପୁନ-ପ୍ରାମାଣିକିକରଣ ଆବଶ୍ୟକ କରେ';
+			case 'data.viewChats': return 'ଚାଟ୍ ଦେଖନ୍ତୁ';
+			case 'data.deleteAllPillar': return 'ସବୁ ଡିଲିଟ୍ କରନ୍ତୁ';
+			case 'data.space': return 'ସ୍ଥାନ:';
+			case 'data.activeInstances': return 'ସକ୍ରିୟ ଇନଷ୍ଟାନ୍ସ:';
+			case 'pin_setup.title_setup': return '୪-ଅଙ୍କ ବିଶିଷ୍ଟ ପିନ୍ ସେଟ୍ କରନ୍ତୁ';
+			case 'pin_setup.subtitle_setup': return 'ଆପ୍ ଆକ୍ସେସ୍ କରିବା ପାଇଁ ଏକ ସୁରକ୍ଷିତ କୋଡ୍ ସୃଷ୍ଟି କରନ୍ତୁ';
+			case 'pin_setup.title_confirm': return 'ପିନ୍ ନିଶ୍ଚିତ କରନ୍ତୁ';
+			case 'pin_setup.subtitle_confirm': return 'ଯାଞ୍ଚ କରିବା ପାଇଁ ଆପଣଙ୍କର ୪-ଅଙ୍କ ବିଶିଷ୍ଟ କୋଡ୍ ପୁନର୍ବାର ପ୍ରବେଶ କରନ୍ତୁ';
+			case 'pin_setup.title_verify': return 'ବର୍ତ୍ତମାନର ପିନ୍ ପ୍ରବେଶ କରନ୍ତୁ';
+			case 'pin_setup.subtitle_verify': return 'ଜାରି ରଖିବା ପାଇଁ ଆପଣଙ୍କର ବିଦ୍ୟମାନ କୋଡ୍ ପ୍ରବେଶ କରନ୍ତୁ';
+			case 'pin_setup.error_mismatch': return 'ପିନ୍ ମେଳ ହେଉନାହିଁ | ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ |';
+			case 'pin_setup.error_incorrect': return 'ଭୁଲ୍ ପିନ୍ | ଦୟାକରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ |';
+			case 'pin_setup.snack_success': return 'ପିନ୍ ସଫଳତାର ସହିତ ସେଟ୍ ହୋଇଛି';
+			case 'pin_mgmt.appBar': return 'ଆପ୍-ନିର୍ଦ୍ଦିଷ୍ଟ ପିନ୍';
+			case 'pin_mgmt.change_title': return 'ପିନ୍ ପରିବର୍ତ୍ତନ କରନ୍ତୁ';
+			case 'pin_mgmt.change_sub': return 'ଆପଣଙ୍କର ୪-ଅଙ୍କ ବିଶିଷ୍ଟ ZiqeX ସୁରକ୍ଷା କୋଡ୍ ଅପଡେਟ୍ କରନ୍ତୁ';
+			case 'pin_mgmt.remove_title': return 'ପିନ୍ ହଟାନ୍ତୁ';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX ପାଇଁ ପିନ୍ ଆକ୍ସେସ୍ ବନ୍ଦ କରନ୍ତୁ';
+			case 'pin_mgmt.snack_removed': return 'ପିନ୍ ସଫଳତାର ସହିତ ହଟାଗଲା';
+			case 'lang_legacy.title1': return 'କେଉଁ ଭାଷା\n';
+			case 'lang_legacy.title2': return 'ନିଜର ପରି ଲାଗେ?';
+			case 'lang_legacy.subtitle': return 'ଆପଣଙ୍କ ମାତୃଭାଷାରେ ସ୍ୱର, ପାଠ୍ୟ ଏବଂ ଉତ୍ତର | ଯେକୌଣସି ସମୟରେ ପରିବର୍ତ୍ତନ କରନ୍ତୁ |';
+			case 'lang_legacy.first_reply': return 'ପ୍ରଥਮ ଉତ୍ତର ଏହିପରି ହେବ';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - ଆପଣଙ୍କ ଲିପିରେ ଲିଖିତ ଏବଂ କଥିତ';
+			case 'lang_legacy.continueBtn': return 'ଜାରି ରଖନ୍ତୁ';
 			default: return null;
 		}
 	}
@@ -4036,7 +5977,7 @@ extension on _StringsPa {
 			case 'info.control_desc': return 'ਚੁਣੋ ਕਿ ਕੀ ਰੱਖਣਾ ਹੈ, ਜੋ ਸਟੋਰ ਕੀਤਾ ਗਿਆ ਹੈ ਉਸਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ, ਅਤੇ ਜਿਸਦੀ ਤੁਹਾਨੂੰ ਹੁਣ ਲੋੜ ਨਹੀਂ ਹੈ ਉਸਨੂੰ ਮਿਟਾਓ।';
 			case 'info.place_title': return 'ਹਰ ਜਗ੍ਹਾ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ';
 			case 'info.place_desc': return 'ਵੱਖ-ਵੱਖ ਭਾਸ਼ਾਵਾਂ, ਡਿਵਾਈਸਾਂ ਅਤੇ ਲੋਕਾਂ ਦੇ ਤਕਨਾਲੋਜੀ ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੇ ਤਰੀਕਿਆਂ ਲਈ ਬਣਾਇਆ ਗਿਆ।';
-			case 'info.footer': return 'ਤੁਹਾਡੀ ਬੁੱਧੀ। ਤੁਹਾਡਾ ਡਿਵਾਈਸ। ਤੁਹਾਡਾ ਨਿਯੰਤਰਣ।';
+			case 'info.footer': return 'ਤੁਹਾਡੀ ਬੁੱਧੀ. ਤੁਹਾਡਾ ਡਿਵਾਈਸ. ਤੁਹਾਡਾ ਨਿਯੰਤਰਣ।';
 			case 'info.setup': return 'ਆਪਣਾ ZiqeX ਸੈੱਟ ਅੱਪ ਕਰੋ';
 			case 'languageSelection.appBar': return 'ਭਾਸ਼ਾ ਦੀ ਚੋਣ';
 			case 'languageSelection.title': return 'ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ';
@@ -4070,6 +6011,15 @@ extension on _StringsPa {
 			case 'modelDownload.download': return 'ਮਾਡਲ ਡਾਊਨਲੋਡ ਕਰੋ';
 			case 'modelDownload.later': return 'ਬਾਅਦ ਵਿੱਚ ਸੈੱਟਅੱਪ ਕਰੋ';
 			case 'modelDownload.continueSub': return 'ਮਾਡਲ ਡਾਊਨਲੋਡ ਕੀਤੇ ਬਿਨਾਂ ਜਾਰੀ ਰੱਖੋ। ਜਦੋਂ ਤੁਸੀਂ ਤਿਆਰ ਹੋਵੋ ਤਾਂ ਇੱਕ ਜੋੜ ਸਕਦੇ ਹੋ';
+			case 'library_v2.subtitle': return 'ਆਪਣੇ AI ਸਰੋਤਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ';
+			case 'library_v2.language_title': return 'ਭਾਸ਼ਾ';
+			case 'library_v2.language_desc': return 'ਆਪਣੀਆਂ ਪਸੰਦੀਦਾ ਭਾਸ਼ਾਵਾਂ ਚੁਣੋ ਅਤੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ';
+			case 'library_v2.model_title': return 'ਮਾਡਲ';
+			case 'library_v2.model_desc': return 'ਉਪਲਬਧ AI ਮਾਡਲਾਂ ਦੀ ਖੋਜ ਅਤੇ ਪ੍ਰਬੰਧਨ ਕਰੋ';
+			case 'library_v2.saved_title': return 'ਸੁਰੱਖਿਅਤ';
+			case 'library_v2.saved_desc': return 'ਤੁਹਾਡੀ ਪ੍ਰੋਂਪਟ ਲਾਇਬ੍ਰੇਰੀ';
+			case 'library_v2.skills_title': return 'ਹੁਨਰ';
+			case 'library_v2.skills_desc': return 'AI ਸਮਰੱਥਾਵਾਂ';
 			case 'biometric.vault': return 'ਵੌਲਟ ਸੁਰੱਖਿਆ';
 			case 'biometric.setupTitle': return 'ਸੁਰੱਖਿਅਤ ਲੌਕ ਸੈੱਟਅੱਪ';
 			case 'biometric.setupSub': return 'ਆਪਣੀ ਪਸੰਦੀਦਾ ਪ੍ਰਮਾਣਿਕਤਾ ਵਿਧੀ ਨਾਲ ਆਪਣੇ ਵੌਲਟ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ।';
@@ -4081,6 +6031,21 @@ extension on _StringsPa {
 			case 'biometric.dialogSub': return 'ZiqeX ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਜਾਂ ਡਿਵਾਈਸ ਫੇਸ ਰਿਕੋਗਨੀਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ';
 			case 'biometric.cancel': return 'ਰੱਦ ਕਰੋ';
 			case 'biometric.allow': return 'ਬਾਇਓਮੈਟ੍ਰਿਕਸ ਦੀ ਆਗਿਆ ਦਿਓ';
+			case 'security_screen.appBar': return 'ਐਪ ਸੁਰੱਖਿਆ';
+			case 'security_screen.global_protection': return 'ਗਲੋਬਲ ਸੁਰੱਖਿਆ';
+			case 'security_screen.app_lock': return 'ਐਪ ਲਾਕ';
+			case 'security_screen.app_lock_sub': return 'ZiqeX ਖੋਲ੍ਹਣ ਲਈ ਪ੍ਰਮਾਣੀਕਰਨ ਦੀ ਲੋੜ ਹੈ';
+			case 'security_screen.auth_methods': return 'ਪ੍ਰਮਾਣੀਕਰਨ ਵਿਧੀਆਂ';
+			case 'security_screen.biometrics_title': return 'ਡਿਵਾਈਸ ਬਾਇਓਮੈਟ੍ਰਿਕਸ';
+			case 'security_screen.biometrics_sub': return 'ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਜਾਂ ਚਿਹਰੇ ਨਾਲ ਤੁਰੰਤ ਅਨਲਾਕ ਕਰੋ';
+			case 'security_screen.pin_title': return 'ZiqeX ਪਿੰਨ';
+			case 'security_screen.pin_active': return 'ਪਿੰਨ ਸਰਗਰਮ ਹੈ';
+			case 'security_screen.pin_setup': return 'ਐਪ ਨੂੰ ਅਨਲਾਕ ਕਰਨ ਲਈ ਇੱਕ ਵਿਲੱਖਣ 4-ਅੰਕਾਂ ਵਾਲਾ ਕੋਡ ਸੈੱਟ ਕਰੋ';
+			case 'security_screen.warning_title': return 'ਬਹੁਤ ਜ਼ਿਆਦਾ ਗਲਤ ਕੋਸ਼ਿਸ਼ਾਂ';
+			case 'security_screen.warning_sub': return 'ਜੇਕਰ ਗਲਤ ਪਿੰਨ 10 ਵਾਰ ਦਰਜ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ZiqeX ਆਪਣੇ ਆਪ ਰੀਸੈਟ ਹੋ ਜਾਵੇਗਾ। ਇਸ ਡਿਵਾਈਸ \'ਤੇ ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਸਾਰਾ ਡਾਟਾ ਪੱਕੇ ਤੌਰ \'ਤੇ ਮਿਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ';
+			case 'security_screen.incomplete_title': return 'ਸੁਰੱਖਿਆ ਸੈੱਟਅੱਪ ਅਧੂਰਾ';
+			case 'security_screen.incomplete_content': return 'ਤੁਸੀਂ ਐਪ ਲਾਕ ਨੂੰ ਚਾਲੂ ਕਰ ਦਿੱਤਾ ਹੈ ਪਰ ਪਿੰਨ ਜਾਂ ਬਾਇਓਮੈਟ੍ਰਿਕਸ ਸੈੱਟ ਨਹੀਂ ਕੀਤਾ ਹੈ। ਐਪ ਲਾਕ ਉਦੋਂ ਤੱਕ ਬੰਦ ਰਹੇਗਾ ਜਦੋਂ ਤੱਕ ਕੋਈ ਤਰੀਕਾ ਸੈੱਟ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ।';
+			case 'security_screen.got_it': return 'ਠੀਕ ਹੈ';
 			case 'data.appBar': return 'ਡੇਟਾ ਪ੍ਰਬੰਧਨ ਅਤੇ\nਸਟੋਰੇਜ';
 			case 'data.summary': return 'ਸਟੋਰੇਜ ਸੰਖੇਪ';
 			case 'data.totalUsed': return 'ਕੁੱਲ ਵਰਤੀ ਗਈ: ';
@@ -4100,6 +6065,27 @@ extension on _StringsPa {
 			case 'data.deleteAllPillar': return 'ਸਭ ਮਿਟਾਓ';
 			case 'data.space': return 'ਥਾਂ:';
 			case 'data.activeInstances': return 'ਸਰਗਰਮ ਇੰਸਟੈਂਸ:';
+			case 'pin_setup.title_setup': return '4-ਅੰਕਾਂ ਦਾ ਪਿੰਨ ਸੈੱਟ ਕਰੋ';
+			case 'pin_setup.subtitle_setup': return 'ਐਪ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਇੱਕ ਸੁਰੱਖਿਅਤ ਕੋਡ ਬਣਾਓ';
+			case 'pin_setup.title_confirm': return 'ਪਿੰਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ';
+			case 'pin_setup.subtitle_confirm': return 'ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਆਪਣਾ 4-ਅੰਕਾਂ ਵਾਲਾ ਕੋਡ ਦੁਬਾਰਾ ਦਰਜ ਕਰੋ';
+			case 'pin_setup.title_verify': return 'ਮੌਜੂਦਾ ਪਿੰਨ ਦਰਜ ਕਰੋ';
+			case 'pin_setup.subtitle_verify': return 'ਜਾਰੀ ਰੱਖਣ ਲਈ ਆਪਣਾ ਮੌਜੂਦਾ ਕੋਡ ਦਰਜ ਕਰੋ';
+			case 'pin_setup.error_mismatch': return 'ਪਿੰਨ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।';
+			case 'pin_setup.error_incorrect': return 'ਗਲਤ ਪਿੰਨ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।';
+			case 'pin_setup.snack_success': return 'ਪਿੰਨ ਸਫਲਤਾਪੂਰਵਕ ਸੈੱਟ ਕੀਤਾ ਗਿਆ';
+			case 'pin_mgmt.appBar': return 'ਐਪ-ਵਿਸ਼ੇਸ਼ ਪਿੰਨ';
+			case 'pin_mgmt.change_title': return 'ਪਿੰਨ ਬਦਲੋ';
+			case 'pin_mgmt.change_sub': return 'ਆਪਣਾ 4-ਅੰਕਾਂ ਵਾਲਾ ZiqeX ਸੁਰੱਖਿਆ ਕੋਡ ਅਪਡੇਟ ਕਰੋ';
+			case 'pin_mgmt.remove_title': return 'ਪਿੰਨ ਹਟਾਓ';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX ਲਈ ਪਿੰਨ ਪਹੁੰਚ ਬੰਦ ਕਰੋ';
+			case 'pin_mgmt.snack_removed': return 'ਪਿੰਨ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ';
+			case 'lang_legacy.title1': return 'ਕਿਹੜੀ ਭਾਸ਼ਾ\n';
+			case 'lang_legacy.title2': return 'ਆਪਣੀ ਲੱਗਦੀ ਹੈ?';
+			case 'lang_legacy.subtitle': return 'ਤੁਹਾਡੀ ਮਾਤ੍ਰ ਭਾਸ਼ਾ ਵਿੱਚ ਆਵਾਜ਼, ਟੈਕਸਟ ਅਤੇ ਜਵਾਬ। ਕਿਸੇ ਵੀ ਸਮੇਂ ਬਦਲੋ।';
+			case 'lang_legacy.first_reply': return 'ਪਹਿਲਾ ਜਵਾਬ ਇਹ ਹੋਵੇਗਾ';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - ਤੁਹਾਡੀ ਲਿਪੀ ਵਿੱਚ ਲਿਖਿਆ ਅਤੇ ਬੋਲਿਆ ਗਿਆ';
+			case 'lang_legacy.continueBtn': return 'ਜਾਰੀ ਰੱਖੋ';
 			default: return null;
 		}
 	}
@@ -4156,17 +6142,17 @@ extension on _StringsTa {
 			case 'profile.security_active': return 'பாதுகாப்பு செயலில் உள்ளது';
 			case 'profile.security_inactive': return 'பாதுகாப்பு செயலிழந்துள்ளது';
 			case 'profile.dark_mode': return 'இருண்ட பயன்முறை';
-			case 'profile.dark_mode_sub': return 'ஒளி மற்றும் இருண்ட பணி இட தீம்களுக்கு இடையே மாறவும்';
-			case 'profile.data_mgmt': return 'அரட்டை தரவு மேலாண்மை மற்றும் தக்கவைத்தல்';
-			case 'profile.data_mgmt_sub': return 'உங்கள் உரையாடல் வரலாற்றை நிர்வகிக்கவும்';
+			case 'profile.dark_mode_sub': return 'ஒளி மற்றும் இருண்ட தீம்களுக்கு இடையே மாறவும்';
+			case 'profile.data_mgmt': return 'தரவு மேலாண்மை';
+			case 'profile.data_mgmt_sub': return 'அரட்டை வரலாற்றை நிர்வகிக்கவும்';
 			case 'profile.app_lock': return 'ஆப் லாக்';
-			case 'profile.app_lock_sub': return 'உங்கள் கைரேகை, முகம் அல்லது பின் (PIN) மூலம் ZiqeX ஐ பாதுகாக்கவும்';
-			case 'profile.incognito_sub': return 'வரலாற்றில் சேமிக்காமல் அரட்டை அடிக்கவும். அரட்டையிலிருந்து வெளியேறிய பிறகு மீட்டெடுக்க முடியாது';
+			case 'profile.app_lock_sub': return 'கைரேகை, முகம் அல்லது பின் (PIN) மூலம் பாதுகாக்கவும்';
+			case 'profile.incognito_sub': return 'வரலாற்றில் சேமிக்காமல் அரட்டை அடிக்கவும். மீட்டெடுக்க முடியாது';
 			case 'profile.version': return 'V0.1 • இறையாண்மை • சாதனத்தில்';
-			case 'welcome.meet': return 'ZiqeX ஐ சந்திக்கவும்';
+			case 'welcome.meet': return 'ZiqeX-ஐ சந்திக்கவும்';
 			case 'welcome.at_edge': return 'எட்ஜில் உள்ள நுண்ணறிவு';
-			case 'welcome.private': return 'தனியார் மற்றும் எட்ஜ் AI\nZenteiQ வழங்கியது';
-			case 'welcome.begin': return 'தொடங்குங்கள்';
+			case 'welcome.private': return 'தனியார் எட்ஜ் AI\nZenteiQ வழங்கியது';
+			case 'welcome.begin': return 'தொடங்கலாம்';
 			case 'info.title': return 'உங்களுக்கான நுண்ணறிவு';
 			case 'info.subtitle': return 'தனியுரிமை மற்றும் முழு கட்டுப்பாட்டுடன் கூடிய AI அனுபவம்.';
 			case 'info.privacy_title': return 'தனியுரிமை முதலில்';
@@ -4207,40 +6193,85 @@ extension on _StringsTa {
 			case 'modelDownload.ttft': return '~140 ms TTFT';
 			case 'modelDownload.error': return ({required Object error}) => 'பிழை: ${error}';
 			case 'modelDownload.retry': return 'மீண்டும் முயற்சிக்கவும்';
-			case 'modelDownload.open': return 'BrahmAI-ஐத் திறக்கவும்';
-			case 'modelDownload.download': return 'மாடலைப் பதிவிறக்கவும்';
+			case 'modelDownload.open': return 'திறக்கவும்';
+			case 'modelDownload.download': return 'பதிவிறக்கவும்';
 			case 'modelDownload.later': return 'பிறகு அமைக்கவும்';
-			case 'modelDownload.continueSub': return 'மாடலைப் பதிவிறக்காமல் தொடரவும். நீங்கள் தயாராக இருக்கும்போது ஒன்றைச் சேர்க்கலாம்';
+			case 'modelDownload.continueSub': return 'பதிவிறக்காமல் தொடரவும். நீங்கள் தயாராக இருக்கும்போது ஒன்றைச் சேர்க்கலாம்';
+			case 'library_v2.subtitle': return 'AI வளங்களை நிர்வகிக்கவும்';
+			case 'library_v2.language_title': return 'மொழி';
+			case 'library_v2.language_desc': return 'மொழிகளைத் தேர்ந்தெடுத்து நிர்வகிக்கவும்';
+			case 'library_v2.model_title': return 'மாதிரி';
+			case 'library_v2.model_desc': return 'AI மாதிரிகளை ஆராய்ந்து நிர்வகிக்கவும்';
+			case 'library_v2.saved_title': return 'சேமிக்கப்பட்டது';
+			case 'library_v2.saved_desc': return 'உங்கள் ப்ராம்ப்ட் நூலகம்';
+			case 'library_v2.skills_title': return 'திறன்கள்';
+			case 'library_v2.skills_desc': return 'AI திறன்கள்';
 			case 'biometric.vault': return 'பெட்டக பாதுகாப்பு';
-			case 'biometric.setupTitle': return 'பாதுகாப்பான லாக் அமைப்பு';
-			case 'biometric.setupSub': return 'உங்களுக்கு விருப்பமான அங்கீகார முறை மூலம் உங்கள் பெட்டகத்தைப் பாதுகாக்கவும்.';
-			case 'biometric.deviceTitle': return 'சாதன பயோமெட்ரிக்ஸ்';
-			case 'biometric.deviceSub': return 'FaceID அல்லது கைரேகையைப் பயன்படுத்தவும்';
-			case 'biometric.pinTitle': return 'ஆப்-குறிப்பிட்ட பின் (PIN)';
-			case 'biometric.pinSub': return 'தனித்துவமான 4-இலக்க குறியீட்டை அமைக்கவும்';
-			case 'biometric.dialogTitle': return 'பயோமெட்ரிக் அணுகலை அனுமதி';
-			case 'biometric.dialogSub': return 'ZiqeX ஐத் திறக்க உங்கள் கைரேகை அல்லது சாதன முக அங்கீகாரத்தைப் பயன்படுத்தவும்';
-			case 'biometric.cancel': return 'ரத்துசெய்';
-			case 'biometric.allow': return 'பயோமெட்ரிக்ஸை அனுமதி';
-			case 'data.appBar': return 'தரவு மேலாண்மை மற்றும்\nதக்கவைத்தல்';
+			case 'biometric.setupTitle': return 'பாதுகாப்பான லாக்';
+			case 'biometric.setupSub': return 'விரும்பிய முறையில் உங்கள் பெட்டகத்தைப் பாதுகாக்கவும்.';
+			case 'biometric.deviceTitle': return 'பயோமெட்ரிக்ஸ்';
+			case 'biometric.deviceSub': return 'FaceID அல்லது கைரேகை';
+			case 'biometric.pinTitle': return 'பின் (PIN) குறியீடு';
+			case 'biometric.pinSub': return '4-இலக்க குறியீட்டை அமைக்கவும்';
+			case 'biometric.dialogTitle': return 'அனுமதி';
+			case 'biometric.dialogSub': return 'ZiqeX ஐத் திறக்க உங்கள் கைரேகை அல்லது முகத்தை பயன்படுத்தவும்';
+			case 'biometric.cancel': return 'ரத்து';
+			case 'biometric.allow': return 'அனுமதி';
+			case 'security_screen.appBar': return 'செயலி பாதுகாப்பு';
+			case 'security_screen.global_protection': return 'உலகளாவிய பாதுகாப்பு';
+			case 'security_screen.app_lock': return 'செயலி பூட்டு';
+			case 'security_screen.app_lock_sub': return 'ZiqeX ஐத் திறக்க அங்கீகாரம் தேவை';
+			case 'security_screen.auth_methods': return 'அங்கீகார முறைகள்';
+			case 'security_screen.biometrics_title': return 'சாதன பயோமெட்ரிக்ஸ்';
+			case 'security_screen.biometrics_sub': return 'உங்கள் கைரேகை அல்லது முகத்தைக் கொண்டு உடனடியாகத் திறக்கவும்';
+			case 'security_screen.pin_title': return 'ZiqeX பின்';
+			case 'security_screen.pin_active': return 'பின் செயல்பாட்டில் உள்ளது';
+			case 'security_screen.pin_setup': return 'செயலியைத் திறக்க ஒரு தனித்துவமான 4 இலக்க குறியீட்டை அமைக்கவும்';
+			case 'security_screen.warning_title': return 'அதிகப்படியான தவறான முயற்சிகள்';
+			case 'security_screen.warning_sub': return 'தவறான பின் 10 முறை உள்ளிடப்பட்டால், ZiqeX தானாகவே மீட்டமைக்கப்படும். இந்த சாதனத்தில் சேமிக்கப்பட்ட அனைத்து தரவுகளும் நிரந்தரமாக நீக்கப்படும்';
+			case 'security_screen.incomplete_title': return 'பாதுகாப்பு அமைப்பு முழுமையடையவில்லை';
+			case 'security_screen.incomplete_content': return 'நீங்கள் செயலி பூட்டை இயக்கியுள்ளீர்கள், ஆனால் பின் அல்லது பயோமெட்ரிக்ஸை அமைக்கவில்லை. ஒரு முறை கட்டமைக்கப்படும் வரை செயலி பூட்டு முடக்கப்படும்.';
+			case 'security_screen.got_it': return 'புரிந்தது';
+			case 'data.appBar': return 'தரவு மேலாண்மை';
 			case 'data.summary': return 'சேமிப்பக சுருக்கம்';
-			case 'data.totalUsed': return 'மொத்தம் பயன்படுத்தப்பட்டது: ';
+			case 'data.totalUsed': return 'பயன்படுத்தப்பட்டது: ';
 			case 'data.legendModel': return 'மாடல் எடைகள்';
 			case 'data.legendFree': return 'வெற்று இடம்';
 			case 'data.mgmt': return 'மாடல் மேலாண்மை';
-			case 'data.deleteModels': return 'பதிவிறக்கம் செய்யப்பட்ட அனைத்து மாடல்களையும் நீக்கு';
-			case 'data.deleteModelsSub': return 'இந்த சாதனத்திலிருந்து அனைத்து உள்ளூர் மாடல் எடைகளையும் அளவுருக்களையும் முழுமையாக அகற்றவும்.';
-			case 'data.selectDelete': return 'நீக்க வேண்டிய மாடல்களைத் தேர்ந்தெடுக்கவும்';
-			case 'data.autoDelete': return 'இதற்கு மேலான பழைய அரட்டைகளைத் தானாக நீக்கு:';
-			case 'data.autoDeleteSub': return 'இந்த அமைப்பு அனைத்து அரட்டை முறைகளுக்கும் பொருந்தும்.';
+			case 'data.deleteModels': return 'அனைத்தையும் நீக்கு';
+			case 'data.deleteModelsSub': return 'மாடல் எடைகளை சாதனத்திலிருந்து முழுமையாக அகற்றவும்.';
+			case 'data.selectDelete': return 'நீக்க வேண்டியவற்றைத் தேர்ந்தெடுக்கவும்';
+			case 'data.autoDelete': return 'தானாக நீக்கு:';
+			case 'data.autoDeleteSub': return 'அனைத்து அரட்டை முறைகளுக்கும் பொருந்தும்.';
 			case 'data.modes': return 'முறைகள்';
-			case 'data.noData': return 'செயலில் உள்ள அரட்டை தரவு இல்லை';
-			case 'data.deleteAll': return 'அனைத்து தரவையும் நீக்கு';
-			case 'data.authReq': return 'ஆப் லாக் மீண்டும் அங்கீகாரம் தேவை';
-			case 'data.viewChats': return 'அரட்டைகளைப் பார்';
-			case 'data.deleteAllPillar': return 'அனைத்தையும் நீக்கு';
+			case 'data.noData': return 'தகவல்கள் இல்லை';
+			case 'data.deleteAll': return 'அனைத்தையும் நீக்கு';
+			case 'data.authReq': return 'மீண்டும் அங்கீகாரம் தேவை';
+			case 'data.viewChats': return 'பார்';
+			case 'data.deleteAllPillar': return 'நீக்கு';
 			case 'data.space': return 'இடம்:';
-			case 'data.activeInstances': return 'செயலில் உள்ள நிகழ்வுகள்:';
+			case 'data.activeInstances': return 'நிகழ்வுகள்:';
+			case 'pin_setup.title_setup': return '4-இலக்க PIN-ஐ அமைக்கவும்';
+			case 'pin_setup.subtitle_setup': return 'பயன்பாட்டை அணுக பாதுகாப்பான குறியீட்டை உருவாக்கவும்';
+			case 'pin_setup.title_confirm': return 'PIN-ஐ உறுதிப்படுத்தவும்';
+			case 'pin_setup.subtitle_confirm': return 'சரிபார்க்க உங்கள் 4-இலக்க குறியீட்டை மீண்டும் உள்ளிடவும்';
+			case 'pin_setup.title_verify': return 'தற்போதைய PIN-ஐ உள்ளிடவும்';
+			case 'pin_setup.subtitle_verify': return 'தொடர உங்கள் தற்போதைய குறியீட்டை உள்ளிடவும்';
+			case 'pin_setup.error_mismatch': return 'PIN-கள் பொருந்தவில்லை. மீண்டும் முயற்சிக்கவும்.';
+			case 'pin_setup.error_incorrect': return 'தவறான PIN. மீண்டும் முயற்சிக்கவும்.';
+			case 'pin_setup.snack_success': return 'PIN வெற்றிகரமாக அமைக்கப்பட்டது';
+			case 'pin_mgmt.appBar': return 'செயலி சார்ந்த PIN';
+			case 'pin_mgmt.change_title': return 'PIN-ஐ மாற்றவும்';
+			case 'pin_mgmt.change_sub': return 'உங்கள் 4-இலக்க ZiqeX பாதுகாப்புக் குறியீட்டைப் புதுப்பிக்கவும்';
+			case 'pin_mgmt.remove_title': return 'PIN-ஐ அகற்றவும்';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX க்கான PIN அணுகலை முடக்கவும்';
+			case 'pin_mgmt.snack_removed': return 'PIN வெற்றிகரமாக அகற்றப்பட்டது';
+			case 'lang_legacy.title1': return 'எந்த மொழி\n';
+			case 'lang_legacy.title2': return 'சொந்த உணர்வைத் தருகிறது?';
+			case 'lang_legacy.subtitle': return 'உங்கள் தாய்மொழியில் குரல், உரை மற்றும் பதில்கள். எப்போது வேண்டுமானாலும் மாற்றிக்கொள்ளலாம்.';
+			case 'lang_legacy.first_reply': return 'முதல் பதில் இவ்வாறு இருக்கும்';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - உங்கள் எழுத்துருவில் எழுதப்பட்டு பேசப்படும்';
+			case 'lang_legacy.continueBtn': return 'தொடரவும்';
 			default: return null;
 		}
 	}
@@ -4280,11 +6311,11 @@ extension on _StringsTe {
 			case 'storage_purge_sub': return 'పరికరంలో 184 KB';
 			case 'ephemeral_mode': return 'ఇన్కాగ్నిటో చాట్';
 			case 'about': return 'సిస్టమ్ సమాచారం';
-			case 'reset_prototype': return 'ప్రోటోటైప్‌ని రీసెట్ చేయండి';
+			case 'reset_prototype': return 'ప్రోటోటోపిని రీసెట్ చేయండి';
 			case 'built_in_india': return 'భారతదేశంలో నిర్మించబడింది. ప్రపంచం కోసం.';
 			case 'library_sub': return 'ప్రతి మోడల్ · ప్రతి మెమరీ · ఈ పరికరంలో';
 			case 'on_this_device': return 'ఈ పరికరంలో';
-			case 'active': return 'యాక్тив్';
+			case 'active': return 'యాక్టివ్';
 			case 'add': return '+ జోడించు';
 			case 'storage_used': return 'ఉపయోగించిన స్టోరేజ్';
 			case 'health_question': return 'ఆరోగ్య ప్రశ్న';
@@ -4314,7 +6345,7 @@ extension on _StringsTe {
 			case 'info.privacy_desc': return 'ZiqeX ఇంటెలిజెన్స్ మరియు మీ సమాచారాన్ని మీ పరికరానికి దగ్గరగా ఉంచడానికి రూపొందించబడింది.';
 			case 'info.hand_title': return 'మీ చేతిలో ఇంటెలిజెన్స్';
 			case 'info.hand_desc': return 'రోజువారీ ఇంటెలిజెన్స్, నేరుగా మీ పరికరంలో అందుబాటులో ఉంటుంది.';
-			case 'info.control_title': return 'మీ డేటా. మీ నియন্ত্রণ.';
+			case 'info.control_title': return 'మీ డేటా. మీ నియంత్రణ.';
 			case 'info.control_desc': return 'దేనిని ఉంచుకోవాలో ఎంచుకోండి, నిల్వ చేయబడిన దానిని నిర్వహించండి మరియు మీకు అవసరం లేని వాటిని తొలగించండి.';
 			case 'info.place_title': return 'ప్రతి ప్రదేశం కోసం రూపొందించబడింది';
 			case 'info.place_desc': return 'విభిన్న భాషలు, పరికరాలు మరియు ప్రజలు సాంకేతికతను ఉపయోగించే మార్గాల కోసం నిర్మించబడింది.';
@@ -4352,6 +6383,15 @@ extension on _StringsTe {
 			case 'modelDownload.download': return 'మోడల్‌ను డౌన్‌లోడ్ చేయండి';
 			case 'modelDownload.later': return 'తర్వాత సెటప్ చేయండి';
 			case 'modelDownload.continueSub': return 'మోడల్‌ను డౌన్‌లోడ్ చేయకుండా కొనసాగించండి. మీరు సిద్ధంగా ఉన్నప్పుడు ఒకదాన్ని జోడించవచ్చు';
+			case 'library_v2.subtitle': return 'మీ AI వనరులను నిర్వహించండి';
+			case 'library_v2.language_title': return 'భాష';
+			case 'library_v2.language_desc': return 'మీకు నచ్చిన భాషలను ఎంచుకోండి మరియు నిర్వహించండి';
+			case 'library_v2.model_title': return 'మోడల్';
+			case 'library_v2.model_desc': return 'అందుబాటులో ఉన్న AI మోడల్‌లను అన్వేషించండి మరియు నిర్వహించండి';
+			case 'library_v2.saved_title': return 'సేవ్ చేయబడింది';
+			case 'library_v2.saved_desc': return 'మీ ప్రాంప్ట్ లైబ్రరీ';
+			case 'library_v2.skills_title': return 'నైపుణ్యాలు';
+			case 'library_v2.skills_desc': return 'AI సామర్థ్యాలు';
 			case 'biometric.vault': return 'వాల్ట్ భద్రత';
 			case 'biometric.setupTitle': return 'సురక్షిత లాక్ సెటప్';
 			case 'biometric.setupSub': return 'మీకు ఇష్టమైన ప్రమాణీకరణ పద్ధతితో మీ వాల్ట్‌ను రక్షించుకోండి.';
@@ -4363,13 +6403,28 @@ extension on _StringsTe {
 			case 'biometric.dialogSub': return 'ZiqeXని అన్‌లాక్ చేయడానికి మీ వేలిముద్ర లేదా డివైస్ ఫేస్ రికగ్నిషన్‌ని ఉపయోగించండి';
 			case 'biometric.cancel': return 'రద్దు చేయి';
 			case 'biometric.allow': return 'బయోమెట్రిక్స్‌ను అనుమతించు';
+			case 'security_screen.appBar': return 'యాప్ భద్రత';
+			case 'security_screen.global_protection': return 'గ్లోబల్ ప్రొటెక్షన్';
+			case 'security_screen.app_lock': return 'యాప్ లాక్';
+			case 'security_screen.app_lock_sub': return 'ZiqeX తెరవడానికి ప్రమాణీకరణ అవసరం';
+			case 'security_screen.auth_methods': return 'ప్రమాణీకరణ పద్ధతులు';
+			case 'security_screen.biometrics_title': return 'పరికర బయోమెట్రిక్స్';
+			case 'security_screen.biometrics_sub': return 'మీ వేలిముద్ర లేదా ముఖంతో తక్షణమే అన్‌లాక్ చేయండి';
+			case 'security_screen.pin_title': return 'ZiqeX పిన్';
+			case 'security_screen.pin_active': return 'పిన్ యాక్టివ్‌గా ఉంది';
+			case 'security_screen.pin_setup': return 'యాప్‌ను అన్‌లాక్ చేయడానికి ప్రత్యేకమైన 4-అంకెల కోడ్‌ను సెట్ చేయండి';
+			case 'security_screen.warning_title': return 'చాలా తప్పుడు ప్రయత్నాలు';
+			case 'security_screen.warning_sub': return 'తప్పుడు పిన్ 10 సార్లు నమోదు చేస్తే, ZiqeX స్వయంచాలకంగా రీసెట్ చేయబడుతుంది. ఈ పరికరంలో సేవ్ చేయబడిన మొత్తం డేటా శాశ్వతంగా తొలగించబడుతుంది';
+			case 'security_screen.incomplete_title': return 'సెక్యూరిటీ సెటప్ అసంపూర్తిగా ఉంది';
+			case 'security_screen.incomplete_content': return 'మీరు యాప్ లాక్‌ని ప్రారంభించారు కానీ పిన్ లేదా బయోమెట్రిక్స్‌ని సెట్ చేయలేదు. ఒక పద్ధతి కాన్ఫిగర్ చేయబడే వరకు యాప్ లాక్ నిలిపివేయబడుతుంది.';
+			case 'security_screen.got_it': return 'సరే';
 			case 'data.appBar': return 'డేటా నిర్వహణ మరియు\nనిలుపుదల';
 			case 'data.summary': return 'స్టోరేజ్ సారాంశం';
 			case 'data.totalUsed': return 'మొత్తం ఉపయోగించినది: ';
 			case 'data.legendModel': return 'మోడల్ వెయిట్స్';
 			case 'data.legendFree': return 'ఖాళీ స్థలం';
 			case 'data.mgmt': return 'మోడల్ నిర్వహణ';
-			case 'data.deleteModels': return 'డೌన్‌లోడ్ చేసిన అన్ని మోడళ్లను తొలగించు';
+			case 'data.deleteModels': return 'డೌน์โหลด చేసిన అన్ని మోడళ్లను తొలగించు';
 			case 'data.deleteModelsSub': return 'ఈ పరికరం నుండి అన్ని స్థానిక మోడల్ వెయిట్స్ మరియు పారామితులను పూర్తిగా తొలగించండి.';
 			case 'data.selectDelete': return 'తొలగించడానికి మోడళ్లను ఎంచుకోండి';
 			case 'data.autoDelete': return 'దీనికంటే పాత చాట్‌లను ఆటోమేటిక్‌గా తొలగించు:';
@@ -4382,6 +6437,27 @@ extension on _StringsTe {
 			case 'data.deleteAllPillar': return 'అన్నీ తొలగించు';
 			case 'data.space': return 'స్థలం:';
 			case 'data.activeInstances': return 'యాక్టివ్ ఇన్‌స్టాన్స్:';
+			case 'pin_setup.title_setup': return '4-అంకెల పిన్ సెట్ చేయండి';
+			case 'pin_setup.subtitle_setup': return 'యాప్‌ని యాక్సెస్ చేయడానికి సురక్షితమైన కోడ్‌ని సృష్టించండి';
+			case 'pin_setup.title_confirm': return 'పిన్‌ని ధృవీకరించండి';
+			case 'pin_setup.subtitle_confirm': return 'ధృవీకరించడానికి మీ 4-అంకెల కోడ్‌ని మళ్లీ నమోదు చేయండి';
+			case 'pin_setup.title_verify': return 'ప్రస్తుత పిన్‌ని నమోదు చేయండి';
+			case 'pin_setup.subtitle_verify': return 'కొనసాగించడానికి మీ ప్రస్తుత కోడ్‌ని నమోదు చేయండి';
+			case 'pin_setup.error_mismatch': return 'పిన్‌లు సరిపోలలేదు. మళ్లీ ప్రయత్నించండి.';
+			case 'pin_setup.error_incorrect': return 'తప్పు పిన్. దయచేసి మళ్లీ ప్రయత్నించండి.';
+			case 'pin_setup.snack_success': return 'పిన్ విజయవంతంగా సెట్ చేయబడింది';
+			case 'pin_mgmt.appBar': return 'యాప్-నిర్దిష్ట పిన్';
+			case 'pin_mgmt.change_title': return 'పిన్ మార్చండి';
+			case 'pin_mgmt.change_sub': return 'మీ 4-అంకెల ZiqeX భద్రతా కోడ్‌ను అప్‌డేట్ చేయండి';
+			case 'pin_mgmt.remove_title': return 'పిన్‌ని తొలగించండి';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX కోసం పిన్ యాక్సెస్‌ని ఆఫ్ చేయండి';
+			case 'pin_mgmt.snack_removed': return 'పిన్ విజయవంతంగా తొలగించబడింది';
+			case 'lang_legacy.title1': return 'ఏ భాష\n';
+			case 'lang_legacy.title2': return 'సొంతం అనిపిస్తుంది?';
+			case 'lang_legacy.subtitle': return 'మీ మాతృభాషలో వాయిస్, టెక్స్ట్ మరియు ప్రత్యుత్తరాలు. ఎప్పుడైనా మారండి.';
+			case 'lang_legacy.first_reply': return 'మొదటి సమాధానం ఇలా ఉంటుంది';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - మీ లిపిలో వ్రాయబడినది మరియు మాట్లాడబడేది';
+			case 'lang_legacy.continueBtn': return 'కొనసాగించండి';
 			default: return null;
 		}
 	}
@@ -4409,6 +6485,42 @@ extension on _StringsUr {
 			case 'modelDownload.download': return 'ماڈل ڈاؤن لوڈ کریں';
 			case 'modelDownload.later': return 'بعد میں سیٹ اپ کریں';
 			case 'modelDownload.continueSub': return 'ماڈل ڈاؤن لوڈ کیے بغیر جاری رکھیں۔ جب آپ تیار ہوں تو آپ ایک شامل کر سکتے ہیں';
+			case 'security_screen.appBar': return 'ایپ سیکیورٹی';
+			case 'security_screen.global_protection': return 'عالمی تحفظ';
+			case 'security_screen.app_lock': return 'ایپ لاک';
+			case 'security_screen.app_lock_sub': return 'ZiqeX کھولنے کے لیے تصدیق درکار ہے';
+			case 'security_screen.auth_methods': return 'تصدیق کے طریقے';
+			case 'security_screen.biometrics_title': return 'ڈیوائس بائیو میٹرکس';
+			case 'security_screen.biometrics_sub': return 'اپنے فنگر پرنٹ یا چہرے سے فوری طور پر ان لاک کریں';
+			case 'security_screen.pin_title': return 'ZiqeX پن';
+			case 'security_screen.pin_active': return 'پن فعال ہے';
+			case 'security_screen.pin_setup': return 'ایپ کو ان لاک کرنے کے لیے ایک منفرد 4 ہندسوں کا کوڈ سیٹ کریں';
+			case 'security_screen.warning_title': return 'بہت زیادہ غلط کوششیں';
+			case 'security_screen.warning_sub': return 'اگر غلط پن 10 بار درج کیا جاتا ہے تو ZiqeX خود بخود ری سیٹ ہو جائے گا۔ اس ڈیوائس پر محفوظ تمام ڈیٹا مستقل طور بر حذف کر دیا جائے گا';
+			case 'security_screen.incomplete_title': return 'سیکیورٹی سیٹ اپ نامکمل';
+			case 'security_screen.incomplete_content': return 'آپ نے ایپ لاک فعال کر دیا ہے لیکن پن یا بائیو میٹرکس سیٹ نہیں کیا ہے۔ ایپ لاک اس وقت تک غیر فعال رہے گا جب تک کہ کوئی طریقہ کنفیگر نہیں کیا جاتا۔';
+			case 'security_screen.got_it': return 'ٹھیک ہے';
+			case 'pin_setup.title_setup': return '4 ہندسوں کا پن سیٹ کریں';
+			case 'pin_setup.subtitle_setup': return 'ایپ تک رسائی کے لیے ایک محفوظ کوڈ بنائیں';
+			case 'pin_setup.title_confirm': return 'پن کی تصدیق کریں';
+			case 'pin_setup.subtitle_confirm': return 'تصدیق کے لیے اپنا 4 ہندسوں کا کوڈ دوبارہ درج کریں';
+			case 'pin_setup.title_verify': return 'موجودہ پن درج کریں';
+			case 'pin_setup.subtitle_verify': return 'جاری رکھنے کے لیے اپنا موجودہ کوڈ درج کریں';
+			case 'pin_setup.error_mismatch': return 'پن مطابقت نہیں رکھتے۔ دوبارہ کوشش کریں۔';
+			case 'pin_setup.error_incorrect': return 'غلط پن۔ براہ کرم دوبارہ کوشش کریں۔';
+			case 'pin_setup.snack_success': return 'پن کامیابی کے ساتھ سیٹ ہو گیا';
+			case 'pin_mgmt.appBar': return 'ایپ کے لیے مخصوص پن';
+			case 'pin_mgmt.change_title': return 'پن تبدیل کریں';
+			case 'pin_mgmt.change_sub': return 'اپنا 4 ہندسوں والا ZiqeX سیکیورٹی کوڈ اپ ڈیٹ کریں';
+			case 'pin_mgmt.remove_title': return 'پن ختم کریں';
+			case 'pin_mgmt.remove_sub': return 'ZiqeX کے لیے پن تک رسائی بند کریں';
+			case 'pin_mgmt.snack_removed': return 'پن کامیابی کے ساتھ ختم کر دیا گیا';
+			case 'lang_legacy.title1': return 'کون سی زبان\n';
+			case 'lang_legacy.title2': return 'اپنی سی لگتی ہے؟';
+			case 'lang_legacy.subtitle': return 'آپ کی مادری زبان میں آواز، متن اور جوابات۔ کسی بھی وقت تبدیل کریں۔';
+			case 'lang_legacy.first_reply': return 'پہلا جواب یہ ہوگا';
+			case 'lang_legacy.script_info': return ({required Object lang}) => '${lang} - آپ کے رسم الخط میں لکھا اور بولا گیا';
+			case 'lang_legacy.continueBtn': return 'جاری رکھیں';
 			default: return null;
 		}
 	}
