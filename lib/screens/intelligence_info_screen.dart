@@ -78,7 +78,7 @@ class IntelligenceInfoScreen extends StatelessWidget {
                       description: t.info.privacy_desc,
                       scale: scale,
                     ),
-                    SizedBox(height: 24 * scale),
+                    SizedBox(height: 20 * scale),
                     _buildFeatureRow(
                       icon: Icons.app_shortcut_outlined,
                       iconBg: const Color(0xFFE0F2F1),
@@ -86,7 +86,7 @@ class IntelligenceInfoScreen extends StatelessWidget {
                       description: t.info.hand_desc,
                       scale: scale,
                     ),
-                    SizedBox(height: 24 * scale),
+                    SizedBox(height: 20 * scale),
                     _buildFeatureRow(
                       icon: Icons.analytics_outlined,
                       iconBg: const Color(0xFFE0F2F1),
@@ -94,7 +94,7 @@ class IntelligenceInfoScreen extends StatelessWidget {
                       description: t.info.control_desc,
                       scale: scale,
                     ),
-                    SizedBox(height: 24 * scale),
+                    SizedBox(height: 20 * scale),
                     _buildFeatureRow(
                       icon: Icons.language_outlined,
                       iconBg: const Color(0xFFE0F2F1),
@@ -145,7 +145,7 @@ class IntelligenceInfoScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 24 * scale),
+                    SizedBox(height: 20 * scale),
                   ],
                 ),
               ),

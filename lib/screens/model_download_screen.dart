@@ -178,12 +178,12 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                         ),
                         const SizedBox(height: 16),
                         // Stats Badges
-                        Row(
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
                           children: [
                             _buildStatBadge(context, t.modelDownload.toks),
-                            const SizedBox(width: 8),
                             _buildStatBadge(context, t.modelDownload.ttft),
-                            const SizedBox(width: 8),
                             _buildStatBadge(context, t.modelDownload.langs),
                           ],
                         ),
@@ -227,11 +227,15 @@ class _ModelDownloadScreenState extends State<ModelDownloadScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            isComplete ? t.modelDownload.open : t.modelDownload.download,
-                            style: GoogleFonts.notoSans(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                          Flexible(
+                            child: Text(
+                              isComplete ? t.modelDownload.open : t.modelDownload.download,
+                              style: GoogleFonts.notoSans(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           const SizedBox(width: 8),

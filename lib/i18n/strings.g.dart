@@ -6,7 +6,7 @@
 /// Locales: 13
 /// Strings: 1465 (112 per locale)
 ///
-/// Built on 2026-08-19 at 06:33 UTC
+/// Built on 2026-08-19 at 08:38 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -1358,18 +1358,18 @@ class _StringsInfoKn extends _StringsInfoEn {
 	@override final _StringsKn _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'ನಿಮ್ಮ ಸುತ್ತ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಬುದ್ಧಿವಂತಿಕೆ';
-	@override String get subtitle => 'ಗೌಪ್ಯತೆ, ಆಯ್ಕೆ ಮತ್ತು ನಿಯಂತ್ರಣದೊಂದಿಗೆ ಅನುಭವದಲ್ಲಿ ನಿರ್ಮಿಸಲಾದ ಉಪಯುಕ್ತ AI.';
+	@override String get title => 'ನಿಮಗಾಗಿ ಬುದ್ಧಿವಂತಿಕೆ';
+	@override String get subtitle => 'ಗೌಪ್ಯತೆ ಮತ್ತು ಪೂರ್ಣ ನಿಯಂತ್ರಣದೊಂದಿಗೆ AI ಅನುಭವ.';
 	@override String get privacy_title => 'ಗೌಪ್ಯತೆ ಮೊದಲು';
-	@override String get privacy_desc => 'ZiqeX ಬುದ್ಧಿವಂತಿಕೆ ಮತ್ತು ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ನಿಮ್ಮ ಸಾಧನಕ್ಕೆ ಹತ್ತಿರವಾಗಿಡಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.';
-	@override String get hand_title => 'ನಿಮ್ಮ ಕೈಯಲ್ಲಿ ಬುದ್ಧಿವಂತಿಕೆ';
-	@override String get hand_desc => 'ದೈನಂದಿನ ಬುದ್ಧಿವಂತಿಕೆ, ನೇರವಾಗಿ ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಲಭ್ಯವಿದೆ.';
-	@override String get control_title => 'ನಿಮ್ಮ ಡೇಟಾ. ನಿಮ್ಮ ನಿಯಂತ್ರಣ.';
-	@override String get control_desc => 'ಏನನ್ನು ಇಟ್ಟುಕೊಳ್ಳಬೇಕು ಎಂಬುದನ್ನು ಆರಿಸಿ, ಸಂಗ್ರಹವಾಗಿರುವುದನ್ನು ನಿರ್ವಹಿಸಿ ಮತ್ತು ನಿಮಗೆ ಅಗತ್ಯವಿಲ್ಲದ್ದನ್ನು ಅಳಿಸಿ.';
-	@override String get place_title => 'ಪ್ರತಿ ಸ್ಥಳಕ್ಕೂ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ';
-	@override String get place_desc => 'ವಿಭಿನ್ನ ಭಾಷೆಗಳು, ಸಾಧನಗಳು ಮತ್ತು ಜನರು ತಂತ್ರಜ್ಞಾನವನ್ನು ಬಳಸುವ ವಿಧಾನಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.';
+	@override String get privacy_desc => 'ನಿಮ್ಮ ಮಾಹಿತಿ ನಿಮ್ಮ ಸಾಧನದಲ್ಲೇ ಸುರಕ್ಷಿತವಾಗಿರುತ್ತದೆ.';
+	@override String get hand_title => 'ಕೈಯಲ್ಲಿ ಬುದ್ಧಿವಂತಿಕೆ';
+	@override String get hand_desc => 'ದೈನಂದಿನ ಅಗತ್ಯಗಳಿಗಾಗಿ ಬುದ್ಧಿವಂತಿಕೆ ನಿಮ್ಮ ಸಾಧನದಲ್ಲೇ ಲಭ್ಯ.';
+	@override String get control_title => 'ಪೂರ್ಣ ನಿಯಂತ್ರಣ';
+	@override String get control_desc => 'ಅಗತ್ಯವಿರುವುದನ್ನು ಇಟ್ಟುಕೊಳ್ಳಿ, ಬೇಡದ್ದನ್ನು ಅಳಿಸಿ.';
+	@override String get place_title => 'ಎಲ್ಲರಿಗೂ ವಿನ್ಯಾಸ';
+	@override String get place_desc => 'ವಿವಿಧ ಭಾಷೆ ಮತ್ತು ಸಾಧನಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.';
 	@override String get footer => 'ನಿಮ್ಮ ಬುದ್ಧಿವಂತಿಕೆ. ನಿಮ್ಮ ಸಾಧನ. ನಿಮ್ಮ ನಿಯಂತ್ರಣ.';
-	@override String get setup => 'ನಿಮ್ಮ ZiqeX ಅನ್ನು ಹೊಂದಿಸಿ';
+	@override String get setup => 'ಸ್ಥಾಪನೆ';
 }
 
 // Path: languageSelection
@@ -1664,8 +1664,8 @@ class _StringsModelDownloadMl extends _StringsModelDownloadEn {
 	@override String get ttft => '~140 ms TTFT';
 	@override String error({required Object error}) => 'പിശക്: ${error}';
 	@override String get retry => 'വീണ്ടും ശ്രമിക്കുക';
-	@override String get open => 'BrahmAI തുറക്കുക';
-	@override String get download => 'മോഡൽ ഡൗൺലോഡ് ചെയ്യുക';
+	@override String get open => 'തുറക്കാം';
+	@override String get download => 'ഡൗൺലോഡ്';
 	@override String get later => 'പിന്നീട് സജ്ജമാക്കുക';
 	@override String get continueSub => 'മോഡൽ ഡൗൺലോഡ് ചെയ്യാതെ തുടരുക. നിങ്ങൾ തയ്യാറാകുമ്പോൾ ഒരെണ്ണം ചേർക്കാം';
 }
@@ -3552,18 +3552,18 @@ extension on _StringsKn {
 			case 'welcome.at_edge': return 'ಎಡ್ಜ್‌ನಲ್ಲಿ ಬುದ್ಧಿವಂತಿಕೆ';
 			case 'welcome.private': return 'ಖಾಸಗಿ ಮತ್ತು ಎಡ್ಜ್ AI\nZenteiQ ಇಂದ';
 			case 'welcome.begin': return 'ಆನ್‌ಬೋರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ';
-			case 'info.title': return 'ನಿಮ್ಮ ಸುತ್ತ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಬುದ್ಧಿವಂತಿಕೆ';
-			case 'info.subtitle': return 'ಗೌಪ್ಯತೆ, ಆಯ್ಕೆ ಮತ್ತು ನಿಯಂತ್ರಣದೊಂದಿಗೆ ಅನುಭವದಲ್ಲಿ ನಿರ್ಮಿಸಲಾದ ಉಪಯುಕ್ತ AI.';
+			case 'info.title': return 'ನಿಮಗಾಗಿ ಬುದ್ಧಿವಂತಿಕೆ';
+			case 'info.subtitle': return 'ಗೌಪ್ಯತೆ ಮತ್ತು ಪೂರ್ಣ ನಿಯಂತ್ರಣದೊಂದಿಗೆ AI ಅನುಭವ.';
 			case 'info.privacy_title': return 'ಗೌಪ್ಯತೆ ಮೊದಲು';
-			case 'info.privacy_desc': return 'ZiqeX ಬುದ್ಧಿವಂತಿಕೆ ಮತ್ತು ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ನಿಮ್ಮ ಸಾಧನಕ್ಕೆ ಹತ್ತಿರವಾಗಿಡಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.';
-			case 'info.hand_title': return 'ನಿಮ್ಮ ಕೈಯಲ್ಲಿ ಬುದ್ಧಿವಂತಿಕೆ';
-			case 'info.hand_desc': return 'ದೈನಂದಿನ ಬುದ್ಧಿವಂತಿಕೆ, ನೇರವಾಗಿ ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಲಭ್ಯವಿದೆ.';
-			case 'info.control_title': return 'ನಿಮ್ಮ ಡೇಟಾ. ನಿಮ್ಮ ನಿಯಂತ್ರಣ.';
-			case 'info.control_desc': return 'ಏನನ್ನು ಇಟ್ಟುಕೊಳ್ಳಬೇಕು ಎಂಬುದನ್ನು ಆರಿಸಿ, ಸಂಗ್ರಹವಾಗಿರುವುದನ್ನು ನಿರ್ವಹಿಸಿ ಮತ್ತು ನಿಮಗೆ ಅಗತ್ಯವಿಲ್ಲದ್ದನ್ನು ಅಳಿಸಿ.';
-			case 'info.place_title': return 'ಪ್ರತಿ ಸ್ಥಳಕ್ಕೂ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ';
-			case 'info.place_desc': return 'ವಿಭಿನ್ನ ಭಾಷೆಗಳು, ಸಾಧನಗಳು ಮತ್ತು ಜನರು ತಂತ್ರಜ್ಞಾನವನ್ನು ಬಳಸುವ ವಿಧಾನಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.';
+			case 'info.privacy_desc': return 'ನಿಮ್ಮ ಮಾಹಿತಿ ನಿಮ್ಮ ಸಾಧನದಲ್ಲೇ ಸುರಕ್ಷಿತವಾಗಿರುತ್ತದೆ.';
+			case 'info.hand_title': return 'ಕೈಯಲ್ಲಿ ಬುದ್ಧಿವಂತಿಕೆ';
+			case 'info.hand_desc': return 'ದೈನಂದಿನ ಅಗತ್ಯಗಳಿಗಾಗಿ ಬುದ್ಧಿವಂತಿಕೆ ನಿಮ್ಮ ಸಾಧನದಲ್ಲೇ ಲಭ್ಯ.';
+			case 'info.control_title': return 'ಪೂರ್ಣ ನಿಯಂತ್ರಣ';
+			case 'info.control_desc': return 'ಅಗತ್ಯವಿರುವುದನ್ನು ಇಟ್ಟುಕೊಳ್ಳಿ, ಬೇಡದ್ದನ್ನು ಅಳಿಸಿ.';
+			case 'info.place_title': return 'ಎಲ್ಲರಿಗೂ ವಿನ್ಯಾಸ';
+			case 'info.place_desc': return 'ವಿವಿಧ ಭಾಷೆ ಮತ್ತು ಸಾಧನಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.';
 			case 'info.footer': return 'ನಿಮ್ಮ ಬುದ್ಧಿವಂತಿಕೆ. ನಿಮ್ಮ ಸಾಧನ. ನಿಮ್ಮ ನಿಯಂತ್ರಣ.';
-			case 'info.setup': return 'ನಿಮ್ಮ ZiqeX ಅನ್ನು ಹೊಂದಿಸಿ';
+			case 'info.setup': return 'ಸ್ಥಾಪನೆ';
 			case 'languageSelection.appBar': return 'ಭಾಷೆಯ ಆಯ್ಕೆ';
 			case 'languageSelection.title': return 'ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆರಿಸಿ';
 			case 'languageSelection.subtitle': return 'ನಿಮ್ಮ ಇಂಟರ್ಫೇಸ್‌ಗಾಗಿ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ.';
@@ -3733,8 +3733,8 @@ extension on _StringsMl {
 			case 'modelDownload.ttft': return '~140 ms TTFT';
 			case 'modelDownload.error': return ({required Object error}) => 'പിശക്: ${error}';
 			case 'modelDownload.retry': return 'വീണ്ടും ശ്രമിക്കുക';
-			case 'modelDownload.open': return 'BrahmAI തുറക്കുക';
-			case 'modelDownload.download': return 'മോഡൽ ഡൗൺലോഡ് ചെയ്യുക';
+			case 'modelDownload.open': return 'തുറക്കാം';
+			case 'modelDownload.download': return 'ഡൗൺലോഡ്';
 			case 'modelDownload.later': return 'പിന്നീട് സജ്ജമാക്കുക';
 			case 'modelDownload.continueSub': return 'മോഡൽ ഡൗൺലോഡ് ചെയ്യാതെ തുടരുക. നിങ്ങൾ തയ്യാറാകുമ്പോൾ ഒരെണ്ണം ചേർക്കാം';
 			default: return null;
