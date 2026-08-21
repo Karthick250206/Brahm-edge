@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
@@ -17,7 +18,7 @@ class BiometricService {
   Future<List<BiometricType>> getAvailableBiometrics() async {
     final List<BiometricType> availableBiometrics = await _auth.getAvailableBiometrics();
     // Debug print to help identify what the OS allows the app to see
-    print('Security Diagnostic - Available Biometrics: $availableBiometrics');
+    debugPrint('Security Diagnostic - Available Biometrics: $availableBiometrics');
     return availableBiometrics;
   }
 
@@ -52,7 +53,7 @@ class BiometricService {
       }
     } on PlatformException catch (e) {
       // Trace logic for exact return for mobile authentication
-      print('Security Trace - Error Code: ${e.code}, Message: ${e.message}');
+      debugPrint('Security Trace - Error Code: ${e.code}, Message: ${e.message}');
       return AuthenticationResult.failure('Error [${e.code}]: ${e.message}');
     } catch (e) {
       return AuthenticationResult.failure('Unexpected error: $e');

@@ -281,7 +281,7 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
                     final index = entry.key;
                     final chat = entry.value;
                     return _buildChatCard(chat, index, accentColor, cardColor, textSecondary);
-                  }).toList(),
+                  }),
                   const SizedBox(height: 32),
                   const Text(
                     "Pillar Visualization",

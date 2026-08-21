@@ -380,7 +380,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       });
                       _startNewChat();
                     },
-                    offset: const Offset(0, 50),
+                    position: PopupMenuPosition.under,
+                    offset: const Offset(-48, 8),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     color: theme.colorScheme.surface,
                     elevation: 8,
