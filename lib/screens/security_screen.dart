@@ -100,14 +100,17 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       },
                     ),
                     const SizedBox(width: 8),
-                    Text(
-                      t.security_screen.appBar,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        color: colorScheme.primary,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        t.security_screen.appBar,
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(width: 16),
                     Icon(Icons.notifications_outlined, color: colorScheme.onSurfaceVariant),
                   ],
                 ),
@@ -233,11 +236,14 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                       child: Icon(Icons.info_outline, color: colorScheme.primary, size: 16),
                                     ),
                                     const SizedBox(width: 12),
-                                    Text(
-                                      t.security_screen.warning_title,
-                                      style: theme.textTheme.titleMedium?.copyWith(
-                                        color: colorScheme.primary,
-                                        fontWeight: FontWeight.bold,
+                                    Expanded(
+                                      child: Text(
+                                        t.security_screen.warning_title,
+                                        style: theme.textTheme.titleMedium?.copyWith(
+                                          color: colorScheme.primary,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                   ],

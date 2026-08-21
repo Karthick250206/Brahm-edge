@@ -22,24 +22,49 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final t = Translations.of(context);
     final tealColor = theme.colorScheme.primary;
     final bgColor = theme.scaffoldBackgroundColor;
     final cardBgColor = theme.colorScheme.surfaceContainerHighest;
 
     final List<Map<String, dynamic>> pillars = [
-      {"title": t.pillars.general, "icon": Icons.shield_outlined},
-      {"title": t.pillars.operational, "icon": Icons.auto_awesome_outlined},
-      {"title": t.pillars.personal, "icon": Icons.face_retouching_natural_outlined},
-      {"title": t.pillars.workplace, "icon": Icons.work_outline},
-      {"title": t.pillars.culture, "icon": Icons.groups_outlined},
-      {"title": t.pillars.journal, "icon": Icons.edit_note_outlined},
+      {
+        "title": t.pillars.general,
+        "subtitle": "Everyday Assistant",
+        "icon": Icons.chat_bubble_outline,
+      },
+      {
+        "title": t.pillars.operational,
+        "subtitle": "Systems & Logic",
+        "icon": Icons.auto_awesome_outlined,
+      },
+      {
+        "title": t.pillars.personal,
+        "subtitle": "Private Guidance",
+        "icon": Icons.face_retouching_natural_outlined,
+      },
+      {
+        "title": t.pillars.workplace,
+        "subtitle": "Professional Tasks",
+        "icon": Icons.work_outline,
+      },
+      {
+        "title": t.pillars.culture,
+        "subtitle": "Relationships",
+        "icon": Icons.groups_outlined,
+      },
+      {
+        "title": t.pillars.journal,
+        "subtitle": "Record Thoughts",
+        "icon": Icons.edit_note_outlined,
+      },
     ];
 
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
-        elevation: 0,
+        elevation: 0.5,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
@@ -88,7 +113,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                       crossAxisCount: 2,
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
-                      childAspectRatio: 0.85,
+                      childAspectRatio: 1.0,
                     ),
                     itemCount: pillars.length,
                     itemBuilder: (context, index) {
@@ -129,14 +154,17 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                                   size: 32,
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 12),
                               Text(
                                 pillar["title"],
+                                textAlign: TextAlign.center,
                                 style: GoogleFonts.notoSans(
                                   color: theme.colorScheme.onSurface,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),
@@ -186,7 +214,7 @@ class _PillarsGridSelectionScreenState extends State<PillarsGridSelectionScreen>
                       onPressed: _selectedPillar == null ? null : () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ModelDownloadScreen()),
+                          MaterialPageRoute(builder: (context) => const ModelDownloadScreen()),
                         );
                       },
                       style: TextButton.styleFrom(

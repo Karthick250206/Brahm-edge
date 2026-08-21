@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../i18n/strings.g.dart';
-import 'pillars_grid_selection_screen.dart';
+import 'welcome_screen.dart';
 import '../services/language_service.dart';
 
-/// [LanguageSelectionScreen] provides an interactive multi-language choice interface
-/// allowing users to select their mother tongue for localized voice, text, and assistant replies.
-/// Supports both an onboarding flow (with navigation progression) and a settings mode (quick update/dismiss).
 class LanguageSelectionScreen extends StatefulWidget {
   final bool isSettingsMode;
   const LanguageSelectionScreen({super.key, this.isSettingsMode = false});
@@ -15,229 +13,207 @@ class LanguageSelectionScreen extends StatefulWidget {
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-  String selectedLanguage = "English";
   final LanguageService _languageService = LanguageService();
+  String _selectedLanguage = "English";
+
+  final List<Map<String, String>> _languages = [
+    {"native": "English", "english": "English"},
+    {"native": "हिन्दी", "english": "Hindi"},
+    {"native": "বাংলা", "english": "Bengali"},
+    {"native": "मराठी", "english": "Marathi"},
+    {"native": "తెలుగు", "english": "Telugu"},
+    {"native": "தமிழ்", "english": "Tamil"},
+    {"native": "ગુજરાતી", "english": "Gujarati"},
+    {"native": "اردو", "english": "Urdu"},
+    {"native": "ಕನ್ನಡ", "english": "Kannada"},
+    {"native": "ଓଡ଼ಿଆ", "english": "Odia"},
+    {"native": "മലയാളം", "english": "Malayalam"},
+    {"native": "ਪੰਜਾਬੀ", "english": "Punjabi"},
+    {"native": "অসমীয়া", "english": "Assamese"},
+  ];
 
   @override
   void initState() {
     super.initState();
-    // Synchronize initial selection state with stored preferences
-    selectedLanguage = _languageService.selectedLanguage;
+    _selectedLanguage = _languageService.selectedLanguage;
   }
-
-  // Predefined master catalog of supported Indian and global languages with native greetings
-  final List<Map<String, String>> languages = [
-    {"name": "हिन्दी", "english": "Hindi", "greeting": "नमस्ते"},
-    {"name": "English", "english": "English", "greeting": "Hello"},
-    {"name": "தமிழ்", "english": "Tamil", "greeting": "வணக்கம்"},
-    {"name": "বাংলা", "english": "Bengali", "greeting": "নমস্কার"},
-    {"name": "తెలుగు", "english": "Telugu", "greeting": "నమస్కారం"},
-    {"name": "मराठी", "english": "Marathi", "greeting": "नमस्कार"},
-    {"name": "ગુજરાતી", "english": "Gujarati", "greeting": "નમસ્તે"},
-    {"name": "ಕನ್ನಡ", "english": "Kannada", "greeting": "ನಮಸ್ಕಾರ"},
-    {"name": "മലയാളം", "english": "Malayalam", "greeting": "നമസ്കാരം"},
-    {"name": "ਪੰਜਾਬੀ", "english": "Punjabi", "greeting": "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ"},
-    {"name": "ଓଡ଼ିଆ", "english": "Odia", "greeting": "ନମସ୍କାର"},
-    {"name": "অসমীয়া", "english": "Assamese", "greeting": "নমস্কাৰ"},
-    {"name": "اردو", "english": "Urdu", "greeting": "سلام"},
-    {"name": "संस्कृत", "english": "Sanskrit", "greeting": "नमो नमः"},
-    {"name": "+ 8 more", "english": "More", "greeting": ""},
-  ];
 
   @override
   Widget build(BuildContext context) {
-    // Resolve details for the currently active language choice
-    Map<String, String> currentLang = languages.firstWhere(
-          (l) => l["name"] == selectedLanguage,
-      orElse: () => languages[0],
-    );
-    final t = Translations.of(context);
+    final theme = Theme.of(context);
+    final tealColor = theme.colorScheme.primary;
+    final bgColor = theme.scaffoldBackgroundColor;
+    final cardBgColor = theme.colorScheme.surfaceContainerHighest;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F0), // Light off-white background styling
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-
-              // Back Navigation Button
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios, size: 20),
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-              ),
-              const SizedBox(height: 32),
-
-              // Main Custom Headline Title ("Which language feels like home?")
-              RichText(
-                text: TextSpan(
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Serif',
-                  ),
-                  children: [
-                    TextSpan(text: t.lang_legacy.title1),
-                    TextSpan(
-                      text: t.lang_legacy.title2,
-                      style: TextStyle(
-                        color: Colors.orange.shade800,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Descriptive Subtext
-              Text(
-                t.lang_legacy.subtitle,
-                style: TextStyle(
-                  color: Colors.grey.shade700,
-                  fontSize: 14,
-                  height: 1.4,
-                ),
-              ),
-              const SizedBox(height: 24),
-
-              // Visual Progress Line Indicator
-              Container(
-                width: 100,
-                height: 4,
-                color: Colors.orange.shade800,
-              ),
-              const SizedBox(height: 32),
-
-              // Selectable Language Selection Wrap Grid Chips
-              Wrap(
-                spacing: 8,
-                runSpacing: 12,
-                children: languages.map((lang) {
-                  bool isSelected = selectedLanguage == lang["name"];
-                  return GestureDetector(
-                    onTap: () {
-                      // Prevent selection action if tapped on the "+ 8 more" expander chip
-                      if (lang["name"] != "+ 8 more") {
-                        setState(() {
-                          selectedLanguage = lang["name"]!;
-                        });
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: isSelected ? Colors.black : Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: isSelected ? Colors.black : Colors.grey.shade300,
-                        ),
-                      ),
-                      child: Text(
-                        lang["name"]!,
-                        style: TextStyle(
-                          color: isSelected ? Colors.white : Colors.black87,
-                          fontSize: 14,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-              const Spacer(),
-
-              // Dynamic Greeting Preview Card Component
-              if (currentLang["greeting"]!.isNotEmpty)
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEBEBE0),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        t.lang_legacy.first_reply,
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontSize: 10,
-                          letterSpacing: 1,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        currentLang["greeting"]!,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        t.lang_legacy.script_info(lang: currentLang["english"]!),
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              const SizedBox(height: 32),
-
-              // Primary Full-Width Save / Continue Action Button
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    // Save selected language state to persistent storage service
-                    await _languageService.setLanguage(selectedLanguage);
-                    if (!context.mounted) return;
-
-                    // Route handling based on execution mode (Settings update vs Onboarding sequence)
-                    if (widget.isSettingsMode) {
-                      Navigator.of(context).pop();
-                    } else {
-                      // Replace onboarding screen stack to advance forward without looping back
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const PillarsGridSelectionScreen(),
-                        ),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFE67E22),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: Text(
-                    t.lang_legacy.continueBtn,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 40),
-            ],
+      backgroundColor: bgColor,
+      appBar: AppBar(
+        backgroundColor: bgColor,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        leading: widget.isSettingsMode ? IconButton(
+          icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
+          onPressed: () => Navigator.pop(context),
+        ) : null,
+        title: Expanded(
+          child: Text(
+            t.languageSelection.appBar,
+            style: GoogleFonts.notoSans(
+              color: theme.colorScheme.onSurface,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    t.languageSelection.title,
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurface,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    t.languageSelection.subtitle,
+                    style: GoogleFonts.notoSans(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontSize: 16,
+                      height: 1.4,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 1.4,
+                    ),
+                    itemCount: _languages.length,
+                    itemBuilder: (context, index) {
+                      final lang = _languages[index];
+                      final isSelected = _selectedLanguage == lang["native"];
+                      
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedLanguage = lang["native"]!;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          decoration: BoxDecoration(
+                            color: isSelected ? theme.colorScheme.surface : cardBgColor.withValues(alpha: 0.6),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isSelected ? tealColor : Colors.transparent,
+                              width: 2,
+                            ),
+                            boxShadow: isSelected ? [
+                              BoxShadow(
+                                color: tealColor.withValues(alpha: 0.1),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              )
+                            ] : [],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  lang["native"]!,
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurface,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Flexible(
+                                child: Text(
+                                  lang["english"]!,
+                                  style: GoogleFonts.notoSans(
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          
+          // Bottom Navigation Buttons
+          Container(
+            padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
+            decoration: BoxDecoration(
+              color: bgColor,
+              border: Border(top: BorderSide(color: theme.colorScheme.outline.withValues(alpha: 0.1))),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 56,
+                    child: TextButton(
+                      onPressed: () async {
+                        await _languageService.setLanguage(_selectedLanguage);
+                        if (context.mounted) {
+                          if (widget.isSettingsMode) {
+                            Navigator.pop(context);
+                          } else {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                            );
+                          }
+                        }
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: tealColor,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                      ),
+                      child: Text(
+                        t.languageSelection.continueBtn,
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.onPrimary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

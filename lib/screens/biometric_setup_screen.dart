@@ -40,11 +40,14 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                           children: [
                             Icon(Icons.shield_outlined, color: colorScheme.primary, size: 24),
                             const SizedBox(width: 12),
-                            Text(
-                              t.biometric.vault,
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                color: colorScheme.primary,
-                                fontWeight: FontWeight.w500,
+                            Expanded(
+                              child: Text(
+                                t.biometric.vault,
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  color: colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],

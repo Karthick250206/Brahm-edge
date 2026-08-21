@@ -1,30 +1,53 @@
-# Implementation Plan: Fix Library Screen Overflow
+# Implementation Plan: Model Management Screen
 
-Address the "Bottom Overflow" issue in the Library screen for Tamil, Malayalam, and other languages with taller/longer scripts.
+Replace the `LibraryScreenLegacy` with a new, high-fidelity `ModelManagementScreen` as per the provided image.
+
+## User Review Required
+
+> [!IMPORTANT]
+> The new screen will handle model loading, unloading, and downloading. Deletion logic will be implemented as a file-system removal operation.
 
 ## Proposed Changes
 
-### 1. Translation Optimization
-- **`lib/i18n/strings_ta.i18n.json`**:
-    - `library_v2.saved_desc`: Condense "உங்கள் ப்ராம்ப்ட் (Prompt) நூலகம்" to "உங்கள் ப்ராம்ப்ட் நூலகம்" or similar.
-    - `library_v2.language_desc`: Condense if necessary.
-- **`lib/i18n/strings_ml.i18n.json`**:
-    - Fix duplicate `library_v2` key.
-    - Condense descriptions to fit the small card height.
+### 1. Update Translations
+- **`lib/i18n/strings.i18n.json`**: Add a new `model_mgmt` section:
+    - `appBar`: "Model Management"
+    - `subtitle`: "Configure local edge AI language models"
+    - `status_loaded`: "LOADED"
+    - `status_unloaded`: "UNLOADED"
+    - `status_loading`: "LOADING..."
+    - `size`: "Size: {size}"
+    - `load`: "Load"
+    - `unload`: "Unload"
+    - `download`: "Download"
+    - `delete`: "Delete"
+    - `brahm_2b_desc`: "Ultra-fast compact edge model designed for low-latency text completion and chat on mobile devices."
+    - `brahm_5b_desc`: "Balanced reasoning model offering enhanced task accuracy and complex instructional performance."
 
-### 2. UI Layout Refinement (`lib/screens/library_screen.dart`)
-- **Flexible Card Content**: Wrap title and description in `Flexible` or `Expanded` where appropriate to ensure they don't force overflow.
-- **Adaptive Padding**: Reduce card padding from `24.0` to `16.0` or `20.0` based on card height.
-- **Font Scaling**: Implement a small scaling factor for the "Small Cards" (Saved, Skills) to ensure they can handle multi-line text without overflowing the fixed container.
-- **MaxLines & Ellipsis**: Set `maxLines: 2` and `overflow: TextOverflow.ellipsis` for descriptions to safeguard against extreme cases.
+### 2. Create Model Management Screen
+- **`lib/screens/model_management_screen.dart`**:
+    - Build the UI using `Scaffold` and `ListView`.
+    - Implement the `ModelCard` component with:
+        - Status indicator dot and text.
+        - Dynamic button states (e.g., disable `Load` if model isn't downloaded).
+        - Connect `Load` to `inferenceService.loadModel`.
+        - Connect `Download` to `downloadService.downloadModel`.
+        - Implement `Unload` logic (may need adding to `LlmInferenceService`).
+        - Implement `Delete` logic (remove file from `models/` directory).
+
+### 3. Integration
+- **`lib/screens/library_screen.dart`**: Update the "Model" card's `onTap` to navigate to `ModelManagementScreen`.
+- **`lib/services/llm_inference_service.dart`**: Add an `unloadModel()` method if not present.
+- **Cleanup**: Delete `lib/screens/library_screen_legacy.dart`.
 
 ## Verification Plan
 
-### Automated Checks
-- Run `dart run slang` to fix duplicate keys and update strings.
-- Run `flutter analyze` to ensure no UI breakages.
+### Automated Tests
+- Run `dart run slang` to generate new keys.
+- Run `flutter analyze` to ensure no broken references.
 
 ### Manual Verification
-- Test on a device/emulator with Tamil and Malayalam active.
-- Verify that the "Saved" card no longer shows a 20-pixel overflow.
-- Ensure the layout remains static and covers the page correctly.
+- Verify navigation from the Library screen.
+- Verify that clicking "Load" actually initializes the model (checked via Chat screen).
+- Verify "Download" progress appears on the card.
+- Confirm "Delete" removes the model from the storage summary.

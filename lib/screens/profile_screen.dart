@@ -47,62 +47,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               const SizedBox(height: 20),
               // Header
-              Text(
-                t.settings_pref,
-                style: GoogleFonts.notoSans(
-                  color: theme.colorScheme.onSurface,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          t.settings_pref,
+                          style: GoogleFonts.notoSans(
+                            color: theme.colorScheme.onSurface,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.surface,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2)),
+                    ),
+
+                  ),
+                ],
               ),
               const SizedBox(height: 24),
               // Static Header Row
-              Row(
-                children: [
-                  Text(
-                    t.profile.access,
-                    style: GoogleFonts.notoSans(
-                      color: theme.colorScheme.onSurface,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Text(
+                      t.profile.access,
+                      style: GoogleFonts.notoSans(
+                        color: theme.colorScheme.onSurface,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  SvgPicture.asset(
-                    'assets/icons/wave_sine.svg',
-                    width: 16,
-                    height: 4,
-                    colorFilter: ColorFilter.mode(theme.colorScheme.onSurface, BlendMode.srcIn),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    t.profile.privacy,
-                    style: GoogleFonts.notoSans(
-                      color: theme.colorScheme.onSurface,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
+                    const SizedBox(width: 8),
+                    SvgPicture.asset(
+                      'assets/icons/wave_sine.svg',
+                      width: 16,
+                      height: 4,
+                      colorFilter: ColorFilter.mode(theme.colorScheme.onSurface, BlendMode.srcIn),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  SvgPicture.asset(
-                    'assets/icons/wave_sine.svg',
-                    width: 16,
-                    height: 4,
-                    colorFilter: ColorFilter.mode(theme.colorScheme.onSurface, BlendMode.srcIn),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    t.profile.system,
-                    style: GoogleFonts.notoSans(
-                      color: theme.colorScheme.onSurface,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
+                    const SizedBox(width: 8),
+                    Text(
+                      t.profile.privacy,
+                      style: GoogleFonts.notoSans(
+                        color: theme.colorScheme.onSurface,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    SvgPicture.asset(
+                      'assets/icons/wave_sine.svg',
+                      width: 16,
+                      height: 4,
+                      colorFilter: ColorFilter.mode(theme.colorScheme.onSurface, BlendMode.srcIn),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      t.profile.system,
+                      style: GoogleFonts.notoSans(
+                        color: theme.colorScheme.onSurface,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 32),
 
@@ -130,28 +156,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              t.you,
-                              style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              "• $lang",
-                              style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                            const SizedBox(height: 4),
-                            Text(
-                              appSecurityEnabled ? t.profile.security_active : t.profile.security_inactive,
-                              style: GoogleFonts.notoSans(color: textSecondary, fontSize: 14),
-                            ),
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  t.you,
+                                  style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Flexible(
+                                child: Text(
+                                  "• $lang",
+                                  style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            appSecurityEnabled ? t.profile.security_active : t.profile.security_inactive,
+                            style: GoogleFonts.notoSans(color: textSecondary, fontSize: 14),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -399,6 +434,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Text(
                     subtitle,
                     style: GoogleFonts.notoSans(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 12),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

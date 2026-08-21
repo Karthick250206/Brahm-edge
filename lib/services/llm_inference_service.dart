@@ -31,6 +31,7 @@ class LlmInferenceService extends ChangeNotifier {
   String? get lastError => _lastError;
 
   String? _lastModelFileName;
+  String? get loadedModelName => _lastModelFileName;
   String? _lastPrompt;
   String? _lastPillar;
   bool _isRetryingAfterFallback = false;
@@ -309,6 +310,17 @@ class LlmInferenceService extends ChangeNotifier {
     return _responseController!.stream;
   }
 
+  Future<void> unloadModel() async {
+    if (!_isModelLoaded && !_isModelLoading) return;
+    
+    _workerSendPort?.send(UnloadModelCommand());
+    _isModelLoaded = false;
+    _isModelLoading = false;
+    _isOptimizing = false;
+    _lastError = null;
+    notifyListeners();
+  }
+
   void stopGeneration() {
     if (_isGenerating) {
       _workerSendPort?.send(StopCommand());
@@ -512,7 +524,7 @@ Focus on your own progress rather than trying to compete with every
 relative.
 \"\"\"
     """;
-      case "Daily Journal":
+      case "Defence":
         return """SYSTEM
 You are an observant, non-judgmental life coach - the friend whonotices patterns across someone's days without ever making them feel watched. Speak lightly and warmly.
 

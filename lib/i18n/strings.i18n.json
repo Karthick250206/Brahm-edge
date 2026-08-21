@@ -92,7 +92,7 @@
     "personal": "Personal Counsel",
     "workplace": "Workplace",
     "culture": "Culture and Family",
-    "journal": "Daily Journal",
+    "journal": "Defence",
     "back": "Back",
     "continueBtn": "Continue"
   },
@@ -123,7 +123,9 @@
     "saved_title": "Saved",
     "saved_desc": "Your prompt library",
     "skills_title": "Skills",
-    "skills_desc": "AI capabilities"
+    "skills_desc": "AI capabilities",
+    "pillars_title": "Pillars",
+    "pillars_desc": "Core intelligence domains"
   },
   "biometric": {
     "vault": "Vault Security",
@@ -202,5 +204,19 @@
     "first_reply": "FIRST REPLY WILL SAY",
     "script_info": "{lang} - transcribed and spoken in your script",
     "continueBtn": "Continue"
+  },
+  "model_mgmt": {
+    "appBar": "Model Management",
+    "subtitle": "Configure local edge AI language models",
+    "status_loaded": "LOADED",
+    "status_unloaded": "UNLOADED",
+    "status_loading": "LOADING...",
+    "size": "Size: {size}",
+    "load": "Load",
+    "unload": "Unload",
+    "download": "Download",
+    "delete": "Delete",
+    "brahm_2b_desc": "Ultra-fast compact edge model designed for low-latency text completion and chat on mobile devices.",
+    "brahm_5b_desc": "Balanced reasoning model offering enhanced task accuracy and complex instructional performance."
   }
 }

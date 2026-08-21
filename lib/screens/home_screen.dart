@@ -30,14 +30,29 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    t.hello,
-                    style: GoogleFonts.notoSans(
-                      color: theme.colorScheme.onSurface,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w800,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          t.hello,
+                          style: GoogleFonts.notoSans(
+                            color: theme.colorScheme.onSurface,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Text(
+                          t.mind_today,
+                          style: GoogleFonts.notoSans(
+                            color: theme.colorScheme.onSurfaceVariant,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  const SizedBox(width: 16),
                   Container(
                     width: 36,
                     height: 36,
@@ -58,13 +73,6 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(
-                t.mind_today,
-                style: GoogleFonts.notoSans(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontSize: 16,
-                ),
-              ),
               const SizedBox(height: 24),
 
               // Offline Status & On-Device Security Indicator Banner
@@ -79,15 +87,18 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Icon(Icons.lock_outline, size: 16, color: theme.colorScheme.primary),
                     const SizedBox(width: 8),
-                    Text(
-                      t.on_device_only,
-                      style: GoogleFonts.notoSans(
-                        color: theme.colorScheme.primary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
+                    Expanded(
+                      child: Text(
+                        t.on_device_only,
+                        style: GoogleFonts.notoSans(
+                          color: theme.colorScheme.primary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(width: 12),
                     Text(
                       t.offline,
                       style: GoogleFonts.notoSans(
@@ -160,6 +171,8 @@ class HomeScreen extends StatelessWidget {
                                 color: theme.colorScheme.onSurfaceVariant,
                                 fontSize: 12,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
@@ -259,6 +272,8 @@ class HomeScreen extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -267,6 +282,8 @@ class HomeScreen extends StatelessWidget {
                     color: theme.colorScheme.onSurfaceVariant,
                     fontSize: 13,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -298,6 +315,8 @@ class HomeScreen extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 4),
           Text(
@@ -307,6 +326,8 @@ class HomeScreen extends StatelessWidget {
               fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

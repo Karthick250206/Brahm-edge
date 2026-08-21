@@ -19,6 +19,8 @@ class GenerateCommand extends WorkerCommand {
 
 class WarmupCommand extends WorkerCommand {}
 
+class UnloadModelCommand extends WorkerCommand {}
+
 class StopCommand extends WorkerCommand {}
 
 /// Messages sent from the Isolate back to the main thread
@@ -157,6 +159,17 @@ void inferenceWorkerEntryPoint(SendPort mainSendPort) {
         mainSendPort.send(LoadResult(true, wasWarmup: true));
       } catch (e) {
         mainSendPort.send(LoadResult(false, wasWarmup: true, error: e.toString()));
+      }
+    } else if (message is UnloadModelCommand) {
+      try {
+        if (conversation != null) await conversation!.dispose();
+        if (engine != null) await engine!.dispose();
+        conversation = null;
+        engine = null;
+        currentSystemPrompt = null;
+        mainSendPort.send(LoadResult(true));
+      } catch (e) {
+        mainSendPort.send(LoadResult(false, error: e.toString()));
       }
     } else if (message is StopCommand) {
       if (isGenerating) {

@@ -67,6 +67,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             fontWeight: FontWeight.w800,
             height: 1.1,
           ),
+          overflow: TextOverflow.ellipsis,
         ),
         actions: [
           IconButton(
@@ -111,6 +112,8 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         ),
                       ],
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 20),
                   // Dynamic Segmented Bar
@@ -210,9 +213,13 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            t.data.selectDelete,
-                            style: GoogleFonts.notoSans(color: errorRed, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                          Flexible(
+                            child: Text(
+                              t.data.selectDelete,
+                              style: GoogleFonts.notoSans(color: errorRed, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           const SizedBox(width: 10),
                           Icon(Icons.arrow_forward_ios, color: errorRed, size: 16),
@@ -321,9 +328,13 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       children: [
                         Icon(Icons.warning_amber_rounded, color: errorRed, size: 26),
                         const SizedBox(width: 14),
-                        Text(
-                          t.data.deleteAll,
-                          style: GoogleFonts.notoSans(color: errorRed, fontSize: 20, fontWeight: FontWeight.bold),
+                        Flexible(
+                          child: Text(
+                            t.data.deleteAll,
+                            style: GoogleFonts.notoSans(color: errorRed, fontSize: 20, fontWeight: FontWeight.bold),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
@@ -359,13 +370,16 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
           color: color.withValues(alpha: 0.3),
         ),
         const SizedBox(width: 14),
-        Text(
-          title,
-          style: GoogleFonts.notoSans(
-            color: color,
-            fontSize: 11,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 2.0,
+        Expanded(
+          child: Text(
+            title,
+            style: GoogleFonts.notoSans(
+              color: color,
+              fontSize: 11,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 2.0,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
@@ -504,26 +518,30 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                     Text(
                       title,
                       style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold, height: 1.2),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(t.data.space, style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
-                            Text("$space MB", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
-                          ],
-                        ),
-                        const SizedBox(width: 32),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(t.data.activeInstances, style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
-                            Text("$instances", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
-                          ],
-                        ),
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(t.data.space, style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
+                              Text("$space MB", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
+                            ],
+                          ),
+                          const SizedBox(width: 32),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(t.data.activeInstances, style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
+                              Text("$instances", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -534,36 +552,41 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PillarChatsScreen(
-                        pillarName: title.split('\n')[0].replaceFirst('General Assistant', 'General Assistant').replaceFirst('Code Expert Agent', 'Code Expert Agent'),
-                        storage: space,
-                        retention: retention,
+              Flexible(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PillarChatsScreen(
+                          pillarName: title.split('\n')[0].replaceFirst('General Assistant', 'General Assistant').replaceFirst('Code Expert Agent', 'Code Expert Agent'),
+                          storage: space,
+                          retention: retention,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                child: Row(
-                  children: [
-                    Text(t.data.viewChats, style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 15, fontWeight: FontWeight.w600)),
-                    const SizedBox(width: 6),
-                    Icon(Icons.chevron_right, color: theme.colorScheme.onSurface, size: 20),
-                  ],
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(child: Text(t.data.viewChats, style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 15, fontWeight: FontWeight.w600), overflow: TextOverflow.ellipsis)),
+                      const SizedBox(width: 6),
+                      Icon(Icons.chevron_right, color: theme.colorScheme.onSurface, size: 20),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(width: 16),
-              OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: errorRed.withValues(alpha: 0.2)),
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              const SizedBox(width: 12),
+              Flexible(
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: errorRed.withValues(alpha: 0.2)),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                  child: Text(t.data.deleteAllPillar, style: GoogleFonts.notoSans(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
                 ),
-                child: Text(t.data.deleteAllPillar, style: GoogleFonts.notoSans(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold)),
               ),
             ],
           ),

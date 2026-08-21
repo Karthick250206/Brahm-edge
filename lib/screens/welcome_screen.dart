@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../i18n/strings.g.dart';
 import '../security/providers/security_provider.dart';
 import 'intelligence_info_screen.dart';
-import 'new_language_selection_screen.dart';
+import 'language_selection_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -56,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                         // and avoid any stack/blank screen issues.
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const NewLanguageSelectionScreen()),
+                          MaterialPageRoute(builder: (context) => const LanguageSelectionScreen()),
                         );
                       },
                     ),
@@ -136,6 +136,8 @@ class WelcomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w800,
                                   height: 1.1,
                                 ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 16),
                               Text(
@@ -147,6 +149,8 @@ class WelcomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w800,
                                   height: 1.1,
                                 ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 18),
                               Container(
@@ -167,6 +171,8 @@ class WelcomeScreen extends StatelessWidget {
                                   height: 1.5,
                                   fontWeight: FontWeight.w800,
                                 ),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),

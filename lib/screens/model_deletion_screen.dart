@@ -89,9 +89,12 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
           icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
-          "Select models to delete",
-          style: TextStyle(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
+        title: Expanded(
+          child: Text(
+            "Select models to delete",
+            style: TextStyle(color: theme.colorScheme.onSurface, fontSize: 20, fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
       body: Column(
@@ -106,6 +109,7 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
                 Text(
                   "INSTALLED MODELS",
                   style: TextStyle(color: accentColor, fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 1.5),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -180,14 +184,18 @@ class _ModelDeletionScreenState extends State<ModelDeletionScreen> {
                                       Text(
                                         model.name,
                                         style: TextStyle(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                       const SizedBox(height: 8),
-                                      Row(
-                                        children: [
-                                          _buildInfoColumn("SIZE", _formatSize(model.bytes), textSecondary, theme.colorScheme.onSurface),
-                                          const SizedBox(width: 24),
-                                          _buildInfoColumn("INSTALLED", _formatDate(model.installedDate), textSecondary, theme.colorScheme.onSurface),
-                                        ],
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: [
+                                            _buildInfoColumn("SIZE", _formatSize(model.bytes), textSecondary, theme.colorScheme.onSurface),
+                                            const SizedBox(width: 24),
+                                            _buildInfoColumn("INSTALLED", _formatDate(model.installedDate), textSecondary, theme.colorScheme.onSurface),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),

@@ -46,7 +46,9 @@ class LanguageService extends ChangeNotifier {
       case "తెలుగు": return AppLocale.te;
       case "தமிழ்": return AppLocale.ta;
       case "ગુજરાતી": return AppLocale.gu;
-      case "اردو": return AppLocale.ur;
+      case "اردو":
+      case "Urdu":
+        return AppLocale.ur;
       case "ಕನ್ನಡ": return AppLocale.kn;
       case "ଓଡ଼ିଆ": return AppLocale.or;
       case "മലയാളം": return AppLocale.ml;

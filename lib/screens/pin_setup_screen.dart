@@ -143,11 +143,14 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                           onPressed: () => Navigator.pop(context),
                         ),
                         const SizedBox(width: 8),
-                        Text(
-                          t.security,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: colorScheme.primary,
-                            fontWeight: FontWeight.w500,
+                        Expanded(
+                          child: Text(
+                            t.security,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -314,13 +317,20 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
   }
 
   Widget _buildNavItem(IconData icon, String label, bool active, Color color) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: color),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(color: color, fontSize: 10, fontWeight: active ? FontWeight.bold : FontWeight.normal)),
-      ],
+    return Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color),
+          const SizedBox(height: 4),
+          Text(
+            label, 
+            style: TextStyle(color: color, fontSize: 10, fontWeight: active ? FontWeight.bold : FontWeight.normal),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 }

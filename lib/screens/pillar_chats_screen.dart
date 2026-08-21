@@ -93,6 +93,7 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
                     child: Text(
                       "Delete $count chat threads?",
                       style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   IconButton(
@@ -212,9 +213,12 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
           icon: const Icon(Icons.arrow_back, color: accentColor),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
-          "Pillar: ${widget.pillarName}",
-          style: const TextStyle(color: accentColor, fontSize: 20, fontWeight: FontWeight.bold),
+        title: Expanded(
+          child: Text(
+            "Pillar: ${widget.pillarName}",
+            style: const TextStyle(color: accentColor, fontSize: 20, fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
       body: Column(
@@ -346,7 +350,13 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
       children: [
         Container(width: 24, height: 1.5, color: color.withValues(alpha: 0.3)),
         const SizedBox(width: 12),
-        Text(title, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
+        Expanded(
+          child: Text(
+            title,
+            style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 1.5),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }
@@ -361,16 +371,19 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(color: Color(0xFF64748B), fontSize: 10, fontWeight: FontWeight.bold)),
+          Text(title, style: const TextStyle(color: Color(0xFF64748B), fontSize: 10, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
           const SizedBox(height: 8),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text(value, style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-              const SizedBox(width: 4),
-              Text(unit, style: TextStyle(color: accent, fontSize: 14, fontWeight: FontWeight.bold)),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(value, style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(width: 4),
+                Text(unit, style: TextStyle(color: accent, fontSize: 14, fontWeight: FontWeight.bold)),
+              ],
+            ),
           ),
         ],
       ),
@@ -414,20 +427,23 @@ class _PillarChatsScreenState extends State<PillarChatsScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Text(chat['size'], style: TextStyle(color: accent, fontSize: 11, fontWeight: FontWeight.bold)),
-                    const SizedBox(width: 8),
-                    const Text("•", style: TextStyle(color: Color(0xFF334155))),
-                    const SizedBox(width: 8),
-                    Text(chat['time'], style: TextStyle(color: textSecondary, fontSize: 11)),
-                    const SizedBox(width: 8),
-                    const Text("•", style: TextStyle(color: Color(0xFF334155))),
-                    const SizedBox(width: 8),
-                    const Icon(Icons.chat_bubble_outline, color: Color(0xFF64748B), size: 12),
-                    const SizedBox(width: 4),
-                    Text("${chat['messages']} messages", style: TextStyle(color: textSecondary, fontSize: 11)),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Text(chat['size'], style: TextStyle(color: accent, fontSize: 11, fontWeight: FontWeight.bold)),
+                      const SizedBox(width: 8),
+                      const Text("•", style: TextStyle(color: Color(0xFF334155))),
+                      const SizedBox(width: 8),
+                      Text(chat['time'], style: TextStyle(color: textSecondary, fontSize: 11)),
+                      const SizedBox(width: 8),
+                      const Text("•", style: TextStyle(color: Color(0xFF334155))),
+                      const SizedBox(width: 8),
+                      const Icon(Icons.chat_bubble_outline, color: Color(0xFF64748B), size: 12),
+                      const SizedBox(width: 4),
+                      Text("${chat['messages']} messages", style: TextStyle(color: textSecondary, fontSize: 11)),
+                    ],
+                  ),
                 ),
               ],
             ),

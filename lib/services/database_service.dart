@@ -16,7 +16,7 @@ class DatabaseService {
     "Personal Counsel",
     "Workplace",
     "Culture & Family",
-    "Daily Journal",
+    "Defence",
     "Global Assistant",
   ];
 

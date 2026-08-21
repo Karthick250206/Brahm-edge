@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import '../i18n/strings.g.dart';
 import 'library_screen.dart';
 import '../services/llm_inference_service.dart';
 import '../services/database_service.dart';
@@ -63,7 +64,7 @@ class _ChatScreenState extends State<ChatScreen> {
       "icon": Icons.groups_outlined,
     },
     {
-      "title": "Daily Journal",
+      "title": "Defence",
       "subtitle": "Record Thoughts",
       "icon": Icons.edit_note_outlined,
     },
@@ -358,6 +359,7 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Custom Top App Bar
             Padding(
@@ -373,118 +375,132 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const Spacer(),
                   // Pillar Selector
-                  PopupMenuButton<String>(
-                    onSelected: (String value) {
-                      setState(() {
-                        _selectedPillar = value;
-                      });
-                      _startNewChat();
-                    },
-                    position: PopupMenuPosition.under,
-                    offset: const Offset(-48, 8),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    color: theme.colorScheme.surface,
-                    elevation: 8,
-                    itemBuilder: (BuildContext context) {
-                      return _pillars.map((pillar) {
-                        bool isSelected = pillar['title'] == _selectedPillar;
-                        return PopupMenuItem<String>(
-                          value: pillar['title'],
-                          child: Row(
-                            children: [
-                              Icon(
-                                pillar['icon'],
-                                color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
-                                size: 20,
-                              ),
-                              const SizedBox(width: 12),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
+                  Expanded(
+                    child: Center(
+                      child: PopupMenuButton<String>(
+                        onSelected: (String value) {
+                          setState(() {
+                            _selectedPillar = value;
+                          });
+                          _startNewChat();
+                        },
+                        position: PopupMenuPosition.under,
+                        offset: const Offset(-48, 8),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        color: theme.colorScheme.surface,
+                        elevation: 8,
+                        itemBuilder: (BuildContext context) {
+                          return _pillars.map((pillar) {
+                            bool isSelected = pillar['title'] == _selectedPillar;
+                            return PopupMenuItem<String>(
+                              value: pillar['title'],
+                              child: Row(
                                 children: [
-                                  Text(
-                                    pillar['title'],
-                                    style: GoogleFonts.notoSans(
-                                      color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurface,
-                                      fontSize: 14,
-                                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                                    ),
+                                  Icon(
+                                    pillar['icon'],
+                                    color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
+                                    size: 20,
                                   ),
-                                  Text(
-                                    pillar['subtitle'],
-                                    style: GoogleFonts.notoSans(
-                                      color: theme.colorScheme.onSurfaceVariant,
-                                      fontSize: 10,
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          pillar['title'],
+                                          style: GoogleFonts.notoSans(
+                                            color: isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurface,
+                                            fontSize: 14,
+                                            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          pillar['subtitle'],
+                                          style: GoogleFonts.notoSans(
+                                            color: theme.colorScheme.onSurfaceVariant,
+                                            fontSize: 10,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
+                            );
+                          }).toList();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
                           ),
-                        );
-                      }).toList();
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.1)),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Column(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "ZiqeX",
-                                    style: GoogleFonts.notoSans(
-                                      fontSize: 14,
-                                      color: theme.colorScheme.primary,
-                                      fontWeight: FontWeight.bold,
+                              Flexible(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            "ZiqeX",
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              color: theme.colorScheme.primary,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        if (_inferenceService.safeModeActive) ...[
+                                          const SizedBox(width: 6),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                                            decoration: BoxDecoration(
+                                              color: Colors.blue.shade900,
+                                              borderRadius: BorderRadius.circular(4),
+                                            ),
+                                            child: const Text(
+                                              "ACTIVE",
+                                              style: TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                        const SizedBox(width: 4),
+                                        Icon(
+                                          Icons.keyboard_arrow_down, 
+                                          color: theme.colorScheme.onSurfaceVariant, 
+                                          size: 16
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  if (_inferenceService.safeModeActive) ...[
-                                    const SizedBox(width: 6),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue.shade900,
-                                        borderRadius: BorderRadius.circular(4),
+                                    Text(
+                                      _selectedPillar.toUpperCase(),
+                                      style: GoogleFonts.notoSans(
+                                        fontSize: 8,
+                                        color: theme.colorScheme.onSurfaceVariant,
+                                        fontWeight: FontWeight.w800,
+                                        letterSpacing: 1.0,
                                       ),
-                                      child: const Text(
-                                        "ACTIVE",
-                                        style: TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
-                                      ),
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
-                                  const SizedBox(width: 4),
-                                  Icon(
-                                    Icons.keyboard_arrow_down, 
-                                    color: theme.colorScheme.onSurfaceVariant, 
-                                    size: 16
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                _selectedPillar.toUpperCase(),
-                                style: GoogleFonts.notoSans(
-                                  fontSize: 8,
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1.0,
                                 ),
-                                textAlign: TextAlign.center,
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -792,7 +808,7 @@ class _ChatScreenState extends State<ChatScreen> {
             )
           else
             Text(
-              "EDITORIAL INTELLIGENCE",
+              "HOW CAN I HELP YOU TODAY?",
               style: GoogleFonts.notoSans(color: theme.colorScheme.onSurfaceVariant, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1.2),
             ),
         ],

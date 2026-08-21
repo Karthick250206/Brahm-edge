@@ -5,12 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'theme/design_system.dart';
 import 'i18n/strings.g.dart';
 import 'screens/welcome_screen.dart';
-import 'screens/new_language_selection_screen.dart';
+import 'screens/language_selection_screen.dart';
 import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
 import 'services/llm_inference_service.dart';
+import 'services/model_download_service.dart';
 import 'providers/theme_provider.dart';
-import 'services/storage_management_service.dart';
 import 'security/providers/security_setup.dart';
 import 'security/providers/security_provider.dart';
 
@@ -30,8 +30,8 @@ void main() async {
       child: MultiProvider(
         providers: [
           ...securityProviders,
-          ChangeNotifierProvider(create: (_) => ThemeProvider()),
-          ChangeNotifierProvider(create: (_) => StorageManagementService()),
+          ChangeNotifierProvider.value(value: inferenceService),
+          ChangeNotifierProvider.value(value: ModelDownloadService()),
         ],
         child: const MyApp(),
       ),
@@ -128,7 +128,7 @@ class AuthenticationWrapper extends StatelessWidget {
         final bool onboarded = snapshot.data![2];
         
         if (isFirstLaunch) {
-          return const NewLanguageSelectionScreen();
+          return const LanguageSelectionScreen();
         }
 
         final bool isLocked = securityProvider.isAppLockEnabled && shouldLock;

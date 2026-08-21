@@ -187,6 +187,8 @@ class IntelligenceInfoScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   height: 1.1,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               SizedBox(height: 4 * scale),
               Text(
@@ -197,6 +199,8 @@ class IntelligenceInfoScreen extends StatelessWidget {
                   height: 1.3,
                   fontWeight: FontWeight.w500,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

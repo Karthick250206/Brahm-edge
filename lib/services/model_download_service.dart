@@ -29,6 +29,9 @@ class ModelDownloadService extends ChangeNotifier {
   String? _error;
   String? get error => _error;
 
+  String? _downloadingFileName;
+  String? get downloadingFileName => _downloadingFileName;
+
   String? _expectedHash;
 
   DateTime _lastNotifyTime = DateTime.fromMillisecondsSinceEpoch(0);
@@ -99,14 +102,17 @@ class ModelDownloadService extends ChangeNotifier {
       case TaskStatus.failed:
         _status = DownloadStatus.error;
         _error = "Download failed";
+        _downloadingFileName = null;
         break;
       case TaskStatus.canceled:
         _status = DownloadStatus.idle;
         _downloadProgress = 0.0;
+        _downloadingFileName = null;
         break;
       case TaskStatus.notFound:
         _status = DownloadStatus.error;
         _error = "File not found";
+        _downloadingFileName = null;
         break;
       case TaskStatus.waitingToRetry:
         _status = DownloadStatus.downloading;
@@ -130,13 +136,16 @@ class ModelDownloadService extends ChangeNotifier {
       
       if (isValid) {
         _status = DownloadStatus.complete;
+        _downloadingFileName = null;
         StorageManagementService().refresh(); // Update storage metrics
       } else {
         _status = DownloadStatus.error;
+        _downloadingFileName = null;
         _error = "Checksum verification failed. The file may be corrupt.";
       }
     } catch (e) {
       _status = DownloadStatus.error;
+      _downloadingFileName = null;
       _error = e.toString();
     }
     notifyListeners();
@@ -171,6 +180,7 @@ class ModelDownloadService extends ChangeNotifier {
     if (_status == DownloadStatus.downloading || _status == DownloadStatus.validating) return;
 
     _status = DownloadStatus.downloading;
+    _downloadingFileName = fileName;
     _downloadProgress = 0.0;
     _error = null;
     _expectedHash = sha256;
