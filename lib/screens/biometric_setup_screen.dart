@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../i18n/strings.g.dart';
 import '../security/providers/security_provider.dart';
 import '../security/models/security_type.dart';
 
@@ -16,6 +17,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
     final securityProvider = context.watch<SecurityProvider>();
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final t = Translations.of(context);
 
     final bool appLockEnabled = securityProvider.isAppLockEnabled && 
                                 securityProvider.selectedType == SecurityType.biometric;
@@ -39,7 +41,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                             Icon(Icons.shield_outlined, color: colorScheme.primary, size: 24),
                             const SizedBox(width: 12),
                             Text(
-                              "Vault Security",
+                              t.biometric.vault,
                               style: theme.textTheme.titleMedium?.copyWith(
                                 color: colorScheme.primary,
                                 fontWeight: FontWeight.w500,
@@ -58,7 +60,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                         ),
                         const SizedBox(height: 24),
                         Text(
-                          "Secure Lock Setup",
+                          t.biometric.setupTitle,
                           style: theme.textTheme.headlineMedium?.copyWith(
                             color: colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
@@ -66,7 +68,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          "Protect your vault with your preferred\nauthentication method.",
+                          t.biometric.setupSub,
                           style: theme.textTheme.bodyLarge?.copyWith(
                             color: colorScheme.onSurfaceVariant,
                             height: 1.4,
@@ -76,8 +78,8 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                         _buildOptionCard(
                           context,
                           icon: Icons.fingerprint,
-                          title: "Device Biometrics",
-                          subtitle: "Use FaceID or Fingerprint",
+                          title: t.biometric.deviceTitle,
+                          subtitle: t.biometric.deviceSub,
                           cardColor: colorScheme.surfaceContainerLow,
                           accentColor: colorScheme.primary,
                           trailing: Switch(
@@ -100,8 +102,8 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                         _buildOptionCard(
                           context,
                           icon: Icons.pin_outlined,
-                          title: "App-Specific PIN",
-                          subtitle: "Set a unique 4-digit code",
+                          title: t.biometric.pinTitle,
+                          subtitle: t.biometric.pinSub,
                           cardColor: colorScheme.surfaceContainerLow,
                           accentColor: colorScheme.primary,
                           trailing: Icon(Icons.arrow_forward_ios, color: colorScheme.onSurfaceVariant, size: 16),
@@ -143,7 +145,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                     ),
                     const SizedBox(height: 32),
                     Text(
-                      "Allow biometric access",
+                      t.biometric.dialogTitle,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.headlineSmall?.copyWith(
                         color: colorScheme.onSurface,
@@ -152,7 +154,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      "Use your fingerprint or device face recognition to unlock ZiqeX",
+                      t.biometric.dialogSub,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,
@@ -171,7 +173,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                             ),
                             child: Text(
-                              "Cancel",
+                              t.biometric.cancel,
                               style: TextStyle(color: colorScheme.onSurface, fontSize: 16, fontWeight: FontWeight.w600),
                             ),
                           ),
@@ -193,9 +195,9 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                               elevation: 0,
                             ),
-                            child: const Text(
-                              "Allow biometrics",
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            child: Text(
+                              t.biometric.allow,
+                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -214,11 +216,11 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen> {
         onTap: (index) {
           if (index != 3) Navigator.pop(context);
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-          BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
+        items: [
+          BottomNavigationBarItem(icon: const Icon(Icons.home_outlined), label: t.home),
+          BottomNavigationBarItem(icon: const Icon(Icons.chat_bubble_outline), label: t.chat),
+          BottomNavigationBarItem(icon: const Icon(Icons.library_books_outlined), label: t.library),
+          BottomNavigationBarItem(icon: const Icon(Icons.person), label: t.you),
         ],
       ),
     );

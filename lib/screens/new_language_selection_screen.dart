@@ -171,7 +171,7 @@ class _NewLanguageSelectionScreenState extends State<NewLanguageSelectionScreen>
                       onPressed: () async {
                         await _languageService.setLanguage(_selectedLanguage);
                         if (context.mounted) {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => const WelcomeScreen()),
                           );

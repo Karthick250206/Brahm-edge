@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../i18n/strings.g.dart';
 import '../security/providers/security_provider.dart';
 import 'pin_setup_screen.dart';
 
@@ -10,6 +11,7 @@ class PinManagementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final t = Translations.of(context);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -27,7 +29,7 @@ class PinManagementScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    "App-Specific PIN",
+                    t.pin_mgmt.appBar,
                     style: theme.textTheme.headlineSmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -47,8 +49,8 @@ class PinManagementScreen extends StatelessWidget {
                     _buildActionCard(
                       context,
                       icon: Icons.edit_outlined,
-                      title: "Change PIN",
-                      subtitle: "Update your 4-digit ZiqeX security code",
+                      title: t.pin_mgmt.change_title,
+                      subtitle: t.pin_mgmt.change_sub,
                       cardColor: colorScheme.surfaceContainerLow,
                       accentColor: colorScheme.primary,
                       onTap: () {
@@ -76,8 +78,8 @@ class PinManagementScreen extends StatelessWidget {
                     _buildActionCard(
                       context,
                       icon: Icons.delete_outline,
-                      title: "Remove PIN",
-                      subtitle: "Turn off PIN access for ZiqeX",
+                      title: t.pin_mgmt.remove_title,
+                      subtitle: t.pin_mgmt.remove_sub,
                       cardColor: colorScheme.surfaceContainerLow,
                       accentColor: colorScheme.error,
                       onTap: () {
@@ -93,7 +95,7 @@ class PinManagementScreen extends StatelessWidget {
                             await context.read<SecurityProvider>().toggleAppLock(false);
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("PIN removed successfully")),
+                                SnackBar(content: Text(t.pin_mgmt.snack_removed)),
                               );
                               Navigator.pop(context); // Go back to Security screen
                             }
@@ -114,11 +116,11 @@ class PinManagementScreen extends StatelessWidget {
         onTap: (index) {
           if (index != 3) Navigator.pop(context);
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-          BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
+        items: [
+          BottomNavigationBarItem(icon: const Icon(Icons.home_outlined), label: t.home),
+          BottomNavigationBarItem(icon: const Icon(Icons.chat_bubble_outline), label: t.chat),
+          BottomNavigationBarItem(icon: const Icon(Icons.library_books_outlined), label: t.library),
+          BottomNavigationBarItem(icon: const Icon(Icons.person), label: t.you),
         ],
       ),
     );

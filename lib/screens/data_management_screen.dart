@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../i18n/strings.g.dart';
 import 'model_deletion_screen.dart';
 import 'pillar_chats_screen.dart';
 import '../services/storage_management_service.dart';
@@ -34,6 +35,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
     final accentColor = theme.colorScheme.primary;
     final textSecondary = theme.colorScheme.onSurfaceVariant;
     final errorRed = theme.colorScheme.error;
+    final t = Translations.of(context);
 
     const double totalCapacityGB = 10.0;
     final double usedGB = storage.totalGB;
@@ -58,7 +60,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
           ),
         ),
         title: Text(
-          "Data Management &\nRetention",
+          t.data.appBar,
           style: GoogleFonts.notoSans(
             color: accentColor,
             fontSize: 24,
@@ -78,7 +80,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionTitle("STORAGE SUMMARY", accentColor),
+            _buildSectionTitle(t.data.summary, accentColor),
             const SizedBox(height: 20),
             // Storage Summary Card
             Container(
@@ -100,7 +102,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         letterSpacing: -0.5,
                       ),
                       children: [
-                        const TextSpan(text: "Total Used: "),
+                        TextSpan(text: t.data.totalUsed),
                         TextSpan(
                           text: "${usedGB.toStringAsFixed(2)} GB / ${totalCapacityGB.toInt()} GB",
                           style: GoogleFonts.notoSans(
@@ -147,7 +149,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             ),
 
             const SizedBox(height: 40),
-            _buildSectionTitle("MODEL MANAGEMENT", accentColor),
+            _buildSectionTitle(t.data.mgmt, accentColor),
             const SizedBox(height: 20),
             // Model Management Card
             Container(
@@ -177,12 +179,12 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Delete all downloaded models",
+                              t.data.deleteModels,
                               style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              "Completely remove all local model weights and fine-tuned parameters from this device.",
+                              t.data.deleteModelsSub,
                               style: GoogleFonts.notoSans(color: textSecondary, fontSize: 15, height: 1.5),
                             ),
                           ],
@@ -209,7 +211,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "SELECT MODELS TO DELETE",
+                            t.data.selectDelete,
                             style: GoogleFonts.notoSans(color: errorRed, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1.5),
                           ),
                           const SizedBox(width: 10),
@@ -235,12 +237,12 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Auto-delete chats older than:",
+                    t.data.autoDelete,
                     style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "This setting applies across all unlinked conversation modes.",
+                    t.data.autoDeleteSub,
                     style: GoogleFonts.notoSans(color: textSecondary, fontSize: 15),
                   ),
                   const SizedBox(height: 20),
@@ -272,7 +274,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
             ),
 
             const SizedBox(height: 40),
-            _buildSectionTitle("MODES", accentColor),
+            _buildSectionTitle(t.data.modes, accentColor),
             const SizedBox(height: 20),
             // Dynamic Pillar Cards
             ...storage.pillarInfo.where((p) => p.bytes > 0).map((p) => Padding(
@@ -295,7 +297,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Center(
                   child: Text(
-                    "No active chat data",
+                    t.data.noData,
                     style: GoogleFonts.notoSans(color: textSecondary),
                   ),
                 ),
@@ -320,7 +322,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         Icon(Icons.warning_amber_rounded, color: errorRed, size: 26),
                         const SizedBox(width: 14),
                         Text(
-                          "Delete all data",
+                          t.data.deleteAll,
                           style: GoogleFonts.notoSans(color: errorRed, fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -333,7 +335,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                       Icon(Icons.lock_outline, color: textSecondary, size: 16),
                       const SizedBox(width: 10),
                       Text(
-                        "Requires app lock re-authentication",
+                        t.data.authReq,
                         style: GoogleFonts.notoSans(color: textSecondary.withValues(alpha: 0.7), fontSize: 13, fontWeight: FontWeight.w500),
                       ),
                     ],
@@ -381,8 +383,8 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
     return Column(
       children: [
         _buildLegendRow([
-          _LegendItem("Model Weights", Theme.of(context).colorScheme.primary, bytes: info.modelBytes),
-          _LegendItem("Free Space", Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1), bytes: (10.0 * 1024 * 1024 * 1024).toInt() - info.totalBytes),
+          _LegendItem(t.data.legendModel, Theme.of(context).colorScheme.primary, bytes: info.modelBytes),
+          _LegendItem(t.data.legendFree, Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1), bytes: (10.0 * 1024 * 1024 * 1024).toInt() - info.totalBytes),
         ]),
         const SizedBox(height: 16),
         ..._chunkPillars(info.pillarInfo, 2).map((chunk) => Column(
@@ -509,7 +511,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Space:", style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
+                            Text(t.data.space, style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
                             Text("$space MB", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
                           ],
                         ),
@@ -517,7 +519,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Active Instances:", style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
+                            Text(t.data.activeInstances, style: GoogleFonts.notoSans(color: textSecondary, fontSize: 11)),
                             Text("$instances", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w700)),
                           ],
                         ),
@@ -547,7 +549,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                 },
                 child: Row(
                   children: [
-                    Text("View Chats", style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 15, fontWeight: FontWeight.w600)),
+                    Text(t.data.viewChats, style: GoogleFonts.notoSans(color: theme.colorScheme.onSurface, fontSize: 15, fontWeight: FontWeight.w600)),
                     const SizedBox(width: 6),
                     Icon(Icons.chevron_right, color: theme.colorScheme.onSurface, size: 20),
                   ],
@@ -561,7 +563,7 @@ class _DataManagementScreenState extends State<DataManagementScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
-                child: Text("Delete all", style: GoogleFonts.notoSans(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold)),
+                child: Text(t.data.deleteAllPillar, style: GoogleFonts.notoSans(color: errorRed, fontSize: 15, fontWeight: FontWeight.bold)),
               ),
             ],
           ),

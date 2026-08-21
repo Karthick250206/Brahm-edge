@@ -5,6 +5,7 @@ import '../security/models/security_type.dart';
 import 'pin_setup_screen.dart';
 import 'biometric_setup_screen.dart';
 import 'pin_management_screen.dart';
+import '../i18n/strings.g.dart';
 
 class SecurityScreen extends StatefulWidget {
   const SecurityScreen({super.key});
@@ -17,6 +18,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   Future<bool> _handleBackPress() async {
     final securityProvider = context.read<SecurityProvider>();
     final theme = Theme.of(context);
+    final t = Translations.of(context);
     
     // If App Lock is enabled but no method is set, warn and disable
     if (securityProvider.isAppLockEnabled && securityProvider.selectedType == SecurityType.none) {
@@ -26,14 +28,14 @@ class _SecurityScreenState extends State<SecurityScreen> {
           backgroundColor: theme.colorScheme.surface,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Text(
-            "Security Setup Incomplete",
+            t.security_screen.incomplete_title,
             style: theme.textTheme.titleLarge?.copyWith(
               color: theme.colorScheme.primary,
               fontWeight: FontWeight.bold,
             ),
           ),
           content: Text(
-            "You have enabled App Lock but haven't set a PIN or Biometrics. App Lock will be disabled until a method is configured.",
+            t.security_screen.incomplete_content,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),
@@ -42,7 +44,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text(
-                "GOT IT",
+                t.security_screen.got_it,
                 style: theme.textTheme.labelLarge?.copyWith(
                   color: theme.colorScheme.primary,
                   fontWeight: FontWeight.bold,
@@ -64,6 +66,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
     final securityProvider = context.watch<SecurityProvider>();
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final t = Translations.of(context);
 
     final bool globalSecurityEnabled = securityProvider.isAppLockEnabled;
     final bool hasPin = securityProvider.selectedType == SecurityType.pin;
@@ -98,7 +101,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      "App Security",
+                      t.security_screen.appBar,
                       style: theme.textTheme.headlineSmall?.copyWith(
                         color: colorScheme.primary,
                         fontWeight: FontWeight.bold,
@@ -117,7 +120,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 24),
-                      _buildSectionTitle(context, "GLOBAL PROTECTION", colorScheme.primary),
+                      _buildSectionTitle(context, t.security_screen.global_protection, colorScheme.primary),
                       const SizedBox(height: 16),
                       // Global Toggle Card
                       Container(
@@ -134,7 +137,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "App lock",
+                                    t.security_screen.app_lock,
                                     style: theme.textTheme.titleMedium?.copyWith(
                                       color: colorScheme.onSurface,
                                       fontWeight: FontWeight.bold,
@@ -142,7 +145,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    "Require authentication to open ZiqeX",
+                                    t.security_screen.app_lock_sub,
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: colorScheme.onSurfaceVariant,
                                     ),
@@ -161,15 +164,15 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       ),
 
                       const SizedBox(height: 32),
-                      _buildSectionTitle(context, "AUTHENTICATION METHODS", colorScheme.primary),
+                      _buildSectionTitle(context, t.security_screen.auth_methods, colorScheme.primary),
                       const SizedBox(height: 16),
 
                       // Device Biometrics Card
                       _buildMethodCard(
                         context,
                         icon: Icons.lock_outline,
-                        title: "Device biometrics",
-                        subtitle: "Unlock instantly with your fingerprint or face",
+                        title: t.security_screen.biometrics_title,
+                        subtitle: t.security_screen.biometrics_sub,
                         cardColor: colorScheme.surfaceContainerLow,
                         accentColor: colorScheme.primary,
                         onTap: () {
@@ -185,8 +188,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       _buildMethodCard(
                         context,
                         icon: Icons.grid_view_rounded,
-                        title: "ZiqeX PIN",
-                        subtitle: hasPin ? "PIN is active" : "Set a unique 4-digit code to unlock the app",
+                        title: t.security_screen.pin_title,
+                        subtitle: hasPin ? t.security_screen.pin_active : t.security_screen.pin_setup,
                         cardColor: colorScheme.surfaceContainerLow,
                         accentColor: colorScheme.primary,
                         onTap: () {
@@ -231,7 +234,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                     ),
                                     const SizedBox(width: 12),
                                     Text(
-                                      "Too many incorrect attempts",
+                                      t.security_screen.warning_title,
                                       style: theme.textTheme.titleMedium?.copyWith(
                                         color: colorScheme.primary,
                                         fontWeight: FontWeight.bold,
@@ -241,7 +244,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
-                                  "If an incorrect PIN is entered 10 times, ZiqeX will automatically reset. All data saved on this device will be permanently deleted",
+                                  t.security_screen.warning_sub,
                                   style: theme.textTheme.bodyMedium?.copyWith(
                                     color: colorScheme.onSurfaceVariant,
                                     height: 1.5,
@@ -280,11 +283,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
           onTap: (index) {
             if (index != 3) Navigator.pop(context);
           },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-            BottomNavigationBarItem(icon: Icon(Icons.library_books_outlined), label: "Library"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "You"),
+          items: [
+            BottomNavigationBarItem(icon: const Icon(Icons.home_outlined), label: t.home),
+            BottomNavigationBarItem(icon: const Icon(Icons.chat_bubble_outline), label: t.chat),
+            BottomNavigationBarItem(icon: const Icon(Icons.library_books_outlined), label: t.library),
+            BottomNavigationBarItem(icon: const Icon(Icons.person), label: t.you),
           ],
         ),
       ),

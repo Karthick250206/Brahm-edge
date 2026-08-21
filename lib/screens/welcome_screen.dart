@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../i18n/strings.g.dart';
 import '../security/providers/security_provider.dart';
 import 'intelligence_info_screen.dart';
+import 'new_language_selection_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -12,6 +13,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final t = Translations.of(context);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -49,7 +51,14 @@ class WelcomeScreen extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurfaceVariant),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        // Using pushReplacement to ensure we go back to a fresh instance of language selection
+                        // and avoid any stack/blank screen issues.
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const NewLanguageSelectionScreen()),
+                        );
+                      },
                     ),
                     // Refined "ZiqeX" label
                     Container(

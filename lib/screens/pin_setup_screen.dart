@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../i18n/strings.g.dart';
 import '../security/providers/security_provider.dart';
 import '../security/models/security_type.dart';
 
@@ -45,6 +46,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
 
   void _onSubmit() async {
     final securityProvider = context.read<SecurityProvider>();
+    final t = Translations.of(context);
     
     if (_enteredPin.length == 4) {
       if (widget.mode == PinMode.setup) {
@@ -69,7 +71,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
               widget.onSuccess!(_enteredPin);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("PIN set successfully")),
+                SnackBar(content: Text(t.pin_setup.snack_success)),
               );
             }
             Navigator.pop(context, true);
@@ -77,7 +79,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
         } else {
           setState(() {
             _enteredPin = "";
-            _errorMessage = "PINs do not match. Try again.";
+            _errorMessage = t.pin_setup.error_mismatch;
           });
         }
       } else if (widget.mode == PinMode.verify) {
@@ -92,7 +94,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
         } else {
           setState(() {
             _enteredPin = "";
-            _errorMessage = result.errorMessage ?? "Incorrect PIN. Please try again.";
+            _errorMessage = result.errorMessage ?? t.pin_setup.error_incorrect;
           });
         }
       }
@@ -103,22 +105,23 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final t = Translations.of(context);
 
     String title;
     String subtitle;
 
     switch (widget.mode) {
       case PinMode.setup:
-        title = "Set 4-Digit PIN";
-        subtitle = "Create a secure code to access the app";
+        title = t.pin_setup.title_setup;
+        subtitle = t.pin_setup.subtitle_setup;
         break;
       case PinMode.confirm:
-        title = "Confirm PIN";
-        subtitle = "Re-enter your 4-digit code to verify";
+        title = t.pin_setup.title_confirm;
+        subtitle = t.pin_setup.subtitle_confirm;
         break;
       case PinMode.verify:
-        title = "Enter Current PIN";
-        subtitle = "Enter your existing code to continue";
+        title = t.pin_setup.title_verify;
+        subtitle = t.pin_setup.subtitle_verify;
         break;
     }
 
@@ -141,7 +144,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          "Security",
+                          t.security,
                           style: theme.textTheme.titleMedium?.copyWith(
                             color: colorScheme.primary,
                             fontWeight: FontWeight.w500,
@@ -291,6 +294,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
   Widget _buildBottomNav(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final t = Translations.of(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -300,10 +304,10 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home_outlined, "Home", false, colorScheme.onSurfaceVariant),
-          _buildNavItem(Icons.chat_bubble_outline, "Chat", false, colorScheme.onSurfaceVariant),
-          _buildNavItem(Icons.library_books_outlined, "Library", false, colorScheme.onSurfaceVariant),
-          _buildNavItem(Icons.person, "You", true, colorScheme.primary),
+          _buildNavItem(Icons.home_outlined, t.home, false, colorScheme.onSurfaceVariant),
+          _buildNavItem(Icons.chat_bubble_outline, t.chat, false, colorScheme.onSurfaceVariant),
+          _buildNavItem(Icons.library_books_outlined, t.library, false, colorScheme.onSurfaceVariant),
+          _buildNavItem(Icons.person, t.you, true, colorScheme.primary),
         ],
       ),
     );

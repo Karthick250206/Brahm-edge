@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../i18n/strings.g.dart';
 import 'pillars_grid_selection_screen.dart';
 import '../services/language_service.dart';
 
@@ -32,7 +33,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     {"name": "বাংলা", "english": "Bengali", "greeting": "নমস্কার"},
     {"name": "తెలుగు", "english": "Telugu", "greeting": "నమస్కారం"},
     {"name": "मराठी", "english": "Marathi", "greeting": "नमस्कार"},
-    {"name": "ગુજરાતી", "english": "Gujarati", "greeting": "નમસ્ते"},
+    {"name": "ગુજરાતી", "english": "Gujarati", "greeting": "નમસ્તે"},
     {"name": "ಕನ್ನಡ", "english": "Kannada", "greeting": "ನಮಸ್ಕಾರ"},
     {"name": "മലയാളം", "english": "Malayalam", "greeting": "നമസ്കാരം"},
     {"name": "ਪੰਜਾਬੀ", "english": "Punjabi", "greeting": "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ"},
@@ -50,6 +51,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           (l) => l["name"] == selectedLanguage,
       orElse: () => languages[0],
     );
+    final t = Translations.of(context);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F0), // Light off-white background styling
@@ -80,9 +82,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     fontFamily: 'Serif',
                   ),
                   children: [
-                    const TextSpan(text: "Which language\nfeels like "),
+                    TextSpan(text: t.lang_legacy.title1),
                     TextSpan(
-                      text: "home?",
+                      text: t.lang_legacy.title2,
                       style: TextStyle(
                         color: Colors.orange.shade800,
                         fontStyle: FontStyle.italic,
@@ -95,7 +97,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
 
               // Descriptive Subtext
               Text(
-                "Voice, text and replies in your mother tongue. Switch anytime.",
+                t.lang_legacy.subtitle,
                 style: TextStyle(
                   color: Colors.grey.shade700,
                   fontSize: 14,
@@ -163,7 +165,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "FIRST REPLY WILL SAY",
+                        t.lang_legacy.first_reply,
                         style: TextStyle(
                           color: Colors.grey.shade600,
                           fontSize: 10,
@@ -182,7 +184,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "${currentLang["english"]} - transcribed and spoken in your script",
+                        t.lang_legacy.script_info(lang: currentLang["english"]!),
                         style: TextStyle(
                           color: Colors.grey.shade600,
                           fontSize: 12,
@@ -223,9 +225,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     ),
                     elevation: 0,
                   ),
-                  child: const Text(
-                    "Continue",
-                    style: TextStyle(
+                  child: Text(
+                    t.lang_legacy.continueBtn,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),

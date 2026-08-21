@@ -1,34 +1,30 @@
-# Implementation Plan: Universal Adaptive Scaling for Intelligence Info Screen
+# Implementation Plan: Fix Library Screen Overflow
 
-This plan details a robust, mathematical approach to ensure the `IntelligenceInfoScreen` fits perfectly on **any** device size and in **any** language (Hindi, Tamil, Urdu, etc.) without requiring a scrollbar.
+Address the "Bottom Overflow" issue in the Library screen for Tamil, Malayalam, and other languages with taller/longer scripts.
 
-## The Problem
-The current "Small vs Large" logic is too binary. Modern phones have high resolutions but narrow aspect ratios, and languages like Tamil or Telugu use more vertical space per character. This combination causes "Bottom Overflow" even on medium-sized screens.
+## Proposed Changes
 
-## Proposed Solution: Continuous Dynamic Scaling
+### 1. Translation Optimization
+- **`lib/i18n/strings_ta.i18n.json`**:
+    - `library_v2.saved_desc`: Condense "உங்கள் ப்ராம்ப்ட் (Prompt) நூலகம்" to "உங்கள் ப்ராம்ப்ட் நூலகம்" or similar.
+    - `library_v2.language_desc`: Condense if necessary.
+- **`lib/i18n/strings_ml.i18n.json`**:
+    - Fix duplicate `library_v2` key.
+    - Condense descriptions to fit the small card height.
 
-Instead of a "Yes/No" scaling toggle, I will implement a **Scaling Factor** based on the actual available height.
-
-### 1. Scaling Logic
-I will establish a "Standard Height" (e.g., 800dp).
-- **Scale Factor:** `constraints.maxHeight / 800` (clamped between 0.75 and 1.0).
-- All font sizes, icon dimensions, and vertical margins will be multiplied by this factor.
-
-### 2. Layout Refinements
-- **Icon Sizing:** The top ZenteiQ logo and feature icons will shrink proportionally to save vertical space.
-- **Line Heights:** Set specific `height` properties on `GoogleFonts` to prevent multi-line translations from expanding too far.
-- **Flexible Spacing:** Replace some `SizedBox` gaps with `MainAxisAlignment.spaceBetween` or `Flexible` widgets to "push" content together on smaller screens.
-- **Button Sizing:** The "Set up your ZiqeX" button will have a height that scales, ensuring it never gets pushed off-screen.
-
-### 3. Language-Specific Tweaks
-- Ensure the Urdu (RTL) layout is also respected by this scaling logic.
+### 2. UI Layout Refinement (`lib/screens/library_screen.dart`)
+- **Flexible Card Content**: Wrap title and description in `Flexible` or `Expanded` where appropriate to ensure they don't force overflow.
+- **Adaptive Padding**: Reduce card padding from `24.0` to `16.0` or `20.0` based on card height.
+- **Font Scaling**: Implement a small scaling factor for the "Small Cards" (Saved, Skills) to ensure they can handle multi-line text without overflowing the fixed container.
+- **MaxLines & Ellipsis**: Set `maxLines: 2` and `overflow: TextOverflow.ellipsis` for descriptions to safeguard against extreme cases.
 
 ## Verification Plan
 
 ### Automated Checks
-- Use `flutter analyze` to ensure no syntax errors.
+- Run `dart run slang` to fix duplicate keys and update strings.
+- Run `flutter analyze` to ensure no UI breakages.
 
 ### Manual Verification
-- **Test Device Simulation:** Simulate a 360x640 (very small) and 411x891 (tall) device.
-- **Language Stress Test:** Switch to **Tamil** (long text) and **Hindi** (tall characters) on the smallest simulated screen.
-- **Button Visibility:** Confirm the "Set up your ZiqeX" button is always fully visible and clickable without scrolling.
+- Test on a device/emulator with Tamil and Malayalam active.
+- Verify that the "Saved" card no longer shows a 20-pixel overflow.
+- Ensure the layout remains static and covers the page correctly.
