@@ -218,5 +218,67 @@
     "delete": "Delete",
     "brahm_2b_desc": "Ultra-fast compact edge model designed for low-latency text completion and chat on mobile devices.",
     "brahm_5b_desc": "Balanced reasoning model offering enhanced task accuracy and complex instructional performance."
+  },
+  "pillars_info": {
+    "title": "Pillars of Intelligence",
+    "subtitle": "Integrated intelligence across every dimension.",
+    "general_title": "General Intelligence",
+    "general_desc": "Macroscopic insights and overarching strategic direction.",
+    "workplace_title": "Workplace",
+    "workplace_desc": "Collaborative intelligence.",
+    "culture_title": "Culture & Family",
+    "culture_desc": "Sustaining foundational relationships.",
+    "counsel_title": "Personal Counsel",
+    "counsel_desc": "Tailored cognitive frameworks for strategic alignment."
+  },
+  "pillar_details": {
+    "appBar": "Pillar Overview",
+    "analysis_label": "COMPREHENSIVE ANALYSIS",
+    "capabilities_label": "KEY CAPABILITIES",
+    "start_chat": "Start Chat",
+    "general": {
+      "title": "General Intelligence",
+      "subtitle": "Macroscopic insights & strategic direction",
+      "analysis": "General Intelligence operates as your central cognitive hub. It aggregates multi-domain streams to deliver macro-level strategic summaries, risk assessment models, and cross-functional decision matrix frameworks.",
+      "capabilities": [
+        "Cross-Domain Problem Analysis",
+        "Executive Decision Support Systems",
+        "Macro-Environmental Risk Scanning",
+        "Holistic Strategy Formulation"
+      ]
+    },
+    "workplace": {
+      "title": "Workplace Intelligence",
+      "subtitle": "Collaborative efficiency & organizational networks",
+      "analysis": "Workplace Intelligence optimizes team synergies, automates complex operational workflows, and analyzes communication patterns to unlock organizational agility and maximize enterprise productivity.",
+      "capabilities": [
+        "Workflow & Automation Synthesis",
+        "Team Synergy & Skill Matrix Mapping",
+        "Document Summarization & Extraction",
+        "Project Alignment Diagnostics"
+      ]
+    },
+    "culture": {
+      "title": "Culture & Family",
+      "subtitle": "Sustaining foundational dynamics & ethos",
+      "analysis": "Culture & Family offers guidance rooted in social psychology and relationship dynamics. It helps nurture community values, balance personal-professional obligations, and build long-term generational alignment.",
+      "capabilities": [
+        "Interpersonal Conflict Resolution",
+        "Organizational Values Alignment",
+        "Work-Life Synergy Strategies",
+        "Generational Communication Bridges"
+      ]
+    },
+    "counsel": {
+      "title": "Personal Counsel",
+      "subtitle": "Tailored cognitive alignment & coaching",
+      "analysis": "Personal Counsel serves as an intimate advisory framework for self-reflection, habit optimization, high-stakes personal choices, and continuous self-improvement.",
+      "capabilities": [
+        "Personalized Cognitive Coaching",
+        "Habit Formation & Tracking Frameworks",
+        "Confidential Decision Sounding-Board",
+        "Stress Resilience & Goal Mapping"
+      ]
+    }
   }
 }

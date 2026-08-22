@@ -1,26 +1,41 @@
-# Implementation Plan - Fix Data Management Overflows (Tamil)
+# Implementation Plan - Pillar Overview Screens
 
-This plan specifically targets the remaining overflow issues in the `DataManagementScreen` visible in the Tamil language, where button labels are exceptionally long.
+This plan implements the detailed overview screens for each of the four intelligence pillars (General, Workplace, Culture & Family, Personal Counsel), exactly replicating the provided designs.
 
 ## User Review Required
 
 > [!IMPORTANT]
-> I will be wrapping the text within buttons and the app bar in `Flexible` widgets with `TextOverflow.ellipsis`. This ensures that even if a translation is very long, it will truncate gracefully rather than breaking the layout with a "Right Overflow".
+> I will be creating a single `PillarOverviewScreen` that dynamically renders the content for any pillar. I will also add all the textual content from your images to the translation system to ensure it works across all languages.
 
 ## Proposed Changes
 
+### [Internationalization]
+
+#### [MODIFY] [strings.i18n.json](file:///D:/develop/Projects/Brahm-edge/lib/i18n/strings.i18n.json)
+- Add a new section `pillar_details` containing:
+    - Analysis text for all 4 pillars.
+    - Key capabilities list for all 4 pillars.
+    - UI labels like "COMPREHENSIVE ANALYSIS", "KEY CAPABILITIES", and "Start Chat".
+
 ### [UI Layer]
 
-#### [MODIFY] [data_management_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/data_management_screen.dart)
+#### [NEW] [pillar_overview_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/pillar_overview_screen.dart)
+- **Header**: Large card with the pillar's icon, bold title, and subtitle.
+- **Analysis Section**: Left-aligned "COMPREHENSIVE ANALYSIS" label with the detailed paragraph below.
+- **Capabilities Section**: "KEY CAPABILITIES" label followed by a list of items with checkmark icons.
+- **Sticky Footer**: A primary teal "Start Chat" button fixed at the bottom.
 
-- **App Bar Title**: Remove the invalid `Expanded` wrapper and ensure the `Text` handles overflow properly within the `AppBar` constraints.
-- **"Select models to delete" Button**: Wrap the button text in `Flexible` and add `overflow: TextOverflow.ellipsis`.
-- **"Delete all" Button**: Wrap the label in `Flexible` and add `overflow: TextOverflow.ellipsis` to prevent the red warning icon from being pushed off or the text from overflowing the button container.
-- **Pillar Card Actions**: Ensure the "Delete all" button within the pillar card also handles long text gracefully.
+#### [MODIFY] [pillars_info_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/pillars_info_screen.dart)
+- Update `_buildBentoCard` to accept a `pillarType` parameter.
+- Wrap the cards in `GestureDetector` to navigate to the `PillarOverviewScreen` with the corresponding data.
 
 ## Verification Plan
 
 ### Manual Verification
-1.  **Tamil Language Check**: Switch to Tamil and navigate to the Data Management screen.
-2.  **Visual Audit**: Confirm that the "Select models to delete" and "Delete all" buttons no longer show overflow stripes.
-3.  **UI Integrity**: Verify that the buttons are still functional and the text remains readable (even if truncated in extreme cases).
+1.  **Navigation**: Click on each of the 4 cards in the Pillars screen. Verify that the correct overview opens for each.
+2.  **Visual Comparison**: Cross-reference the rendered screens with the provided images. Pay close attention to:
+    - Font weights and sizes (Noto Sans).
+    - Spacing between sections.
+    - Icon colors and background opacity.
+    - "Start Chat" button styling.
+3.  **Responsiveness**: Ensure the text wraps correctly and the screen remains scrollable on smaller devices.

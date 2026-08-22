@@ -1,30 +1,32 @@
-# Walkthrough - Global Overflow Prevention (Tamil & Multi-language)
+# Walkthrough - Pillar Overview Screens
 
-I have performed a systematic audit and fix of UI overflow issues across the entire application. This ensures that the UI remains stable and professional regardless of the language selected (including long scripts like Tamil).
+I have implemented the detailed **Pillar Overview** screens, providing in-depth analysis and capability breakdowns for each of the four intelligence pillars. These screens follow a high-fidelity design with consistent typography and color palettes.
 
-## Key Improvements Applied Globally
+## Features & Enhancements
 
-### 1. Robust Header & App Bar Titles
-- **Flexible Titles**: Wrapped App Bar titles and main headers in `Expanded` or `Flexible` widgets. This prevents "Right Overflow" errors by allowing long titles to wrap or truncate gracefully.
-- **Batched Screens**: Applied this to `ProfileScreen`, `SecurityScreen`, `DataManagementScreen`, `ModelDeletionScreen`, `LanguageSelectionScreen`, and `ModelManagementScreen`.
+### 1. Unified Dynamic Overview Screen
+- **Smart Templating**: Instead of multiple static files, I created a single `PillarOverviewScreen` that dynamically loads content based on the selected pillar type (General, Workplace, Culture, or Counsel).
+- **Design Fidelity**:
+    - **Header Card**: Replicates the 24px rounded cards from the previous screen, maintaining the color-coded themes (Teal, Blue, Lavender, Rose).
+    - **Sticky CTA**: A prominent "Start Chat" button is fixed at the bottom of each overview to provide an immediate path to action.
+- **Sectioned Content**:
+    - **Comprehensive Analysis**: Presents a high-level strategic overview of the pillar's purpose.
+    - **Key Capabilities**: Lists specific functional strengths using a clean, checkmark-bullet style with 1px divider lines for clarity.
 
-### 2. Horizontal Content Scalability
-- **Static Label Rows**: In the `ProfileScreen`, I added a `SingleChildScrollView` to the static "ACCESS • PRIVACY • SYSTEM" header row. This ensures that in languages with long words, the labels are accessible via scrolling instead of causing a layout break.
-- **Pillar Selector**: Optimized the `ChatScreen` header to allow the pillar name and status labels to scale within the available width without pushing action icons off-screen.
+### 2. Full Localization (Multi-Language Ready)
+- **Extracted Content**: Captured all text from your design references, including the detailed analysis paragraphs and capability lists for every pillar.
+- **Integrated i18n**: Added a new `pillar_details` section to the translation engine. This ensures that these detailed descriptions are ready to be translated into Tamil, Hindi, and other supported languages.
 
-### 3. Metadata & Description Constraints
-- **Strict Line Limits**: Added `maxLines` and `TextOverflow.ellipsis` to secondary information like:
-    - Recent chat subtitles in `HomeScreen`.
-    - Profile card labels and preference subtitles in `ProfileScreen`.
-    - Feature descriptions in `IntelligenceInfoScreen`.
-    - Model details and storage summary text in Management screens.
-- **Internal Spacing**: Switched from fixed `Spacer` widgets to flexible gaps or small `SizedBoxes` to keep content closer to its related icons when vertical space is restricted.
+### 3. Interactive Experience
+- **Smooth Navigation**: Linked the bento cards in the **Pillars of Intelligence** screen to their respective overview pages using `GestureDetector` and standard Material routing.
+- **Visual Consistency**: matched the **Noto Sans** font weights and icon containers to create a seamless transition between the high-level library view and the detailed pillar analysis.
 
-### 4. Interactive Components
-- **Button Row Adaptability**: Ensured that action buttons in dialogs (Delete confirmation) and setup screens have enough flex room to accommodate long action verbs in Indian languages.
-- **Navigation Items**: Updated custom navigation bars to ensure labels like "நூலகம்" (Library) or "அரட்டை" (Chat) fit within their designated slots.
+## Implementation Details
+- **File**: [pillar_overview_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/pillar_overview_screen.dart)
+- **Layout Robustness**: used a `Stack` for the sticky button and `SingleChildScrollView` for the content to ensure the screen remains usable on devices with limited vertical space or when translated into longer scripts.
+- **Adaptive Icons**: in the "Personal Counsel" card, I followed your requirement to position the icon **below the text** for a balanced wide-card layout.
 
 ## Verification
-- **Code Audit**: Verified all screens compile and run.
-- **Language Stress Test**: The implementation follows the "Elastic UI" and "Flexible Layout" patterns used in the successful Home and Library screen fixes.
-- **UI Integrity**: Verified that the core design aesthetic (Bento Box, Teal theme) is maintained while adding these technical safety nets.
+- **Navigational Check**: Confirmed that clicking "Workplace Intelligence" opens the correct Blue-themed workplace overview.
+- **UI Integrity**: Verified that the checkmark list and button rows scale correctly and don't cause any layout overflows.
+- **Code Health**: `analyze_file` passed for all new and modified components.

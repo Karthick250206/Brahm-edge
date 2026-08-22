@@ -3,11 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import '../i18n/strings.g.dart';
 import 'model_management_screen.dart';
 import 'language_selection_screen.dart';
-import 'pillars_grid_selection_screen.dart';
+import 'pillars_info_screen.dart';
 
-class LibraryScreen extends StatelessWidget {
+class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
 
+  @override
+  State<LibraryScreen> createState() => _LibraryScreenState();
+}
+
+class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -170,7 +175,7 @@ class LibraryScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const PillarsGridSelectionScreen()),
+                          MaterialPageRoute(builder: (context) => const PillarsInfoScreen()),
                         );
                       },
                     ),
@@ -197,9 +202,6 @@ class LibraryScreen extends StatelessWidget {
     required IconData watermarkIcon,
     VoidCallback? onTap,
   }) {
-    // Determine card sizing hints for styling based on common flex usage
-    final bool isTall = height == null;
-
     return LayoutBuilder(
       builder: (context, constraints) {
         final double h = constraints.maxHeight;
@@ -217,7 +219,7 @@ class LibraryScreen extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.circular(20), // Slightly tighter radius for better scaling
+              borderRadius: BorderRadius.circular(20),
               border: Border.all(color: iconColor.withValues(alpha: 0.1)),
               boxShadow: [
                 BoxShadow(
@@ -278,7 +280,6 @@ class LibraryScreen extends StatelessWidget {
                               ),
                           ],
                         ),
-                        // Replace Spacer with a flexible gap that can shrink to 0
                         const Expanded(child: SizedBox(height: 4)),
                         Text(
                           title,
@@ -294,7 +295,7 @@ class LibraryScreen extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           description,
-                          maxLines: 2, // Strict limit for all languages
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.notoSans(
                             color: const Color(0xFF64748B),

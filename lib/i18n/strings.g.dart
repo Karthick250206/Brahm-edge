@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 13
-/// Strings: 2477 (190 per locale)
+/// Strings: 2529 (194 per locale)
 ///
-/// Built on 2026-08-21 at 11:17 UTC
+/// Built on 2026-08-22 at 06:10 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -215,6 +215,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsPinMgmtEn pin_mgmt = _StringsPinMgmtEn._(_root);
 	late final _StringsLangLegacyEn lang_legacy = _StringsLangLegacyEn._(_root);
 	late final _StringsModelMgmtEn model_mgmt = _StringsModelMgmtEn._(_root);
+	late final _StringsPillarsInfoEn pillars_info = _StringsPillarsInfoEn._(_root);
+	late final _StringsPillarDetailsEn pillar_details = _StringsPillarDetailsEn._(_root);
 }
 
 // Path: profile
@@ -491,6 +493,114 @@ class _StringsModelMgmtEn {
 	String get delete => 'Delete';
 	String get brahm_2b_desc => 'Ultra-fast compact edge model designed for low-latency text completion and chat on mobile devices.';
 	String get brahm_5b_desc => 'Balanced reasoning model offering enhanced task accuracy and complex instructional performance.';
+}
+
+// Path: pillars_info
+class _StringsPillarsInfoEn {
+	_StringsPillarsInfoEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Pillars of Intelligence';
+	String get subtitle => 'Integrated intelligence across every dimension.';
+	String get general_title => 'General Intelligence';
+	String get general_desc => 'Macroscopic insights and overarching strategic direction.';
+	String get workplace_title => 'Workplace';
+	String get workplace_desc => 'Collaborative intelligence.';
+	String get culture_title => 'Culture & Family';
+	String get culture_desc => 'Sustaining foundational relationships.';
+	String get counsel_title => 'Personal Counsel';
+	String get counsel_desc => 'Tailored cognitive frameworks for strategic alignment.';
+}
+
+// Path: pillar_details
+class _StringsPillarDetailsEn {
+	_StringsPillarDetailsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appBar => 'Pillar Overview';
+	String get analysis_label => 'COMPREHENSIVE ANALYSIS';
+	String get capabilities_label => 'KEY CAPABILITIES';
+	String get start_chat => 'Start Chat';
+	late final _StringsPillarDetailsGeneralEn general = _StringsPillarDetailsGeneralEn._(_root);
+	late final _StringsPillarDetailsWorkplaceEn workplace = _StringsPillarDetailsWorkplaceEn._(_root);
+	late final _StringsPillarDetailsCultureEn culture = _StringsPillarDetailsCultureEn._(_root);
+	late final _StringsPillarDetailsCounselEn counsel = _StringsPillarDetailsCounselEn._(_root);
+}
+
+// Path: pillar_details.general
+class _StringsPillarDetailsGeneralEn {
+	_StringsPillarDetailsGeneralEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'General Intelligence';
+	String get subtitle => 'Macroscopic insights & strategic direction';
+	String get analysis => 'General Intelligence operates as your central cognitive hub. It aggregates multi-domain streams to deliver macro-level strategic summaries, risk assessment models, and cross-functional decision matrix frameworks.';
+	List<String> get capabilities => [
+		'Cross-Domain Problem Analysis',
+		'Executive Decision Support Systems',
+		'Macro-Environmental Risk Scanning',
+		'Holistic Strategy Formulation',
+	];
+}
+
+// Path: pillar_details.workplace
+class _StringsPillarDetailsWorkplaceEn {
+	_StringsPillarDetailsWorkplaceEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Workplace Intelligence';
+	String get subtitle => 'Collaborative efficiency & organizational networks';
+	String get analysis => 'Workplace Intelligence optimizes team synergies, automates complex operational workflows, and analyzes communication patterns to unlock organizational agility and maximize enterprise productivity.';
+	List<String> get capabilities => [
+		'Workflow & Automation Synthesis',
+		'Team Synergy & Skill Matrix Mapping',
+		'Document Summarization & Extraction',
+		'Project Alignment Diagnostics',
+	];
+}
+
+// Path: pillar_details.culture
+class _StringsPillarDetailsCultureEn {
+	_StringsPillarDetailsCultureEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Culture & Family';
+	String get subtitle => 'Sustaining foundational dynamics & ethos';
+	String get analysis => 'Culture & Family offers guidance rooted in social psychology and relationship dynamics. It helps nurture community values, balance personal-professional obligations, and build long-term generational alignment.';
+	List<String> get capabilities => [
+		'Interpersonal Conflict Resolution',
+		'Organizational Values Alignment',
+		'Work-Life Synergy Strategies',
+		'Generational Communication Bridges',
+	];
+}
+
+// Path: pillar_details.counsel
+class _StringsPillarDetailsCounselEn {
+	_StringsPillarDetailsCounselEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Personal Counsel';
+	String get subtitle => 'Tailored cognitive alignment & coaching';
+	String get analysis => 'Personal Counsel serves as an intimate advisory framework for self-reflection, habit optimization, high-stakes personal choices, and continuous self-improvement.';
+	List<String> get capabilities => [
+		'Personalized Cognitive Coaching',
+		'Habit Formation & Tracking Frameworks',
+		'Confidential Decision Sounding-Board',
+		'Stress Resilience & Goal Mapping',
+	];
 }
 
 // Path: <root>
@@ -3786,6 +3896,7 @@ class _StringsTa extends Translations {
 	@override late final _StringsPinMgmtTa pin_mgmt = _StringsPinMgmtTa._(_root);
 	@override late final _StringsLangLegacyTa lang_legacy = _StringsLangLegacyTa._(_root);
 	@override late final _StringsModelMgmtTa model_mgmt = _StringsModelMgmtTa._(_root);
+	@override late final _StringsPillarsInfoTa pillars_info = _StringsPillarsInfoTa._(_root);
 }
 
 // Path: profile
@@ -4062,6 +4173,25 @@ class _StringsModelMgmtTa extends _StringsModelMgmtEn {
 	@override String get delete => 'நீக்கு';
 	@override String get brahm_2b_desc => 'மொபைல் சாதனங்களில் குறைந்த தாமத உரை நிறைவு மற்றும் அரட்டைக்காக வடிவமைக்கப்பட்ட அதிவேக சிறிய எட்ஜ் மாடல்.';
 	@override String get brahm_5b_desc => 'மேம்படுத்தப்பட்ட பணி துல்லியம் மற்றும் சிக்கலான அறிவுறுத்தல் செயல்திறனை வழங்கும் சமச்சீர் பகுத்தறிவு மாடல்.';
+}
+
+// Path: pillars_info
+class _StringsPillarsInfoTa extends _StringsPillarsInfoEn {
+	_StringsPillarsInfoTa._(_StringsTa root) : this._root = root, super._(root);
+
+	@override final _StringsTa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'நுண்ணறிவு தூண்கள்';
+	@override String get subtitle => 'ஒவ்வொரு பரிமாணத்திலும் ஒருங்கிணைந்த நுண்ணறிவு.';
+	@override String get general_title => 'பொது நுண்ணறிவு';
+	@override String get general_desc => 'மேக்ரோஸ்கோபிக் நுண்ணறிவு மற்றும் ஒட்டுமொத்த மூலோபாய திசை.';
+	@override String get workplace_title => 'பணியிடம்';
+	@override String get workplace_desc => 'கூட்டு நுண்ணறிவு.';
+	@override String get culture_title => 'கலாச்சாரம் மற்றும் குடும்பம்';
+	@override String get culture_desc => 'அடித்தள உறவுகளை நிலைநிறுத்துதல்.';
+	@override String get counsel_title => 'தனிப்பட்ட ஆலோசனை';
+	@override String get counsel_desc => 'மூலோபாய சீரமைப்புக்கான வடிவமைக்கப்பட்ட அறிவாற்றல் கட்டமைப்புகள்.';
 }
 
 // Path: <root>
@@ -4982,6 +5112,48 @@ extension on Translations {
 			case 'model_mgmt.delete': return 'Delete';
 			case 'model_mgmt.brahm_2b_desc': return 'Ultra-fast compact edge model designed for low-latency text completion and chat on mobile devices.';
 			case 'model_mgmt.brahm_5b_desc': return 'Balanced reasoning model offering enhanced task accuracy and complex instructional performance.';
+			case 'pillars_info.title': return 'Pillars of Intelligence';
+			case 'pillars_info.subtitle': return 'Integrated intelligence across every dimension.';
+			case 'pillars_info.general_title': return 'General Intelligence';
+			case 'pillars_info.general_desc': return 'Macroscopic insights and overarching strategic direction.';
+			case 'pillars_info.workplace_title': return 'Workplace';
+			case 'pillars_info.workplace_desc': return 'Collaborative intelligence.';
+			case 'pillars_info.culture_title': return 'Culture & Family';
+			case 'pillars_info.culture_desc': return 'Sustaining foundational relationships.';
+			case 'pillars_info.counsel_title': return 'Personal Counsel';
+			case 'pillars_info.counsel_desc': return 'Tailored cognitive frameworks for strategic alignment.';
+			case 'pillar_details.appBar': return 'Pillar Overview';
+			case 'pillar_details.analysis_label': return 'COMPREHENSIVE ANALYSIS';
+			case 'pillar_details.capabilities_label': return 'KEY CAPABILITIES';
+			case 'pillar_details.start_chat': return 'Start Chat';
+			case 'pillar_details.general.title': return 'General Intelligence';
+			case 'pillar_details.general.subtitle': return 'Macroscopic insights & strategic direction';
+			case 'pillar_details.general.analysis': return 'General Intelligence operates as your central cognitive hub. It aggregates multi-domain streams to deliver macro-level strategic summaries, risk assessment models, and cross-functional decision matrix frameworks.';
+			case 'pillar_details.general.capabilities.0': return 'Cross-Domain Problem Analysis';
+			case 'pillar_details.general.capabilities.1': return 'Executive Decision Support Systems';
+			case 'pillar_details.general.capabilities.2': return 'Macro-Environmental Risk Scanning';
+			case 'pillar_details.general.capabilities.3': return 'Holistic Strategy Formulation';
+			case 'pillar_details.workplace.title': return 'Workplace Intelligence';
+			case 'pillar_details.workplace.subtitle': return 'Collaborative efficiency & organizational networks';
+			case 'pillar_details.workplace.analysis': return 'Workplace Intelligence optimizes team synergies, automates complex operational workflows, and analyzes communication patterns to unlock organizational agility and maximize enterprise productivity.';
+			case 'pillar_details.workplace.capabilities.0': return 'Workflow & Automation Synthesis';
+			case 'pillar_details.workplace.capabilities.1': return 'Team Synergy & Skill Matrix Mapping';
+			case 'pillar_details.workplace.capabilities.2': return 'Document Summarization & Extraction';
+			case 'pillar_details.workplace.capabilities.3': return 'Project Alignment Diagnostics';
+			case 'pillar_details.culture.title': return 'Culture & Family';
+			case 'pillar_details.culture.subtitle': return 'Sustaining foundational dynamics & ethos';
+			case 'pillar_details.culture.analysis': return 'Culture & Family offers guidance rooted in social psychology and relationship dynamics. It helps nurture community values, balance personal-professional obligations, and build long-term generational alignment.';
+			case 'pillar_details.culture.capabilities.0': return 'Interpersonal Conflict Resolution';
+			case 'pillar_details.culture.capabilities.1': return 'Organizational Values Alignment';
+			case 'pillar_details.culture.capabilities.2': return 'Work-Life Synergy Strategies';
+			case 'pillar_details.culture.capabilities.3': return 'Generational Communication Bridges';
+			case 'pillar_details.counsel.title': return 'Personal Counsel';
+			case 'pillar_details.counsel.subtitle': return 'Tailored cognitive alignment & coaching';
+			case 'pillar_details.counsel.analysis': return 'Personal Counsel serves as an intimate advisory framework for self-reflection, habit optimization, high-stakes personal choices, and continuous self-improvement.';
+			case 'pillar_details.counsel.capabilities.0': return 'Personalized Cognitive Coaching';
+			case 'pillar_details.counsel.capabilities.1': return 'Habit Formation & Tracking Frameworks';
+			case 'pillar_details.counsel.capabilities.2': return 'Confidential Decision Sounding-Board';
+			case 'pillar_details.counsel.capabilities.3': return 'Stress Resilience & Goal Mapping';
 			default: return null;
 		}
 	}
@@ -6963,6 +7135,16 @@ extension on _StringsTa {
 			case 'model_mgmt.delete': return 'நீக்கு';
 			case 'model_mgmt.brahm_2b_desc': return 'மொபைல் சாதனங்களில் குறைந்த தாமத உரை நிறைவு மற்றும் அரட்டைக்காக வடிவமைக்கப்பட்ட அதிவேக சிறிய எட்ஜ் மாடல்.';
 			case 'model_mgmt.brahm_5b_desc': return 'மேம்படுத்தப்பட்ட பணி துல்லியம் மற்றும் சிக்கலான அறிவுறுத்தல் செயல்திறனை வழங்கும் சமச்சீர் பகுத்தறிவு மாடல்.';
+			case 'pillars_info.title': return 'நுண்ணறிவு தூண்கள்';
+			case 'pillars_info.subtitle': return 'ஒவ்வொரு பரிமாணத்திலும் ஒருங்கிணைந்த நுண்ணறிவு.';
+			case 'pillars_info.general_title': return 'பொது நுண்ணறிவு';
+			case 'pillars_info.general_desc': return 'மேக்ரோஸ்கோபிக் நுண்ணறிவு மற்றும் ஒட்டுமொத்த மூலோபாய திசை.';
+			case 'pillars_info.workplace_title': return 'பணியிடம்';
+			case 'pillars_info.workplace_desc': return 'கூட்டு நுண்ணறிவு.';
+			case 'pillars_info.culture_title': return 'கலாச்சாரம் மற்றும் குடும்பம்';
+			case 'pillars_info.culture_desc': return 'அடித்தள உறவுகளை நிலைநிறுத்துதல்.';
+			case 'pillars_info.counsel_title': return 'தனிப்பட்ட ஆலோசனை';
+			case 'pillars_info.counsel_desc': return 'மூலோபாய சீரமைப்புக்கான வடிவமைக்கப்பட்ட அறிவாற்றல் கட்டமைப்புகள்.';
 			default: return null;
 		}
 	}
