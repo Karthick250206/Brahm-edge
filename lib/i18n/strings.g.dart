@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 13
-/// Strings: 2529 (194 per locale)
+/// Strings: 2541 (195 per locale)
 ///
-/// Built on 2026-08-22 at 06:10 UTC
+/// Built on 2026-08-22 at 10:14 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -217,6 +217,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsModelMgmtEn model_mgmt = _StringsModelMgmtEn._(_root);
 	late final _StringsPillarsInfoEn pillars_info = _StringsPillarsInfoEn._(_root);
 	late final _StringsPillarDetailsEn pillar_details = _StringsPillarDetailsEn._(_root);
+	late final _StringsPromptLibraryEn prompt_library = _StringsPromptLibraryEn._(_root);
 }
 
 // Path: profile
@@ -529,6 +530,27 @@ class _StringsPillarDetailsEn {
 	late final _StringsPillarDetailsWorkplaceEn workplace = _StringsPillarDetailsWorkplaceEn._(_root);
 	late final _StringsPillarDetailsCultureEn culture = _StringsPillarDetailsCultureEn._(_root);
 	late final _StringsPillarDetailsCounselEn counsel = _StringsPillarDetailsCounselEn._(_root);
+}
+
+// Path: prompt_library
+class _StringsPromptLibraryEn {
+	_StringsPromptLibraryEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Prompt Library';
+	String get favorites => 'Favorites';
+	String get search_placeholder => 'Search prompts';
+	String get add_title => 'Add new prompts';
+	String get input_title_label => 'Title';
+	String get input_title_placeholder => 'Enter the title...';
+	String get input_text_label => 'Prompt text';
+	String get input_text_placeholder => 'Enter your prompt...';
+	String get save_button => 'Save';
+	String get recent_title => 'Recently saved prompts';
+	String get select_pillars => 'Select Pillars';
+	String get use_prompt => 'Use Prompt';
 }
 
 // Path: pillar_details.general
@@ -5154,6 +5176,18 @@ extension on Translations {
 			case 'pillar_details.counsel.capabilities.1': return 'Habit Formation & Tracking Frameworks';
 			case 'pillar_details.counsel.capabilities.2': return 'Confidential Decision Sounding-Board';
 			case 'pillar_details.counsel.capabilities.3': return 'Stress Resilience & Goal Mapping';
+			case 'prompt_library.title': return 'Prompt Library';
+			case 'prompt_library.favorites': return 'Favorites';
+			case 'prompt_library.search_placeholder': return 'Search prompts';
+			case 'prompt_library.add_title': return 'Add new prompts';
+			case 'prompt_library.input_title_label': return 'Title';
+			case 'prompt_library.input_title_placeholder': return 'Enter the title...';
+			case 'prompt_library.input_text_label': return 'Prompt text';
+			case 'prompt_library.input_text_placeholder': return 'Enter your prompt...';
+			case 'prompt_library.save_button': return 'Save';
+			case 'prompt_library.recent_title': return 'Recently saved prompts';
+			case 'prompt_library.select_pillars': return 'Select Pillars';
+			case 'prompt_library.use_prompt': return 'Use Prompt';
 			default: return null;
 		}
 	}

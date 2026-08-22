@@ -280,5 +280,19 @@
         "Stress Resilience & Goal Mapping"
       ]
     }
+  },
+  "prompt_library": {
+    "title": "Prompt Library",
+    "favorites": "Favorites",
+    "search_placeholder": "Search prompts",
+    "add_title": "Add new prompts",
+    "input_title_label": "Title",
+    "input_title_placeholder": "Enter the title...",
+    "input_text_label": "Prompt text",
+    "input_text_placeholder": "Enter your prompt...",
+    "save_button": "Save",
+    "recent_title": "Recently saved prompts",
+    "select_pillars": "Select Pillars",
+    "use_prompt": "Use Prompt"
   }
 }

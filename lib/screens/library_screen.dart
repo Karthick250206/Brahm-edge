@@ -4,6 +4,7 @@ import '../i18n/strings.g.dart';
 import 'model_management_screen.dart';
 import 'language_selection_screen.dart';
 import 'pillars_info_screen.dart';
+import 'prompt_library_screen.dart';
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
@@ -138,6 +139,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   iconColor: const Color(0xFF00796B),
                                   badgeCount: 12,
                                   watermarkIcon: Icons.collections_bookmark_rounded,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const PromptLibraryScreen()),
+                                    );
+                                  },
                                 ),
                               ),
                               const SizedBox(height: 12),

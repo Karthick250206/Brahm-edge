@@ -1,41 +1,51 @@
-# Implementation Plan - Pillar Overview Screens
+# Implementation Plan - Functional Prompt Storage
 
-This plan implements the detailed overview screens for each of the four intelligence pillars (General, Workplace, Culture & Family, Personal Counsel), exactly replicating the provided designs.
+Make the "Prompt Library" screen functional by implementing persistent storage for prompts using SQLite.
 
 ## User Review Required
 
 > [!IMPORTANT]
-> I will be creating a single `PillarOverviewScreen` that dynamically renders the content for any pillar. I will also add all the textual content from your images to the translation system to ensure it works across all languages.
+> I will be adding a new SQLite database called `shared.db` to store global application data such as user-defined prompts. This separates prompt data from individual pillar message histories.
+
+- Prompts will include a title, the prompt text, a favorite status, and associated pillars (stored as a comma-separated string for now).
+- The UI will be updated to reflect the actual data stored in the database.
 
 ## Proposed Changes
 
-### [Internationalization]
+### 1. Database Layer
+#### [MODIFY] [database_service.dart](file:///D:/develop/Projects/Brahm-edge/lib/services/database_service.dart)
+- Add `getSharedDatabase()` to manage `shared.db`.
+- Define the `prompts` table: `id`, `title`, `text`, `isFavorite` (int), `associatedPillars` (text), `timestamp` (int).
+- Implement CRUD methods: `insertPrompt`, `getPrompts`, `deletePrompt`, and `updatePromptFavorite`.
 
-#### [MODIFY] [strings.i18n.json](file:///D:/develop/Projects/Brahm-edge/lib/i18n/strings.i18n.json)
-- Add a new section `pillar_details` containing:
-    - Analysis text for all 4 pillars.
-    - Key capabilities list for all 4 pillars.
-    - UI labels like "COMPREHENSIVE ANALYSIS", "KEY CAPABILITIES", and "Start Chat".
+### 2. Model & State Management
+#### [NEW] [prompt_model.dart](file:///D:/develop/Projects/Brahm-edge/lib/models/prompt_model.dart)
+- Define a `Prompt` class with `toMap` and `fromMap` methods.
+#### [NEW] [prompt_provider.dart](file:///D:/develop/Projects/Brahm-edge/lib/providers/prompt_provider.dart)
+- Create a `PromptProvider` (ChangeNotifier) to manage the list of prompts and interface with `DatabaseService`.
 
-### [UI Layer]
+### 3. Application Setup
+#### [MODIFY] [main.dart](file:///D:/develop/Projects/Brahm-edge/lib/main.dart)
+- Register `PromptProvider` in the `MultiProvider` block.
+- Ensure `DatabaseService().init()` is called during startup.
 
-#### [NEW] [pillar_overview_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/pillar_overview_screen.dart)
-- **Header**: Large card with the pillar's icon, bold title, and subtitle.
-- **Analysis Section**: Left-aligned "COMPREHENSIVE ANALYSIS" label with the detailed paragraph below.
-- **Capabilities Section**: "KEY CAPABILITIES" label followed by a list of items with checkmark icons.
-- **Sticky Footer**: A primary teal "Start Chat" button fixed at the bottom.
-
-#### [MODIFY] [pillars_info_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/pillars_info_screen.dart)
-- Update `_buildBentoCard` to accept a `pillarType` parameter.
-- Wrap the cards in `GestureDetector` to navigate to the `PillarOverviewScreen` with the corresponding data.
+### 4. UI Integration
+#### [MODIFY] [prompt_library_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/prompt_library_screen.dart)
+- Use `context.read<PromptProvider>()` to save new prompts when the "Save" button is pressed.
+- Use `context.watch<PromptProvider>()` to display the "Recently saved prompts" list.
+- Implement "Delete" and "Favorite" icon functionality.
+- Clear input fields after a successful save.
 
 ## Verification Plan
 
+### Automated Tests
+- Run `analyze` to ensure no syntax or type errors.
+
 ### Manual Verification
-1.  **Navigation**: Click on each of the 4 cards in the Pillars screen. Verify that the correct overview opens for each.
-2.  **Visual Comparison**: Cross-reference the rendered screens with the provided images. Pay close attention to:
-    - Font weights and sizes (Noto Sans).
-    - Spacing between sections.
-    - Icon colors and background opacity.
-    - "Start Chat" button styling.
-3.  **Responsiveness**: Ensure the text wraps correctly and the screen remains scrollable on smaller devices.
+1. Navigate to **Prompt Library**.
+2. Fill in a title and prompt text, then tap **Save**.
+3. Verify the new prompt appears in the "Recently saved prompts" list below.
+4. Restart the app and verify the prompts are still there (persistence check).
+5. Tap the **Star** icon and verify the favorite status toggles and persists.
+6. Tap the **Trash** icon and verify the prompt is removed.
+7. Try adding a prompt with empty fields and ensure it handles validation (optional but good practice).

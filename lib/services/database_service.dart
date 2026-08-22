@@ -21,9 +21,32 @@ class DatabaseService {
   ];
 
   Future<void> init() async {
+    await _getSharedDatabase(); // Initialize shared DB first
     for (var pillar in pillars) {
       await _getDatabase(pillar);
     }
+  }
+
+  Future<Database> _getSharedDatabase() async {
+    if (_databases.containsKey('shared')) {
+      return _databases['shared']!;
+    }
+
+    final directory = await getApplicationDocumentsDirectory();
+    final path = join(directory.path, 'databases', 'shared.db');
+
+    final db = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute(
+          'CREATE TABLE prompts(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, text TEXT, isFavorite INTEGER DEFAULT 0, associatedPillars TEXT, timestamp INTEGER)',
+        );
+      },
+    );
+
+    _databases['shared'] = db;
+    return db;
   }
 
   Future<Database> _getDatabase(String pillar) async {
@@ -99,5 +122,32 @@ class DatabaseService {
   Future<void> clearHistory(String pillar) async {
     final db = await _getDatabase(pillar);
     await db.delete('messages');
+  }
+
+  // --- Prompt Library Methods ---
+
+  Future<int> insertPrompt(Map<String, dynamic> prompt) async {
+    final db = await _getSharedDatabase();
+    return await db.insert('prompts', prompt, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<List<Map<String, dynamic>>> getPrompts() async {
+    final db = await _getSharedDatabase();
+    return await db.query('prompts', orderBy: 'timestamp DESC');
+  }
+
+  Future<void> deletePrompt(int id) async {
+    final db = await _getSharedDatabase();
+    await db.delete('prompts', where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> updatePromptFavorite(int id, bool isFavorite) async {
+    final db = await _getSharedDatabase();
+    await db.update(
+      'prompts', 
+      {'isFavorite': isFavorite ? 1 : 0}, 
+      where: 'id = ?', 
+      whereArgs: [id]
+    );
   }
 }

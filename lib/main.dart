@@ -10,13 +10,18 @@ import 'screens/main_wrapper.dart';
 import 'services/language_service.dart';
 import 'services/llm_inference_service.dart';
 import 'services/model_download_service.dart';
+import 'services/database_service.dart';
 import 'providers/theme_provider.dart';
+import 'providers/prompt_provider.dart';
 import 'security/providers/security_setup.dart';
 import 'security/providers/security_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  // Initialize Database Service
+  await DatabaseService().init();
+
   // Initialize Language Service
   final languageService = LanguageService();
   await languageService.init();
@@ -32,6 +37,7 @@ void main() async {
           ...securityProviders,
           ChangeNotifierProvider.value(value: inferenceService),
           ChangeNotifierProvider.value(value: ModelDownloadService()),
+          ChangeNotifierProvider(create: (_) => PromptProvider()),
         ],
         child: const MyApp(),
       ),

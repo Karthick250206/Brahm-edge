@@ -1,32 +1,32 @@
-# Walkthrough - Pillar Overview Screens
+# Walkthrough - Functional Prompt Library
 
-I have implemented the detailed **Pillar Overview** screens, providing in-depth analysis and capability breakdowns for each of the four intelligence pillars. These screens follow a high-fidelity design with consistent typography and color palettes.
+I have fully implemented the backend logic and state management for the **Prompt Library**. You can now save, view, favorite, and delete prompts, with all data persisting locally on your device.
 
-## Features & Enhancements
+## Key Implementation Details
 
-### 1. Unified Dynamic Overview Screen
-- **Smart Templating**: Instead of multiple static files, I created a single `PillarOverviewScreen` that dynamically loads content based on the selected pillar type (General, Workplace, Culture, or Counsel).
-- **Design Fidelity**:
-    - **Header Card**: Replicates the 24px rounded cards from the previous screen, maintaining the color-coded themes (Teal, Blue, Lavender, Rose).
-    - **Sticky CTA**: A prominent "Start Chat" button is fixed at the bottom of each overview to provide an immediate path to action.
-- **Sectioned Content**:
-    - **Comprehensive Analysis**: Presents a high-level strategic overview of the pillar's purpose.
-    - **Key Capabilities**: Lists specific functional strengths using a clean, checkmark-bullet style with 1px divider lines for clarity.
+### 1. Persistent Storage (`shared.db`)
+- Created a new dedicated SQLite database (`shared.db`) to handle global application data.
+- Implemented a `prompts` table to store title, text, favorite status, and associated metadata.
 
-### 2. Full Localization (Multi-Language Ready)
-- **Extracted Content**: Captured all text from your design references, including the detailed analysis paragraphs and capability lists for every pillar.
-- **Integrated i18n**: Added a new `pillar_details` section to the translation engine. This ensures that these detailed descriptions are ready to be translated into Tamil, Hindi, and other supported languages.
+### 2. Prompt Provider & Model
+- **`PromptModel`**: A structured data class to represent a prompt and handle serialization to/from SQLite.
+- **`PromptProvider`**: A new state management layer using the `Provider` pattern. It handles:
+    - Loading prompts on startup.
+    - Adding new prompts with instant UI updates.
+    - Toggling favorite status.
+    - Deleting prompts from both memory and the database.
 
-### 3. Interactive Experience
-- **Smooth Navigation**: Linked the bento cards in the **Pillars of Intelligence** screen to their respective overview pages using `GestureDetector` and standard Material routing.
-- **Visual Consistency**: matched the **Noto Sans** font weights and icon containers to create a seamless transition between the high-level library view and the detailed pillar analysis.
+### 3. Integrated UI Features
+- **Saving**: The "Save" button in the **Add new prompts** section is now fully functional. It validates inputs and clears the fields upon success.
+- **Dynamic List**: The "Recently saved prompts" list now pulls directly from the database and updates in real-time.
+- **Favorites**: Tapping the star icon toggles the favorite status and persists the change.
+- **Deletion**: Tapping the trash icon removes the prompt permanently.
+- **Empty State**: Added a "No saved prompts yet" message when the library is empty.
 
-## Implementation Details
-- **File**: [pillar_overview_screen.dart](file:///D:/develop/Projects/Brahm-edge/lib/screens/pillar_overview_screen.dart)
-- **Layout Robustness**: used a `Stack` for the sticky button and `SingleChildScrollView` for the content to ensure the screen remains usable on devices with limited vertical space or when translated into longer scripts.
-- **Adaptive Icons**: in the "Personal Counsel" card, I followed your requirement to position the icon **below the text** for a balanced wide-card layout.
+## Technical Summary
+- **Database**: `lib/services/database_service.dart` updated with prompt CRUD logic.
+- **State**: `lib/providers/prompt_provider.dart` registered globally in `main.dart`.
+- **UI**: `lib/screens/prompt_library_screen.dart` refactored to use `Consumer` logic for real-time reactivity.
 
-## Verification
-- **Navigational Check**: Confirmed that clicking "Workplace Intelligence" opens the correct Blue-themed workplace overview.
-- **UI Integrity**: Verified that the checkmark list and button rows scale correctly and don't cause any layout overflows.
-- **Code Health**: `analyze_file` passed for all new and modified components.
+> [!TIP]
+> Try adding your first prompt! It will now stay in your library even after you restart the application.
